@@ -1624,6 +1624,88 @@ html.aklock body{overflow:hidden}
 .dtabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 #viewO .dtabs{grid-template-columns:repeat(8,minmax(0,1fr))!important}
 @media (max-width:900px){#viewO .dtabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}.ppaint span{flex-basis:100%;padding:2px 8px}}
+
+.nnow{margin:0 0 10px;padding:8px;border-radius:18px;border:1px solid color-mix(in srgb,var(--acc) 45%,var(--line));background:color-mix(in srgb,var(--acc) 9%,transparent)}
+.nnh{display:flex;align-items:center;gap:8px;margin:2px 6px 6px;font-size:12.5px;font-weight:800;color:var(--acc)}
+.nnh i{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 25%,transparent)}
+.nnow .nt small{display:block;font-size:11.5px;color:var(--mute);font-weight:500}
+/* ---------- v14: drawing register ---------- */
+#viewW #pW{max-width:1400px}
+:root{--d-pend:#9aa5b4;--d-recv:#4f86e8;--d-sent:#e8672a;--d-sign:#9b5de5;--d-final:#1f9d63}
+.s-pend{--sc:var(--d-pend)}.s-recv{--sc:var(--d-recv)}.s-sent{--sc:var(--d-sent)}.s-sign{--sc:var(--d-sign)}.s-final{--sc:var(--d-final)}
+.drd{display:flex;flex-direction:column;gap:14px;margin-bottom:14px}
+.drh{display:flex;flex-direction:column;gap:12px}
+.drh1{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 20px;align-items:flex-end}
+.drh1 h2{margin:2px 0 0;font-size:24px;font-stretch:125%;font-weight:800;letter-spacing:-.015em}
+.drh1 h2 .fig{color:var(--d-final);font-size:inherit}
+.dzsb{display:flex;height:12px;border-radius:999px;overflow:hidden;background:var(--well);border:1px solid var(--line);min-width:60px}
+.dzsb i{display:block;height:100%;background:var(--sc)}
+.drk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.drt{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:14px 16px;border-radius:18px;border:1px solid var(--line);background:var(--well);color:var(--ink);font:inherit;text-align:left;cursor:pointer;border-top:4px solid var(--kc)}
+.drt.k-final{--kc:var(--d-final)}.drt.k-sign{--kc:var(--d-sign)}.drt.k-yet{--kc:var(--d-sent)}.drt.k-pend{--kc:var(--d-pend)}
+.drt b{font-size:30px;line-height:1.05;color:var(--kc)}.drt.k-pend b{color:var(--ink)}
+.drt span{font-size:14px;font-weight:750}.drt small{font-size:12px;color:var(--mute);line-height:1.35}
+.drt.on{outline:2px solid var(--kc);outline-offset:1px}
+.drleg{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0}
+.drleg span,.dzk{display:inline-flex;align-items:center;gap:6px}
+.drleg i,.dzk i{width:12px;height:12px;border-radius:4px;background:var(--sc)}
+.drbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.drsc{display:flex!important;flex-wrap:wrap;gap:6px!important;margin:0!important;padding:0!important;border:0!important;position:static!important;background:none!important}
+.drsc button{height:38px;padding:0 14px!important;border-radius:999px;font-size:13px!important}
+.drv{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.drv .fxi{width:220px;height:40px}
+.segv{display:flex;padding:3px;border-radius:999px;background:var(--well);border:1px solid var(--line)}
+.segv button{height:34px;border:0;border-radius:999px;background:transparent;color:var(--mute);font:inherit;font-size:13px;font-weight:750;padding:0 14px;cursor:pointer}
+.segv button[aria-selected=true]{background:var(--ink);color:var(--base)}
+.drbody{padding:16px}
+.drm{overflow:auto;max-height:70vh;border-radius:14px;border:1px solid var(--line);background:var(--well)}
+.drm table{border-collapse:separate;border-spacing:0}
+.drm th,.drm td{padding:2px;text-align:center}
+.drm thead th{position:sticky;top:0;z-index:2;background:var(--well);height:120px;vertical-align:bottom;font-size:11px;font-weight:650;color:var(--mute)}
+.drm thead th span{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;display:inline-block;max-height:112px;overflow:hidden;text-overflow:ellipsis}
+.drm .sv{position:sticky;left:0;z-index:1;background:var(--well);padding:2px 8px}
+.drm thead .sv{z-index:3;writing-mode:horizontal-tb}
+.drm .sv button{border:0;background:none;color:var(--ink);font:inherit;font-weight:800;font-size:13px;cursor:pointer;min-width:32px}
+.dq{display:block;width:22px;height:22px;border-radius:6px;border:0;background:var(--sc);cursor:pointer;padding:0}
+.dq.s-pend{background:transparent;border:1.5px dashed var(--d-pend)}
+.dq.dim{opacity:.15}
+.dq:hover,.dq:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+.dfin{font-size:12px;font-weight:750;color:var(--d-final);white-space:nowrap;padding:0 8px!important}
+.drl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.drg{margin:14px 4px 8px;font-size:13px;font-stretch:85%;font-weight:750;color:var(--mute)}
+.drg:first-child{margin-top:0}
+.drr{display:grid;grid-template-columns:minmax(110px,1.1fr) minmax(80px,1.4fr) minmax(0,1.6fr) 18px;gap:12px;align-items:center;width:100%;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--well);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.drr:hover{border-color:var(--ink)}
+.drn{font-weight:800;font-size:14px}
+.drcn{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12.5px;color:var(--ink)}
+.drcn .mu{color:var(--mute)}.s-final-t{color:var(--d-final)}.s-sign-t{color:var(--d-sign)}
+.drl li.op .drr .vch{transform:rotate(180deg)}
+.drvs{display:flex;flex-wrap:wrap;gap:6px;padding:10px 4px 4px}
+.drv1{min-width:40px;height:34px;border-radius:10px;border:1px solid var(--sc);background:color-mix(in srgb,var(--sc) 18%,transparent);color:var(--ink);font:inherit;font-weight:800;font-size:13px;cursor:pointer}
+.dst{display:inline-block;font-size:11.5px;font-weight:800;border-radius:999px;padding:3px 10px;white-space:nowrap;color:#fff;background:var(--sc)}
+.dst.s-pend{background:transparent;color:var(--mute);border:1px dashed var(--d-pend)}
+.dzh{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}.dzh .fxsm{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0}
+.dzt{max-height:52vh;overflow:auto;padding-right:4px}
+.dzr{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;border:1px solid transparent;cursor:pointer}
+.dzr:hover{background:var(--well)}.dzr.on{background:var(--well);border-color:var(--line)}.dzr.fo{border-color:var(--acc)}
+.dzr input{width:18px;height:18px;accent-color:var(--acc)}
+.dzn{display:flex;flex-direction:column;min-width:0}.dzn b{font-size:14px}.dzn small{font-size:12px;color:var(--mute);overflow:hidden;text-overflow:ellipsis}
+.dzbar{position:sticky;bottom:-22px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px;padding:10px 0;background:linear-gradient(transparent,var(--base) 30%)}
+.dzlink{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-top:10px}.dzlink .fxf{flex:1 1 260px}
+.sigp{margin-top:12px;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--well);display:flex;flex-direction:column;gap:10px}
+.sigf{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#sgC{width:100%;aspect-ratio:900/260;background:#fff;border-radius:12px;border:1px dashed var(--mute);touch-action:none;cursor:crosshair}
+.dwfiles{padding:0}
+.dwfiles>summary{list-style:none;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;padding:16px 20px;cursor:pointer}
+.dwfiles>summary::-webkit-details-marker{display:none}.dwfiles>summary small{color:var(--mute);font-size:13px}
+.dwfb{padding:0 16px 16px}
+@media (max-width:900px){
+  .drk{grid-template-columns:repeat(2,minmax(0,1fr))}.drt b{font-size:24px}
+  .drv{width:100%}.drv .fxi{flex:1;width:auto}
+  .drr{grid-template-columns:minmax(0,1fr) 18px;gap:6px 10px}.drr .dzsb{grid-column:1/-1;grid-row:2}.drr .drcn{grid-column:1/-1;grid-row:3}.drr .vch{grid-column:2;grid-row:1}
+  .sigf{grid-template-columns:1fr}
+  .drbody{padding:12px}
+}
 </style>
 <div class="app">
 <nav class="rail" aria-label="Sections"><div class="mark" aria-hidden="true">AK</div><div class="views" role="tablist" aria-label="View"><button type="button" role="tab" id="vO" aria-selected="false" title="Overview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M12 14l3.5-4.5"/><path d="M5 19h14"/></svg>Overview</button><button type="button" role="tab" id="vS" aria-selected="false" title="Site map"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z"/><path d="M9 4.5v13M15 6.5v13"/></svg>Site map</button><button type="button" role="tab" id="vP" aria-selected="false" title="Planner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16"/><path d="M8 7h8"/><path d="M11 12h9"/><path d="M8 17h6"/></svg>Planner</button><button type="button" role="tab" id="vC" aria-selected="false" title="Checklists"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5v-1h6v1"/><path d="M9 13l2.2 2.2L15.2 11"/></svg>Checklists<span class="badge" id="qb" hidden></span></button><button type="button" role="tab" id="vD" aria-selected="false" title="Defects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10.5v4"/><path d="M12 17.2v.3"/></svg>Defects<span class="badge" id="db"></span></button><button type="button" role="tab" id="vW" aria-selected="false" title="Drawings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 13h6M9 16.5h6"/></svg>Drawings<span class="badge" id="wb" hidden></span></button><button type="button" role="tab" id="vQ" aria-selected="false" title="Quantities"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 16.5l13-13 4 4-13 13z"/><path d="M7.5 12.5l2 2M10.5 9.5l2 2M13.5 6.5l2 2"/></svg>Quantities</button></div></nav>
@@ -2254,7 +2336,7 @@ const sevCol=v=>(DSEV.find(x=>x[0]==v)||DSEV[1])[1];
 function defCat(u){const n=u.n.toLowerCase();if(/waterproof/.test(n))return"Waterproofing & leakage";if(/electric|plumb|wiring|sanitary|commission/.test(n))return"Services (MEP)";if(u.si<=1)return"Structural";if(/paint|putty|tile|granite|plaster|grout|clean|railing/.test(n))return"Finishing";return"Workmanship"}
 function syncDf(u){items(u).forEach(x=>{if(u.chk[x.k]=="n"&&!u.df[x.k])u.df[x.k]={sev:"Major",cat:defCat(u),who:"",due:"",note:"",closed:false,on:"",by:"",raised:iso(today),after:[]}});
   Object.keys(u.df).forEach(k=>{if(u.chk[k]!="n")delete u.df[k]})}
-function score(u){const s=clStat(u),den=s.y+s.n;if(!den)return null;const cl=Object.entries(u.df).filter(([k,d])=>d.closed&&u.chk[k]=="n").length;return{ftp:Math.round(100*s.y/den),now:Math.round(100*(s.y+cl)/den),open:s.n-cl,closed:cl,n:s.n,den}}
+function score(u){const s=clStat(u),dl=Object.entries(u.df).filter(([k,d])=>d.del&&u.chk[k]=="n").length,nn=s.n-dl,den=s.y+nn;if(!den)return null;const cl=Object.entries(u.df).filter(([k,d])=>d.closed&&!d.del&&u.chk[k]=="n").length;return{ftp:Math.round(100*s.y/den),now:Math.round(100*(s.y+cl)/den),open:nn-cl,closed:cl,n:nn,den}}
 const scCls=v=>v>=100?"good":v>=80?"mid":"bad";
 
 // ---------- dates & schedule ----------
@@ -2362,12 +2444,13 @@ $("clBlank").onchange=()=>{$("clPh").disabled=$("clBlank").checked};
 let dfFilter="open";try{$("eng").value=localStorage.getItem("ak-eng")||""}catch(e){}
 $("eng").oninput=e=>{try{localStorage.setItem("ak-eng",e.target.value)}catch(x){}};
 $("dfs").onchange=()=>renderDefects(sel);
-function allDefects(){const out=[];LEAVES.forEach(u=>{items(u).forEach((x,i)=>{const d=u.df[x.k];if(d&&u.chk[x.k]=="n")out.push({u,k:x.k,i,t:x.t,d})});(u.xd||[]).forEach(d=>out.push({u,k:"x"+d.id,i:null,t:d.t,d,x:true}))});return out}
+function canPlanSafe(){try{return canEdit("plan")}catch(e){return false}}
+function allDefects(){const out=[];LEAVES.forEach(u=>{items(u).forEach((x,i)=>{const d=u.df[x.k];if(d&&!d.del&&u.chk[x.k]=="n")out.push({u,k:x.k,i,t:x.t,d})});(u.xd||[]).forEach(d=>{if(!d.del)out.push({u,k:"x"+d.id,i:null,t:d.t,d,x:true})})});return out}
 function renderDefects(cur){
   const A=allDefects(),open=A.filter(x=>!x.d.closed).length,closed=A.length-open;
   $("db").textContent=open;$("db").className="badge"+(open?" warnb":A.length?" ok":"");
   const v=villa();
-  const nx=A.filter(z=>z.x).length;
+  const nx=canPlanSafe()?A.filter(z=>z.x).length:0;
   $("dfhead").innerHTML=`<h2>Defects${v?" · Villa "+esc(v):""}</h2>${nx?`<p><button type="button" class="btn sm" id="dfAllX" style="width:auto;color:var(--bad)">Delete all ${nx} imported (Excel) defect${nx==1?"":"s"} for this villa</button></p>`:""}<p>${A.length?`${open} open · ${closed} closed. Every <b>No</b> on a checklist lands here. Classify it, rectify it, add an after photo, then close it to restore the activity score.`:"No defects. Points answered <b>No</b> on any checklist will appear here."}</p>`;
   $("dff").innerHTML=[["open",`Open (${open})`],["closed",`Closed (${closed})`],["all",`All (${A.length})`]].map(([k,l])=>`<button type="button" data-dff="${k}" aria-pressed="${dfFilter==k}">${l}</button>`).join("");
   let L=A.filter(x=>dfFilter=="all"||(dfFilter=="open")==!x.d.closed);if($("dfs").value=="sel")L=L.filter(x=>x.u===cur);
@@ -2376,7 +2459,7 @@ function renderDefects(cur){
   $("dfl").innerHTML=L.length?L.map(({u,k,i,t,d,x})=>{const od=!d.closed&&d.due&&d.due<iso(today);const before=(x?d.before:u.ph[k])||[],after=d.after||[];
     return`<article class="df${d.closed?" closed":""}" style="--sv:${sevCol(d.sev)}" data-dk="${u.id}|${k}">
       <div class="dfh"><span class="sevp">${d.closed?"Closed":esc(d.sev)}</span><b>${esc(t)}</b></div>
-      <div class="dfm">${esc(u.stn)} › ${esc(u.n)}${i!=null?` · point ${i+1}`:""}${d.cp?` · ${esc(d.cp)}`:""}${d.loc?` · ${esc(d.loc)}`:""} · raised ${fmtD(d.raised)}${d.rby?" by "+esc(d.rby):""}${d.src=="excel"?'<span class="srcx">Excel</span>':""}${od?` · <span class="od">overdue</span>`:""}<button type="button" class="link" data-goto="1">Open checklist</button>${x?`<button type="button" class="link" data-dfdel="1" style="color:var(--bad)">Delete defect</button>`:""}</div>
+      <div class="dfm">${esc(u.stn)} › ${esc(u.n)}${i!=null?` · point ${i+1}`:""}${d.cp?` · ${esc(d.cp)}`:""}${d.loc?` · ${esc(d.loc)}`:""} · raised ${fmtD(d.raised)}${d.rby?" by "+esc(d.rby):""}${d.src=="excel"?'<span class="srcx">Excel</span>':""}${od?` · <span class="od">overdue</span>`:""}<button type="button" class="link" data-goto="1">Open checklist</button>${canPlanSafe()?`<button type="button" class="link" data-dfdel="1" style="color:var(--bad)">Delete defect</button>`:""}</div>
       ${d.closed?"":`<div class="dfg"><label>Severity<select data-f="sev">${DSEV.map(([x])=>`<option${x==d.sev?" selected":""}>${x}</option>`).join("")}</select></label><label>Category<select data-f="cat">${DCAT.map(x=>`<option${x==d.cat?" selected":""}>${esc(x)}</option>`).join("")}</select></label><label>Responsible<input data-f="who" type="text" value="${esc(d.who)}" placeholder="Contractor / foreman"></label><label>Target date<input data-f="due" type="date" value="${esc(d.due)}"></label></div>`}
       ${before.length?`<div class="ph"><span class="lbl">Before</span>${thumbs(before,"before")}</div>`:""}
       ${d.closed?(d.note?`<div><span class="lbl" style="font-size:11px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.05em">Rectification</span><div>${esc(d.note)}</div></div>`:""):`<textarea data-f="note" placeholder="Rectification done (what was fixed, how it was checked)">${esc(d.note)}</textarea>`}
@@ -2384,15 +2467,14 @@ function renderDefects(cur){
       ${d.closed?`<div class="dfdone"><span>Closed ${fmtD(d.on)}${d.by?" by "+esc(d.by):""} · ${esc(d.sev)} · ${esc(d.cat)}</span><button type="button" class="btn sm" data-reopen="1" style="width:auto">Reopen</button></div>`:`<button type="button" class="btn pri" data-close="1">Mark rectified &amp; close defect</button>`}
       <p class="note" id="dfmsg${u.id}${k}"></p></article>`}).join(""):`<div class="empty">${dfFilter=="closed"?"No closed defects yet.":dfFilter=="open"?"No open defects.":"No defects recorded."}</div>`;
 }
-$("dfhead").addEventListener("click",e=>{if(!e.target.closest("#dfAllX"))return;const n=LEAVES.reduce((a,u)=>a+(u.xd||[]).length,0);if(!n||!confirm2(`Delete all ${n} imported defects for this villa? This cannot be undone.`))return;
-  LEAVES.forEach(u=>{(u.xd||[]).forEach(d=>{(d.before||[]).concat(d.after||[]).forEach(q=>{if(q&&q.id&&ASSETS)ASSETS.delete(q.id).catch(()=>{})});});if(u.xd&&u.xd.length){u.xd=[];}});queueSave();render()});
+$("dfhead").addEventListener("click",e=>{if(!e.target.closest("#dfAllX"))return;const L=[];LEAVES.forEach(u=>(u.xd||[]).forEach(d=>{if(!d.del)L.push({u,d})}));if(L.length)dfDelAsk(L)});
 $("dff").onclick=e=>{const b=e.target.closest("[data-dff]");if(b){dfFilter=b.dataset.dff;renderDefects(sel)}};
 const dfOf=el=>{const a=el.closest("[data-dk]");if(!a)return null;const [id,k]=a.dataset.dk.split("|");const u=LEAF[id];if(!u)return null;const d=k[0]=="x"?(u.xd||[]).find(z=>"x"+z.id==k):u.df[k];return d?{u,k,d,x:k[0]=="x"}:null};
 $("dfl").addEventListener("change",e=>{const f=e.target.dataset.f;if(!f)return;const r=dfOf(e.target);if(!r)return;r.d[f]=e.target.value;queueSave();if(f=="sev"||f=="due")renderDefects(sel)});
 $("dfl").addEventListener("input",e=>{const f=e.target.dataset.f;if(f!="note"&&f!="who")return;const r=dfOf(e.target);if(!r)return;r.d[f]=e.target.value;queueSave()});
 $("dfl").addEventListener("click",e=>{const r=dfOf(e.target);if(!r)return;const {u,k,d}=r;
   if(e.target.closest("[data-goto]")){pick(u);setTab("Q");return}
-  if(e.target.closest("[data-dfdel]")){if(!confirm2("Delete this defect? This cannot be undone."))return;(d.before||[]).forEach(q=>{if(q&&q.id&&ASSETS)ASSETS.delete(q.id).catch(()=>{})});(d.after||[]).forEach(q=>{if(q&&q.id&&ASSETS)ASSETS.delete(q.id).catch(()=>{})});u.xd=(u.xd||[]).filter(z=>"x"+z.id!=k);afterChk(u);return}
+  if(e.target.closest("[data-dfdel]")){dfDelAsk([{u,d}]);return}
   if(e.target.closest("[data-dcam]")){phTarget={u,k,after:true};$("phCam").click();return}
   if(e.target.closest("[data-dfile]")){phTarget={u,k,after:true};$("phFile").click();return}
   const rm=e.target.closest("[data-drm]");if(rm){const q=(d.after||[]).splice(+rm.dataset.drm,1)[0];if(q&&q.id&&ASSETS)ASSETS.delete(q.id).catch(()=>{});afterChk(u);return}
@@ -2691,7 +2773,7 @@ async function applyPlanAll(){const m=$("stmsg2");const D={};LEAVES.forEach(u=>D
 
 // ---------- selection & inputs ----------
 function render(){const S=schedule();renderKPI(S);renderSide(S);renderGantt(S);updGbar();if(view=="C"||view=="D")renderNav()}
-const openDfOf=u=>Object.entries(u.df).filter(([k,d])=>u.chk[k]=="n"&&!d.closed).length+(u.xd||[]).filter(d=>!d.closed).length;
+const openDfOf=u=>Object.entries(u.df).filter(([k,d])=>u.chk[k]=="n"&&!d.closed&&!d.del).length+(u.xd||[]).filter(d=>!d.closed&&!d.del).length;
 function renderNav(){const box=$("navL");if(!box)return;const q=($("navQ").value||"").trim().toLowerCase(),dm=view=="D",v=villa();
   $("navV").textContent=v?"Villa "+v:"No villa selected";$("navSub").textContent=v?(dm?"Pick an activity to see its defects":"Pick an activity to open its checklist"):"Enter a villa number at the top to save your answers";
   $("navS").textContent=(dm?"Defects: ":"Checklist: ")+label(sel);
@@ -2863,12 +2945,12 @@ function makePDF(mode,opts){opts=opts||{};
       doc.setFont("helvetica","normal");doc.setFontSize(8.5);doc.setTextColor(...mute);
       doc.text(pdfTxt(`${opts.only?"":(m.s?fmt(m.s)+" to "+fmt(m.e):"Not scheduled")+"   |   "}${opts.only?"":(u.done?"Completed"+(u.on?" "+fmt(new Date(u.on+"T00:00:00")):""):u.wip?"In progress":"To be started")+"   |   "}Checked by: ${(opts.blank?"":u.by)||"__________"}${sc?`   |   First-time pass ${sc.ftp}%  |  Defects ${sc.n} (${sc.open} open)`:""}${u.rem&&!opts.blank?"   |   Remarks: "+u.rem:""}`),14,ys+4.5,{maxWidth:W-28});
       doc.autoTable({startY:ys+(u.rem&&u.rem.length>60?11:7),head:[["#","Check point","Reference","Result","Photos"]],
-        body:it.flatMap((x,i)=>[...(i==0||it[i-1].ph!=x.ph?[[{content:PHN[x.ph].toUpperCase(),colSpan:5,styles:{halign:"left",fillColor:[232,236,241],textColor:ink,fontStyle:"bold",fontSize:7.6}}]]:[]),[i+1,pdfTxt(x.t+(x.own?"  [site]":"")),pdfTxt(x.ref||""),opts.blank?"[     ] Yes     [     ] No     [     ] N/A":(R[u.chk[x.k]]||"-")+(u.df[x.k]?(u.df[x.k].closed?" - rectified":" - open defect"):""),opts.blank?"":(u.ph[x.k]||[]).length||""]]),theme:"grid",
+        body:it.flatMap((x,i)=>[...(i==0||it[i-1].ph!=x.ph?[[{content:PHN[x.ph].toUpperCase(),colSpan:5,styles:{halign:"left",fillColor:[232,236,241],textColor:ink,fontStyle:"bold",fontSize:7.6}}]]:[]),[i+1,pdfTxt(x.t+(x.own?"  [site]":"")),pdfTxt(x.ref||""),opts.blank?"[     ] Yes     [     ] No     [     ] N/A":(R[u.chk[x.k]]||"-")+(u.df[x.k]&&!u.df[x.k].del?(u.df[x.k].closed?" - rectified":" - open defect"):""),opts.blank?"":(u.ph[x.k]||[]).length||""]]),theme:"grid",
         styles:{fontSize:7.8,cellPadding:1.4,textColor:ink,lineColor:[214,221,228],lineWidth:.15},headStyles:{fillColor:[94,107,124],textColor:255},
         columnStyles:{0:{cellWidth:8,halign:"right"},2:{cellWidth:30,fontSize:6.8,textColor:mute},3:{cellWidth:opts.blank?58:34,fontStyle:"bold"},4:{cellWidth:13,halign:"center"}},
         didParseCell:d=>{if(d.section=="body"&&d.column.index==3){const r=String(d.cell.raw);if(r.startsWith("Yes"))d.cell.styles.textColor=[36,135,90];if(r.startsWith("No"))d.cell.styles.textColor=r.includes("rectified")?[184,74,21]:[194,61,51]}},
         margin:{top:30,left:14,right:14,bottom:14},didDrawPage:d=>{if(d.pageNumber>1&&d.table.startPageNumber!==d.pageNumber)head()}});
-      const dfs=opts.blank?[]:it.map((x,i)=>({x,i,d:u.df[x.k]})).filter(z=>z.d&&u.chk[z.x.k]=="n").concat((u.xd||[]).map(d=>({x:{t:d.t+(d.loc?" ("+d.loc+")":"")},i:null,d})));
+      const dfs=opts.blank?[]:it.map((x,i)=>({x,i,d:u.df[x.k]})).filter(z=>z.d&&!z.d.del&&u.chk[z.x.k]=="n").concat((u.xd||[]).filter(d=>!d.del).map(d=>({x:{t:d.t+(d.loc?" ("+d.loc+")":"")},i:null,d})));
       if(dfs.length){doc.autoTable({startY:doc.lastAutoTable.finalY+2,head:[["Point","Defect","Severity","Category","Responsible","Target","Status","Rectification"]],
         body:dfs.map(({x,i,d})=>[i!=null?i+1:"Excel",pdfTxt(x.t),d.sev,pdfTxt(d.cat),pdfTxt(d.who||"-"),d.due?fmtD(d.due):"-",d.closed?pdfTxt(`Closed ${fmtD(d.on)}${d.by?" by "+d.by:""}`):"Open",pdfTxt(d.note||"-")]),theme:"grid",
         styles:{fontSize:7.4,cellPadding:1.3,textColor:ink,lineColor:[214,221,228],lineWidth:.15},headStyles:{fillColor:[194,61,51],textColor:255},
@@ -2968,8 +3050,8 @@ function villaStats(s){
   const ptText=(u,x,k)=>k[0]=="c"?cuPh((x.custom||[])[+k.slice(1)])[1]:(leafItems(u).find(z=>z.k==k)||{}).t||"";
   const addOpen=(u,k,d,t)=>{Q.open++;const sv=d&&d.sev||"Major";Q.sev[sv]=(Q.sev[sv]||0)+1;const c=d&&d.cat||"Workmanship";Q.cat[c]=(Q.cat[c]||0)+1;Q.list.push({u,k,d:d||{},sev:sv,t})};
   Q.all=[];
-  LEAVES.forEach(u=>{const x=s&&s.leaves&&s.leaves[u.id];if(!x)return;(x.xd||[]).forEach(d=>{Q.all.push({u,d,t:d.t,x:true});if(d.closed)Q.closed++;else addOpen(u,"x"+d.id,d,d.t)});if(!x.chk)return;let y=0,n=0,cl=0;const df=x.df||{};
-    Object.entries(x.chk).forEach(([k,v])=>{if(v=="y")y++;else if(v=="n"){n++;const d=df[k];Q.all.push({u,d:d||{},t:ptText(u,x,k)});if(d&&d.closed){cl++;Q.closed++}else addOpen(u,k,d,ptText(u,x,k))}});
+  LEAVES.forEach(u=>{const x=s&&s.leaves&&s.leaves[u.id];if(!x)return;(x.xd||[]).forEach(d=>{if(d.del)return;Q.all.push({u,d,t:d.t,x:true});if(d.closed)Q.closed++;else addOpen(u,"x"+d.id,d,d.t)});if(!x.chk)return;let y=0,n=0,cl=0;const df=x.df||{};
+    Object.entries(x.chk).forEach(([k,v])=>{if(v=="y")y++;else if(v=="n"){if(df[k]&&df[k].del)return;n++;const d=df[k];Q.all.push({u,d:d||{},t:ptText(u,x,k)});if(d&&d.closed){cl++;Q.closed++}else addOpen(u,k,d,ptText(u,x,k))}});
     if(x.done&&x.src!="sheet"&&y+n){Q.acts++;Q.ftp+=100*y/(y+n);Q.now+=100*(y+cl)/(y+n)}});
   let comp=null;if(cat==5){let last="";LEAVES.forEach(u=>{const x=s.leaves[u.id];if(x&&x.done&&x.on&&x.on>last)last=x.on});comp=last?new Date(last.slice(0,10)+"T00:00:00"):today}
   const SE=SEQ.map(q=>{const L=stageLeaves(q);let e=null,s0=null;F.forEach(f=>{if(f.u.si==q.i){if(!e||f.e>e)e=f.e;if(!s0||f.s<s0)s0=f.s}});
@@ -3123,10 +3205,11 @@ function dashSections(sum){const D=$("dash");let body=null;const secs=[];
 $("dash").addEventListener("click",e=>{if(e.target.closest("[data-goov]")){setView("O");return}const b=e.target.closest("[data-dsall]");if(!b)return;const op=b.dataset.dsall=="1";$("dash").querySelectorAll("details.dsec").forEach(d=>{d.open=op;op?DSOPEN.add(d.dataset.sec):DSOPEN.delete(d.dataset.sec)});try{localStorage.setItem("ak-dsec",JSON.stringify([...DSOPEN]))}catch(e){}});
 
 // villas of a cluster (or the project) grouped by the priority set in the Priority tab
+var PGO=new Set();document.addEventListener("toggle",e=>{const d=e.target;if(d&&d.dataset&&d.dataset.pg){d.open?PGO.add(d.dataset.pg):PGO.delete(d.dataset.pg)}},true);
 function priGroups(ns,openAll){const G=[...LV.map(([l])=>({l,c:lvCol(l),v:[]})),{l:"Not set",c:"var(--na)",v:[]}];
   ns.forEach(n=>{const i=priOf(+n);const g=i>=0?G.find(x=>x.l==PRI[i].lv)||G[G.length-1]:G[G.length-1];g.v.push({n:+n,i})});
   G.forEach(g=>g.v.sort((x,y)=>(x.i<0?1e4:x.i)-(y.i<0?1e4:y.i)||x.n-y.n));
-  return`<div class="pgs"><p class="cap">Villas by priority</p>${G.filter(g=>g.v.length).map((g,gi)=>`<details class="pgd" style="--lc:${g.c}"${openAll||g.l!="Not set"&&g.l!="Low"?" open":""}><summary><span class="lvp">${g.l}</span><b>${g.v.length} ${g.v.length==1?"villa":"villas"}</b><span class="pgav">${pctTxt(g.v.reduce((s,x)=>s+stats(x.n).pct,0)/g.v.length)} avg</span></summary>
+  return`<div class="pgs"><p class="cap">Villas by priority</p>${G.filter(g=>g.v.length).map((g,gi)=>`<details class="pgd" data-pg="${g.l}" style="--lc:${g.c}"${openAll||PGO.has(g.l)?" open":""}><summary><span class="lvp">${g.l}</span><b>${g.v.length} ${g.v.length==1?"villa":"villas"}</b><span class="pgav">${pctTxt(g.v.reduce((s,x)=>s+stats(x.n).pct,0)/g.v.length)} avg</span></summary>
     <div class="pgl">${g.v.map(x=>{const st=stats(x.n),pr=x.i>=0?PRI[x.i]:null,L=pr?lateDays(st,pr.tg):null;return`<button type="button" class="pgr" data-sel="${x.n}"><span class="pgn">Villa ${x.n}</span><span class="pgs1">${st.cat==0?"Not started":STG[st.cat]}${st.P.length?" · "+esc(st.P[0].u.n):st.N[0]?" · next "+esc(st.N[0].u.n):""}${L!=null&&L>0?` · <b class="late">late ${L}d</b>`:""}</span><span class="pgp">${pctTxt(st.pct)}</span><i class="pgb" style="--w:${st.pct}%"></i></button>`}).join("")}</div></details>`).join("")}</div>`}
 function renderDash(){
   const sc=hov??pin,isP=sc==="P",c=isP?PRIC():isLV(sc)?LVC(sc):CLUSTERS.find(x=>x.id===sc)||null,a=agg(c),N=a.ns.length;
@@ -4664,7 +4747,7 @@ const inr=n=>"₹"+Number(n||0).toLocaleString("en-IN",{maximumFractionDigits:2}
 let dnDel=null;
 function dnContractors(){const s=new Set;try{JSON.parse(localStorage.getItem("ak-contractors")||"[]").forEach(x=>s.add(x))}catch(e){}
   Object.values(SITE).forEach(st=>Object.values((st&&st.leaves)||{}).forEach(L=>(L.dn||[]).forEach(d=>d.con&&s.add(d.con))));LEAVES.forEach(u=>(u.dn||[]).forEach(d=>d.con&&s.add(d.con)));return[...s].sort()}
-function dnDefects(u){const out=[];items(u).forEach(x=>{const f=u.df&&u.df[x.k];if(u.chk[x.k]=="n")out.push({k:"p:"+x.k,t:x.t,sev:(f&&f.sev)||"",open:!(f&&f.closed)})});
+function dnDefects(u){const out=[];items(u).forEach(x=>{const f=u.df&&u.df[x.k];if(u.chk[x.k]=="n"&&!(f&&f.del))out.push({k:"p:"+x.k,t:x.t,sev:(f&&f.sev)||"",open:!(f&&f.closed)})});
   (u.xd||[]).forEach(d=>out.push({k:"x:"+d.id,t:d.t,sev:d.sev||"",open:!d.closed}));return out}
 function dnNo(u){const v=villa()||"NA",n=(u.dn||[]).reduce((m,d)=>Math.max(m,+String(d.no).split("-").pop()||0),0)+1;return`DN-${vkey(v)}-${String(u.id).padStart(2,"0")}-${String(n).padStart(2,"0")}`}
 function renderDN(){const box=$("dnsec");if(!box)return;const u=sel;if(!u||view!="C"){box.hidden=true;return}box.hidden=false;u.dn=u.dn||[];
@@ -4754,7 +4837,9 @@ renderNav=function(){const box=$("navL");if(!box)return;const q=($("navQ").value
   // keep the current activity's stage and sub-stage open
   if(navFor!==sel.id){navFor=sel.id;NAVO.add("q"+sel.si);NAVO.add("g"+sel.si+"."+sel.r)}
   const badge=u=>{if(dm){const o=openDfOf(u);return o?`<span class="nb bad" title="Open defects">${o}</span>`:""}const cs=clStat(u);return`<span class="nb${cs.tot&&cs.open==0&&cs.ok+cs.n==cs.tot?" ok":cs.n?" bad":""}" title="Points answered">${cs.ok+cs.n}/${cs.tot}</span>`};
-  let h="";SEQ.forEach(qs=>{const all=stageLeaves(qs),L=all.filter(u=>!q||(u.n+" "+u.stn+" "+u.acn+" "+qs.n).toLowerCase().includes(q));if(!L.length)return;
+  let h="";if(!q&&v){const now=LEAVES.filter(u=>!u.done&&(u.wip||clStat(u).ok+clStat(u).n>0)),nx=now.length?[]:LEAVES.filter(u=>!u.done).slice(0,1);const L2=now.length?now:nx;
+    if(L2.length)h+=`<div class="nnow"><p class="nnh"><i></i>${now.length?`Work going on now · ${now.length}`:"Up next"}</p>${L2.map(u=>`<button type="button" class="nr${u===sel?" on":""}" data-nav="${u.id}"${u===sel?' aria-current="true"':""}><span class="dot ${u.wip?"w":"t"}"></span><span class="nt">${esc(label(u))}<small>${esc(u.seq.n)} › ${esc(u.stn)}</small></span>${badge(u)}</button>`).join("")}</div>`}
+  SEQ.forEach(qs=>{const all=stageLeaves(qs),L=all.filter(u=>!q||(u.n+" "+u.stn+" "+u.acn+" "+qs.n).toLowerCase().includes(q));if(!L.length)return;
     const dn=all.filter(u=>u.done).length,oq=q||NAVO.has("q"+qs.i);
     let nd=0;if(dm)all.forEach(u=>nd+=openDfOf(u));
     h+=`<details class="nacc" data-acc="q${qs.i}"${oq?" open":""} style="--c:${scol(qs.i)}"><summary><i class="nsw"></i><span class="nst"><b>${esc(qs.n)}</b><small>${dm?(nd?plur(nd,"open defect"):"No open defects"):`${dn} of ${all.length} activities done`}</small></span><span class="nmini" aria-hidden="true"><i style="width:${all.length?100*dn/all.length:0}%"></i></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><div class="nbody">`;
@@ -4915,7 +5000,7 @@ const engName=()=>ls.get("ak-eng")||"";
 function fxShareable(f){try{return!!(navigator.canShare&&navigator.canShare({files:[f]}))}catch(e){return false}}
 async function fxShare(blob,name,title){const f=new File([blob],name,{type:blob.type||"application/octet-stream"});
   if(fxShareable(f)){try{await navigator.share({files:[f],title});return"Shared "+name}catch(e){if(e&&e.name=="AbortError")return"Sharing cancelled."}}
-  const m=await saveFile(name,blob);return m+(navigator.share?"":". Your browser can't share files directly, so attach the downloaded file in WhatsApp.")}
+  const m=await saveFile(name,blob);return m+(navigator.share||!matchMedia("(pointer:coarse)").matches?"":". This browser can't share files directly, so attach the downloaded file in WhatsApp.")}
 function villaSnap(k){const v=villa();if(v&&vkey(v)==k)return snapshot();if(SITE[k])return SITE[k];try{return JSON.parse(ls.get("amr-planner:"+k)||"null")}catch(e){return null}}
 async function fxPdfPreview(doc,title){let d=fxDialog(title,`<div class="fxpv" id="fxPv"><p class="fxsm">Preparing preview…</p></div>`);d.querySelector(".fxbox").classList.add("wide");
   try{await loadPdfJs();const buf=doc.output("arraybuffer");const pd=await pdfjsLib.getDocument({data:buf,isEvalSupported:false}).promise;const box=$("fxPv");box.innerHTML="";
@@ -5064,17 +5149,17 @@ function eodPlan(d,all){const log=dayLog(d);const pairs=new Map();
     const actWide=(L.xd||[]).length||(L.dn||[]).length||L.rem||L.done;if(!phs.length&&actWide)phs.push("A");
     phs.forEach((ph,i)=>files.push({k,id,u,L,ph,last:i==phs.length-1,name:`${leafFile(k,u0)}-${PHS[ph]}-${d}.json`,it:it.filter(x=>x.ph==ph)}))});
   return files}
-function eodCounts(f){let pts=0,ph=0,df=0;f.it.forEach(x=>{if(f.L.chk&&f.L.chk[x.k])pts++;ph+=((f.L.ph||{})[x.k]||[]).length;const q=(f.L.df||{})[x.k];if(q){df++;ph+=(q.after||[]).length}});
-  if(f.last){df+=(f.L.xd||[]).length;(f.L.xd||[]).forEach(x=>ph+=(x.before||[]).length+(x.after||[]).length)}return{pts,ph,df,dn:f.last?(f.L.dn||[]).length:0}}
+function eodCounts(f){let pts=0,ph=0,df=0;f.it.forEach(x=>{if(f.L.chk&&f.L.chk[x.k])pts++;ph+=((f.L.ph||{})[x.k]||[]).length;const q=(f.L.df||{})[x.k];if(q&&!q.del){df++;ph+=(q.after||[]).length}});
+  if(f.last){df+=(f.L.xd||[]).filter(x=>!x.del).length;(f.L.xd||[]).filter(x=>!x.del).forEach(x=>ph+=(x.before||[]).length+(x.after||[]).length)}return{pts,ph,df,dn:f.last?(f.L.dn||[]).length:0}}
 async function eodJson(f,d,stat){const L=f.L,u=f.u,fn=f.name.replace(/\.json$/,"");let pi=0;
   const photo=async(r,tag)=>{const x=await eodBlob(r);pi++;if(!x){stat.miss++;return{file:`${fn}-${tag}-${pi}`,takenAt:r.at||"",by:r.by||"",missing:true}}
     if(x.q=="original")stat.orig++;else stat.red++;stat.bytes+=x.b.size;return{file:`${fn}-${tag}-${pi}.${/png/.test(x.b.type)?"png":"jpg"}`,takenAt:r.at||"",by:r.by||"",quality:x.q,mime:x.b.type||"image/jpeg",bytes:x.b.size,data:await toB64(x.b)}};
-  const pts=[];let no=0;for(const x of f.it){no++;const q=(L.df||{})[x.k];const ph=[];for(const r of ((L.ph||{})[x.k]||[]))ph.push(await photo(r,"P"+String(no).padStart(2,"0")));
+  const pts=[];let no=0;for(const x of f.it){no++;const q0=(L.df||{})[x.k],q=q0&&!q0.del?q0:null;const ph=[];for(const r of ((L.ph||{})[x.k]||[]))ph.push(await photo(r,"P"+String(no).padStart(2,"0")));
     let def=null;if(q){const af=[];for(const r of (q.after||[]))af.push(await photo(r,"P"+String(no).padStart(2,"0")+"-fix"));def={severity:q.sev||"",category:q.cat||"",responsible:q.who||"",due:q.due||"",raised:q.raised||"",status:q.closed?"Closed":"Open",closedOn:q.on||"",note:q.note||"",photosAfterFix:af}}
     pts.push({no,key:x.k,point:x.t,reference:x.ref||"",ownPoint:!!x.own,answer:ANS[(L.chk||{})[x.k]]||"Not answered",photos:ph,defect:def})}
   const out={schema:"ak-checklist/1",project:"AMR Living Spaces",villa:+f.k||f.k,stage:u.seq.n,subStage:u.stn,activity:u.n,activityId:u.id,phase:PHS[f.ph],phaseName:PHN[f.ph],date:d,
     status:L.done?"Complete":L.wip?"In progress":"Not started",completedOn:L.on||"",engineer:L.by||"",lastChanged:L.mt||"",points:pts};
-  if(f.last){const xd=[];for(const z of (L.xd||[])){const b=[],a=[];for(const r of (z.before||[]))b.push(await photo(r,"D"));for(const r of (z.after||[]))a.push(await photo(r,"D-fix"));
+  if(f.last){const xd=[];for(const z of (L.xd||[]).filter(z=>!z.del)){const b=[],a=[];for(const r of (z.before||[]))b.push(await photo(r,"D"));for(const r of (z.after||[]))a.push(await photo(r,"D-fix"));
       xd.push({title:z.t,checkpoint:z.cp||"",category:z.cat||"",severity:z.sev||"",location:z.loc||"",raisedBy:z.rby||"",raised:z.raised||"",responsible:z.who||"",due:z.due||"",status:z.closed?"Closed":"Open",closedOn:z.on||"",note:z.note||"",photos:b,photosAfterFix:a})}
     out.activityDefects=xd;out.debitNotes=(L.dn||[]).map(n=>({number:n.no,contractor:n.con||"",amountINR:+n.amt||0,reason:n.why||"",date:n.date||"",status:(DNST.find(s=>s[0]==n.st)||[0,n.st])[1],raisedBy:n.by||""}));out.remarks=L.rem||""}
   out.exportedAt=new Date().toISOString();return JSON.stringify(out,null,1)}
@@ -5129,7 +5214,7 @@ syPill();
 // ---------- v7: villa page from the site map, compact header with a "More" menu ----------
 var VSEL=null;
 function villaRows(n){const s=getState(n)||{leaves:{}};const L=s.leaves||{};return LEAVES.map(u=>{const x=L[u.id]||{};const it=items({...u,custom:x.custom||[]});const chk=x.chk||{};
-  const ans=it.filter(i=>chk[i.k]).length,df=Object.entries(x.df||{}).filter(([k,d])=>chk[k]=="n"&&!d.closed).length+(x.xd||[]).filter(d=>!d.closed).length;
+  const ans=it.filter(i=>chk[i.k]).length,df=Object.entries(x.df||{}).filter(([k,d])=>chk[k]=="n"&&!d.closed&&!d.del).length+(x.xd||[]).filter(d=>!d.closed&&!d.del).length;
   const st=x.done?"done":(x.wip||ans)?"wip":"todo";return{u,st,ans,tot:it.length,df,on:x.on||"",dn:(x.dn||[]).length}})}
 function renderVilla(){const box=$("viewV");if(!box)return;const n=+VSEL;if(!n){setView("S");return}
   const R=villaRows(n),stt=stats(n),c=clusterOf(n),pct=stt.pct||0;const cnt={done:0,wip:0,todo:0};let dfo=0;R.forEach(r=>{cnt[r.st]++;dfo+=r.df});
@@ -5435,6 +5520,282 @@ $("viewS").addEventListener("click",e=>{if(!PPM)return;const g=e.target.closest(
 {const rv=renderVilla;renderVilla=function(){rv();const n=+VSEL;if(!n||!canEdit("plan"))return;const box=$("viewV").querySelector(".vact");if(!box)return;const i=priOf(n),pr=i>=0?PRI[i]:null;
   const d=document.createElement("div");d.className="vpri2";d.innerHTML=`<span class="cap">Priority${pr?` · #${i+1} in the list`:""}</span><div class="vdp" role="group" aria-label="Villa priority">${[["","None"],...LV.map(x=>[x[0],x[0]])].map(([v,l])=>`<button type="button" data-vpl="${v}" aria-pressed="${(pr?pr.lv:"")==v}" style="--lc:${v?lvCol(v):"var(--na)"}">${l}</button>`).join("")}</div>${pr?`<label class="fxf vtg"><span>Target handover</span><input type="date" class="fxi" id="vpTg" value="${esc(pr.tg||"")}"></label>`:""}`;
   box.after(d);d.onclick=e=>{const b=e.target.closest("[data-vpl]");if(b){setPri(n,b.dataset.vpl||null);renderVilla()}};const t=$("vpTg");if(t)t.onchange=()=>{setPri(n,PRI[priOf(n)].lv,t.value);renderVilla()}}}
+
+// ---------- v13: open on the work that's going on; priority groups closed until tapped ----------
+{const ov0=openVilla;let lastV="";openVilla=async function(v){const r=await ov0.apply(this,arguments);const k=String(villa()||"");
+  if(k&&k!==lastV&&(view=="C"||view=="D")){const w=LEAVES.find(u=>!u.done&&u.wip)||LEAVES.find(u=>!u.done&&clStat(u).ok+clStat(u).n>0);if(w&&w!==sel){sel=w;render()}}lastV=k;return r}}
+
+// ---------- v14: drawing register — status per villa and drawing, client sign-off, PM approval ----------
+const DRT0=[{"id":"fp","n":"Floor plan","g":"Architectural","x":"Floor Plan"},{"id":"fpit","n":"Footing pits","g":"Structural","x":"Footing pits"},{"id":"fdet","n":"Footing details","g":"Structural","x":"Footing Details"},{"id":"cl","n":"Centre line","g":"Structural","x":"Center line"},{"id":"col","n":"Column details","g":"Structural","x":"Column Details"},{"id":"pb","n":"Plinth beam","g":"Structural","x":"Plinth beam"},{"id":"gs","n":"Grade slab / floor PCC","g":"Structural","x":"Grade slab/Floor Pcc"},{"id":"st","n":"Staircase","g":"Structural","x":"Stair case"},{"id":"gbl","n":"GF beam layout","g":"Structural","x":"GF beam layout"},{"id":"gbd","n":"GF beam details","g":"Structural","x":"GF Beam details"},{"id":"gsd","n":"GF slab details","g":"Structural","x":"GF slab details"},{"id":"gse","n":"GF slab electrical","g":"Electrical","x":"GF Slab electrical"},{"id":"fbl","n":"FF beam layout","g":"Structural","x":"FF Beam layout"},{"id":"fbd","n":"FF beam details","g":"Structural","x":"FF Beam Details"},{"id":"fsd","n":"FF slab details","g":"Structural","x":"FF slab Details"},{"id":"fse","n":"FF slab electrical","g":"Electrical","x":"FF slab electrical"},{"id":"sbl","n":"SF beam layout","g":"Structural","x":"SF Beam layout"},{"id":"sbd","n":"SF beam details","g":"Structural","x":"SF Beam Details"},{"id":"ssd","n":"SF slab details","g":"Structural","x":"SF slab Details"},{"id":"sse","n":"SF slab electrical","g":"Electrical","x":"SF slab electrical"},{"id":"hbl","n":"Head room beam layout","g":"Structural","x":"Head Room Beam layout"},{"id":"hbs","n":"Head room beam & slab details","g":"Structural","x":"Head Room Beam & Slab Details"},{"id":"hre","n":"Head room electrical","g":"Electrical","x":"Headroom electrical"},{"id":"wp","n":"Working plan","g":"Architectural","x":"Working Plan"},{"id":"dw","n":"Doors & windows","g":"Architectural","x":"Doors & windows"},{"id":"we","n":"Wall electrical","g":"Electrical","x":"Wall electrical"},{"id":"el","n":"Elevation details","g":"Architectural","x":"Elevation Details"},{"id":"ws","n":"Water supply","g":"Plumbing","x":"water supply"},{"id":"dr","n":"Drainage layout","g":"Plumbing","x":"Drinage layout"}];
+const DREG0={"1":"RRRRRRRRRRRRRRRRRRRRPPRRRRRPP","2":"RRRRRRRRRRRRRRRRRRRRPPRRRRRPP","3":"RRRRRRRRRRRRRRRRRRRRPPRPPPRPP","4":"RRRRRRRRRRRRRRRRRRRRPPRPPPRPP","5":"RRRRRRRRRRRRRRRRRRRRPPRPPPRPP","6":"RRRRRRRRRRRRRRRRRRRRPPRPPPPPP","7":"RRRRRRRRRRRRRRRRRRRRPPRPPPPPP","8":"RRRRRRRRRRRRRRRRRRRRPPRPPPPPP","9":"RRRRRRRRRRRRPPPRPPPPPPRPPPPPP","10":"RRRRRRRRRRRRPPPRPPPPPPRPPPPPP","11":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","12":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","13":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","14":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","15":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","16":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","17":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","18":"RRRRRRRRRRRRRRRRPPPPRRRRRRRPP","19":"PPPPPPPPPPPPPPPPPPPPPPPPPPPPP","20":"RRRRRRRRRRRRRRRRPPPRPPRRRRRRR","21":"RRRRRRRRRRRRRRRRPPPRRRRRRRRRR","22":"PPPPPPPPPPPPPPPPPPPPPPPPPPPPP","23":"RRRRRRRRRRRRPPPPPPPPRRRRRRRPP","24":"RRRRRRRRRRRRRRRRPPPRRRRRRRRRR","25":"RRRRRRRRRRRRRRRRPPPRRRRRRRRRR","26":"RRRRRRRRRRRRRRRRPPPRRRRRRRRRR","27":"RRRRRRRRRRRRRRRRPPPRRRRRRRRRR","28":"RRRRRRRRRRRRRRRRPPPRRRRRRRRRR","29":"RRRRRRRRRRRRRRRRPPPRRRRRRRRRR","30":"RRRRRRRRRRRRRRRRPPPRRRRRRRRRR","31":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","32":"RRRRRRRRRRRRPPPRPPPPPPRPPPPPP","33":"RRRRRRRRRRRRRPRRPPPPPPRPPPPPP","34":"RRRRRRRRRRRRPPPRPPPPPPPPPPPPP","35":"RRRRRRRRRRRRPPPRPPPPPPRPPPPRR","36":"RRRRRRRRRRRRPPPRPPPPPPRPPPPRR","37":"RRRRRRRRRRRRPPPRPPPPPPRPPPPRR","38":"RRRRRRRRRRRRPPPRPPPPPPRPPPPRR","39":"RRRRRRRRRRRRPPPRPPPPPPRPPPPRR","40":"RRRRRRRRRRRRPPPRPPPPPPRPPPPRR","41":"RRRRRRRRRRRRPPPRPPPPPPRPPPPRR","42":"RRRRRRRRRRRRPPPRPPPPPPRPPPPRR","43":"RRRRRRRRRRRRPPPPPPPPPPPPPPPPP","44":"PPPPPPPPPPPPPPPPPPPPPPPPPPPPP","45":"PPPPPPPPPPPPPPPPPPPPPPPPPPPPP","46":"PPPPPPPPPPPPPPPPPPPPPPPPPPPPP","47":"PPPPPPPPPPPPPPPPPPPPPPPPPPPPP","48":"RRRRRRRRRRRRRRRRRRRRPPPPPPPPP","49":"RRRRRRRRRRRRRRRRRRRRRRRRRRRRR","50":"RRRRRRRRRRRRRRRRRRRRRRRRRRRRR","51":"RRRRRRRRRRRRRRRRRRRRRRRRRRRRR","52":"RRRRRRRRRRRRRRRRRRRRRRRRRRRRR","53":"RRRRRRRRRRRRRRRRRRRRRRRRRRRRR","54":"RRRRRRRRRRRRRRRRRRRRRRRRRRRRR","55":"RRRRRRRRRRRRRRRRRRRRRRRRRRRRR","56":"RRRRRRRRRRRRRRRRRRRRRRRRRRRRR","57":"RRRRRRRRRRRRRRRRRRRRRRRRRRRRR","58":"RRRRRRRRRRRRRRRRPPPPPPPPPPPPP","59":"RRRRRRRPPPPPPPPPPPPPPPPPPPPPP","60":"RRRRRRRPPPPPPPPPPPPPPPPPPPPPP","61":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","62":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","63":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","64":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","65":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","66":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","67":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","68":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","69":"RRRRRRRRRRRRRRRRPPPPRRRRRPPPP","70":"RRRRRRRRRRRRRRRRPPPPRRRRRPPPP","71":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","72":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","73":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","74":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","75":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","76":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","77":"RRRRRRRPPPPPPPPPPPPPPPPPPPPPP","78":"RRRRRRRPPPPPPPPPPPPPPPPPPPPPP","79":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","80":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","81":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","82":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","83":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","84":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","85":"RRRRRRRRRRRRRRRRPPPPRRRRRPPPP","86":"RRRRRRRRRRRRRRRRPPPPRRRRRPPPP","87":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","88":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","89":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","90":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","91":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","92":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","93":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","94":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","95":"RRRRRRRPPPPPPPPPPPPPPPPPPPPPP","96":"RRRRRRRPPPPPPPPPPPPPPPPPPPPPP","97":"RRRRRPPPPPPPPPPPPPPPPPPPPPPPP","98":"RRRRRPPPPPPPPPPPPPPPPPPPPPPPP","99":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","100":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","101":"RRRRRRRRRRRRRRRRPPPPRRRRRRRRR","102":"RRRRRPPPPPPPPPPPPPPPPPPPPPPPP","103":"RRRRRPPPPPPPPPPPPPPPPPPPPPPPP","104":"RRRRRPPPPPPPPPPPPPPPPPPPPPPPP","105":"RRRRRRRRRRRRPPPPPPPPPPPPPPPPP","106":"RRRRRRRRRRRRPPPPPPPPPPPPPPPPP","107":"RRRRRRRRRRRRPPPPPPPPPPPPPPPPP","108":"RRRRRRRRRRRRPPPPPPPPPPPPPPPPP","109":"RRRRRRRRRRRRPPPPPPPPPPPPPPPPP","110":"RRRRRRRRRRRRPPPPPPPPPPPPPPPPP","111":"RRRRRRRRRRRRPPPPPPPPPPPPPPPPP","112":"RRRRRRRRRRRRPPPPPPPPPPPPPPPPP"};
+
+var DRT=DRT0.slice();try{const x=JSON.parse(ls.get("ak-drt")||"null");if(Array.isArray(x)&&x.length)DRT=x}catch(e){}
+const DST=[["pend","To be received"],["recv","Received"],["sent","Awaiting client signature"],["sign","Approval pending"],["final","Finalised"]];
+const DSTN=Object.fromEntries(DST),DSTI=Object.fromEntries(DST.map((x,i)=>[x[0],i]));
+var DREG={};
+function dregLoad(v){v=String(v);if(DREG[v])return DREG[v];let o=null;try{o=JSON.parse(ls.get("ak-dreg:"+v)||"null")}catch(e){}
+  if(!o){o={cells:{}};const s=DREG0[v]||"";DRT0.forEach((t,i)=>{o.cells[t.id]={st:s[i]=="R"?"recv":"pend",h:[]}})}return DREG[v]=o}
+function dcell(v,t){const o=dregLoad(v);return o.cells[t]=o.cells[t]||{st:"pend",h:[]}}
+function dregSave(v,mark){v=String(v);ls.set("ak-dreg:"+v,JSON.stringify(DREG[v]));if(mark!==false&&DB){syMark("w:__dreg:"+v);syKick(400)}}
+function dset(v,t,st,extra,note){const c=dcell(v,t);const now=new Date().toISOString(),by=(ROLE&&ROLE.name)||engName()||ROLE.me||"";c.h=(c.h||[]).concat([{st,at:now,by,note:note||""}]).slice(-30);c.st=st;c.mt=now;Object.assign(c,extra||{})}
+// sync: each villa's register is its own record, merged drawing by drawing
+{const p2=wkPush;wkPush=async function(d){if(String(d).startsWith("__dreg:")){const v=d.slice(7);const l=dregLoad(v);const r=await DB.doc("dreg/"+v).get();const R=r&&r.exists?r.data():{cells:{}};
+    const out={cells:{...(R.cells||{})}};for(const t in l.cells){const a=l.cells[t],b=out.cells[t];if(!b||String(a.mt||"")>String(b.mt||""))out.cells[t]=a}out.saved=new Date().toISOString();
+    await DB.doc("dreg/"+v).set(out);DREG[v]={cells:out.cells};dregSave(v,false);if(view=="W")renderDreg();return}
+  if(d=="__drt"){await DB.doc("meta/dtypes").set({list:DRT,saved:new Date().toISOString()});return}return p2(d)}}
+let dregPullT=0;function dregPull(){if(!DB||!navigator.onLine||Date.now()-dregPullT<60000)return;dregPullT=Date.now();
+  const take=docs=>{let ch=0;docs.forEach(x=>{const v=x.id;if(syDirty("w:__dreg:"+v))return;const R=x.data()||{};const l=dregLoad(v);for(const t in (R.cells||{})){const a=l.cells[t],b=R.cells[t];if(!a||String(b.mt||"")>String(a.mt||"")){l.cells[t]=b;ch++}}dregSave(v,false)});if(ch&&view=="W")renderDreg()};
+  try{const c=DB.collection("dreg");if(c.get)c.get().then(q=>take(q.docs)).catch(()=>{});else{let un=null;un=c.onSnapshot(q=>{take(q.docs);if(un){un();un=null}},()=>{})}}catch(e){}
+  try{DB.doc("meta/dtypes").get().then(d=>{if(d&&d.exists&&Array.isArray(d.data().list)&&!syDirty("w:__drt")){DRT=d.data().list;ls.set("ak-drt",JSON.stringify(DRT))}}).catch(()=>{})}catch(e){}}
+// counts for a set of villas
+function dcount(vs,types){const c={pend:0,recv:0,sent:0,sign:0,final:0,tot:0};vs.forEach(v=>(types||DRT).forEach(t=>{c[dcell(v,t.id).st]++;c.tot++}));return c}
+const DRS={scope:0,f:"",view:innerWidth>900?"matrix":"villa",q:"",open:new Set()};
+const dScopeVs=()=>DRS.scope==="P"?PRI.map(x=>x.n):isLV(DRS.scope)?PRI.filter(x=>x.lv==LVID[DRS.scope]).map(x=>x.n):villasOf(DRS.scope?CLUSTERS.find(c=>c.id===DRS.scope):null);
+const dchip=st=>`<span class="dst s-${st}">${DSTN[st]}</span>`;
+const dbar=c=>`<span class="dzsb" aria-hidden="true">${DST.map(([k])=>c[k]?`<i class="s-${k}" style="flex:${c[k]}"></i>`:"").join("")}</span>`;
+function renderDreg(){const box=$("drd");if(!box)return;dregPull();const vs=dScopeVs(),q=DRS.q.trim().toLowerCase();const T=DRT.filter(t=>!q||(t.n+" "+t.g).toLowerCase().includes(q));
+  const c=dcount(vs,T),ed=canEdit("dwg");const pct=k=>c.tot?Math.round(c[k]/c.tot*1000)/10:0;
+  const tiles=[["final","Finalised","Client signed and PM approved"],["sign","Approval pending","Client signed, waiting for the PM"],["yet","Yet to be approved","Received or sent to the client, not signed yet"],["pend","To be received","Not received from the consultant"]];
+  const tv=k=>k=="yet"?c.recv+c.sent:c[k];
+  box.innerHTML=`<section class="fxp drh">
+    <div class="drh1"><div><span class="vcl">Drawing register · ${vs.length} ${vs.length==1?"villa":"villas"} × ${T.length} drawings</span><h2>${c.tot?`<span class="fig">${pct("final")}%</span> finalised`:"No drawings"}</h2></div>
+      <div class="fxacts">${ed?`<button type="button" class="fxb" id="drImp">Import register (.xlsx)</button>`:""}<button type="button" class="fxb" id="drExp">Export register</button></div></div>
+    ${dbar(c)}
+    <div class="drk">${tiles.map(([k,l,s])=>`<button type="button" class="drt k-${k}${DRS.f==k?" on":""}" data-drf="${k}" aria-pressed="${DRS.f==k}"><b class="fig">${tv(k)}</b><span>${l}</span><small>${s}</small></button>`).join("")}</div>
+    <p class="fxsm drleg">${DST.map(([k,l])=>`<span><i class="s-${k}"></i>${l} ${c[k]}</span>`).join("")}</p>
+    <input type="file" id="drF" accept=".xlsx,.xls" hidden><p class="fxmsg" id="drMsg" role="status"></p></section>
+   <div class="drbar"><div class="dtabs drsc" role="tablist" aria-label="Villas">${[{id:0,n:"All villas"},...CLUSTERS.map(x=>({id:x.id,n:"Cluster "+x.id})),...(PRI.length?[{id:"H",n:"High"},{id:"M",n:"Medium"},{id:"L",n:"Low"}]:[])].map(x=>`<button type="button" role="tab" data-drs="${x.id}" aria-selected="${DRS.scope===x.id}"${isLV(x.id)?` class="lvt" style="--lc:${lvCol(LVID[x.id])}"`:""}>${x.n}</button>`).join("")}</div>
+     <div class="drv"><input class="fxi" id="drQ" type="search" placeholder="Find a drawing, e.g. FF slab" value="${esc(DRS.q)}" aria-label="Find a drawing">
+     <div class="segv" role="tablist" aria-label="View">${[["matrix","Grid"],["villa","By villa"],["type","By drawing"]].map(([k,l])=>`<button type="button" role="tab" data-drv="${k}" aria-selected="${DRS.view==k}">${l}</button>`).join("")}</div></div></div>
+   <section class="fxp drbody">${DRS.view=="matrix"?dMatrix(vs,T):DRS.view=="type"?dByType(vs,T):dByVilla(vs,T)}</section>`;
+  const msg=$("drMsg");
+  box.onclick=e=>{const t=e.target.closest("[data-drf],[data-drs],[data-drv],[data-drvo],[data-dro],[data-drc]");if(!t)return;
+    if(t.dataset.drf!=null){DRS.f=DRS.f==t.dataset.drf?"":t.dataset.drf;renderDreg()}
+    else if(t.dataset.drs!=null){const v=t.dataset.drs;DRS.scope=isLV(v)?v:+v;renderDreg()}
+    else if(t.dataset.drv){DRS.view=t.dataset.drv;renderDreg()}
+    else if(t.dataset.dro){DRS.open.has(t.dataset.dro)?DRS.open.delete(t.dataset.dro):DRS.open.add(t.dataset.dro);renderDreg()}
+    else if(t.dataset.drvo)dVilla(+t.dataset.drvo,t.dataset.drt0||"");
+    else if(t.dataset.drc){const [v,ty]=t.dataset.drc.split("|");dVilla(+v,ty)}};
+  $("drQ").oninput=e=>{DRS.q=e.target.value;const p=e.target.selectionStart;renderDreg();const i=$("drQ");i.focus();try{i.setSelectionRange(p,p)}catch(x){}};
+  $("drExp").onclick=()=>dExport().then(m=>{msg.className="fxmsg";msg.textContent=m},e=>{msg.className="fxmsg bad";msg.textContent=e.message});
+  if($("drImp")){$("drImp").onclick=()=>$("drF").click();$("drF").onchange=e=>{const f=e.target.files[0];e.target.value="";if(f)dImport(f).then(m=>{msg.className="fxmsg";msg.textContent=m;renderDreg();$("drMsg").textContent=m},er=>{msg.className="fxmsg bad";msg.textContent=er.message})}}}
+const dHit=(st)=>!DRS.f||(DRS.f=="yet"?st=="recv"||st=="sent":st==DRS.f);
+function dMatrix(vs,T){const ab=t=>t.n.replace(/details?/i,"det").replace(/layout/i,"lay").replace(/electrical/i,"elec");
+  return`<p class="fxsm" style="margin:0 0 10px">Each square is one drawing for one villa. Tap a square or a villa number to open that villa's drawings.</p><div class="drm"><table><thead><tr><th class="sv">Villa</th>${T.map(t=>`<th title="${esc(t.n)} · ${esc(t.g)}"><span>${esc(t.n)}</span></th>`).join("")}<th>Final</th></tr></thead><tbody>${vs.map(v=>{const cc=dcount([v],T);return`<tr><th class="sv"><button type="button" data-drvo="${v}">${v}</button></th>${T.map(t=>{const st=dcell(v,t.id).st;return`<td><button type="button" class="dq s-${st}${dHit(st)?"":" dim"}" data-drc="${v}|${t.id}" title="Villa ${v} · ${esc(t.n)}: ${DSTN[st]}" aria-label="Villa ${v} ${esc(t.n)} ${DSTN[st]}"></button></td>`}).join("")}<td class="dfin">${cc.final}/${cc.tot}</td></tr>`}).join("")}</tbody></table></div>`}
+function dByVilla(vs,T){const rows=vs.map(v=>({v,c:dcount([v],T)})).filter(x=>!DRS.f||(DRS.f=="yet"?x.c.recv+x.c.sent:x.c[DRS.f]));
+  return rows.length?`<ul class="drl">${rows.map(({v,c})=>`<li><button type="button" class="drr" data-drvo="${v}"><span class="drn">Villa ${v}</span>${dbar(c)}<span class="drcn">${c.final?`<b class="s-final-t">${c.final} final</b>`:""}${c.sign?`<b class="s-sign-t">${c.sign} pending</b>`:""}${c.recv+c.sent?`<span>${c.recv+c.sent} yet</span>`:""}${c.pend?`<span class="mu">${c.pend} to receive</span>`:""}</span><svg class="ico vch" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5L16 12l-6.5 6.5"/></svg></button></li>`).join("")}</ul>`:`<div class="fxempty">No villas match this filter.</div>`}
+function dByType(vs,T){const G=[...new Set(T.map(t=>t.g))];
+  return G.map(g=>`<h4 class="drg">${esc(g)}</h4><ul class="drl">${T.filter(t=>t.g==g).map(t=>{const c=dcount(vs,[t]);const open=DRS.open.has(t.id);const hv=vs.filter(v=>dHit(dcell(v,t.id).st));if(DRS.f&&!hv.length)return"";
+    return`<li class="${open?"op":""}"><button type="button" class="drr" data-dro="${t.id}" aria-expanded="${open}"><span class="drn">${esc(t.n)}</span>${dbar(c)}<span class="drcn">${c.final?`<b class="s-final-t">${c.final} final</b>`:""}${c.sign?`<b class="s-sign-t">${c.sign} pending</b>`:""}${c.recv+c.sent?`<span>${c.recv+c.sent} yet</span>`:""}${c.pend?`<span class="mu">${c.pend} to receive</span>`:""}</span><svg class="ico vch" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      ${open?`<div class="drvs">${hv.map(v=>{const st=dcell(v,t.id).st;return`<button type="button" class="drv1 s-${st}" data-drvo="${v}" data-drt0="${t.id}" title="${DSTN[st]}">${v}</button>`}).join("")}</div>`:""}</li>`}).join("")}</ul>`).join("")}
+// one villa's drawings: status, linked file, and the sign-off steps
+let DVSEL=new Set();
+function dVilla(v,focus){DVSEL=new Set(focus?[focus]:[]);dVillaDraw(v,focus)}
+function dGuessFile(v,t){const L=drawingsFor(v).filter(d=>!d.sup);const w=t.n.toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(x=>x.length>1);let best=null,bs=0;
+  L.forEach(d=>{const s=(d.title+" "+(d.no||"")).toLowerCase();const k=w.filter(x=>s.includes(x)).length/w.length;if(k>bs){bs=k;best=d}});return bs>=.66?best:null}
+function dVillaDraw(v,focus){const ed=canEdit("dwg"),adm=roleNow()=="admin";const files=drawingsFor(v).filter(d=>!d.sup);const c=dcount([v]);
+  const sel=[...DVSEL].map(t=>({t,c:dcell(v,t)}));const has=st=>sel.some(x=>x.c.st==st);
+  const d=fxDialog(`Villa ${v} · drawings`,`<div class="dzh">${dbar(c)}<p class="fxsm">${DST.map(([k,l])=>`<span class="dzk"><i class="s-${k}"></i>${l} <b>${c[k]}</b></span>`).join("")}</p></div>
+    <div class="dzt">${[...new Set(DRT.map(t=>t.g))].map(g=>`<h4 class="drg">${esc(g)}</h4>${DRT.filter(t=>t.g==g).map(t=>{const x=dcell(v,t.id);const f=x.f?files.find(z=>z.id==x.f):null;const last=(x.h||[]).slice(-1)[0];
+      return`<label class="dzr${DVSEL.has(t.id)?" on":""}${focus==t.id?" fo":""}"><input type="checkbox" data-dzc="${t.id}"${DVSEL.has(t.id)?" checked":""}><span class="dzn"><b>${esc(t.n)}</b><small>${f?"File: "+esc(f.title)+(f.rev?" · Rev "+esc(f.rev):""):files.length?"No file linked":"No files uploaded for this villa"}${last?` · ${DSTN[last.st]} ${new Date(last.at).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}${last.by?" by "+esc(last.by):""}`:""}${x.sig?` · signed by ${esc(x.sig.name)}`:""}</small></span>${dchip(x.st)}</label>`}).join("")}`).join("")}</div>
+    <div class="dzbar"><span class="fxsm" style="margin:0">${sel.length?`${plur(sel.length,"drawing")} selected`:"Tick drawings to act on them"}</span><span class="ezsp"></span>
+      <button type="button" class="fxb sm fxgh" id="dzAll">${sel.length?"Clear":"Select all"}</button>
+      ${ed?`<button type="button" class="fxb sm" id="dzRecv"${has("pend")?"":" disabled"}>Mark received</button>
+      <button type="button" class="fxb sm" id="dzLink"${sel.length==1&&files.length?"":" disabled"}>Link file</button>
+      <button type="button" class="fxb sm pri" id="dzSend"${has("recv")||has("sent")?"":" disabled"}>Fix as final &amp; print for client</button>
+      <button type="button" class="fxb sm" id="dzSign"${has("sent")?"":" disabled"}>Client signs</button>
+      <button type="button" class="fxb sm pri" id="dzAppr"${has("sign")?"":" disabled"}>PM approve</button>
+      ${adm?`<button type="button" class="fxb sm fxgh" id="dzReo"${sel.some(x=>x.c.st!="pend"&&x.c.st!="recv")?"":" disabled"}>Reopen</button>`:""}`:""}
+      <button type="button" class="fxb sm" id="dzPdf"${sel.length?"":" disabled"}>PDF</button></div><p class="fxmsg" id="dzMsg" role="status"></p><div id="dzX"></div>`);
+  d.querySelector(".fxbox").classList.add("wide");
+  const msg=$("dzMsg"),redraw=()=>{dVillaDraw(v);if(view=="W")renderDreg()};
+  d.querySelectorAll("[data-dzc]").forEach(i=>i.onchange=()=>{i.checked?DVSEL.add(i.dataset.dzc):DVSEL.delete(i.dataset.dzc);dVillaDraw(v)});
+  $("dzAll").onclick=()=>{DVSEL=sel.length?new Set():new Set(DRT.map(t=>t.id));dVillaDraw(v)};
+  const pick=st=>sel.filter(x=>x.c.st==st).map(x=>x.t);
+  if($("dzRecv"))$("dzRecv").onclick=()=>{pick("pend").forEach(t=>dset(v,t,"recv"));dregSave(v);redraw()};
+  if($("dzLink"))$("dzLink").onclick=()=>{const t=sel[0].t,x=dcell(v,t),g=dGuessFile(v,DRT.find(z=>z.id==t));
+    $("dzX").innerHTML=`<div class="dzlink"><label class="fxf"><span>File for ${esc(DRT.find(z=>z.id==t).n)}</span><select class="fxi" id="dzF"><option value="">No file</option>${files.map(f=>`<option value="${f.id}"${(x.f||(g&&g.id))==f.id?" selected":""}>${esc(f.title)}${f.no?" · "+esc(f.no):""}${f.rev?" · Rev "+esc(f.rev):""}</option>`).join("")}</select></label><button type="button" class="fxb pri" id="dzFok">Link</button></div>`;
+    $("dzFok").onclick=()=>{x.f=$("dzF").value;x.mt=new Date().toISOString();dregSave(v);redraw()}};
+  if($("dzSend"))$("dzSend").onclick=async e=>{const ts=sel.filter(x=>x.c.st=="recv"||x.c.st=="sent").map(x=>x.t);ts.forEach(t=>{const x=dcell(v,t);if(!x.f){const g=dGuessFile(v,DRT.find(z=>z.id==t));if(g)x.f=g.id}if(x.st=="recv")dset(v,t,"sent")});dregSave(v);
+    msg.className="fxmsg";msg.textContent="Making the sign-off PDF…";try{msg.textContent=await dPdf(v,ts,"sign")}catch(er){msg.className="fxmsg bad";msg.textContent="PDF failed: "+(er.message||er)}redraw();$("dzMsg").textContent=msg.textContent};
+  if($("dzSign"))$("dzSign").onclick=()=>dSignPad(v,pick("sent"));
+  if($("dzAppr"))$("dzAppr").onclick=()=>{const ts=pick("sign");const now=new Date().toISOString();ts.forEach(t=>dset(v,t,"final",{ap:{by:(ROLE&&ROLE.name)||ROLE.me||engName()||"",at:now}}));dregSave(v);redraw();$("dzMsg").textContent=`${plur(ts.length,"drawing")} approved and fixed as final.`};
+  if($("dzReo"))$("dzReo").onclick=()=>{$("dzX").innerHTML=`<div class="dzlink"><label class="fxf"><span>Why reopen? (kept in the history)</span><input class="fxi" id="dzWhy" placeholder="e.g. Revised by consultant, R3"></label><button type="button" class="fxb bad" id="dzReok">Reopen ${plur(sel.filter(x=>x.c.st!="pend"&&x.c.st!="recv").length,"drawing")}</button></div>`;
+    $("dzReok").onclick=()=>{const why=$("dzWhy").value.trim();if(!why){$("dzWhy").focus();return}sel.filter(x=>x.c.st!="pend"&&x.c.st!="recv").forEach(x=>{dset(v,x.t,"recv",{sig:null,ap:null},"Reopened: "+why)});dregSave(v);redraw()}};
+  $("dzPdf").onclick=async()=>{msg.className="fxmsg";msg.textContent="Making the PDF…";try{msg.textContent=await dPdf(v,sel.map(x=>x.t),"auto")}catch(er){msg.className="fxmsg bad";msg.textContent="PDF failed: "+(er.message||er)}}}
+// client signature, captured on this screen
+function dSignPad(v,ts){if(!ts.length)return;const x=$("dzX");x.innerHTML=`<div class="sigp"><h3 class="fxh3">Client signature · ${plur(ts.length,"drawing")}</h3>
+  <p class="fxsm" style="margin-top:0">${ts.map(t=>esc(DRT.find(z=>z.id==t).n)).join(", ")}</p>
+  <div class="sigf"><label class="fxf"><span>Client name</span><input class="fxi" id="sgN" autocomplete="name"></label><label class="fxf"><span>Phone (optional)</span><input class="fxi" id="sgP" inputmode="tel"></label></div>
+  <canvas id="sgC" width="900" height="260" aria-label="Sign here"></canvas><div class="fxacts"><button type="button" class="fxb sm fxgh" id="sgClr">Clear</button></div>
+  <label class="fxck"><input type="checkbox" id="sgOk"> I accept the drawings listed above as final for construction of villa ${v}.</label>
+  <div class="fxacts"><button type="button" class="fxb pri" id="sgSave">Save signature</button></div><p class="fxmsg" id="sgMsg"></p></div>`;
+  const cv=$("sgC"),g=cv.getContext("2d");g.lineWidth=3.2;g.lineCap="round";g.lineJoin="round";g.strokeStyle="#15233a";let dn=false,drew=false,lp=null;
+  const pt=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]};
+  cv.onpointerdown=e=>{dn=true;lp=pt(e);cv.setPointerCapture(e.pointerId);e.preventDefault()};cv.onpointermove=e=>{if(!dn)return;const p=pt(e);g.beginPath();g.moveTo(lp[0],lp[1]);g.lineTo(p[0],p[1]);g.stroke();lp=p;drew=true};cv.onpointerup=cv.onpointercancel=()=>dn=false;
+  $("sgClr").onclick=()=>{g.clearRect(0,0,cv.width,cv.height);drew=false};
+  $("sgSave").onclick=()=>{const m=$("sgMsg"),n=$("sgN").value.trim();if(!n){m.className="fxmsg bad";m.textContent="Enter the client's name.";return}if(!drew){m.className="fxmsg bad";m.textContent="Ask the client to sign in the box.";return}if(!$("sgOk").checked){m.className="fxmsg bad";m.textContent="Tick the acceptance line.";return}
+    const c2=document.createElement("canvas");c2.width=450;c2.height=130;c2.getContext("2d").drawImage(cv,0,0,450,130);const png=c2.toDataURL("image/png");const at=new Date().toISOString();
+    ts.forEach(t=>dset(v,t,"sign",{sig:{name:n,ph:$("sgP").value.trim(),png,at}}));dregSave(v);dVillaDraw(v);if(view=="W")renderDreg();$("dzMsg").textContent=`Signed by ${n}. ${plur(ts.length,"drawing")} now waiting for PM approval.`};
+  cv.scrollIntoView({behavior:"smooth",block:"center"})}
+// the sign-off / final PDF: Bhaaje cover sheet with signatures, then each drawing with a header band
+async function dPdf(v,ts,mode){await loadJsPDF();const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4"});const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
+  const ink=[21,35,58],mute=[94,107,124],acc=[232,103,42],line=[214,220,228],ok=[24,128,80];const files=drawingsFor(v);const cl=clusterOf(v);
+  const cells=ts.map(t=>({t:DRT.find(z=>z.id==t),c:dcell(v,t)})).filter(x=>x.t);const allFinal=cells.every(x=>x.c.st=="final");
+  pdfLogo(doc,14,12,14);doc.setFont("helvetica","bold");doc.setFontSize(16);doc.setTextColor(...ink);doc.text(allFinal?"Approved final drawings":"Drawings for final approval",W-14,18,{align:"right"});
+  doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(...mute);doc.text(`AMR Living Spaces · Villa ${v}${cl?" · "+cl.n:""} · Issued ${fmt(new Date())}`,W-14,24,{align:"right"});
+  doc.setDrawColor(...acc);doc.setLineWidth(.8);doc.line(14,32,W-14,32);
+  doc.autoTable({startY:37,head:[["#","Drawing","Discipline","File / Drawing no.","Rev","Status"]],body:cells.map((x,i)=>{const f=x.c.f?files.find(z=>z.id==x.c.f):null;return[i+1,x.t.n,x.t.g,f?(f.no||f.title):"—",f&&f.rev||"—",DSTN[x.c.st]]}),theme:"grid",margin:{left:14,right:14},
+    styles:{fontSize:9,cellPadding:2,textColor:ink,lineColor:line,lineWidth:.2},headStyles:{fillColor:ink,textColor:255},columnStyles:{0:{cellWidth:8,halign:"right"},5:{cellWidth:38}},
+    didParseCell:h=>{if(h.section=="body"&&h.column.index==5&&String(h.cell.raw)=="Finalised")h.cell.styles.textColor=ok}});
+  let y=doc.lastAutoTable.finalY+10;if(y>H-95){doc.addPage();y=24}
+  doc.setFontSize(10);doc.setTextColor(...ink);const decl=doc.splitTextToSize(`We confirm that the ${cells.length==1?"drawing":"drawings"} listed above ${cells.length==1?"is":"are"} accepted as final for construction of Villa ${v}, AMR Living Spaces. Any change after this approval will be treated as a variation and needs a fresh approval.`,W-28);doc.text(decl,14,y);y+=decl.length*5+8;
+  const sig=cells.map(x=>x.c.sig).find(Boolean),ap=cells.map(x=>x.c.ap).find(Boolean);const bw=(W-28-10)/2;
+  [[14,"Client",sig?sig.name:"",sig?fmt(new Date(sig.at)):"",sig&&sig.png],[14+bw+10,"For Bhaaje Private Limited (Project Manager)",ap?(ap.by||"Project manager"):"",ap?fmt(new Date(ap.at)):"",null]].forEach(([x,l,n,dt,png],i)=>{
+    doc.setDrawColor(...line);doc.setLineWidth(.3);doc.roundedRect(x,y,bw,48,2,2);doc.setFontSize(8.5);doc.setTextColor(...mute);doc.text(l,x+4,y+6);
+    if(png){try{doc.addImage(png,"PNG",x+4,y+9,bw-8,(bw-8)*130/450)}catch(e){}}
+    if(i==1&&ap){doc.setDrawColor(...ok);doc.setTextColor(...ok);doc.setLineWidth(.8);doc.roundedRect(x+bw/2-24,y+14,48,14,2,2);doc.setFont("helvetica","bold");doc.setFontSize(12);doc.text("APPROVED",x+bw/2,y+23.5,{align:"center"});doc.setFont("helvetica","normal")}
+    doc.setDrawColor(...mute);doc.line(x+4,y+38,x+bw-4,y+38);doc.setTextColor(...ink);doc.setFontSize(9.5);doc.text(n||"Name",x+4,y+43);doc.setTextColor(...mute);doc.setFontSize(8.5);doc.text(dt||"Date",x+bw-4,y+43,{align:"right"})});
+  // the drawings themselves
+  let pages=0,miss=[];
+  for(const x of cells){const f=x.c.f?files.find(z=>z.id==x.c.f):null;if(!f){miss.push(x.t.n);continue}
+    let b=null;try{b=await dwBlob(f)}catch(e){miss.push(x.t.n);continue}
+    const imgs=[];if(f.type=="pdf"||/pdf/.test(b.type)){await loadPdfJs();const pd=await pdfjsLib.getDocument({data:await b.arrayBuffer(),isEvalSupported:false}).promise;
+        for(let i=1;i<=Math.min(pd.numPages,12);i++){const pg=await pd.getPage(i);const vp0=pg.getViewport({scale:1});const sc=Math.min(2.2,2400/Math.max(vp0.width,vp0.height));const vp=pg.getViewport({scale:sc});const cv=document.createElement("canvas");cv.width=vp.width;cv.height=vp.height;const g=cv.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,cv.width,cv.height);await pg.render({canvasContext:g,viewport:vp}).promise;imgs.push({d:cv.toDataURL("image/jpeg",.85),w:cv.width,h:cv.height})}pd.destroy()}
+    else if(/^image\//.test(b.type)){const u=await toB64(b);const im=await new Promise((r,j)=>{const i=new Image();i.onload=()=>r(i);i.onerror=j;i.src=u});imgs.push({d:u,w:im.naturalWidth,h:im.naturalHeight,t:/png/.test(b.type)?"PNG":"JPEG"})}
+    else{miss.push(x.t.n+" (CAD file: upload a PDF to print it)");continue}
+    imgs.forEach((im,i)=>{const land=im.w>im.h;doc.addPage("a4",land?"landscape":"portrait");pages++;const pw=doc.internal.pageSize.getWidth(),ph=doc.internal.pageSize.getHeight();
+      pdfLogo(doc,8,5,7);doc.setFontSize(9);doc.setTextColor(...ink);doc.setFont("helvetica","bold");doc.text(`Villa ${v} · ${x.t.n}${imgs.length>1?` · sheet ${i+1}/${imgs.length}`:""}`,pw-8,9,{align:"right"});doc.setFont("helvetica","normal");
+      doc.setTextColor(...(x.c.st=="final"?ok:acc));doc.text(x.c.st=="final"?`APPROVED FINAL · ${x.c.ap?fmt(new Date(x.c.ap.at)):""}`:"FOR CLIENT SIGN-OFF",pw-8,13.5,{align:"right"});
+      const top=17,mw=pw-16,mh=ph-top-8;const r=Math.min(mw/im.w,mh/im.h);doc.addImage(im.d,im.t||"JPEG",8+(mw-im.w*r)/2,top,im.w*r,im.h*r)})}
+  const n=doc.getNumberOfPages();for(let i=1;i<=n;i++){doc.setPage(i);const pw=doc.internal.pageSize.getWidth(),ph=doc.internal.pageSize.getHeight();doc.setFontSize(7.5);doc.setTextColor(...mute);doc.text(`Bhaaje Private Limited · AMR Living Spaces · Villa ${v}`,8,ph-4);doc.text(`Page ${i} of ${n}`,pw-8,ph-4,{align:"right"})}
+  const name=`Villa${vkey(v)}-Drawings-${allFinal?"Final":"For-Signoff"}-${iso(new Date())}.pdf`;const r=await fxShare(doc.output("blob"),name,`Villa ${v} drawings`);
+  return r.replace(/\.+$/,"")+(miss.length?`. No printable file linked for: ${miss.join(", ")} (only the cover sheet lists them).`:pages?`. ${plur(pages,"drawing page")} included.`:"")}
+// Excel in and out, same layout as the consultant register
+async function dImport(f){await loadXLSX();const wb=XLSX.read(await f.arrayBuffer(),{type:"array"});const A=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:null});
+  let hr=-1,vc=-1;for(let r=0;r<Math.min(15,A.length);r++){const i=(A[r]||[]).findIndex(h=>/villa/i.test(String(h||"")));if(i>=0){hr=r;vc=i;break}}if(hr<0)throw new Error("Couldn't find the “Villa No” column in the first rows.");
+  const nm=s=>String(s||"").toLowerCase().replace(/drinage/,"drainage").replace(/center/,"centre").replace(/stair case/,"staircase").replace(/headroom/,"head room").replace(/[^a-z0-9]/g,"");
+  const hdr=A[hr]||[];const map={};let added=0;hdr.forEach((h,i)=>{if(i<=vc||h==null||!String(h).trim())return;let t=DRT.find(t=>nm(t.n)==nm(h)||nm(t.x)==nm(h));if(!t){t={id:"x"+Date.now().toString(36)+i,n:String(h).trim(),g:"Other",x:String(h).trim()};DRT.push(t);added++}map[i]=t.id});
+  if(added){ls.set("ak-drt",JSON.stringify(DRT));if(DB){syMark("w:__drt");}}
+  let ch=0,keep=0,vs=0;A.slice(hr+1).forEach(row=>{const v=parseInt((row||[])[vc]);if(!v||!SITEGEO.plots[v])return;vs++;let any=false;
+    for(const i in map){const raw=String(row[i]??"").trim();if(!raw)continue;const st=/receiv|recieved|received|yes|done/i.test(raw)&&!/to be|pending/i.test(raw)?"recv":"pend";const c=dcell(v,map[i]);
+      if(c.st==st)continue;if(c.st!="pend"&&c.st!="recv"){keep++;continue}dset(v,map[i],st,null,"From "+f.name);ch++;any=true}
+    if(any)dregSave(v)});
+  return`Imported ${f.name}: ${vs} villas, ${plur(ch,"drawing")} changed${keep?`, ${keep} left as they are because they're already with the client or finalised`:""}${added?`, ${plur(added,"new drawing type")} added`:""}.`}
+async function dExport(){await loadXLSX();const vs=PLOTS;const rows=[["Sl No.","Villa No",...DRT.map(t=>t.n),"Finalised","Approval pending","Yet to be approved","To be received"]];
+  vs.forEach((v,i)=>{const c=dcount([v]);rows.push([i+1,v,...DRT.map(t=>DSTN[dcell(v,t.id).st]),c.final,c.sign,c.recv+c.sent,c.pend])});
+  const ws=XLSX.utils.aoa_to_sheet(rows);ws["!cols"]=[{wch:6},{wch:8},...DRT.map(()=>({wch:14}))];const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Drawing register");
+  const out=XLSX.write(wb,{bookType:"xlsx",type:"array"});return saveFile(`Drawing-Register-${iso(new Date())}.xlsx`,new Blob([out],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}))}
+// page layout: register on top, uploaded files folded below
+{const pW=$("pW");const d=document.createElement("div");d.id="drd";d.className="drd";pW.prepend(d);
+  const fd=document.createElement("details");fd.className="fxp dwfiles";fd.id="dwfiles";fd.innerHTML=`<summary><b>Drawing files</b><small>Uploaded PDFs, CAD and images for this villa</small></summary><div class="dwfb"></div>`;d.after(fd);
+  const fb=fd.querySelector(".dwfb");["dwhead","dwq","dwf","dwadd","dwlist"].forEach(id=>{const el=$(id);if(el)fb.appendChild(el)})}
+{const rd=renderDrawings;renderDrawings=function(){rd.apply(this,arguments);renderDreg()}}
+
+// ---------- v15: deleting defects keeps the record (hidden in the app, kept in the data and the admin log) ----------
+function dfDelAsk(L){const d=fxDialog(L.length==1?"Delete defect?":`Delete ${L.length} imported defects?`,`<p class="gtxt" style="margin-top:0">${L.length==1?esc(L[0].d.t||"This defect"):plur(L.length,"defect")+" for villa "+esc(villa())} will disappear from the app, the reports and the quality score. The record, with who deleted it and why, is kept and stays in the admin's deleted-defects log.</p>
+  <label class="fxf"><span>Reason (required)</span><input class="fxi" id="ddWhy" placeholder="e.g. Raised by mistake, duplicate of #12"></label><div class="fxacts" style="margin-top:12px"><button type="button" class="fxb bad" id="ddGo">Delete</button><button type="button" class="fxb" data-x="1">Cancel</button></div><p class="fxmsg" id="ddMsg"></p>`);
+  $("ddWhy").focus();$("ddGo").onclick=()=>{const why=$("ddWhy").value.trim();if(!why){$("ddMsg").className="fxmsg bad";$("ddMsg").textContent="Enter why the defect is being deleted.";$("ddWhy").focus();return}
+    const del={by:(ROLE&&ROLE.name)||ROLE.me||engName()||"",email:ROLE.me||"",at:new Date().toISOString(),why};const us=new Set();L.forEach(x=>{x.d.del=del;us.add(x.u)});us.forEach(u=>afterChk(u));queueSave();render();d.hidden=true;status(`${plur(L.length,"defect")} deleted. The record is kept in the deleted-defects log.`)}}
+async function dfDelLog(){await loadXLSX();const rows=[["Villa","Stage","Sub-stage","Activity","Defect","Type","Severity","Category","Raised","Deleted on","Deleted by","Email","Reason"]];
+  const keys=new Set(Object.keys(SITE));try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith("amr-planner:")&&!/:(last|_draft)$/.test(k))keys.add(k.slice(12))}}catch(e){}
+  [...keys].sort((a,b)=>+a-+b).forEach(k=>{const s=villaSnap(k);if(!s||!s.leaves)return;LEAVES.forEach(u=>{const L=s.leaves[u.id];if(!L)return;const it=items({...u,custom:L.custom||[]});
+    Object.entries(L.df||{}).forEach(([key,d])=>{if(d&&d.del)rows.push([+k||k,u.seq.n,u.stn,u.n,(it.find(x=>x.k==key)||{}).t||key,"Checklist No",d.sev||"",d.cat||"",d.raised||"",fmt(new Date(d.del.at)),d.del.by,d.del.email||"",d.del.why])});
+    (L.xd||[]).forEach(d=>{if(d.del)rows.push([+k||k,u.seq.n,u.stn,u.n,d.t||"","Imported",d.sev||"",d.cat||"",d.raised||"",fmt(new Date(d.del.at)),d.del.by,d.del.email||"",d.del.why])})})});
+  const ws=XLSX.utils.aoa_to_sheet(rows);ws["!cols"]=[{wch:6},{wch:16},{wch:18},{wch:24},{wch:50},{wch:12},{wch:9},{wch:14},{wch:11},{wch:13},{wch:18},{wch:24},{wch:40}];const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Deleted defects");
+  return saveFile(`Deleted-Defects-Log-${iso(new Date())}.xlsx`,new Blob([XLSX.write(wb,{bookType:"xlsx",type:"array"})],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}))+` (${rows.length-1} deleted)`}
+{const mb=$("mnB");if(mb)mb.addEventListener("click",()=>setTimeout(()=>{const mn=$("mnu");if(!mn||mn.hidden||roleNow()!="admin")return;const b=document.createElement("button");b.type="button";b.setAttribute("role","menuitem");b.innerHTML=fsv('<path d="M5 7h14M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>')+"<span>Deleted defects log</span>";b.onclick=()=>{mn.hidden=true;dfDelLog().then(m=>status(m),e=>status("Couldn't make the log: "+e.message))};mn.appendChild(b)},0))}
+
+// ---------- v15: villa quality & snag report (layout follows the Bhaaje snag report) ----------
+function qrData(){const acts=[];let Y=0,N=0,C=0,NA=0;
+  LEAVES.forEach(u=>{const s=clStat(u),sc=score(u);if(!sc)return;Y+=s.y;N+=sc.n;C+=sc.closed;NA+=s.na||0;acts.push({u,y:s.y,n:sc.n,c:sc.closed,o:sc.open,ftp:sc.ftp,now:sc.now})});
+  const D=allDefects(),open=D.filter(x=>!x.d.closed),den=Y+N;
+  const st=SEQ.map(q=>{const a=acts.filter(x=>x.u.seq===q);const y=a.reduce((s,x)=>s+x.y,0),n=a.reduce((s,x)=>s+x.n,0),c=a.reduce((s,x)=>s+x.c,0);const dq=D.filter(x=>x.u.seq===q);return{q,y,n,c,den:y+n,ftp:y+n?100*y/(y+n):null,now:y+n?100*(y+c)/(y+n):null,dt:dq.length,dopen:dq.filter(x=>!x.d.closed).length}}).filter(x=>x.den||x.dt);
+  return{acts,Y,N,C,NA,den,ftp:den?100*Y/den:null,now:den?100*(Y+C)/den:null,D,open,closed:D.length-open.length,st}}
+const qrGrade=v=>v==null?["–","No checklist answers yet"]:v>=95?["A","Excellent"]:v>=85?["B","Good"]:v>=70?["C","Needs attention"]:["D","Poor"];
+async function qrPdf(){const v=villa();if(!v)throw new Error("Choose a villa first.");await loadJsPDF();await preloadPhotos();
+  const Q=qrData(),{jsPDF}=window.jspdf,doc=new jsPDF({unit:"mm",format:"a4",compress:true});const W=210,H=297,M=12;
+  const C={ink:[21,25,29],muted:[90,99,108],faint:[138,147,155],line:[213,217,221],accent:[232,103,42],accentSoft:[251,230,218],crit:[150,30,30],major:[184,55,45],majorSoft:[247,222,219],minor:[42,102,168],minorSoft:[221,232,245],ok:[31,128,80],okSoft:[220,240,228],slab:[27,34,41],slabInk:[241,243,244],slabMuted:[164,174,183],soft:[245,246,247],white:[255,255,255]};
+  const fill=c=>doc.setFillColor(...c),ink=c=>doc.setTextColor(...c),draw=c=>doc.setDrawColor(...c),font=(sz,w)=>{doc.setFont("helvetica",w||"normal");doc.setFontSize(sz)};
+  const safe=s=>String(s==null?"":s).replace(/[–—]/g,"-").replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/›/g,">").replace(/[^\x00-\xFF]/g,"");
+  const sevC=s=>s=="Critical"?C.crit:s=="Minor"?C.minor:C.major,pct=x=>x==null?"–":(Math.round(x*10)/10).toFixed(1)+"%";
+  const cl=clusterOf(+v),st=stats(+v),mon=new Date().toLocaleDateString("en-GB",{month:"long",year:"numeric"});
+  const engs=[...new Set(LEAVES.map(u=>u.by).filter(Boolean))].slice(0,3).join(", ");
+  // cover band
+  fill(C.slab);doc.rect(0,0,W,100,"F");fill([236,238,240]);doc.roundedRect(M-3,6,64,22,2.5,2.5,"F");pdfLogo(doc,M,8.5,17);
+  ink(C.slabMuted);font(6.5,"bold");doc.text(safe("QUALITY & SNAG REPORT  ·  "+mon.toUpperCase()),W-M,14,{align:"right"});
+  ink(C.slabInk);font(24,"bold");doc.text("AMR LIVING SPACES",M,50);ink(C.accent);doc.text(`VILLA ${v}`,M,63);
+  draw([60,68,76]);doc.setLineWidth(.2);doc.line(M,70,W-M,70);
+  [["CLUSTER",cl?cl.n:"-"],["PROGRESS",pctTxt(st.pct)+" complete"],["INSPECTED BY",engs||"Site engineers"],["ISSUED",fmt(new Date())]].forEach((m,i)=>{const x=M+i*46.5;ink(C.slabMuted);font(6.5,"bold");doc.text(m[0],x,77);ink(C.slabInk);font(9.5);doc.text(doc.splitTextToSize(safe(m[1]),43).slice(0,3),x,82.5)});
+  let y=110;
+  // overview
+  ink(C.muted);font(7.5,"bold");doc.text("OVERVIEW",M,y);y+=5.5;ink(C.ink);font(9.5);
+  const ov=Q.den?`Villa ${v} is ${pctTxt(st.pct)} complete. Site engineers checked ${Q.den} points across ${Q.acts.length} activities: ${Q.Y} passed first time and ${Q.N} failed. ${Q.D.length?`${Q.D.length} defects are on record, ${Q.open.length} still open and ${Q.closed} rectified and closed.`:"No defects are on record."} The quality score counts every rectified defect as passed, so it rises as defects are closed.`:`Villa ${v} is ${pctTxt(st.pct)} complete. No checklist points have been answered yet, so there is no quality score.${Q.D.length?` ${Q.D.length} site defects are on record.`:""}`;
+  doc.splitTextToSize(safe(ov),W-2*M).forEach(l=>{doc.text(l,M,y);y+=4.7});y+=6;
+  // quality score block
+  const [gr,gw]=qrGrade(Q.now);ink(C.muted);font(7.5,"bold");doc.text("QUALITY SCORE",M,y);y+=4;
+  draw(C.line);fill(C.white);doc.roundedRect(M,y,W-2*M,58,2,2,"FD");
+  const gcol=Q.now==null?C.faint:Q.now>=95?C.ok:Q.now>=85?C.minor:Q.now>=70?C.accent:C.major;
+  fill(gcol);doc.roundedRect(M+5,y+6,30,30,3,3,"F");ink(C.white);font(26,"bold");doc.text(gr,M+20,y+26,{align:"center"});ink(C.ink);font(8,"bold");doc.text(safe(gw),M+20,y+42,{align:"center"});
+  ink(gcol);font(30,"bold");doc.text(pct(Q.now),M+44,y+20);ink(C.muted);font(8);doc.text("Quality score now (after rectification)",M+44,y+26);
+  ink(C.ink);font(16,"bold");doc.text(pct(Q.ftp),M+122,y+20);ink(C.muted);font(8);doc.text("First-time pass",M+122,y+26);
+  // the calculation, line by line
+  let cy=y+34;font(8.5);ink(C.ink);
+  const calc=Q.den?[["Points checked (Yes + No)",`${Q.Y} + ${Q.N} = ${Q.den}`],["First-time pass = Yes / points checked",`${Q.Y} / ${Q.den} = ${pct(Q.ftp)}`],["Checklist defects rectified and closed",`${Q.C} of ${Q.N}`],["Quality score = (Yes + rectified) / points checked",`(${Q.Y} + ${Q.C}) / ${Q.den} = ${pct(Q.now)}`]]:[["No checklist answers yet","-"]];
+  calc.forEach(([a,b],i)=>{if(i)draw(C.line),doc.line(M+44,cy-3.6,W-M-5,cy-3.6);ink(C.muted);font(8);doc.text(safe(a),M+44,cy);ink(C.ink);font(8.5,"bold");doc.text(safe(b),W-M-5,cy,{align:"right"});cy+=5.4});
+  y+=64;
+  // defect KPIs
+  ink(C.muted);font(7.5,"bold");doc.text("DEFECTS",M,y);y+=4;
+  const od=Q.open.filter(x=>x.d.due&&x.d.due<iso(today)).length,sv=s=>Q.D.filter(x=>(x.d.sev||"Major")==s).length;
+  const kp=[[Q.D.length,"Defects recorded",C.ink],[Q.open.length,"Open",C.major],[Q.closed,"Rectified & closed",C.ok],[sv("Critical")+sv("Major"),"Critical + major",C.major],[od,"Overdue",C.accent]],kw=(W-2*M)/5;
+  kp.forEach((k,i)=>{const x=M+i*kw;draw(C.line);fill(C.white);doc.rect(x,y,kw,20,"FD");ink(k[2]);font(20,"bold");doc.text(String(k[0]),x+4,y+11);ink(C.muted);font(7.5);doc.text(k[1],x+4,y+16.5)});y+=26;
+  // severity bar
+  if(Q.D.length){ink(C.ink);font(10,"bold");doc.text("Severity",M,y);y+=4;const bw=W-2*M;let bx=M;[["Critical",C.crit],["Major",C.major],["Minor",C.minor]].forEach(([s,c])=>{const n=sv(s);if(!n)return;const w=bw*n/Q.D.length;fill(c);doc.rect(bx,y,w,8,"F");ink(C.white);font(8,"bold");if(w>18)doc.text(`${s} ${n}`,bx+2.5,y+5.4);bx+=w});y+=15}
+  // by stage: score and defects
+  if(y>H-70){doc.addPage();y=20}
+  ink(C.ink);font(14,"bold");doc.text("Score by stage",M,y);ink(C.muted);font(8);doc.text("How each stage scored, and the defects it raised. Calculation: (Yes + rectified) / points checked.",M,y+5);y+=9;
+  doc.autoTable({startY:y,margin:{left:M,right:M},head:[["Stage","Points","Yes","No","Rectified","First-time pass","Score now","Defects","Open"]],
+    body:Q.st.map(r=>[r.q.n,r.den,r.y,r.n,r.c,pct(r.ftp),pct(r.now),r.dt,r.dopen]).concat([["Villa total",Q.den,Q.Y,Q.N,Q.C,pct(Q.ftp),pct(Q.now),Q.D.length,Q.open.length]]),
+    theme:"grid",styles:{fontSize:8.2,cellPadding:1.8,textColor:C.ink,lineColor:C.line,lineWidth:.2,halign:"right"},headStyles:{fillColor:C.slab,textColor:255,halign:"right"},columnStyles:{0:{halign:"left",cellWidth:42}},
+    didParseCell:h=>{if(h.section=="head"&&h.column.index==0)h.cell.styles.halign="left";if(h.section=="body"&&h.row.index==Q.st.length){h.cell.styles.fontStyle="bold";h.cell.styles.fillColor=C.soft}if(h.section=="body"&&h.column.index==6&&h.row.index<Q.st.length){const v2=parseFloat(h.cell.raw);if(!isNaN(v2))h.cell.styles.textColor=v2>=95?C.ok:v2>=85?C.minor:v2>=70?C.accent:C.major}}});
+  y=doc.lastAutoTable.finalY+8;
+  // by category bars
+  const cats={};Q.D.forEach(x=>{const c=x.d.cat||"Workmanship";(cats[c]=cats[c]||{v:0,o:0}).v++;if(!x.d.closed)cats[c].o++});const cr=Object.entries(cats).sort((a,b)=>b[1].v-a[1].v);
+  if(cr.length){if(y+12+cr.length*6.2>H-16){doc.addPage();y=20}ink(C.ink);font(10,"bold");doc.text("Defects by category",M,y);y+=3;font(6.5);fill(C.major);doc.rect(M,y+.5,2.4,2.4,"F");ink(C.muted);doc.text("Open",M+3.5,y+2.6);fill(C.ok);doc.rect(M+14,y+.5,2.4,2.4,"F");doc.text("Closed",M+17.5,y+2.6);y+=7;
+    const mx=Math.max(...cr.map(r=>r[1].v)),lw=46,bw=W-2*M-lw-12;cr.forEach(([c,r])=>{ink(C.ink);font(8);doc.text(safe(c),M,y);let bx=M+lw;[[C.major,r.o],[C.ok,r.v-r.o]].forEach(([col,n])=>{if(!n)return;const w=n/mx*bw;fill(col);doc.rect(bx,y-2.6,w,3.2,"F");bx+=w+.5});ink(C.muted);font(7.5);doc.text(String(r.v),W-M,y,{align:"right"});y+=6.2});y+=4}
+  // activity scores
+  if(Q.acts.length){if(y>H-50){doc.addPage();y=20}ink(C.ink);font(14,"bold");doc.text("Activity scores",M,y);y+=4;
+    doc.autoTable({startY:y,margin:{left:M,right:M},head:[["Activity","Stage › sub-stage","Yes","No","Rectified","First-time pass","Score now"]],body:Q.acts.map(a=>[a.u.n,a.u.seq.n+" > "+a.u.stn,a.y,a.n,a.c,a.ftp+"%",a.now+"%"]),theme:"grid",
+      styles:{fontSize:7.8,cellPadding:1.6,textColor:C.ink,lineColor:C.line,lineWidth:.2},headStyles:{fillColor:C.slab,textColor:255},columnStyles:{2:{halign:"right"},3:{halign:"right"},4:{halign:"right"},5:{halign:"right"},6:{halign:"right",fontStyle:"bold"}}});y=doc.lastAutoTable.finalY+6}
+  // defect register with photos, grouped by stage and sub-stage
+  const L=Q.D.slice().sort((a,b)=>LEAVES.indexOf(a.u)-LEAVES.indexOf(b.u)||(a.d.closed-b.d.closed));
+  const PW=62,PH=40,CH=46,GAP=3.5,TOP=22,BOTTOM=H-16;let cur=null,n=0;
+  const newPage=t=>{doc.addPage();y=TOP;ink(C.muted);font(7,"bold");doc.text("DEFECT REGISTER",M,14);doc.text(safe(t.toUpperCase()),W-M,14,{align:"right"});draw(C.line);doc.line(M,16,W-M,16)};
+  if(L.length)newPage(L[0].u.seq.n);
+  L.forEach(x=>{n++;const grp=x.u.seq.n+"  ·  "+x.u.stn;if(grp!==cur){if(y+11+CH>BOTTOM)newPage(x.u.seq.n);const rc=L.filter(z=>z.u.seq.n+"  ·  "+z.u.stn==grp).length;
+      fill(C.slab);doc.rect(M,y,W-2*M,7.5,"F");ink(C.slabInk);font(8.5,"bold");doc.text(safe(grp.toUpperCase()),M+3,y+5);ink(C.slabMuted);font(7.5);doc.text(rc+" defect"+(rc==1?"":"s"),W-M-3,y+5,{align:"right"});y+=7.5+GAP;cur=grp}
+    if(y+CH>BOTTOM)newPage(x.u.seq.n);
+    draw(C.line);fill(C.white);doc.roundedRect(M,y,W-2*M,CH,1.2,1.2,"FD");
+    const before=(x.x?x.d.before:x.u.ph[x.k])||[],after=x.d.after||[];const pics=[before[0],after[0]].filter(Boolean).map(q=>PHDATA[phSrc(q)]).filter(Boolean);
+    const px=M+2.2,py=y+2.2,pw=pics.length>1?PW/2-1:PW;fill(C.soft);doc.rect(px,py,PW,PH,"F");
+    if(!pics.length){ink(C.faint);font(8);doc.text("No photo",px+PW/2,py+PH/2,{align:"center"})}
+    pics.forEach((im,i)=>{const s=Math.min(pw/im.w,PH/im.h),iw=im.w*s,ih=im.h*s;try{doc.addImage(im.data,"JPEG",px+i*(pw+2)+(pw-iw)/2,py+(PH-ih)/2,iw,ih,undefined,"FAST")}catch(e){}});
+    if(pics.length>1){ink(C.white);font(6,"bold");fill(C.slab);doc.rect(px,py+PH-4,12,4,"F");doc.text("BEFORE",px+1,py+PH-1);doc.rect(px+pw+2,py+PH-4,11,4,"F");doc.text("AFTER",px+pw+3,py+PH-1)}
+    const tx=px+PW+5,tw=W-M-4-tx;let ty=y+7;ink(C.muted);font(8);doc.text("#",tx,ty);ink(C.ink);font(9,"bold");doc.text(String(n),tx+2.4,ty);
+    let rx=W-M-4;const pill=(l,bg,fg)=>{font(6.5,"bold");const w=doc.getTextWidth(l)+4;fill(bg);doc.roundedRect(rx-w,ty-3.6,w,5,.8,.8,"F");ink(fg);doc.text(l,rx-w+2,ty);rx-=w+1.5};
+    const sv2=x.d.sev||"Major";pill(sv2.toUpperCase(),sv2=="Minor"?C.minorSoft:C.majorSoft,sevC(sv2));pill(x.d.closed?"CLOSED":"OPEN",x.d.closed?C.okSoft:C.accentSoft,x.d.closed?C.ok:C.accent);
+    ty+=7;ink(C.ink);font(10,"bold");const fl=doc.splitTextToSize(safe(x.t||"Defect"),tw).slice(0,3);doc.text(fl,tx,ty);ty+=fl.length*4.4+1.5;
+    ink(C.muted);font(8.2);doc.text(doc.splitTextToSize(safe(x.u.n+(x.i!=null?"  ·  point "+(x.i+1):"")+(x.d.loc?"  ·  "+x.d.loc:"")),tw)[0],tx,ty);ty+=4.6;
+    doc.text(safe(`Raised ${x.d.raised?fmtD(x.d.raised):"-"}${x.d.who?"  ·  "+x.d.who:""}${x.d.due&&!x.d.closed?"  ·  due "+fmtD(x.d.due):""}${x.d.closed?"  ·  closed "+(x.d.on?fmtD(x.d.on):""):""}`),tx,ty);ty+=4.6;
+    font(7.5);const tg=x.d.cat||"Workmanship",w=doc.getTextWidth(safe(tg))+4;draw(C.line);doc.roundedRect(tx,ty-3.4,w,4.8,.6,.6,"S");ink(C.muted);doc.text(safe(tg),tx+2,ty);
+    if(x.d.closed&&x.d.note){ty+=5;ink(C.ok);font(7.5);doc.text(doc.splitTextToSize(safe("Rectified: "+x.d.note),tw)[0],tx,ty)}
+    y+=CH+GAP});
+  const pages=doc.getNumberOfPages();for(let i=1;i<=pages;i++){doc.setPage(i);ink(C.faint);font(6.5);draw(C.line);doc.line(M,H-11,W-M,H-11);doc.text(safe(`Bhaaje Private Limited  ·  AMR Living Spaces, Villa ${v}  ·  All images are for reference only`),M,H-7);doc.text(`Page ${i} of ${pages}`,W-M,H-7,{align:"right"})}
+  return fxShare(doc.output("blob"),`Villa${vkey(v)}-Quality-Snag-Report-${iso(new Date())}.pdf`,`Villa ${v} quality report`)}
+// buttons: Defects tab header, checklist tools, and the header action on the Defects page
+{const rd0=renderDefects;renderDefects=function(){rd0.apply(this,arguments);const h=$("dfhead");if(!h||h.querySelector("#qrB"))return;const p=document.createElement("p");p.innerHTML=`<button type="button" class="btn pri sm" id="qrB" style="width:auto">Download villa quality report (PDF)</button> <span class="note" id="qrMsg"></span>`;h.appendChild(p);
+  $("qrB").onclick=async()=>{const b=$("qrB");b.disabled=true;$("qrMsg").textContent="Preparing the report…";try{$("qrMsg").textContent=await qrPdf()}catch(e){$("qrMsg").textContent="Couldn't make the report: "+(e.message||e)}finally{b.disabled=false}}}}
+{const h2=window.hdrAct;window.hdrAct=function(){h2&&h2();const b=$("hpB");if(!b||view!="D")return;b.hidden=false;b.textContent="Quality report (PDF)";b.onclick=()=>{const q=$("qrB");if(q)q.click()}}}
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
