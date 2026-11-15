@@ -1832,6 +1832,34 @@ html.aklock body{overflow:hidden}
 .rdb{position:relative;flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center}
 .rdb i{position:absolute;bottom:0;border-radius:4px 4px 1px 1px}.rdb .p{left:0;right:0;background:var(--line)}.rdb .a{left:22%;right:22%;background:var(--s1)}.rdb .s{left:38%;right:38%;background:var(--bad);bottom:auto;top:0;opacity:.0}
 .rdc small{font-size:10.5px}.rdc:hover .rdb .p{background:color-mix(in srgb,var(--ink) 25%,var(--line))}
+/* ---------- v20: shared villa filter, schedule by villa ---------- */
+.scb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-width:0}
+.scb .dtabs{display:flex!important;flex-wrap:wrap;gap:4px;margin:0;grid-template-columns:none!important}
+.scb .dtabs button{flex:0 0 auto;width:auto}
+.scb .dtabs button small{opacity:.75;font-weight:600;margin-left:2px}
+#dash>.scb{margin-bottom:12px}#dash>.scb .dtabs{width:100%}#dash>.scb .dtabs button{flex:1 1 0}
+.wkpg2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:12px}
+.wkv{border:1px solid var(--line);border-radius:14px;background:var(--well);padding:10px 12px;min-width:0}
+.wkv.has{border-color:var(--acc)}
+.wkv header{display:flex;align-items:center;gap:8px;margin-bottom:6px}.wkv header b{font-size:15px}
+.wkvp{font-size:11px;font-weight:800;color:var(--lc);border:1px solid var(--lc);border-radius:999px;padding:1px 7px}
+.wkvc{margin-left:auto;font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}
+.wkv ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.wkpr2{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start;padding:6px;border-radius:10px;cursor:pointer}
+.wkpr2:hover{background:var(--tint)}.wkpr2.on{background:var(--tint)}
+.wkpr2 input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--acc)}
+.wkpr2 b{display:block;font-size:13.5px;line-height:1.3}.wkpr2 small{display:block;font-size:12px;color:var(--mute);line-height:1.35}
+#wkPlan .wkpf{display:flex;flex-wrap:wrap;gap:8px;align-items:center}#wkPlan .wkpf #wkPq{width:110px}
+.skbulk{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}.skbulk .fxi{width:auto;min-width:200px;flex:1 1 200px}
+.sktb select.fxi,.sktb input.fxi{min-width:170px;height:38px}.sktb tr.ok td:first-child{box-shadow:inset 3px 0 var(--ok)}.sktb small{display:block;color:var(--mute);font-size:11.5px;margin-top:2px}
+.lbs2{font-size:12px;font-weight:800;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.lbs2.s-done{background:var(--okbg);color:var(--ok)}.lbs2.s-part{background:var(--warnbg);color:var(--warn)}.lbs2.s-none{background:var(--badbg);color:var(--bad)}
+#wkLab>.wkpf{margin:8px 0 12px}
+.scb .dtabs button{min-height:36px;padding:0 13px;font-size:13px}
+details.skd>summary{list-style:none;display:flex;align-items:center;gap:14px;flex-wrap:wrap;cursor:pointer}details.skd>summary::-webkit-details-marker{display:none}
+.skd .skt{display:flex;flex-direction:column;flex:1 1 220px}.skd .skt b{font-size:16px}.skd .skt small{color:var(--mute);font-size:12.5px}
+.skd .vch{width:20px;height:20px;transition:transform .2s}.skd[open] .vch{transform:rotate(180deg)}.skd[open]>summary{margin-bottom:10px}
+.rdh small{font-size:14px;color:var(--mute);font-weight:600;margin-left:6px}
 </style>
 <div class="app">
 <nav class="rail" aria-label="Sections"><div class="mark" aria-hidden="true">AK</div><div class="views" role="tablist" aria-label="View"><button type="button" role="tab" id="vO" aria-selected="false" title="Overview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M12 14l3.5-4.5"/><path d="M5 19h14"/></svg>Overview</button><button type="button" role="tab" id="vS" aria-selected="false" title="Site map"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z"/><path d="M9 4.5v13M15 6.5v13"/></svg>Site map</button><button type="button" role="tab" id="vP" aria-selected="false" title="Planner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16"/><path d="M8 7h8"/><path d="M11 12h9"/><path d="M8 17h6"/></svg>Planner</button><button type="button" role="tab" id="vC" aria-selected="false" title="Checklists"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5v-1h6v1"/><path d="M9 13l2.2 2.2L15.2 11"/></svg>Checklists<span class="badge" id="qb" hidden></span></button><button type="button" role="tab" id="vD" aria-selected="false" title="Defects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10.5v4"/><path d="M12 17.2v.3"/></svg>Defects<span class="badge" id="db"></span></button><button type="button" role="tab" id="vW" aria-selected="false" title="Drawings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 13h6M9 16.5h6"/></svg>Drawings<span class="badge" id="wb" hidden></span></button><button type="button" role="tab" id="vQ" aria-selected="false" title="Quantities"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 16.5l13-13 4 4-13 13z"/><path d="M7.5 12.5l2 2M10.5 9.5l2 2M13.5 6.5l2 2"/></svg>Quantities</button></div></nav>
@@ -3126,6 +3154,18 @@ const priOf=n=>PRI.findIndex(x=>x.n==n),isPri=n=>priOf(+n)>=0;
 const PRIC=()=>({id:"P",n:"Priority villas",ns:PRI.map(x=>x.n)});
 const LVID={H:"High",M:"Medium",L:"Low"},isLV=x=>x==="H"||x==="M"||x==="L";
 const LVC=id=>({id,lv:LVID[id],n:LVID[id]+" priority",ns:PRI.filter(x=>x.lv==LVID[id]).map(x=>x.n)});
+// one villa filter shared by every page: cluster (pin 0-3) and priority (PSC "", H, M, L, or P = ranked list)
+let PSC="";
+const scIn=(n,cl)=>{cl=cl===undefined?pin:cl;n=+n;if(cl&&cl===+cl&&(clusterOf(n)||{}).id!==cl)return false;if(!PSC)return true;const i=priOf(n);if(i<0)return false;return PSC==="P"||PRI[i].lv===LVID[PSC]};
+const scOn=cl=>!!(cl===undefined?pin:cl)||!!PSC;
+function scObj(cl,p){const C=cl?CLUSTERS.find(x=>x.id===cl)||null:null;if(!p)return C;const inC=n=>!C||clusterOf(n).id===C.id;
+  if(p==="P")return{id:"P",n:(C?C.n+" · ":"")+"Priority villas",ns:PRI.map(x=>x.n).filter(inC)};
+  return{id:p,lv:LVID[p],n:(C?C.n+" · ":"")+LVID[p]+" priority",ns:PRI.filter(x=>x.lv==LVID[p]&&inC(x.n)).map(x=>x.n)}}
+function scName(){const c=pin?"Cluster "+pin:"";const p=PSC==="P"?"priority villas":PSC?LVID[PSC]+" priority":"";return c&&p?c+" · "+p:c||(p?p[0].toUpperCase()+p.slice(1):"All villas")}
+function scSave(){try{localStorage.setItem("ak-sc",JSON.stringify({c:pin,p:PSC}))}catch(e){}}
+function scBar(o){o=o||{};const cl=pin===+pin?pin:0;const cnt=lv=>PRI.filter(x=>x.lv==lv&&(!cl||clusterOf(x.n).id===cl)).length;
+  return`<div class="scb" role="group" aria-label="Villas to show"><div class="dtabs scc" role="tablist" aria-label="Cluster">${[0,...CLUSTERS.map(c=>c.id)].map(id=>`<button type="button" role="tab" data-scc="${id}" aria-selected="${cl===id}">${id?"Cluster "+id:"Project"}</button>`).join("")}</div>
+    <div class="dtabs scp" role="tablist" aria-label="Priority">${[["","All"],["H","High"],["M","Medium"],["L","Low"],...(o.rank?[["P","Ranked"]]:[])].map(([k,l])=>`<button type="button" role="tab" data-scp="${k}" aria-selected="${PSC===k||(!o.rank&&k===""&&PSC==="P")}"${isLV(k)?` class="lvt" style="--lc:${lvCol(LVID[k])}"`:""}>${l}${isLV(k)?` <small>${cnt(LVID[k])}</small>`:""}</button>`).join("")}</div></div>`}
 let priSaving=Promise.resolve(),priDraft={n:"",lv:"High",tg:"",why:""};
 function savePri(){try{localStorage.setItem("ak-priority",JSON.stringify(PRI))}catch(e){}
   if(DB){const doc={list:PRI,saved:new Date().toISOString()};priSaving=priSaving.then(()=>DB.doc("meta/priority").set(doc)).catch(()=>{const m=$("primsg");if(m)m.textContent="Could not save the priority list to shared storage. You may only have view access."})}
@@ -3249,7 +3289,7 @@ function paintMap(){
   hiClusters();renderDash();
 }
 function asOf(){let m=BASE.date||"";PLOTS.forEach(n=>{const s=SITE[vkey(String(n))];if(s&&s.v>=3&&s.saved&&!String(s.saved).startsWith("base")&&s.saved.slice(0,10)>m)m=s.saved.slice(0,10)});return fmtD(m)}
-function hiClusters(){const sc=hov??pin;const sv=$("msvg");if(sv){sv.classList.toggle("prio",sc==="P"||isLV(sc));PLOTS.forEach(n=>{const g=$("gv"+n);if(!g)return;const i=priOf(n);g.classList.toggle("isp",i>=0&&(!isLV(sc)||PRI[i].lv===LVID[sc]))})}CLUSTERS.forEach(c=>{$("cl"+c.id).classList.toggle("hot",sc==c.id);$("cb"+c.id).classList.toggle("hot",sc==c.id)})}
+function hiClusters(){const cl=hov??pin,on=scOn(cl);const sv=$("msvg");if(sv){sv.classList.toggle("prio",on);PLOTS.forEach(n=>{const g=$("gv"+n);if(!g)return;g.classList.toggle("isp",on&&scIn(n,cl))})}CLUSTERS.forEach(c=>{$("cl"+c.id).classList.toggle("hot",cl==c.id);$("cb"+c.id).classList.toggle("hot",cl==c.id)});if(window.wipPaint)wipPaint(cl)}
 
 // ---------- villa hover card ----------
 const STG=["","Sub structure","Super structure","Finishing & MEP","Closing & handover","Handed over"];
@@ -3288,7 +3328,7 @@ $("map").addEventListener("click",e=>{const g=e.target.closest("[data-v]");if(g)
 $("map").addEventListener("keydown",e=>{const g=e.target.closest("[data-v]");if(g&&(e.key=="Enter"||e.key==" ")){e.preventDefault();selectVilla(g.dataset.v,true)}});
 $("map").addEventListener("focusin",e=>{const g=e.target.closest("[data-v]");if(g){const r=g.getBoundingClientRect();showTip(g.dataset.v,{clientX:r.right,clientY:r.top})}});
 $("map").addEventListener("focusout",hideTip);
-function selectVilla(n,fromMap){msel=String(n);if(!((pin==="P"&&isPri(n))||(isLV(pin)&&(PRI[priOf(+n)]||{}).lv===LVID[pin])))pin=clusterOf(+n).id;hov=null;paintMap();$("dash").scrollTop=0;if(fromMap&&narrow())$("sside").scrollIntoView({behavior:"smooth",block:"start"})}
+function selectVilla(n,fromMap){msel=String(n);if(!scIn(n)){pin=pin?clusterOf(+n).id:0;if(!scIn(n))PSC=""}hov=null;paintMap();$("dash").scrollTop=0;if(fromMap&&narrow())$("sside").scrollIntoView({behavior:"smooth",block:"start"})}
 
 // ---------- dashboard ----------
 function chips(ns){return ns.map(n=>`<button type="button" class="vn" data-sel="${n}">${n}</button>`).join("")}
@@ -3338,8 +3378,8 @@ function priGroups(ns,openAll){const G=[...LV.map(([l])=>({l,c:lvCol(l),v:[]})),
   return`<div class="pgs"><p class="cap">Villas by priority</p>${G.filter(g=>g.v.length).map((g,gi)=>`<details class="pgd" data-pg="${g.l}" style="--lc:${g.c}"${openAll||PGO.has(g.l)?" open":""}><summary><span class="lvp">${g.l}</span><b>${g.v.length} ${g.v.length==1?"villa":"villas"}</b><span class="pgav">${pctTxt(g.v.reduce((s,x)=>s+stats(x.n).pct,0)/g.v.length)} avg</span></summary>
     <div class="pgl">${g.v.map(x=>{const st=stats(x.n),pr=x.i>=0?PRI[x.i]:null,L=pr?lateDays(st,pr.tg):null;return`<button type="button" class="pgr" data-sel="${x.n}"><span class="pgn">Villa ${x.n}</span><span class="pgs1">${st.cat==0?"Not started":STG[st.cat]}${st.P.length?" · "+esc(st.P[0].u.n):st.N[0]?" · next "+esc(st.N[0].u.n):""}${L!=null&&L>0?` · <b class="late">late ${L}d</b>`:""}</span><span class="pgp">${pctTxt(st.pct)}</span><i class="pgb" style="--w:${st.pct}%"></i></button>`}).join("")}</div></details>`).join("")}</div>`}
 function renderDash(){
-  const sc=hov??pin,isP=sc==="P",c=isP?PRIC():isLV(sc)?LVC(sc):CLUSTERS.find(x=>x.id===sc)||null,a=agg(c),N=a.ns.length;
-  let h=`<div class="dtabs" role="tablist" aria-label="Dashboard scope">${[{id:0},...CLUSTERS,{id:"H"},{id:"M"},{id:"L"},{id:"P"}].map(x=>`<button type="button" role="tab" data-pin="${x.id}" aria-selected="${sc===x.id}"${isLV(x.id)?` style="--lc:${lvCol(LVID[x.id])}"`:""} class="${hov!=null&&x.id===pin&&hov!==pin?"pinned":""}${isLV(x.id)?" lvt":""}">${x.id==="P"?`All priority${PRI.length?" "+PRI.length:""}`:isLV(x.id)?`${LVID[x.id]} ${PRI.filter(p=>p.lv==LVID[x.id]).length}`:x.id?"Cluster "+x.id:"Project"}</button>`).join("")}</div>`;
+  const sc=hov??pin,isP=PSC==="P",c=scObj(sc,PSC),a=agg(c),N=a.ns.length;
+  let h=scBar({rank:true});
   if(hov!=null&&hov!=pin)h+=`<p class="pv">Previewing ${c.n}. Click the cluster to keep it here.</p>`;
   if(msel){const st=stats(msel),pi=priOf(+msel),pr=pi>=0?PRI[pi]:null;h+=`<div class="vd"><button class="x" type="button" id="vdx" aria-label="Close villa">×</button>${card(msel,st,0)}
     <p class="cap" style="margin:12px 0 0">Priority${pr?` · #${pi+1}`:""}</p><div class="vdp" role="group" aria-label="Villa priority">${[["","None"],...LV.map(x=>[x[0],x[0]])].map(([v,l])=>`<button type="button" data-vlv="${v}" aria-pressed="${(pr?pr.lv:"")==v}" style="--lc:${v?lvCol(v):"var(--na)"}">${l}</button>`).join("")}</div>
@@ -3348,7 +3388,7 @@ function renderDash(){
     <button class="btn" type="button" data-odw="${msel}" style="width:100%;margin-top:8px">Drawings (${drawingsFor(+msel).filter(d=>!d.sup).length})</button>
     <button class="btn pri" type="button" id="openV">Open schedule &amp; checklist</button></div>`}
   if(isP){
-    const rows=PRI.map((x,i)=>{const st=stats(x.n),L=lateDays(st,x.tg);return`<div class="prow" style="--lc:${lvCol(x.lv)}"><span class="rk">${i+1}</span><div class="pm1"><button type="button" class="vno" data-sel="${x.n}">Villa ${x.n}</button><span class="lvp">${x.lv}</span><span class="pct">${pctTxt(st.pct)}</span></div><div class="pbtn"><button type="button" data-pmv="${i}:-1" aria-label="Move up"${i?"":" disabled"}>▲</button><button type="button" data-pmv="${i}:1" aria-label="Move down"${i<PRI.length-1?"":" disabled"}>▼</button><button type="button" data-prm="${x.n}" aria-label="Remove from priority">✕</button></div>
+    const rows=PRI.map((x,i)=>{if(sc&&clusterOf(x.n).id!==sc)return"";const st=stats(x.n),L=lateDays(st,x.tg);return`<div class="prow" style="--lc:${lvCol(x.lv)}"><span class="rk">${i+1}</span><div class="pm1"><button type="button" class="vno" data-sel="${x.n}">Villa ${x.n}</button><span class="lvp">${x.lv}</span><span class="pct">${pctTxt(st.pct)}</span></div><div class="pbtn"><button type="button" data-pmv="${i}:-1" aria-label="Move up"${i?"":" disabled"}>▲</button><button type="button" data-pmv="${i}:1" aria-label="Move down"${i<PRI.length-1?"":" disabled"}>▼</button><button type="button" data-prm="${x.n}" aria-label="Remove from priority">✕</button></div>
       <div class="pm2">${clusterOf(x.n).n} · ${st.cat==0?"Not started":STG[st.cat]}${x.tg?` · target ${fmtD(x.tg)}`:""} · forecast ${st.fin?fmt(st.fin):"complete"}${L!=null?(L>0?` · <b class="late">late by ${L} days</b>`:` · <b class="ontr">on track</b>`):""}<br>${st.P.length?"Doing: "+esc(st.P.map(e=>e.u.n).slice(0,2).join(", ")):st.N[0]?"Next: "+esc(st.N[0].u.n):"All activities done"}${st.Q.open?` · <b class="late">${st.Q.open} open defect${st.Q.open==1?"":"s"}</b>`:""}${x.why?`<br>Reason: ${esc(x.why)}`:""}</div></div>`}).join("");
     const late=PRI.filter(x=>{const L=lateDays(stats(x.n),x.tg);return L!=null&&L>0}).length;
     h+=`<div class="dhead"><div><p class="eyebrow">Ranked by you · ${PRI.filter(x=>x.lv=="High").length} high · ${PRI.filter(x=>x.lv=="Medium").length} medium · ${PRI.filter(x=>x.lv=="Low").length} low</p><h2>Priority villas</h2></div>${N?`<div class="big">${pctTxt(a.pct)}<small>complete</small></div>`:""}</div>
@@ -3411,7 +3451,7 @@ function bindDash(){
     $("paadd").onclick=()=>{const n=+$("pan").value;if(!SITEGEO.plots[n]){$("primsg").textContent="Enter a villa number from 1 to 112.";$("pan").focus();return}
       const was=isPri(n);setPri(n,$("palv").value,$("patg").value,$("pawhy").value.trim());priDraft={n:"",lv:priDraft.lv,tg:"",why:""};$("primsg").textContent=was?`Villa ${n} updated.`:`Villa ${n} added at #${priOf(n)+1}.`}}
 }
-$("dash").addEventListener("click",e=>{const ow=e.target.closest("[data-odw]");if(ow){openFromMap(ow.dataset.odw);setTab("W");return}const od=e.target.closest("[data-odf]");if(od){openFromMap(od.dataset.odf);setTab("D");dfFilter="open";return}const p=e.target.closest("[data-pin]");if(p){const v=p.dataset.pin;pin=v==="P"||isLV(v)?v:+v;hov=null;if(msel&&(pin==="P"?!isPri(msel):isLV(pin)?(PRI[priOf(+msel)]||{}).lv!==LVID[pin]:clusterOf(+msel).id!==pin&&pin!==0))msel=null;paintMap();return}
+$("dash").addEventListener("click",e=>{const ow=e.target.closest("[data-odw]");if(ow){openFromMap(ow.dataset.odw);setTab("W");return}const od=e.target.closest("[data-odf]");if(od){openFromMap(od.dataset.odf);setTab("D");dfFilter="open";return}const p=e.target.closest("[data-pin]");if(p){const v=p.dataset.pin;if(v==="P"||isLV(v))PSC=v;else pin=+v;hov=null;scSave();if(msel&&!scIn(msel))msel=null;paintMap();return}
   const lv=e.target.closest("[data-vlv]");if(lv){setPri(msel,lv.dataset.vlv||null);return}
   const mv=e.target.closest("[data-pmv]");if(mv){const [i,d]=mv.dataset.pmv.split(":").map(Number),j=i+d;if(j>=0&&j<PRI.length){[PRI[i],PRI[j]]=[PRI[j],PRI[i]];savePri()}return}
   const rm=e.target.closest("[data-prm]");if(rm){setPri(rm.dataset.prm,null);return}
@@ -5135,7 +5175,7 @@ async function fxPdfPreview(doc,title){let d=fxDialog(title,`<div class="fxpv" i
   catch(e){const b=$("fxPv");if(b)b.innerHTML=`<p class="fxwarn">The preview couldn't be drawn here (${esc(e.message||e)}). Download or share the PDF to see it.</p>`}}
 
 // ---------- work schedule (tomorrow) and daily labour report ----------
-const WKK={T:{kind:"plan",title:"Next-day work schedule",doc:"Work schedule",tag:"Schedule",file:"Next-Day-Schedule",lead:"Plan tomorrow's work: which villa, which activity, and how many masons and helpers each needs. Share the PDF on WhatsApp before the day ends.",dlab:"Work date",dd:tomorrow},
+const WKK={T:{kind:"plan",title:"Next-day work schedule",doc:"Work schedule",tag:"Schedule",file:"Next-Day-Schedule",lead:"Plan tomorrow's work: tick the villas and activities that will go ahead. Masons and helpers are entered in the daily labour report. Share the PDF on WhatsApp before the day ends.",dlab:"Work date",dd:tomorrow},
   L:{kind:"lab",title:"Daily labour report",doc:"Labour report",tag:"Labour",file:"Daily-Labour-Report",lead:"Record the labour actually deployed today on each villa and activity. Share the PDF with the project office at the end of the day.",dlab:"Report date",dd:()=>iso(new Date())}};
 const WKD={T:null,L:null};
 function wkLoad(d){try{return JSON.parse(ls.get("ak-work:"+d)||"null")||{date:d,rows:[]}}catch(e){return{date:d,rows:[]}}}
@@ -5171,7 +5211,7 @@ const wkState=f=>!f?["none","Not made yet"]:f.st=="up"?["ok",SP?"In SharePoint":
 function wkHistHtml(V){const K=WKK[V],H=wkHistory(K.kind);if(!H.length)return"";
   return`<section class="fxp"><div class="wkhd"><h3 class="fxh3">Saved ${V=="T"?"schedules":"labour reports"}</h3><span class="fxsm" style="margin:0">${SP?"Kept in SharePoint › AK Planner › Daily Reports":"Kept on this device and in the shared record"}</span></div>
    <ul class="wkh">${H.map(h=>{const st=wkState(h.f),wk=h.rows.reduce((s,r)=>s+(+r.mas||0)+(+r.hel||0),0);return`<li${h.d==WKD[V]?' class="on"':""}>
-     <div class="wkhd1"><b>${new Date(h.d+"T00:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})}</b><small>${plur(h.rows.length,"activity","activities")} · ${plur(wk,"worker")}${h.per?" · "+plur(h.per,"activity PDF"):""}</small></div>
+     <div class="wkhd1"><b>${new Date(h.d+"T00:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})}</b><small>${plur(h.rows.length,"activity","activities")}${V=="L"?" · "+plur(wk,"worker"):""}${h.per?" · "+plur(h.per,"activity PDF"):""}</small></div>
      <span class="wkst ${st[0]}">${st[1]}</span>
      <div class="wkha">${h.d!=WKD[V]?`<button type="button" class="fxb sm" data-wkgo="${h.d}">Open</button>`:""}${h.f?`<button type="button" class="fxb sm" data-wkdl="${h.d}">Download</button>`:""}</div></li>`}).join("")}</ul></section>`}
 async function wkStoreNow(d){const w=wkLoad(d);await wkAutoFiles(w);const cur=wkLoad(d);cur.files=w.files;ls.set("ak-work:"+d,JSON.stringify(cur));if(DB){syMark("w:"+d);syKick()}if(view=="T"||view=="L")renderWk(view)}
@@ -5181,7 +5221,7 @@ let wkDel=null;
 function renderWk(V){const K=WKK[V],box=$("view"+V);if(!box)return;const kind=K.kind;
   WKD[V]=WKD[V]||K.dd();const d=WKD[V];const w=wkLoad(d);const rows=V=="L"?labMerged(w):wkRows(w,kind);
   const tm=rows.reduce((s,r)=>s+(+r.mas||0),0),th=rows.reduce((s,r)=>s+(+r.hel||0),0),vs=new Set(rows.map(r=>r.v)).size;
-  const keep=box.querySelector("#wkAct"+V)?{v:$("wkV"+V).value,a:$("wkAct"+V).value,m:$("wkM"+V).value,h:$("wkH"+V).value,n:$("wkN"+V).value,c:$("wkC"+V)?$("wkC"+V).value:""}:null;
+  const gv=id=>$(id)?$(id).value:"";const keep=box.querySelector("#wkAct"+V)?{v:$("wkV"+V).value,a:$("wkAct"+V).value,m:gv("wkM"+V),h:gv("wkH"+V),n:$("wkN"+V).value,c:$("wkC"+V)?$("wkC"+V).value:""}:null;
   const cons=typeof dnContractors=="function"?dnContractors():[];
   const planToday=V=="L"?wkRows(wkLoad(d),"plan"):[];
   box.innerHTML=`<div class="fxin">
@@ -5192,8 +5232,8 @@ function renderWk(V){const K=WKK[V],box=$("view"+V);if(!box)return;const kind=K.
      <div class="wkf">
        <label class="fxf wv"><span>Villa</span><input class="fxi" id="wkV${V}" inputmode="numeric" autocomplete="off" placeholder="e.g. 12 or 12-15, 20" value="${keep?esc(keep.v):villa()&&PLOTS.includes(+villa())?villa():""}"></label>
        <label class="fxf wa"><span>Activity (stage › sub-stage)</span><select class="fxi" id="wkAct${V}">${actOptions(keep?+keep.a:sel&&sel.id)}</select></label>
-       <label class="fxf wn"><span>Masons</span><input class="fxi" id="wkM${V}" type="number" min="0" step="1" inputmode="numeric" value="${keep?esc(keep.m):""}" placeholder="0"></label>
-       <label class="fxf wn"><span>Helpers</span><input class="fxi" id="wkH${V}" type="number" min="0" step="1" inputmode="numeric" value="${keep?esc(keep.h):""}" placeholder="0"></label>
+       ${V=="L"?`<label class="fxf wn"><span>Masons</span><input class="fxi" id="wkM${V}" type="number" min="0" step="1" inputmode="numeric" value="${keep?esc(keep.m):""}" placeholder="0"></label>
+       <label class="fxf wn"><span>Helpers</span><input class="fxi" id="wkH${V}" type="number" min="0" step="1" inputmode="numeric" value="${keep?esc(keep.h):""}" placeholder="0"></label>`:""}
        ${V=="L"?`<label class="fxf wc"><span>Contractor (optional)</span><input class="fxi" id="wkC${V}" list="wkCL" value="${keep?esc(keep.c):""}" placeholder="Agency name"><datalist id="wkCL">${cons.map(c=>`<option value="${esc(c)}">`).join("")}</datalist></label>`:""}
        <label class="fxf wt"><span>Note (optional)</span><input class="fxi" id="wkN${V}" value="${keep?esc(keep.n):""}" placeholder="${V=="T"?"Material, shuttering or access needed":"Hours, overtime or remarks"}"></label>
        <div class="wkgo"><button type="button" class="fxb pri" id="wkAdd${V}">Add to ${V=="T"?"schedule":"report"}</button></div>
@@ -5201,12 +5241,12 @@ function renderWk(V){const K=WKK[V],box=$("view"+V);if(!box)return;const kind=K.
      ${V=="L"&&planToday.length?`<p class="fxsm">${plur(planToday.length,"activity","activities")} ${planToday.length==1?"was":"were"} scheduled for ${fmtD(d)}. <button type="button" class="fxlnk" id="wkCopy">Copy the schedule into this report</button> and adjust the numbers to what turned up.</p>`:""}
    </section>
    <section class="fxp" id="wkList${V}"><div class="wkhd"><h3 class="fxh3">${V=="T"?"Schedule for "+fmtD(d):"Labour on "+fmtD(d)}</h3>
-     <div class="wktot"><span><b class="fig">${rows.length}</b> ${rows.length==1?"activity":"activities"}</span><span><b class="fig">${vs}</b> ${vs==1?"villa":"villas"}</span><span><b class="fig">${tm}</b> masons</span><span><b class="fig">${th}</b> helpers</span><span class="wkall"><b class="fig">${tm+th}</b> workers</span></div></div>
+     <div class="wktot"><span><b class="fig">${rows.length}</b> ${rows.length==1?"activity":"activities"}</span><span><b class="fig">${vs}</b> ${vs==1?"villa":"villas"}</span>${V=="L"?`<span><b class="fig">${tm}</b> masons</span><span><b class="fig">${th}</b> helpers</span><span class="wkall"><b class="fig">${tm+th}</b> workers</span>`:""}</div></div>
      ${rows.length?`<ul class="wkl">${rows.map(r=>{const u=LEAF[r.leaf];return`<li class="wkr">
         <span class="wkvn">Villa <b>${esc(r.v)}</b></span>
         <span class="wkac"><b>${esc(u?u.n:"(removed activity)")}</b><small>${u?esc(u.seq.n+" › "+u.stn):""}${r.con?" · "+esc(r.con):""}${r.note?" · "+esc(r.note):""}</small></span>
-        <label class="wkq"><span>Masons</span><input type="number" min="0" inputmode="numeric" class="fxi" data-wkm="${r.id}" value="${+r.mas||0}"></label>
-        <label class="wkq"><span>Helpers</span><input type="number" min="0" inputmode="numeric" class="fxi" data-wkh="${r.id}" value="${+r.hel||0}"></label>
+        ${V=="L"?`<label class="wkq"><span>Masons</span><input type="number" min="0" inputmode="numeric" class="fxi" data-wkm="${r.id}" value="${+r.mas||0}"></label>
+        <label class="wkq"><span>Helpers</span><input type="number" min="0" inputmode="numeric" class="fxi" data-wkh="${r.id}" value="${+r.hel||0}"></label>`:""}
         <span class="wkx">${wkDel==r.id?`<button type="button" class="fxb sm bad" data-wkdelok="${r.id}">Remove</button><button type="button" class="fxb sm" data-wkdelno="1">Keep</button>`:`<button type="button" class="fxb sm fxgh" data-wkdel="${r.id}" aria-label="Remove villa ${esc(r.v)} ${esc(u?u.n:"")}">Remove</button>`}</span></li>`}).join("")}</ul>`
       :`<div class="fxempty">${V=="T"?"Nothing scheduled for "+fmtD(d)+" yet. Add the first villa and activity above.":"No labour recorded for "+fmtD(d)+" yet. Add a villa and activity above."}</div>`}
    </section>
@@ -5217,9 +5257,9 @@ function renderWk(V){const K=WKK[V],box=$("view"+V);if(!box)return;const kind=K.
   const msg=$("wkMsg"+V),out=$("wkOut"+V);
   $("wkD"+V).onchange=e=>{if(e.target.value){WKD[V]=e.target.value;wkDel=null;renderWk(V);wkPull(WKD[V])}};
   $("wkE"+V).onchange=e=>ls.set("ak-eng",e.target.value.trim());
-  $("wkAdd"+V).onclick=()=>{const vs=parseVL($("wkV"+V).value).filter(n=>PLOTS.includes(n)),a=+$("wkAct"+V).value,m=Math.max(0,Math.round(+$("wkM"+V).value||0)),h=Math.max(0,Math.round(+$("wkH"+V).value||0));
+  $("wkAdd"+V).onclick=()=>{const vs=parseVL($("wkV"+V).value).filter(n=>PLOTS.includes(n)),a=+$("wkAct"+V).value,m=V=="L"?Math.max(0,Math.round(+$("wkM"+V).value||0)):0,h=V=="L"?Math.max(0,Math.round(+$("wkH"+V).value||0)):0;
     if(!vs.length){msg.className="fxmsg bad";msg.textContent=`Enter a villa number from 1 to ${Math.max(...PLOTS)}, or a range like 12-15.`;$("wkV"+V).focus();return}
-    if(!m&&!h){msg.className="fxmsg bad";msg.textContent="Enter how many masons or helpers are needed.";$("wkM"+V).focus();return}
+    if(V=="L"&&!m&&!h){msg.className="fxmsg bad";msg.textContent="Enter how many masons or helpers are needed.";$("wkM"+V).focus();return}
     const w=wkLoad(d),now=new Date().toISOString(),by=$("wkE"+V).value.trim();ls.set("ak-eng",by);
     vs.forEach(v=>w.rows.push({id:fxId(),kind,v,leaf:a,mas:m,hel:h,note:$("wkN"+V).value.trim(),con:V=="L"?$("wkC"+V).value.trim():"",by,mt:now}));wkStore(w,true);
     $("wkN"+V).value="";renderWk(V);const m2=$("wkMsg"+V);m2.className="fxmsg";m2.textContent=`Added ${LEAF[a].n} for ${vs.length>1?"villas "+packVL(vs):"villa "+vs[0]}.`};
@@ -5332,7 +5372,7 @@ Object.assign(PGN,{T:"Tomorrow's work",L:"Labour report",E:"End of day"});
     document.querySelectorAll(".rail [role=tab]").forEach(b=>b.setAttribute("aria-selected",b.id=="v"+v));try{localStorage.setItem("ak-nav",v)}catch(e){}pgHead();if(window.hdrAct)hdrAct();
     if(v=="E")renderEod();else{renderWk(v);wkPull(WKD[v]||WKK[v].dd());wkPullAll()}document.querySelector(".app").scrollTop=0;return}
   document.querySelectorAll(".rail .fxrail").forEach(b=>b.setAttribute("aria-selected","false"));sv1(v)}}
-{const ph0=pgHead;pgHead=function(){ph0();if(["T","L","E"].includes(view)){const s=$("pgS");if(s)s.textContent=view=="E"?"Download today's checklists, photos, defects and debit notes":view=="T"?"Villas, activities, masons and helpers for tomorrow":"Masons and helpers deployed today, by villa and activity"}}}
+{const ph0=pgHead;pgHead=function(){ph0();if(["T","L","E"].includes(view)){const s=$("pgS");if(s)s.textContent=view=="E"?"Download today's checklists, photos, defects and debit notes":view=="T"?"Villas and activities for tomorrow, ticked from the planner":"Masons and helpers deployed today, by villa and activity"}}}
 {const a0=applyQC;applyQC=function(){if(!QC&&["T","L","E"].includes(view))view="S";a0();syPill()}}
 {const h0=window.hdrAct;window.hdrAct=function(){h0&&h0();const b=$("hpB");if(!b||!QC)return;const m={T:["Share PDF",()=>$("wkShT").click()],L:["Share PDF",()=>$("wkShL").click()],E:["Download ZIP",()=>$("eodGo").click()]}[view];if(m){b.hidden=false;b.textContent=m[0];b.onclick=m[1]}}}
 {const s=ls.get("ak-nav");if(QC&&["T","L","E"].includes(s))setView(s)}
@@ -5676,7 +5716,7 @@ let dregPullT=0;function dregPull(){if(!DB||!navigator.onLine||Date.now()-dregPu
 // counts for a set of villas
 function dcount(vs,types){const c={pend:0,recv:0,sent:0,sign:0,final:0,tot:0};vs.forEach(v=>(types||DRT).forEach(t=>{c[dcell(v,t.id).st]++;c.tot++}));return c}
 const DRS={scope:0,f:"",view:innerWidth>900?"matrix":"villa",q:"",open:new Set()};
-const dScopeVs=()=>DRS.scope==="P"?PRI.map(x=>x.n):isLV(DRS.scope)?PRI.filter(x=>x.lv==LVID[DRS.scope]).map(x=>x.n):villasOf(DRS.scope?CLUSTERS.find(c=>c.id===DRS.scope):null);
+const dScopeVs=()=>PLOTS.filter(n=>scIn(n));
 const dchip=st=>`<span class="dst s-${st}">${DSTN[st]}</span>`;
 const dbar=c=>`<span class="dzsb" aria-hidden="true">${DST.map(([k])=>c[k]?`<i class="s-${k}" style="flex:${c[k]}"></i>`:"").join("")}</span>`;
 function drPicker(vs){const v=DRS.villa||0;const lst=PLOTS;const i=lst.indexOf(v);
@@ -5699,7 +5739,7 @@ function renderDreg(){const box=$("drd");if(!box)return;dregPull();
     <div class="drk">${tiles.map(([k,l,s])=>`<button type="button" class="drt k-${k}${DRS.f==k?" on":""}" data-drf="${k}" aria-pressed="${DRS.f==k}"><b class="fig">${tv(k)}</b><span>${l}</span><small>${s}</small></button>`).join("")}</div>
     <p class="fxsm drleg">${DST.map(([k,l])=>`<span><i class="s-${k}"></i>${l} ${c[k]}</span>`).join("")}</p>
     <input type="file" id="drF" accept=".xlsx,.xls" hidden><p class="fxmsg" id="drMsg" role="status"></p></section>
-   <div class="drbar"><div class="dtabs drsc" role="tablist" aria-label="Villas">${[{id:0,n:"All villas"},...CLUSTERS.map(x=>({id:x.id,n:"Cluster "+x.id})),...(PRI.length?[{id:"H",n:"High"},{id:"M",n:"Medium"},{id:"L",n:"Low"}]:[])].map(x=>`<button type="button" role="tab" data-drs="${x.id}" aria-selected="${DRS.scope===x.id}"${isLV(x.id)?` class="lvt" style="--lc:${lvCol(LVID[x.id])}"`:""}>${x.n}</button>`).join("")}</div>
+   <div class="drbar">${scBar()}
      <div class="drv"><input class="fxi" id="drQ" type="search" placeholder="Find a drawing, e.g. FF slab" value="${esc(DRS.q)}" aria-label="Find a drawing">
      <div class="segv" role="tablist" aria-label="View">${[["matrix","Grid"],["villa","By villa"],["type","By drawing"]].map(([k,l])=>`<button type="button" role="tab" data-drv="${k}" aria-selected="${DRS.view==k}">${l}</button>`).join("")}</div></div></div>
    <section class="fxp drbody">${DRS.view=="matrix"?dMatrix(vs,T):DRS.view=="type"?dByType(vs,T):dByVilla(vs,T)}</section>`;
@@ -5975,8 +6015,8 @@ function drBind(box){box.onclick=e=>{drClick(e)};
   const sel=$("drVs");if(sel)sel.onchange=()=>{if(sel.value)dVilla(+sel.value);else{DRS.villa=0;renderDreg()}};
   const st=$("drStrip"),on=st&&st.querySelector(".on");if(on)st.scrollLeft=on.offsetLeft-st.clientWidth/2+on.clientWidth/2}
 // site map: villas with work in progress glow
-{const pm2=paintMap;paintMap=function(){pm2.apply(this,arguments);try{PLOTS.forEach(n=>{const g=$("gv"+n);if(!g)return;const on=stats(n).P.length>0;g.classList.toggle("wipv",on);let o=g.querySelector(".wipo");
-  if(on&&!o){const pl=$("pl"+n);o=document.createElementNS("http://www.w3.org/2000/svg","path");o.setAttribute("class","wipo");o.setAttribute("d",pl.getAttribute("d"));o.setAttribute("aria-hidden","true");pl.after(o)}else if(!on&&o)o.remove()})}catch(e){}}}
+function wipPaint(cl){const on=scOn(cl);PLOTS.forEach(n=>{const g=$("gv"+n);if(!g)return;const w=stats(n).P.length>0&&(!on||scIn(n,cl));g.classList.toggle("wipv",w);let o=g.querySelector(".wipo");
+  if(w&&!o){const pl=$("pl"+n);o=document.createElementNS("http://www.w3.org/2000/svg","path");o.setAttribute("class","wipo");o.setAttribute("d",pl.getAttribute("d"));o.setAttribute("aria-hidden","true");pl.after(o)}else if(!w&&o)o.remove()})}
 {const rr=renderRamp;renderRamp=function(){rr.apply(this,arguments);const r=$("ramp");if(r&&!r.querySelector(".wipleg"))r.insertAdjacentHTML("beforeend",`<span class="wipleg"><i></i>Work going on</span>`)}}
 try{renderRamp();paintMap()}catch(e){}
 
@@ -5991,7 +6031,7 @@ function dnAll(){const out=[],cur=villa();const keys=new Set(Object.keys(SITE));
         out.push({v,u,d,lk,sev,amt:+d.amt||0,con:(d.con||"Not named").trim(),st:d.st||"draft",dt,age:dt?Math.floor((today-new Date(dt+"T00:00:00"))/864e5):0})})})});
   return out.sort((a,b)=>String(b.dt).localeCompare(String(a.dt)))}
 const DNF={scope:0,con:"",st:"",sev:"",q:"",sort:"amt"};
-function renderDnv(){const box=$("viewN");if(!box)return;const A=dnAll();const vs=new Set(DNF.scope?(DNF.scope==="P"?PRI.map(x=>x.n):isLV(DNF.scope)?PRI.filter(x=>x.lv==LVID[DNF.scope]).map(x=>x.n):villasOf(CLUSTERS.find(c=>c.id===DNF.scope))):PLOTS);
+function renderDnv(){const box=$("viewN");if(!box)return;const A=dnAll();const vs=new Set(PLOTS.filter(n=>scIn(n)));
   const q=DNF.q.trim().toLowerCase();
   const S=A.filter(r=>vs.has(+r.v)),F=S.filter(r=>(!DNF.con||r.con==DNF.con)&&(!DNF.st||r.st==DNF.st)&&(!DNF.sev||r.sev==DNF.sev)&&(!q||[r.d.no,r.con,r.d.why,r.u.n,"villa "+r.v].join(" ").toLowerCase().includes(q)));
   const sum=L=>L.reduce((s,r)=>s+r.amt,0),T=sum(F),rec=sum(F.filter(r=>r.st=="recovered")),dis=F.filter(r=>r.st=="disputed"),out=F.filter(r=>r.st=="issued"||r.st=="accepted");
@@ -6011,7 +6051,7 @@ function renderDnv(){const box=$("viewN");if(!box)return;const A=dnAll();const v
       <div class="fxacts"><button type="button" class="fxb" id="dnXl">Excel register</button><button type="button" class="fxb pri" id="dnPdfB"${F.length?"":" disabled"}>Summary PDF</button></div></div>
     <div class="drk dnk">${[["n",F.length,"Debit notes raised",`${plur(F.filter(r=>r.st=="draft").length,"draft")} not yet issued`],["rec",inr(rec),"Recovered from bills",T?Math.round(rec/T*100)+"% of the value raised":""],["out",inr(sum(out)),"Waiting to recover",`${plur(out.length,"note")} issued or accepted`],["dis",inr(sum(dis)),"Disputed",plur(dis.length,"note")+" the contractor contests"]].map(([k,b,l,s])=>`<div class="drt dk-${k}"><b class="fig">${b}</b><span>${l}</span><small>${s}</small></div>`).join("")}</div>
     <div class="dnpipe">${DNST.map(([k,l])=>{const L=F.filter(r=>r.st==k);return`<button type="button" class="dnp st-${k}${DNF.st==k?" on":""}" data-dnst="${k}" aria-pressed="${DNF.st==k}"><b>${L.length}</b><span>${l}</span><small>${inr(sum(L))}</small></button>`}).join("")}</div></section>
-   <div class="drbar"><div class="dtabs drsc" role="tablist" aria-label="Villas">${[{id:0,n:"All villas"},...CLUSTERS.map(x=>({id:x.id,n:"Cluster "+x.id})),...(PRI.length?[{id:"H",n:"High"},{id:"M",n:"Medium"},{id:"L",n:"Low"}]:[])].map(x=>`<button type="button" role="tab" data-dns="${x.id}" aria-selected="${DNF.scope===x.id}"${isLV(x.id)?` class="lvt" style="--lc:${lvCol(LVID[x.id])}"`:""}>${x.n}</button>`).join("")}</div>
+   <div class="drbar">${scBar()}
      <div class="drv"><select class="fxi" id="dnCon" aria-label="Contractor"><option value="">All contractors</option>${cons.map(c=>`<option${c==DNF.con?" selected":""}>${esc(c)}</option>`).join("")}</select><input class="fxi" id="dnQ" type="search" placeholder="Find DN no., reason, villa" value="${esc(DNF.q)}" aria-label="Search debit notes"></div></div>
    ${S.length?`
    <div class="dngrid">
@@ -6221,6 +6261,177 @@ railFit();
 // v19: engineers see checklists, site map, defects, drawings, quantities, tomorrow, labour, day end
 {const av3=allowedViews;allowedViews=function(){const a=av3();if(roleNow()!="eng")return a;return["C","S","D","W","Q","T","L","E","V"]}}
 RAILP.eng=["C","S","D","T","L"];
+// ---------- v20: one villa filter everywhere, schedule by villa, PM reasons for unscheduled plan work ----------
+{try{const o=JSON.parse(localStorage.getItem("ak-sc")||"null");if(o){pin=[0,1,2,3].includes(+o.c)?+o.c:0;PSC=["","H","M","L","P"].includes(o.p)?o.p:""}}catch(e){}}
+function scRefresh(){if(view=="S")paintMap();else if(view=="O"){renderDash();hiClusters()}else if(view=="W")renderDreg();else if(view=="N")renderDnv();else if(view=="T"||view=="L")renderWk(view);else if(view=="R")renderRd()}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-scc],[data-scp]");if(!b)return;e.preventDefault();e.stopPropagation();
+  if(b.dataset.scc!=null)pin=+b.dataset.scc;else PSC=b.dataset.scp;hov=null;scSave();if(msel&&!scIn(msel))msel=null;scRefresh()},true);
+{const pp=$("ppaint");if(pp)pp.remove();PPM=""}
+// every activity the planner has running on a day
+function planFor(d){const D=new Date(d+"T00:00:00");const out=[];PLOTS.forEach(n=>{(stats(n).F||[]).forEach(f=>{if(f.u&&f.s<=D&&f.e>=D)out.push({n,u:f.u,f,k:n+"|"+f.u.id})})});return out}
+// keep what the planner said for a day, so the record still holds once the day has passed
+function planSnap(d,all){const w=wkLoad(d);const keys=all.map(x=>x.k).sort();const ex=w.rows.find(r=>r.id=="pc:"+d);if(ex&&JSON.stringify(ex.keys)==JSON.stringify(keys))return;
+  if(ex){ex.keys=keys;ex.mt=new Date().toISOString()}else w.rows.push({id:"pc:"+d,kind:"pc",keys,mt:new Date().toISOString()});wkStore(w,true)}
+function planKeys(d){const r=wkLoad(d).rows.find(x=>x.id=="pc:"+d&&!x.del);if(r&&r.keys)return r.keys;return d>=iso(today)?planFor(d).map(x=>x.k):null}
+const SKW=["Material not available","Manpower shortage","Hindrance at site","Previous work not ready","Drawing or approval pending","Rain / weather","Client on hold","Not needed on this day","Other"];
+WHY.splice(0,WHY.length,"Labour shortage","Material not available","Hindrance at site","Rain / weather","Drawing or approval pending","Previous work not ready","Machine / equipment","Other");
+const WKP2={allOpen:true};
+function wkPlanHtml(d){const w=wkLoad(d),rows=wkRows(w,"plan"),sel=new Set(rows.map(r=>r.v+"|"+r.leaf));const q=WKP.q.trim();
+  const all=planFor(d);if(d>=iso(today))planSnap(d,all);const G=new Map();const ok=n=>scIn(n)&&(!q||String(n).startsWith(q));
+  all.forEach(x=>{if(!ok(x.n))return;if(!G.has(x.n))G.set(x.n,[]);G.get(x.n).push({u:x.u,f:x.f})});
+  rows.forEach(r=>{if(!ok(r.v)||!LEAF[r.leaf])return;const L=G.get(r.v)||[];if(!L.some(x=>x.u.id==r.leaf)){L.push({u:LEAF[r.leaf],extra:true});G.set(r.v,L)}});
+  let groups=[...G.entries()].sort((a,b)=>a[0]-b[0]);if(WKP.only)groups=groups.filter(([n,L])=>L.some(x=>sel.has(n+"|"+x.u.id)));
+  const total=groups.reduce((s,[,L])=>s+L.length,0),nsel=groups.reduce((s,[n,L])=>s+L.filter(x=>sel.has(n+"|"+x.u.id)).length,0);
+  const when=x=>x.extra?"added by hand":x.f.wip?`in progress, ends ${fmtS(x.f.e)}`:+x.f.e!=+x.f.s?`${fmtS(x.f.s)} – ${fmtS(x.f.e)}`:fmtS(x.f.s);
+  return`<section class="fxp" id="wkPlan"><div class="wkhd"><div><h3 class="fxh3" style="margin:0">From the planner · ${fmtD(d)}</h3><p class="fxsm" style="margin:4px 0 0">Every activity the plan has on this day, villa by villa. Tick what will go ahead; untick to drop it. Masons and helpers go in the daily labour report.</p></div>
+    <span class="wkpc"><b class="fig">${nsel}</b> ticked of ${total}</span></div>
+    <div class="wkpf">${scBar()}<input class="fxi" id="wkPq" inputmode="numeric" placeholder="Villa no." value="${esc(WKP.q)}" aria-label="Find a villa"><label class="fxck"><input type="checkbox" id="wkPo"${WKP.only?" checked":""}> Only ticked</label>
+      ${total?`<span class="ezsp"></span><button type="button" class="fxb sm" data-wpev="1">${nsel==total?"Untick all shown":"Tick all shown"}</button>`:""}</div>
+    ${groups.length?`<div class="wkpg2">${groups.map(([n,L])=>{const ns=L.filter(x=>sel.has(n+"|"+x.u.id)).length,pi=priOf(n),pr=pi>=0?PRI[pi]:null;
+      return`<article class="wkv${ns?" has":""}"><header><b>Villa ${n}</b>${pr?`<span class="wkvp" style="--lc:${lvCol(pr.lv)}">${pr.lv}</span>`:""}<span class="wkvc">${ns}/${L.length}</span><button type="button" class="fxlnk" data-wpall="${n}">${ns==L.length?"Untick":"Tick all"}</button></header>
+        <ul>${L.map(x=>{const on=sel.has(n+"|"+x.u.id);return`<li><label class="wkpr2${on?" on":""}"><input type="checkbox" data-wkpick="${n}|${x.u.id}"${on?" checked":""}><span><b>${esc(x.u.n)}</b><small>${esc(x.u.stn)} · ${when(x)}</small></span></label></li>`}).join("")}</ul></article>`}).join("")}</div>`
+      :`<div class="fxempty">No activities in the plan for ${fmtD(d)}${scOn()||q?" in "+esc(scName())+(q?" matching "+esc(q):""):""}. Add work by hand below.</div>`}</section>`}
+function wkPlanBind(box,d){const P=$("wkPlan");if(!P)return;const re=()=>{const y=box.scrollTop,wy=window.scrollY;renderWk("T");box.scrollTop=y;window.scrollTo(0,wy)};
+  $("wkPq").oninput=e=>{WKP.q=e.target.value.replace(/\D/g,"");const p=e.target.selectionStart;re();const i=$("wkPq");i.focus();try{i.setSelectionRange(p,p)}catch(x){}};
+  $("wkPo").onchange=e=>{WKP.only=e.target.checked;re()};
+  const add=(w,v,leaf)=>{if(w.rows.some(r=>r.kind=="plan"&&!r.del&&r.v==+v&&r.leaf==+leaf))return;w.rows.push({id:fxId(),kind:"plan",v:+v,leaf:+leaf,mas:0,hel:0,note:"",con:"",by:engName(),mt:new Date().toISOString(),src:"planner"})};
+  const drop=(w,v,leaf)=>{const ex=w.rows.find(r=>r.kind=="plan"&&!r.del&&r.v==+v&&r.leaf==+leaf);if(ex){ex.del=true;ex.mt=new Date().toISOString()}};
+  P.querySelectorAll("[data-wkpick]").forEach(c=>c.onchange=()=>{const [v,leaf]=c.dataset.wkpick.split("|");const w=wkLoad(d);c.checked?add(w,v,leaf):drop(w,v,leaf);wkStore(w,true);re()});
+  const bulk=boxes=>{const w=wkLoad(d);const ks=[...boxes].map(c=>c.dataset.wkpick.split("|"));const all=ks.every(([v,l])=>w.rows.some(r=>r.kind=="plan"&&!r.del&&r.v==+v&&r.leaf==+l));ks.forEach(([v,l])=>all?drop(w,v,l):add(w,v,l));wkStore(w,true);re()};
+  P.querySelectorAll("[data-wpall]").forEach(b=>b.onclick=e=>{e.preventDefault();bulk(b.closest("article").querySelectorAll("[data-wkpick]"))});
+  const ev=P.querySelector("[data-wpev]");if(ev)ev.onclick=()=>bulk(P.querySelectorAll("[data-wkpick]"))}
+// project manager / admin: why planned work was left out of the schedule
+function skipHtml(d){if(!canEdit("plan"))return"";const w=wkLoad(d),sel=new Set(wkRows(w,"plan").map(r=>r.v+"|"+r.leaf)),S=new Map(wkRows(w,"skip").map(r=>[r.v+"|"+r.leaf,r]));
+  const all=planFor(d).filter(x=>scIn(x.n)),schd=all.filter(x=>sel.has(x.k)).length,miss=all.filter(x=>!sel.has(x.k)),said=miss.filter(x=>(S.get(x.k)||{}).why).length;
+  const opt=v=>`<option value="">Choose a reason…</option>${SKW.map(x=>`<option${x==v?" selected":""}>${x}</option>`).join("")}`;
+  return`<details class="fxp skd" id="wkSkip"${SKOPEN||miss.length&&said<miss.length&&miss.length<=40?" open":""}><summary><span class="skt"><b>Planned but not scheduled</b><small>Project manager review</small></span><span class="wktot"><span class="${miss.length&&said<miss.length?"lbdt":""}"><b class="fig">${miss.length}</b> left out</span><span><b class="fig">${said}/${miss.length}</b> explained</span></span><svg class="ico vch" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><div class="wkhd"><div><p class="fxsm" style="margin:4px 0 0">The planner has <b>${all.length}</b> ${all.length==1?"activity":"activities"} on ${fmtD(d)}${scOn()?" in "+esc(scName()):""}; the engineers scheduled <b>${schd}</b>. Say why each one was left out. Only project managers and admins see this; it goes into the site diary.</p></div>
+    </div></div>
+    ${miss.length?`<div class="skbulk"><select class="fxi" id="skAll">${opt("")}</select><input class="fxi" id="skAllN" placeholder="Comment (optional)"><button type="button" class="fxb sm pri" id="skAllGo">Apply to all without a reason</button></div>
+    <div class="dntw"><table class="dntb sktb"><thead><tr><th>Villa</th><th>Activity</th><th>Reason</th><th>Comment</th></tr></thead><tbody>${miss.map(x=>{const r=S.get(x.k)||{};return`<tr data-sk="${x.k}" class="${r.why?"ok":""}"><td><b>${x.n}</b></td><td>${esc(x.u.n)}<small>${esc(x.u.seq.n)} › ${esc(x.u.stn)}</small></td><td><select class="fxi" data-skw="1">${opt(r.why)}</select></td><td><input class="fxi" data-skn="1" value="${esc(r.note||"")}" placeholder="e.g. Steel arrives Monday">${r.by?`<small>${esc(r.by)}, ${new Date(r.mt).toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}</small>`:""}</td></tr>`}).join("")}</tbody></table></div>`
+    :`<div class="fxempty">Everything the planner has on ${fmtD(d)} is scheduled.</div>`}</details>`}
+let SKOPEN=false;
+function skipSet(d,k,f){const [v,leaf]=k.split("|").map(Number);const w=wkLoad(d);let r=w.rows.find(x=>x.kind=="skip"&&!x.del&&x.v==v&&x.leaf==leaf);
+  if(!r){r={id:fxId(),kind:"skip",v,leaf,why:"",note:""};w.rows.push(r)}f(r);r.by=(ROLE&&ROLE.name)||engName()||"";r.mt=new Date().toISOString();wkStore(w,true)}
+function skipBind(d){const S=$("wkSkip");if(!S)return;S.addEventListener("toggle",()=>{SKOPEN=S.open});const re=()=>{const box=$("viewT"),y=box?box.scrollTop:0,wy=window.scrollY;renderWk("T");if(box)box.scrollTop=y;window.scrollTo(0,wy)};
+  S.querySelectorAll("tr[data-sk]").forEach(tr=>{tr.querySelector("[data-skw]").onchange=e=>{skipSet(d,tr.dataset.sk,r=>r.why=e.target.value);re()};tr.querySelector("[data-skn]").onchange=e=>{skipSet(d,tr.dataset.sk,r=>r.note=e.target.value.trim());re()}});
+  if($("skAllGo"))$("skAllGo").onclick=()=>{const why=$("skAll").value,nt=$("skAllN").value.trim();if(!why){$("skAll").focus();return}S.querySelectorAll("tr[data-sk]").forEach(tr=>{if(!tr.querySelector("[data-skw]").value)skipSet(d,tr.dataset.sk,r=>{r.why=why;if(nt&&!r.note)r.note=nt})});re()}}
+// labour: masons and helpers against each scheduled activity
+const labNotDone=r=>r.planned&&r.lab&&(r.st=="part"||r.st=="none");
+function labHtml(d){const w=wkLoad(d),M=labMerged(w).filter(r=>scIn(r.v)),P=M.filter(r=>r.planned),U=M.filter(r=>!r.planned);
+  const rep=P.filter(r=>r.lab),am=M.reduce((s,r)=>s+(r.mas||0),0),ah=M.reduce((s,r)=>s+(r.hel||0),0),nd=P.filter(labNotDone).length;
+  const row=r=>{const u=LEAF[r.leaf]||{n:"(removed)",seq:{n:""},stn:""};const need=r.lab&&r.st&&r.st!="done";const stl=(LST.find(x=>x[0]==r.st)||[0,""])[1];
+    return`<li class="lbr${r.lab?" rep":""} ls-${r.st||"x"}" data-lb="${r.id}" data-lbp="${r.pid||""}">
+      <div class="lbh"><span class="wkvn">Villa <b>${r.v}</b></span><span class="wkac"><b>${esc(u.n)}</b><small>${esc(u.seq.n)} › ${esc(u.stn)}${r.planned?"":" · not in the schedule"}</small></span>
+        ${r.lab?(stl?`<span class="lbs2 s-${r.st}">${stl}</span>`:`<span class="lbok">${(r.mas||0)+(r.hel||0)} workers</span>`):`<span class="lbnr">Not reported yet</span>`}</div>
+      <div class="lbg"><label class="wkq"><span>Masons</span><input type="number" min="0" inputmode="numeric" class="fxi" data-lbm="1" value="${r.lab?r.mas??0:""}" placeholder="0"></label>
+        <label class="wkq"><span>Helpers</span><input type="number" min="0" inputmode="numeric" class="fxi" data-lbh="1" value="${r.lab?r.hel??0:""}" placeholder="0"></label>
+        <div class="lbst" role="group" aria-label="Work status">${LST.map(([k,l])=>`<button type="button" data-lbs="${k}" aria-pressed="${r.st==k}">${l}</button>`).join("")}</div></div>
+      ${need||r.why?`<div class="lbw"><label class="fxf"><span>Why wasn't it done?</span><select class="fxi" data-lbwhy="1"><option value="">Choose…</option>${WHY.map(x=>`<option${x==r.why?" selected":""}>${x}</option>`).join("")}</select></label><label class="fxf"><span>Note</span><input class="fxi" data-lbnote="1" value="${esc(r.note||"")}" placeholder="e.g. Cement arrived at 3 pm"></label></div>`:""}
+    </li>`};
+  return`<section class="fxp" id="wkLab"><div class="wkhd"><div><h3 class="fxh3" style="margin:0">Scheduled for ${fmtD(d)}</h3><p class="fxsm" style="margin:4px 0 0">From the schedule made the day before. Enter the masons and helpers who worked on each activity and how far it got. Anything not done needs a reason.</p></div>
+    <div class="wktot"><span><b class="fig">${rep.length}/${P.length}</b> reported</span><span><b class="fig">${am}</b> masons</span><span><b class="fig">${ah}</b> helpers</span><span class="${nd?"lbdt":""}"><b class="fig">${nd}</b> not done</span></div></div>
+    <div class="wkpf">${scBar()}</div>
+    ${P.length?`<ul class="lbl">${P.map(row).join("")}</ul>`:`<div class="fxempty">Nothing was scheduled for ${fmtD(d)}${scOn()?" in "+esc(scName()):""}. Record work below, or open Tomorrow to plan.</div>`}
+    ${U.length?`<h4 class="drg" style="margin-top:16px">Work not in the schedule</h4><ul class="lbl">${U.map(row).join("")}</ul>`:""}</section>`}
+function labBind(d){const S=$("wkLab");if(!S)return;
+  const upd=(li,f)=>{const w=wkLoad(d);let r=w.rows.find(x=>x.id==li.dataset.lb&&x.kind=="lab");const now=new Date().toISOString();
+    if(!r){const p=w.rows.find(x=>x.id==li.dataset.lbp);if(!p)return;r={id:fxId(),kind:"lab",pid:p.id,v:p.v,leaf:p.leaf,mas:0,hel:0,st:"",why:"",note:"",con:"",by:engName(),mt:now};w.rows.push(r)}
+    f(r);if(r.st=="done")r.why="";r.mt=now;wkStore(w,true);const box=$("viewL"),y=box?box.scrollTop:0,wy=window.scrollY;renderWk("L");if(box)box.scrollTop=y;window.scrollTo(0,wy)};
+  S.querySelectorAll("li[data-lb]").forEach(li=>{
+    li.querySelectorAll("[data-lbm],[data-lbh]").forEach(i=>i.onchange=()=>upd(li,r=>{r[i.dataset.lbm?"mas":"hel"]=Math.max(0,Math.round(+i.value||0))}));
+    li.querySelectorAll("[data-lbs]").forEach(b=>b.onclick=()=>upd(li,r=>{r.st=r.st==b.dataset.lbs?"":b.dataset.lbs}));
+    const wy=li.querySelector("[data-lbwhy]");if(wy)wy.onchange=()=>upd(li,r=>{r.why=wy.value});
+    const nt=li.querySelector("[data-lbnote]");if(nt)nt.onchange=()=>upd(li,r=>{r.note=nt.value.trim()})})}
+{const rw=renderWk;renderWk=function(V){rw(V);if(V!="T")return;const P=$("wkPlan"),d=WKD.T;if(P&&canEdit("plan")){P.insertAdjacentHTML("beforebegin",skipHtml(d));skipBind(d)}}}
+// PDFs: the schedule lists activities only; the labour report has masons, helpers, status and reasons
+{const wp=wkPdf;wkPdf=function(V,d,rows,single){if(V=="T")return wkPdfT(d,rows,single);if(V=="L")return wkPdfL(d,rows,single);return wp.apply(this,arguments)}}
+function wkPdfHead(doc,title,sub){const W=doc.internal.pageSize.getWidth();const ink=[21,35,58],mute=[94,107,124],acc=[232,103,42];const lh=pdfLogo(doc,14,10,12);
+  doc.setFont("helvetica","bold");doc.setFontSize(17);doc.setTextColor(...ink);doc.text(title,W-14,16,{align:"right"});doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(...mute);doc.text(sub,W-14,22,{align:"right"});
+  const y=Math.max(30,10+lh+6);doc.setDrawColor(...acc);doc.setLineWidth(.8);doc.line(14,y,W-14,y);return y+5}
+function wkPdfBoxes(doc,y,bx,warn){const W=doc.internal.pageSize.getWidth();const bw=(W-28-(bx.length-1)*4)/bx.length;
+  bx.forEach(([l,n],i)=>{const x=14+i*(bw+4),w=warn===i;doc.setFillColor(...(w?[253,236,233]:[246,248,251]));doc.setDrawColor(214,220,228);doc.setLineWidth(.3);doc.roundedRect(x,y,bw,15,2.5,2.5,"FD");doc.setTextColor(94,107,124);doc.setFontSize(8);doc.text(l,x+4,y+5.2);doc.setTextColor(...(w?[184,55,45]:[21,35,58]));doc.setFont("helvetica","bold");doc.setFontSize(11.5);doc.text(String(n),x+4,y+11.8);doc.setFont("helvetica","normal")});return y+20}
+function wkPdfFoot(doc,by){const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();let y=doc.lastAutoTable.finalY+14;if(y>H-24){doc.addPage();y=26}
+  doc.setDrawColor(94,107,124);doc.setLineWidth(.3);doc.line(14,y,84,y);doc.line(W-84,y,W-14,y);doc.setFontSize(8.5);doc.setTextColor(94,107,124);doc.text("Site engineer"+(by?" ("+by+")":""),14,y+4.5);doc.text("Project manager",W-84,y+4.5);
+  const n=doc.getNumberOfPages();for(let i=1;i<=n;i++){doc.setPage(i);const ph=doc.internal.pageSize.getHeight(),pw=doc.internal.pageSize.getWidth();doc.setFontSize(8);doc.setTextColor(94,107,124);doc.text("Bhaaje Private Limited · AMR Living Spaces",14,ph-7);doc.text(`Page ${i} of ${n}`,pw-14,ph-7,{align:"right"})}return doc}
+const dayLong=d=>new Date(d+"T00:00:00").toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+function wkPdfT(d,rows,single){const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4"});const by=engName();const ink=[21,35,58],line=[214,220,228];
+  let y=wkPdfHead(doc,"Work schedule",`Work on ${dayLong(d)}  ·  AMR Living Spaces${by?"  ·  "+by:""}`);
+  if(!single){const pk=planKeys(d),pl=pk?pk.length:null;y=wkPdfBoxes(doc,y,[["Activities",rows.length],["Villas",new Set(rows.map(r=>r.v)).size],...(pl!=null?[["In the planner",pl],["Not scheduled",Math.max(0,pl-rows.filter(r=>pk.includes(r.v+"|"+r.leaf)).length)]]:[])],pl!=null&&pl>rows.length?3:-1)}
+  doc.autoTable({startY:y,margin:{left:14,right:14},head:[["#","Villa","Stage","Sub-stage","Activity","Notes"]],body:rows.map((r,i)=>{const u=LEAF[r.leaf]||{n:"(removed)",seq:{n:""},stn:""};return[i+1,"Villa "+r.v,u.seq.n,u.stn,u.n,[r.con,r.note].filter(Boolean).join(" · ")]}),theme:"grid",
+    styles:{fontSize:8.8,cellPadding:2,textColor:ink,lineColor:line,lineWidth:.2,valign:"middle"},headStyles:{fillColor:ink,textColor:255},columnStyles:{0:{cellWidth:8,halign:"right"},1:{cellWidth:18},2:{cellWidth:30},3:{cellWidth:34},5:{cellWidth:38}}});
+  return wkPdfFoot(doc,by)}
+function wkPdfL(d,rows,single){const M=rows&&rows.length&&rows[0].planned!==undefined?rows:labMerged(wkLoad(d));const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4",orientation:single?"portrait":"landscape"});const by=engName();
+  const ink=[21,35,58],line=[214,220,228],bad=[184,55,45],ok=[31,128,80],acc=[232,103,42];
+  let y=wkPdfHead(doc,"Daily labour report",`${dayLong(d)}  ·  AMR Living Spaces${by?"  ·  "+by:""}`);const P=M.filter(r=>r.planned),am=M.reduce((s,r)=>s+(r.mas||0),0),ah=M.reduce((s,r)=>s+(r.hel||0),0),nd=P.filter(labNotDone).length;
+  if(!single)y=wkPdfBoxes(doc,y,[["Scheduled",P.length],["Reported",`${P.filter(r=>r.lab).length} of ${P.length}`],["Masons",am],["Helpers",ah],["Total workers",am+ah],["Not done",nd]],nd?5:-1);
+  const stl=k=>(LST.find(x=>x[0]==k)||[0,""])[1];
+  doc.autoTable({startY:y,margin:{left:14,right:14},head:[["#","Villa","Activity","Masons","Helpers","Status","Reason / note"]],
+    body:M.map((r,i)=>{const u=LEAF[r.leaf]||{n:"",seq:{n:""},stn:""};return[i+1,"Villa "+r.v,u.n+"\n"+u.seq.n+" > "+u.stn+(r.planned?"":"  (not scheduled)"),r.lab?r.mas||0:"",r.lab?r.hel||0:"",r.lab?stl(r.st)||"Reported":"Not reported",[r.why,r.note,r.con].filter(Boolean).join(" · ")]}),
+    foot:single?undefined:[["","","Total",am,ah,"",""]],theme:"grid",styles:{fontSize:8.4,cellPadding:1.8,textColor:ink,lineColor:line,lineWidth:.2,valign:"middle"},headStyles:{fillColor:ink,textColor:255},footStyles:{fillColor:[255,240,232],textColor:ink,fontStyle:"bold"},
+    columnStyles:{0:{cellWidth:7,halign:"right"},1:{cellWidth:16},3:{cellWidth:16,halign:"right"},4:{cellWidth:16,halign:"right"},5:{cellWidth:24}},
+    didParseCell:h=>{if(h.section=="body"&&h.column.index==5){const t=String(h.cell.raw);h.cell.styles.textColor=t=="Done"?ok:t=="Not started"||t=="Not reported"?bad:t=="Partly done"?acc:ink}}});
+  return wkPdfFoot(doc,by)}
+// ---------- site diary, rebuilt on scheduled work, workers and reasons ----------
+function rdDay(d){const w=wkLoad(d),M=labMerged(w).filter(r=>scIn(r.v)),P=M.filter(r=>r.planned),rep=M.filter(r=>r.lab);
+  const pk=planKeys(d),pl=pk?pk.filter(k=>scIn(+k.split("|")[0])):null,sch=new Set(P.map(r=>r.v+"|"+r.leaf)),S=new Map(wkRows(w,"skip").map(r=>[r.v+"|"+r.leaf,r]));
+  const miss=pl?pl.filter(k=>!sch.has(k)).map(k=>{const [v,l]=k.split("|").map(Number);return{v,leaf:l,r:S.get(k)||null}}).sort((a,b)=>a.v-b.v||(LEAF[a.leaf]?LEAVES.indexOf(LEAF[a.leaf]):0)-(LEAF[b.leaf]?LEAVES.indexOf(LEAF[b.leaf]):0)):[];
+  const o={d,M,P,rep,am:M.reduce((s,r)=>s+(r.mas||0),0),ah:M.reduce((s,r)=>s+(r.hel||0),0),done:P.filter(r=>r.st=="done").length,part:P.filter(r=>r.st=="part").length,none:P.filter(r=>r.st=="none").length,
+    unrep:P.filter(r=>!r.lab).length,extra:M.filter(r=>!r.planned).length,pl:pl?pl.length:null,miss,why:{},skw:{}};
+  M.forEach(r=>{if(r.lab&&r.st&&r.st!="done"){const k=r.why||"No reason given";o.why[k]=(o.why[k]||0)+1}});miss.forEach(x=>{const k=x.r&&x.r.why||"No reason given";o.skw[k]=(o.skw[k]||0)+1});return o}
+const rdBars=obj=>{const e=Object.entries(obj).sort((a,b)=>b[1]-a[1]);if(!e.length)return"";const mx=Math.max(...e.map(x=>x[1]));return`<div class="dnage">${e.map(([k,v])=>`<div><span>${esc(k)}</span><i style="--w:${v/mx*100}%"></i><b>${v}</b></div>`).join("")}</div>`};
+function renderRd(){const box=$("viewR");if(!box)return;wkPullAll();const days=rdDays(),D=days.map(rdDay),ev=rdEvents(days);const by=k=>D.reduce((s,x)=>s+x[k],0);
+  const sched=D.reduce((s,x)=>s+x.P.length,0),done=by("done"),nd=by("part")+by("none"),A=by("am")+by("ah"),adh=sched?Math.round(done/sched*100):null;
+  const plKnown=D.filter(x=>x.pl!=null),plTot=plKnown.reduce((s,x)=>s+x.pl,0),missTot=D.reduce((s,x)=>s+x.miss.length,0);
+  const why={},skw={};D.forEach(x=>{Object.entries(x.why).forEach(([k,v])=>why[k]=(why[k]||0)+v);Object.entries(x.skw).forEach(([k,v])=>skw[k]=(skw[k]||0)+v)});
+  const one=RD.mode=="day",dd=D[0];
+  const evOn=d=>({comp:ev.comp.filter(e=>e.d==d&&scIn(e.v)),dr:ev.dr.filter(e=>e.d==d&&scIn(e.v)),dc:ev.dc.filter(e=>e.d==d&&scIn(e.v)),dn:ev.dn.filter(e=>e.d==d&&scIn(e.v))});
+  const byCon={},byVilla={};D.forEach(x=>x.M.forEach(r=>{const w=(r.mas||0)+(r.hel||0);if(!w)return;const c=r.con||"Not named";byCon[c]=(byCon[c]||0)+w;byVilla[r.v]=(byVilla[r.v]||0)+w}));
+  const mx=Math.max(1,...D.map(x=>x.am+x.ah));
+  const arrow=(k,l)=>`<button type="button" class="hbtn hico" data-rdstep="${k}" aria-label="${l}"><svg class="ico" viewBox="0 0 24 24"><path d="${k<0?"M14.5 5.5L8 12l6.5 6.5":"M9.5 5.5L16 12l-6.5 6.5"}"/></svg></button>`;
+  const nav=RD.mode=="day"?`${arrow(-1,"Previous day")}<input type="date" class="fxi" id="rdD" value="${RD.d}">${arrow(1,"Next day")}<button type="button" class="fxb sm" data-rdday="${iso(new Date())}">Today</button><button type="button" class="fxb sm" data-rdday="${iso(new Date(Date.now()-864e5))}">Yesterday</button>`
+    :RD.mode=="month"?`${arrow(-1,"Previous month")}<input type="month" class="fxi" id="rdM" value="${RD.m}">${arrow(1,"Next month")}`
+    :`<label class="fxf"><span>From</span><input type="date" class="fxi" id="rdF" value="${days[0]}"></label><label class="fxf"><span>To</span><input type="date" class="fxi" id="rdT" value="${days[days.length-1]}"></label>`;
+  const kp=[["Scheduled",sched,plKnown.length?`of ${plTot} in the planner · ${missTot} left out`:`${by("extra")} more done without a schedule`],["Done as scheduled",adh==null?"–":adh+"%",`${done} done · ${by("part")} partly · ${by("none")} not started`],["Workers",A,`${by("am")} masons · ${by("ah")} helpers`],["Not done",nd,`${by("unrep")} not reported`]];
+  const stOf=r=>r.lab?`<span class="rds rs-${r.st||"x"}">${(LST.find(x=>x[0]==r.st)||[0,"Reported"])[1]}</span>`:`<span class="rds rs-nr">Not reported</span>`;
+  const tbl=rows=>`<div class="dntw"><table class="dntb rdt"><thead><tr><th>Villa</th><th>Activity</th><th class="r">Masons</th><th class="r">Helpers</th><th>Status</th><th>Reason / note</th></tr></thead><tbody>${rows.map(r=>{const u=LEAF[r.leaf]||{n:"",seq:{n:""},stn:""};return`<tr data-rdv="${r.v}" data-rdl="${r.leaf}"><td><b>${r.v}</b></td><td>${esc(u.n)}<small>${esc(u.seq.n)} › ${esc(u.stn)}${r.planned?"":" · not scheduled"}</small></td><td class="r">${r.lab?r.mas||0:"–"}</td><td class="r">${r.lab?r.hel||0:"–"}</td><td>${stOf(r)}</td><td>${esc([r.why,r.note,r.con].filter(Boolean).join(" · "))}</td></tr>`}).join("")}</tbody></table></div>`;
+  const missTbl=m=>m.length?`<div class="dntw"><table class="dntb rdt"><thead><tr><th>Villa</th><th>Activity</th><th>Reason</th><th>Comment</th></tr></thead><tbody>${m.map(x=>{const u=LEAF[x.leaf]||{n:"",seq:{n:""},stn:""};return`<tr data-rdv="${x.v}" data-rdl="${x.leaf}"><td><b>${x.v}</b></td><td>${esc(u.n)}<small>${esc(u.stn)}</small></td><td>${x.r&&x.r.why?esc(x.r.why):`<span class="rds rs-nr">No reason yet</span>`}</td><td>${esc(x.r&&x.r.note||"")}${x.r&&x.r.by?`<small>${esc(x.r.by)}</small>`:""}</td></tr>`}).join("")}</tbody></table></div>`:`<p class="fxsm">Everything in the planner was scheduled.</p>`;
+  box.innerHTML=`<div class="fxin rdv">
+   <section class="fxp"><div class="rdtop"><div class="segv" role="tablist" aria-label="Period">${[["day","Day"],["month","Month"],["range","Date range"]].map(([k,l])=>`<button type="button" role="tab" data-rdm="${k}" aria-selected="${RD.mode==k}">${l}</button>`).join("")}</div><div class="rdnav">${nav}</div><button type="button" class="fxb" id="rdXl">Excel</button></div>
+     <div class="wkpf" style="margin-top:10px">${scBar()}</div>
+     <h2 class="rdh">${one?dayLong(RD.d):RD.mode=="month"?new Date(RD.m+"-01T00:00:00").toLocaleDateString("en-GB",{month:"long",year:"numeric"}):`${fmtD(days[0])} – ${fmtD(days[days.length-1])}`}${scOn()?` <small>${esc(scName())}</small>`:""}</h2>
+     <div class="drk">${kp.map(([l,b,s],i)=>`<div class="drt rk${i}"><b class="fig">${b}</b><span>${l}</span><small>${s}</small></div>`).join("")}</div></section>
+   ${one?`
+   <div class="dngrid"><section class="fxp"><h3 class="fxh3">Scheduled work and what happened</h3>${dd.M.length?tbl(dd.M):`<div class="fxempty">No schedule or labour recorded for this day.</div>`}
+       <h3 class="fxh3" style="margin-top:18px">In the planner but not scheduled${dd.pl!=null?` · ${dd.miss.length} of ${dd.pl}`:""}</h3>${dd.pl==null?`<p class="fxsm">The planner for this day wasn't recorded. It is kept from the day the schedule is made.</p>`:missTbl(dd.miss)}</section>
+     <section class="fxp"><h3 class="fxh3">Masons and helpers</h3><div class="rdmh"><div><b class="fig">${dd.am}</b><span>masons</span></div><div><b class="fig">${dd.ah}</b><span>helpers</span></div></div>
+       ${Object.keys(dd.why).length?`<h3 class="fxh3" style="margin-top:16px">Why work wasn't done</h3>${rdBars(dd.why)}`:""}
+       <h3 class="fxh3" style="margin-top:16px">Also on this day</h3>${(()=>{const e=evOn(RD.d);return`<ul class="rdev"><li><b class="fig">${e.comp.length}</b><span>activities marked complete</span>${e.comp.length?`<small>${e.comp.slice(0,8).map(x=>`V${x.v} ${esc(x.u.n)}`).join(" · ")}${e.comp.length>8?" …":""}</small>`:""}</li><li><b class="fig">${e.dr.length}</b><span>defects raised</span></li><li><b class="fig">${e.dc.length}</b><span>defects closed</span></li><li><b class="fig">${e.dn.length}</b><span>debit notes${e.dn.length?" · "+inr(e.dn.reduce((s,x)=>s+x.amt,0)):""}</span></li></ul>`})()}
+       ${(()=>{const n=new Date(RD.d+"T00:00:00");n.setDate(n.getDate()+1);const nx=wkRows(wkLoad(iso(n)),"plan").filter(r=>scIn(r.v));return`<h3 class="fxh3" style="margin-top:16px">Scheduled for the next day</h3><p class="fxsm" style="margin-top:0">${nx.length?`${plur(nx.length,"activity","activities")} on ${plur(new Set(nx.map(r=>r.v)).size,"villa")}.`:"Nothing scheduled yet."}</p>`})()}</section></div>`
+   :`
+   <section class="fxp"><div class="wkhd"><h3 class="fxh3">Workers each day</h3><span class="fxsm drleg" style="margin:0"><span><i style="background:var(--s1)"></i>Masons</span><span><i style="background:var(--line)"></i>Helpers</span></span></div>
+     <div class="rdch">${D.map(x=>`<button type="button" class="rdc" data-rdday="${x.d}" title="${fmtD(x.d)}: ${x.am} masons, ${x.ah} helpers, ${x.P.length} scheduled${x.miss.length?", "+x.miss.length+" left out":""}"><span class="rdb"><i class="p" style="height:${(x.am+x.ah)/mx*100}%"></i><i class="a" style="height:${x.am/mx*100}%"></i></span><small>${new Date(x.d+"T00:00:00").getDate()}</small></button>`).join("")}</div></section>
+   <div class="dngrid"><section class="fxp"><h3 class="fxh3">Day by day</h3><div class="dntw"><table class="dntb rdt"><thead><tr><th>Date</th><th class="r">Planner</th><th class="r">Scheduled</th><th class="r">Done</th><th class="r">Partly</th><th class="r">Not started</th><th class="r">Masons</th><th class="r">Helpers</th><th>Main reason</th></tr></thead><tbody>${D.filter(x=>x.M.length||x.miss.length).map(x=>`<tr data-rdday="${x.d}"><td><b>${new Date(x.d+"T00:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})}</b></td><td class="r">${x.pl??"–"}${x.miss.length?`<small>${x.miss.length} left out</small>`:""}</td><td class="r">${x.P.length}</td><td class="r">${x.done}</td><td class="r">${x.part}</td><td class="r">${x.none}${x.unrep?`<small>${x.unrep} not reported</small>`:""}</td><td class="r">${x.am}</td><td class="r">${x.ah}</td><td>${esc((Object.entries(x.why).sort((a,b)=>b[1]-a[1])[0]||[""])[0])}</td></tr>`).join("")||`<tr><td colspan="9">Nothing recorded in this period.</td></tr>`}</tbody></table></div></section>
+     <section class="fxp"><h3 class="fxh3">Why work wasn't done</h3>${rdBars(why)||`<p class="fxsm">Nothing recorded as not done.</p>`}
+       <h3 class="fxh3" style="margin-top:16px">Why planned work wasn't scheduled</h3>${rdBars(skw)||`<p class="fxsm">${plKnown.length?"Everything in the planner was scheduled.":"No planner record for these days yet."}</p>`}
+       <h3 class="fxh3" style="margin-top:16px">Man-days</h3><div class="rdmh"><div><b class="fig">${by("am")}</b><span>mason-days</span></div><div><b class="fig">${by("ah")}</b><span>helper-days</span></div></div>
+       ${Object.keys(byCon).length>1||!byCon["Not named"]&&Object.keys(byCon).length?`<h3 class="fxh3" style="margin-top:16px">By contractor</h3>${rdBars(Object.fromEntries(Object.entries(byCon).slice(0,8)))}`:""}
+       <h3 class="fxh3" style="margin-top:16px">Busiest villas</h3>${rdBars(Object.fromEntries(Object.entries(byVilla).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([k,v])=>["Villa "+k,v])))||`<p class="fxsm">No labour recorded.</p>`}
+       <h3 class="fxh3" style="margin-top:16px">Progress in this period</h3><ul class="rdev"><li><b class="fig">${ev.comp.filter(e=>scIn(e.v)).length}</b><span>activities completed</span></li><li><b class="fig">${ev.dr.filter(e=>scIn(e.v)).length}</b><span>defects raised · ${ev.dc.filter(e=>scIn(e.v)).length} closed</span></li><li><b class="fig">${ev.dn.filter(e=>scIn(e.v)).length}</b><span>debit notes · ${inr(ev.dn.filter(e=>scIn(e.v)).reduce((s,x)=>s+x.amt,0))}</span></li></ul></section></div>`}
+  </div>`;
+  box.onclick=e=>{const t=e.target.closest("[data-rdm],[data-rdstep],[data-rdday],[data-rdv],#rdXl");if(!t)return;
+    if(t.dataset.rdm){RD.mode=t.dataset.rdm}else if(t.dataset.rdstep){const k=+t.dataset.rdstep;if(RD.mode=="day"){const x=new Date(RD.d+"T00:00:00");x.setDate(x.getDate()+k);RD.d=iso(x)}else{const x=new Date(RD.m+"-01T00:00:00");x.setMonth(x.getMonth()+k);RD.m=iso(x).slice(0,7)}}
+    else if(t.dataset.rdday){RD.mode="day";RD.d=t.dataset.rdday}else if(t.id=="rdXl"){rdExcel(days,D).then(m=>status(m));return}
+    else if(t.dataset.rdv){$("vn").value=t.dataset.rdv;openVilla(t.dataset.rdv).then(()=>{sel=LEAF[t.dataset.rdl]||sel;setView("C")});return}renderRd()};
+  const ch=(id,f)=>{const el=$(id);if(el)el.onchange=()=>{if(el.value){f(el.value);renderRd()}}};ch("rdD",v=>RD.d=v);ch("rdM",v=>RD.m=v);ch("rdF",v=>RD.from=v);ch("rdT",v=>RD.to=v)}
+async function rdExcel(days,D){await loadXLSX();const wb=XLSX.utils.book_new();
+  const s1=[["Date","In the planner","Scheduled","Not scheduled","Done","Partly done","Not started","Not reported","Done without a schedule","Masons","Helpers","Main reason not done"]];
+  D.forEach(x=>s1.push([x.d,x.pl??"",x.P.length,x.miss.length,x.done,x.part,x.none,x.unrep,x.extra,x.am,x.ah,(Object.entries(x.why).sort((a,b)=>b[1]-a[1])[0]||[""])[0]]));
+  const s2=[["Date","Villa","Stage","Sub-stage","Activity","Scheduled","Masons","Helpers","Status","Reason","Note","Contractor"]];
+  D.forEach(x=>x.M.forEach(r=>{const u=LEAF[r.leaf]||{n:"",seq:{n:""},stn:""};s2.push([x.d,r.v,u.seq.n,u.stn,u.n,r.planned?"Yes":"No",r.lab?r.mas||0:"",r.lab?r.hel||0:"",r.lab?(LST.find(z=>z[0]==r.st)||[0,"Reported"])[1]:"Not reported",r.why||"",r.note||"",r.con||""])}));
+  const s3=[["Date","Villa","Stage","Sub-stage","Activity","Reason","Comment","By"]];
+  D.forEach(x=>x.miss.forEach(m=>{const u=LEAF[m.leaf]||{n:"",seq:{n:""},stn:""};s3.push([x.d,m.v,u.seq.n,u.stn,u.n,m.r&&m.r.why||"",m.r&&m.r.note||"",m.r&&m.r.by||""])}));
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(s1),"Days");XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(s2),"Detail");XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(s3),"Not scheduled");
+  return saveFile(`Site-Diary-${days[0]}${days.length>1?"_to_"+days[days.length-1]:""}.xlsx`,new Blob([XLSX.write(wb,{bookType:"xlsx",type:"array"})],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}))}
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
