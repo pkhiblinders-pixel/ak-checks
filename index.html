@@ -1689,6 +1689,8 @@ html.aklock body{overflow:hidden}
 .dzr{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;border:1px solid transparent;cursor:pointer}
 .dzr:hover{background:var(--well)}.dzr.on{background:var(--well);border-color:var(--line)}.dzr.fo{border-color:var(--acc)}
 .dzr input{width:18px;height:18px;accent-color:var(--acc)}
+.dztk{padding:10px 0;border-top:1px solid var(--line)}.dztk:first-of-type{border-top:0}.dztk ol{list-style:none;margin:8px 0 0;padding:0 0 0 14px;border-left:2px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.dztk li{font-size:13px;line-height:1.4}.dztk li span{display:block;color:var(--mute);font-size:12px}.dztk li small{display:block;color:var(--mute)}
 .dzn{display:flex;flex-direction:column;min-width:0}.dzn b{font-size:14px}.dzn small{font-size:12px;color:var(--mute);overflow:hidden;text-overflow:ellipsis}
 .dzbar{position:sticky;bottom:-22px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px;padding:10px 0;background:linear-gradient(transparent,var(--base) 30%)}
 .dzlink{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-top:10px}.dzlink .fxf{flex:1 1 260px}
@@ -1706,6 +1708,127 @@ html.aklock body{overflow:hidden}
   .sigf{grid-template-columns:1fr}
   .drbody{padding:12px}
 }
+
+/* ---------- v16: villa-wise drawings, glowing villas ---------- */
+.app[data-view="W"] .vctl{display:none}
+.drvp{display:flex;flex-direction:column;gap:12px;padding:14px 16px}
+.drvp1{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.drnav{display:flex;gap:6px;align-items:center;flex:1 1 300px;max-width:420px}
+.drnav .fxi{flex:1;height:40px}
+.drstrip{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 8px;scroll-snap-type:x proximity;scrollbar-width:thin}
+.drc{flex:none;scroll-snap-align:center;position:relative;width:46px;height:52px;border-radius:12px;border:1px solid var(--line);background:var(--well);color:var(--ink);font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0}
+.drc b{font-size:14px;font-weight:800;font-variant-numeric:tabular-nums}
+.drc i{width:30px;height:5px;border-radius:3px;background:linear-gradient(90deg,var(--d-final) var(--f),var(--d-recv) var(--f) var(--r),color-mix(in srgb,var(--line) 80%,transparent) var(--r))}
+.drc.on{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 14%,var(--well));box-shadow:0 0 0 2px color-mix(in srgb,var(--acc) 40%,transparent)}
+.drc:hover{border-color:var(--ink)}
+.drvh{display:flex;flex-direction:column;gap:12px}
+#drVilla .dzt{max-height:none;overflow:visible}
+#drVilla .dzbar{bottom:0;background:linear-gradient(transparent,var(--tint) 25%);border-radius:0 0 16px 16px}
+@keyframes wipg{0%,100%{stroke:var(--acc);stroke-width:.15;stroke-opacity:.5}50%{stroke:#ff8a2a;stroke-width:.65;stroke-opacity:1}}
+@keyframes wipd{0%,100%{opacity:.25}50%{opacity:.85}}
+#msvg g.wipv .plot{stroke:var(--acc);animation:wipg 1.8s ease-in-out infinite}
+.wipleg{display:inline-flex;align-items:center;gap:6px}.wipleg i{width:12px;height:12px;border-radius:3px;border:2px solid var(--acc);animation:wipd 1.8s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){#msvg g.wipv .plot{animation:none;stroke-width:.8}}
+/* ---------- v17: debit notes page ---------- */
+.app:not([data-view="N"]) #viewN{display:none}
+.app[data-view="N"] .vctl{display:none}
+.dnv{max-width:1400px}
+.dnv .drh1 h2 .fig{color:var(--ink)}
+.st-draft{--sc:var(--d-pend)}.st-issued{--sc:var(--d-recv)}.st-accepted{--sc:var(--d-sign)}.st-disputed{--sc:var(--bad)}.st-recovered{--sc:var(--d-final)}
+.dnk .drt{border-top-color:var(--kc)}.dk-n{--kc:var(--ink)}.dk-rec{--kc:var(--d-final)}.dk-out{--kc:var(--acc)}.dk-dis{--kc:var(--bad)}
+.dnk .drt b{font-size:26px;color:var(--kc)}
+.dnpipe{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.dnp{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);border-left:4px solid var(--sc);background:var(--well);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.dnp b{font-size:18px}.dnp span{font-size:12.5px;font-weight:700}.dnp small{font-size:12px;color:var(--mute)}
+.dnp.on{outline:2px solid var(--sc)}
+.dngrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px}
+.dncl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.dncr{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px 14px;align-items:center;width:100%;padding:10px 12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--well);color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.dncr.on{border-color:var(--acc)}
+.dncn{display:flex;flex-direction:column;min-width:0}.dncn b{font-size:14.5px}.dncn small{font-size:12px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dnsv{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}.dnsv i{font-style:normal;font-size:11.5px;font-weight:750;padding:2px 8px;border-radius:999px;color:var(--c);border:1px solid var(--c);white-space:nowrap}
+.dnam{display:flex;flex-direction:column;align-items:flex-end}.dnam b{font-size:15px}.dnam small{font-size:11.5px;color:var(--mute);white-space:nowrap}
+.dnbar{position:absolute;left:12px;right:12px;bottom:5px;height:3px;border-radius:2px;background:color-mix(in srgb,var(--line) 60%,transparent)}.dnbar i{display:block;height:100%;border-radius:inherit;background:var(--acc)}
+.dnsevs{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.dnsevb{display:flex;flex-direction:column;align-items:flex-start;padding:12px;border-radius:14px;border:1px solid var(--line);border-top:4px solid var(--c);background:var(--well);color:var(--ink);font:inherit;cursor:pointer;text-align:left}
+.dnsevb b{font-size:22px;color:var(--c)}.dnsevb span{font-weight:750;font-size:13px}.dnsevb small{font-size:12px;color:var(--mute)}.dnsevb.on{outline:2px solid var(--c)}
+.dnage{display:flex;flex-direction:column;gap:8px}
+.dnage div{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px}
+.dnage i{height:8px;border-radius:999px;background:linear-gradient(90deg,var(--acc) var(--w),color-mix(in srgb,var(--line) 60%,transparent) var(--w))}
+.dnage b{font-size:12.5px;white-space:nowrap}
+.dnmo{display:flex;align-items:flex-end;gap:6px;height:110px;padding-top:6px}
+.dnmo div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
+.dnmo i{width:100%;max-width:28px;border-radius:6px 6px 2px 2px;background:var(--acc);min-height:2px}.dnmo span{font-size:11px;color:var(--mute)}
+.dnrep{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.dnrl{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.dnrl li{font-size:13.5px}.dnrt{display:block;font-weight:650}.dnrm{font-size:12px;color:var(--mute)}.dnrm b{color:var(--acc)}
+.dntw{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}
+.dntb{width:100%;border-collapse:collapse;font-size:13px;min-width:820px}
+.dntb th{text-align:left;font-size:12px;color:var(--mute);font-weight:700;padding:10px;background:var(--well);border-bottom:1px solid var(--line);position:sticky;top:0}
+.dntb td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}.dntb td small{display:block;color:var(--mute);font-size:12px;max-width:340px}
+.dntb .r{text-align:right}.dntb tbody tr{cursor:pointer}.dntb tbody tr:hover,.dntb tbody tr:focus-visible{background:var(--well);outline:0}
+.dntb tfoot td{font-weight:800;background:var(--well)}
+.dnst{display:inline-block;font-size:11.5px;font-weight:750;padding:3px 9px;border-radius:999px;border:1px solid var(--sc);color:var(--sc);white-space:nowrap}
+.dnsvp{font-size:11.5px;font-weight:750;color:var(--c)}
+.dntb .late{color:var(--bad);font-weight:700}
+@media (max-width:900px){.dngrid,.dnrep{grid-template-columns:1fr}.dnpipe{grid-template-columns:repeat(2,minmax(0,1fr))}.dncr{grid-template-columns:minmax(0,1fr) auto}.dnsv{grid-column:1/-1;justify-content:flex-start;grid-row:2}}
+
+/* ---------- v18: planner picks, labour against plan ---------- */
+.wkpc{font-size:13px;color:var(--mute);white-space:nowrap}.wkpc b{font-size:20px;color:var(--acc)}
+.wkpf{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:12px 0}
+.wkpf .fxi{width:110px;height:38px}
+.wkpg{display:flex;flex-direction:column;gap:6px}
+.wkpv{border:1px solid var(--line);border-radius:16px;background:var(--well);overflow:hidden}
+.wkpv.has{border-color:color-mix(in srgb,var(--acc) 55%,var(--line))}
+.wkpv>summary{list-style:none;display:flex;align-items:center;gap:12px;padding:11px 14px;cursor:pointer}
+.wkpv>summary::-webkit-details-marker{display:none}
+.wkpv>summary b{font-size:14.5px;min-width:72px}.wkpv>summary span{font-size:12.5px;color:var(--mute);flex:1}
+.wkpv ul{list-style:none;margin:0;padding:0 8px 8px;display:flex;flex-direction:column;gap:4px}
+.wkpr{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:6px 8px;border-radius:12px}
+.wkpr.on{background:color-mix(in srgb,var(--acc) 9%,transparent)}
+.wkpr>label{display:flex;gap:10px;align-items:center;flex:1 1 300px;min-width:0;cursor:pointer}
+.wkpr input[type=checkbox]{width:20px;height:20px;accent-color:var(--acc);flex:none}
+.wkpn{display:flex;flex-direction:column;min-width:0}.wkpn b{font-size:14px;font-weight:650}.wkpn small{font-size:12px;color:var(--mute)}
+.wkpq{display:flex;gap:8px}.wkpq label{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--mute)}
+.wkpq .fxi{width:64px;height:36px;text-align:right}
+.lbl{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.lbr{padding:12px 14px;border-radius:16px;border:1px solid var(--line);border-left:4px solid var(--line);background:var(--well);display:flex;flex-direction:column;gap:10px}
+.lbr.rep.ls-done{border-left-color:var(--ok)}.lbr.rep.ls-part{border-left-color:var(--acc)}.lbr.rep.ls-none{border-left-color:var(--bad)}.lbr.rep.ls-x{border-left-color:var(--s1)}
+.lbh{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:10px;align-items:center}
+.lbdef{font-size:12px;font-weight:800;color:#fff;background:var(--bad);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.lbok{font-size:12px;font-weight:800;color:var(--ok);border:1px solid var(--ok);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.lbnr{font-size:12px;font-weight:700;color:var(--mute);border:1px dashed var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.lbg{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+.lbg .wkq .fxi{width:96px;height:40px}
+.lbst{display:flex;padding:3px;border-radius:999px;background:var(--base);border:1px solid var(--line)}
+.lbst button{height:34px;border:0;border-radius:999px;background:transparent;color:var(--mute);font:inherit;font-size:12.5px;font-weight:750;padding:0 12px;cursor:pointer}
+.lbst button[aria-pressed=true][data-lbs=done]{background:var(--ok);color:#fff}.lbst button[aria-pressed=true][data-lbs=part]{background:var(--acc);color:#fff}.lbst button[aria-pressed=true][data-lbs=none]{background:var(--bad);color:#fff}
+.lbw{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:10px}
+.lbdt b{color:var(--bad)}
+@media (max-width:900px){.lbh{grid-template-columns:56px minmax(0,1fr)}.lbh>span:last-child{grid-column:1/-1;justify-self:start}.lbw{grid-template-columns:1fr}.lbst{width:100%}.lbst button{flex:1;padding:0 6px}}
+
+/* ---------- v18: site diary ---------- */
+.app:not([data-view="R"]) #viewR{display:none}
+.app[data-view="R"] .vctl{display:none}
+.rdv{max-width:1400px}
+.rdtop{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
+.rdnav{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;flex:1}
+.rdnav .fxi{width:auto;min-width:160px;height:40px}
+.rdh{margin:14px 0 12px;font-size:22px;font-stretch:125%;font-weight:800}
+.rk0{--kc:var(--s1)}.rk1{--kc:var(--d-final)}.rk2{--kc:var(--ink)}.rk3{--kc:var(--bad)}
+.rdv .drt{border-top-color:var(--kc)}.rdv .drt b{font-size:26px;color:var(--kc)}
+.rdt td small{display:block;color:var(--mute);font-size:11.5px}
+.rdt tbody tr{cursor:pointer}
+.rds{font-size:11.5px;font-weight:750;padding:3px 9px;border-radius:999px;white-space:nowrap;border:1px solid}
+.rs-done{color:var(--ok)}.rs-part{color:var(--acc)}.rs-none{color:var(--bad)}.rs-x{color:var(--s1)}.rs-nr{color:var(--mute);border-style:dashed}
+.rdev{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.rdev li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:2px 10px;align-items:baseline}.rdev b{font-size:20px;text-align:right}.rdev small{grid-column:2;color:var(--mute);font-size:12px}
+.rdmh{display:grid;grid-template-columns:1fr 1fr;gap:8px}.rdmh div{padding:12px;border-radius:14px;background:var(--well);border:1px solid var(--line);display:flex;flex-direction:column}.rdmh b{font-size:24px}.rdmh span{font-size:12.5px;color:var(--mute)}
+.rdch{display:flex;align-items:flex-end;gap:3px;height:170px;overflow-x:auto;padding-top:8px}
+.rdc{flex:1 0 18px;max-width:40px;height:100%;display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:transparent;padding:0;cursor:pointer;color:var(--mute);font:inherit}
+.rdb{position:relative;flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center}
+.rdb i{position:absolute;bottom:0;border-radius:4px 4px 1px 1px}.rdb .p{left:0;right:0;background:var(--line)}.rdb .a{left:22%;right:22%;background:var(--s1)}.rdb .s{left:38%;right:38%;background:var(--bad);bottom:auto;top:0;opacity:.0}
+.rdc small{font-size:10.5px}.rdc:hover .rdb .p{background:color-mix(in srgb,var(--ink) 25%,var(--line))}
 </style>
 <div class="app">
 <nav class="rail" aria-label="Sections"><div class="mark" aria-hidden="true">AK</div><div class="views" role="tablist" aria-label="View"><button type="button" role="tab" id="vO" aria-selected="false" title="Overview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M12 14l3.5-4.5"/><path d="M5 19h14"/></svg>Overview</button><button type="button" role="tab" id="vS" aria-selected="false" title="Site map"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z"/><path d="M9 4.5v13M15 6.5v13"/></svg>Site map</button><button type="button" role="tab" id="vP" aria-selected="false" title="Planner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16"/><path d="M8 7h8"/><path d="M11 12h9"/><path d="M8 17h6"/></svg>Planner</button><button type="button" role="tab" id="vC" aria-selected="false" title="Checklists"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5v-1h6v1"/><path d="M9 13l2.2 2.2L15.2 11"/></svg>Checklists<span class="badge" id="qb" hidden></span></button><button type="button" role="tab" id="vD" aria-selected="false" title="Defects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10.5v4"/><path d="M12 17.2v.3"/></svg>Defects<span class="badge" id="db"></span></button><button type="button" role="tab" id="vW" aria-selected="false" title="Drawings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 13h6M9 16.5h6"/></svg>Drawings<span class="badge" id="wb" hidden></span></button><button type="button" role="tab" id="vQ" aria-selected="false" title="Quantities"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 16.5l13-13 4 4-13 13z"/><path d="M7.5 12.5l2 2M10.5 9.5l2 2M13.5 6.5l2 2"/></svg>Quantities</button></div></nav>
@@ -2445,7 +2568,7 @@ let dfFilter="open";try{$("eng").value=localStorage.getItem("ak-eng")||""}catch(
 $("eng").oninput=e=>{try{localStorage.setItem("ak-eng",e.target.value)}catch(x){}};
 $("dfs").onchange=()=>renderDefects(sel);
 function canPlanSafe(){try{return canEdit("plan")}catch(e){return false}}
-function allDefects(){const out=[];LEAVES.forEach(u=>{items(u).forEach((x,i)=>{const d=u.df[x.k];if(d&&!d.del&&u.chk[x.k]=="n")out.push({u,k:x.k,i,t:x.t,d})});(u.xd||[]).forEach(d=>{if(!d.del)out.push({u,k:"x"+d.id,i:null,t:d.t,d,x:true})})});return out}
+function allDefects(){const out=[];LEAVES.forEach(u=>{items(u).forEach((x,i)=>{const d=u.df[x.k];if(d&&!d.del&&u.chk[x.k]=="n")out.push({u,k:x.k,i,t:x.t,d})});(u.xd||[]).forEach(d=>{if(!d.del)out.push({u,k:"xd:"+d.id,i:null,t:d.t,d,x:true})})});return out}
 function renderDefects(cur){
   const A=allDefects(),open=A.filter(x=>!x.d.closed).length,closed=A.length-open;
   $("db").textContent=open;$("db").className="badge"+(open?" warnb":A.length?" ok":"");
@@ -2469,7 +2592,7 @@ function renderDefects(cur){
 }
 $("dfhead").addEventListener("click",e=>{if(!e.target.closest("#dfAllX"))return;const L=[];LEAVES.forEach(u=>(u.xd||[]).forEach(d=>{if(!d.del)L.push({u,d})}));if(L.length)dfDelAsk(L)});
 $("dff").onclick=e=>{const b=e.target.closest("[data-dff]");if(b){dfFilter=b.dataset.dff;renderDefects(sel)}};
-const dfOf=el=>{const a=el.closest("[data-dk]");if(!a)return null;const [id,k]=a.dataset.dk.split("|");const u=LEAF[id];if(!u)return null;const d=k[0]=="x"?(u.xd||[]).find(z=>"x"+z.id==k):u.df[k];return d?{u,k,d,x:k[0]=="x"}:null};
+const dfOf=el=>{const a=el.closest("[data-dk]");if(!a)return null;const [id,k]=a.dataset.dk.split("|");const u=LEAF[id];if(!u)return null;const d=k.startsWith("xd:")?(u.xd||[]).find(z=>"xd:"+z.id==k):u.df[k];return d?{u,k,d,x:k[0]=="x"}:null};
 $("dfl").addEventListener("change",e=>{const f=e.target.dataset.f;if(!f)return;const r=dfOf(e.target);if(!r)return;r.d[f]=e.target.value;queueSave();if(f=="sev"||f=="due")renderDefects(sel)});
 $("dfl").addEventListener("input",e=>{const f=e.target.dataset.f;if(f!="note"&&f!="who")return;const r=dfOf(e.target);if(!r)return;r.d[f]=e.target.value;queueSave()});
 $("dfl").addEventListener("click",e=>{const r=dfOf(e.target);if(!r)return;const {u,k,d}=r;
@@ -2815,7 +2938,7 @@ function shrink(file){return new Promise(res=>{const url=URL.createObjectURL(fil
     c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(url);c.toBlob(b=>res(b||file),"image/jpeg",ASSETS?.82:.6)};
   im.onerror=()=>{URL.revokeObjectURL(url);res(file)};im.src=url})}
 const toDataURL=b=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(b)});
-async function addPhotos(files){const t=phTarget;phTarget=null;if(!t||!files.length)return;const {u,k}=t;const xdf=k[0]=="x"?(u.xd||[]).find(z=>"x"+z.id==k):null;let ok=0,err="";const msgEl=t.after?$("dfmsg"+u.id+k):null;
+async function addPhotos(files){const t=phTarget;phTarget=null;if(!t||!files.length)return;const {u,k}=t;const xdf=String(k).startsWith("xd:")?(u.xd||[]).find(z=>"xd:"+z.id==k):null;let ok=0,err="";const msgEl=t.after?$("dfmsg"+u.id+k):null;
   document.querySelectorAll(".phb").forEach(b=>b.disabled=true);$("lockmsg").className="note";$("lockmsg").textContent="Uploading photo…";
   for(const f of files){try{const b=await shrink(f);const oid=Date.now().toString(36)+Math.random().toString(36).slice(2,8);const rec={at:new Date().toISOString(),by:u.by||"",oid};
       try{await IDB.put("orig:"+oid,{b:f,at:Date.now(),v:villa(),l:u.id,name:f.name||""})}catch(x){}
@@ -3050,7 +3173,7 @@ function villaStats(s){
   const ptText=(u,x,k)=>k[0]=="c"?cuPh((x.custom||[])[+k.slice(1)])[1]:(leafItems(u).find(z=>z.k==k)||{}).t||"";
   const addOpen=(u,k,d,t)=>{Q.open++;const sv=d&&d.sev||"Major";Q.sev[sv]=(Q.sev[sv]||0)+1;const c=d&&d.cat||"Workmanship";Q.cat[c]=(Q.cat[c]||0)+1;Q.list.push({u,k,d:d||{},sev:sv,t})};
   Q.all=[];
-  LEAVES.forEach(u=>{const x=s&&s.leaves&&s.leaves[u.id];if(!x)return;(x.xd||[]).forEach(d=>{if(d.del)return;Q.all.push({u,d,t:d.t,x:true});if(d.closed)Q.closed++;else addOpen(u,"x"+d.id,d,d.t)});if(!x.chk)return;let y=0,n=0,cl=0;const df=x.df||{};
+  LEAVES.forEach(u=>{const x=s&&s.leaves&&s.leaves[u.id];if(!x)return;(x.xd||[]).forEach(d=>{if(d.del)return;Q.all.push({u,d,t:d.t,x:true});if(d.closed)Q.closed++;else addOpen(u,"xd:"+d.id,d,d.t)});if(!x.chk)return;let y=0,n=0,cl=0;const df=x.df||{};
     Object.entries(x.chk).forEach(([k,v])=>{if(v=="y")y++;else if(v=="n"){if(df[k]&&df[k].del)return;n++;const d=df[k];Q.all.push({u,d:d||{},t:ptText(u,x,k)});if(d&&d.closed){cl++;Q.closed++}else addOpen(u,k,d,ptText(u,x,k))}});
     if(x.done&&x.src!="sheet"&&y+n){Q.acts++;Q.ftp+=100*y/(y+n);Q.now+=100*(y+cl)/(y+n)}});
   let comp=null;if(cat==5){let last="";LEAVES.forEach(u=>{const x=s.leaves[u.id];if(x&&x.done&&x.on&&x.on>last)last=x.on});comp=last?new Date(last.slice(0,10)+"T00:00:00"):today}
@@ -5020,8 +5143,8 @@ function wkMerge(l,R){const m=new Map();(R.rows||[]).forEach(x=>m.set(x.id,x));(
   return{date:l.date||R.date,rows:[...m.values()],files:[...fm.values()]}}
 // make (or refresh) the PDFs for a day: one combined per kind, plus one per villa activity when SharePoint is the store
 async function wkAutoFiles(w){w.files=w.files||[];try{await loadJsPDF()}catch(e){return}
-  for(const V of ["T","L"]){const K=WKK[V],rows=wkRows(w,K.kind);if(!rows.length)continue;
-    const sig=JSON.stringify(rows.map(r=>[r.v,r.leaf,r.mas,r.hel,r.note||"",r.con||""])),name=`${K.file}-${fileDate(V,w.date)}.pdf`;const ex=w.files.find(f=>f.name==name);
+  for(const V of ["T","L"]){const K=WKK[V],rows=V=="L"?labMerged(w).filter(r=>r.lab):wkRows(w,K.kind);if(!rows.length)continue;
+    const sig=JSON.stringify(rows.map(r=>[r.v,r.leaf,r.mas,r.hel,r.note||"",r.con||"",r.st||"",r.why||""])),name=`${K.file}-${fileDate(V,w.date)}.pdf`;const ex=w.files.find(f=>f.name==name);
     if(!(ex&&ex.sig==sig)){const blob=wkPdf(V,w.date,rows).output("blob");const id=ex?ex.id:fxId();await IDB.put("wkf:"+id,blob);
       w.files=w.files.filter(f=>f!==ex);w.files.push({id,kind:K.kind,name,at:new Date().toISOString(),by:engName(),rows:rows.length,workers:rows.reduce((s,r)=>s+(+r.mas||0)+(+r.hel||0),0),size:blob.size,sig,st:"new",aid:ex&&ex.aid||undefined})}
     if(SP)for(const r of rows){const u=LEAF[r.leaf];if(!u)continue;const nm=`${leafFile(r.v,u)}-${K.tag}-${fileDate(V,w.date)}.pdf`,s2=JSON.stringify([r.mas,r.hel,r.note||"",r.con||""]);const e2=w.files.find(f=>f.name==nm);if(e2&&e2.sig==s2)continue;
@@ -5053,7 +5176,7 @@ const wkRows=(w,kind)=>w.rows.filter(r=>r.kind==kind&&!r.del).sort((a,b)=>a.v-b.
 function actOptions(selId){return SEQ.map(q=>q.st.map(st=>{const us=[];st.ac.forEach(a=>a.sub.forEach(u=>us.push(u)));return`<optgroup label="${esc(q.n+" › "+st.n)}">${us.map(u=>`<option value="${u.id}"${u.id==selId?" selected":""}>${esc(u.n)}</option>`).join("")}</optgroup>`}).join("")).join("")}
 let wkDel=null;
 function renderWk(V){const K=WKK[V],box=$("view"+V);if(!box)return;const kind=K.kind;
-  WKD[V]=WKD[V]||K.dd();const d=WKD[V];const w=wkLoad(d);const rows=wkRows(w,kind);
+  WKD[V]=WKD[V]||K.dd();const d=WKD[V];const w=wkLoad(d);const rows=V=="L"?labMerged(w):wkRows(w,kind);
   const tm=rows.reduce((s,r)=>s+(+r.mas||0),0),th=rows.reduce((s,r)=>s+(+r.hel||0),0),vs=new Set(rows.map(r=>r.v)).size;
   const keep=box.querySelector("#wkAct"+V)?{v:$("wkV"+V).value,a:$("wkAct"+V).value,m:$("wkM"+V).value,h:$("wkH"+V).value,n:$("wkN"+V).value,c:$("wkC"+V)?$("wkC"+V).value:""}:null;
   const cons=typeof dnContractors=="function"?dnContractors():[];
@@ -5074,7 +5197,7 @@ function renderWk(V){const K=WKK[V],box=$("view"+V);if(!box)return;const kind=K.
      </div><p class="fxmsg" id="wkMsg${V}" role="status"></p>
      ${V=="L"&&planToday.length?`<p class="fxsm">${plur(planToday.length,"activity","activities")} ${planToday.length==1?"was":"were"} scheduled for ${fmtD(d)}. <button type="button" class="fxlnk" id="wkCopy">Copy the schedule into this report</button> and adjust the numbers to what turned up.</p>`:""}
    </section>
-   <section class="fxp"><div class="wkhd"><h3 class="fxh3">${V=="T"?"Schedule for "+fmtD(d):"Labour on "+fmtD(d)}</h3>
+   <section class="fxp" id="wkList${V}"><div class="wkhd"><h3 class="fxh3">${V=="T"?"Schedule for "+fmtD(d):"Labour on "+fmtD(d)}</h3>
      <div class="wktot"><span><b class="fig">${rows.length}</b> ${rows.length==1?"activity":"activities"}</span><span><b class="fig">${vs}</b> ${vs==1?"villa":"villas"}</span><span><b class="fig">${tm}</b> masons</span><span><b class="fig">${th}</b> helpers</span><span class="wkall"><b class="fig">${tm+th}</b> workers</span></div></div>
      ${rows.length?`<ul class="wkl">${rows.map(r=>{const u=LEAF[r.leaf];return`<li class="wkr">
         <span class="wkvn">Villa <b>${esc(r.v)}</b></span>
@@ -5163,7 +5286,7 @@ async function eodJson(f,d,stat){const L=f.L,u=f.u,fn=f.name.replace(/\.json$/,"
       xd.push({title:z.t,checkpoint:z.cp||"",category:z.cat||"",severity:z.sev||"",location:z.loc||"",raisedBy:z.rby||"",raised:z.raised||"",responsible:z.who||"",due:z.due||"",status:z.closed?"Closed":"Open",closedOn:z.on||"",note:z.note||"",photos:b,photosAfterFix:a})}
     out.activityDefects=xd;out.debitNotes=(L.dn||[]).map(n=>({number:n.no,contractor:n.con||"",amountINR:+n.amt||0,reason:n.why||"",date:n.date||"",status:(DNST.find(s=>s[0]==n.st)||[0,n.st])[1],raisedBy:n.by||""}));out.remarks=L.rem||""}
   out.exportedAt=new Date().toISOString();return JSON.stringify(out,null,1)}
-function eodReps(d){const x=new Date(d+"T00:00:00");x.setDate(x.getDate()+1);const nd=iso(x),out=[];const p=wkRows(wkLoad(nd),"plan");if(p.length)out.push({V:"T",d:nd,rows:p});const l=wkRows(wkLoad(d),"lab");if(l.length)out.push({V:"L",d,rows:l});
+function eodReps(d){const x=new Date(d+"T00:00:00");x.setDate(x.getDate()+1);const nd=iso(x),out=[];const p=wkRows(wkLoad(nd),"plan");if(p.length)out.push({V:"T",d:nd,rows:p});const l=labMerged(wkLoad(d));if(l.some(r=>r.lab))out.push({V:"L",d,rows:l});
   out.forEach(r=>{const K=WKK[r.V];r.name=`${K.file}-${fileDate(r.V,r.d)}.pdf`;r.per=r.rows.filter(x=>LEAF[x.leaf]).map(x=>({v:x.v,r:x,name:`${leafFile(x.v,LEAF[x.leaf])}-${K.tag}-${fileDate(r.V,r.d)}.pdf`}))});return out}
 function renderEod(){const box=$("viewE");if(!box)return;EOD.d=EOD.d||iso(new Date());const d=EOD.d,files=eodPlan(d,EOD.all),reps=eodReps(d),any=files.length||reps.length;const byV={};files.forEach(f=>(byV[f.k]=byV[f.k]||[]).push(f));
   const days=[...new Set([...dayList(),iso(new Date())])].sort().reverse().slice(0,14);const n=syWaiting();
@@ -5553,11 +5676,20 @@ const DRS={scope:0,f:"",view:innerWidth>900?"matrix":"villa",q:"",open:new Set()
 const dScopeVs=()=>DRS.scope==="P"?PRI.map(x=>x.n):isLV(DRS.scope)?PRI.filter(x=>x.lv==LVID[DRS.scope]).map(x=>x.n):villasOf(DRS.scope?CLUSTERS.find(c=>c.id===DRS.scope):null);
 const dchip=st=>`<span class="dst s-${st}">${DSTN[st]}</span>`;
 const dbar=c=>`<span class="dzsb" aria-hidden="true">${DST.map(([k])=>c[k]?`<i class="s-${k}" style="flex:${c[k]}"></i>`:"").join("")}</span>`;
-function renderDreg(){const box=$("drd");if(!box)return;dregPull();const vs=dScopeVs(),q=DRS.q.trim().toLowerCase();const T=DRT.filter(t=>!q||(t.n+" "+t.g).toLowerCase().includes(q));
+function drPicker(vs){const v=DRS.villa||0;const lst=PLOTS;const i=lst.indexOf(v);
+  return`<section class="fxp drvp"><div class="drvp1"><button type="button" class="fxb sm${v?"":" pri"}" data-drall="1" aria-pressed="${!v}">All villas</button>
+    <div class="drnav"><button type="button" class="hbtn hico" data-drstep="-1" aria-label="Previous villa"${v&&i>0?"":" disabled"}><svg class="ico" viewBox="0 0 24 24"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></button>
+    <select class="fxi" id="drVs" aria-label="Choose a villa"><option value="">Choose a villa…</option>${CLUSTERS.map(c=>`<optgroup label="${esc(c.n)}">${villasOf(c).map(n=>{const k=dcount([n]);return`<option value="${n}"${n==v?" selected":""}>Villa ${n} · ${k.final}/${k.tot} final</option>`}).join("")}</optgroup>`).join("")}</select>
+    <button type="button" class="hbtn hico" data-drstep="1" aria-label="Next villa"${v&&i<lst.length-1?"":" disabled"}><svg class="ico" viewBox="0 0 24 24"><path d="M9.5 5.5L16 12l-6.5 6.5"/></svg></button></div></div>
+    <div class="drstrip" id="drStrip" role="list" aria-label="Villas">${vs.map(n=>{const k=dcount([n]);const f=k.tot?k.final/k.tot:0,r=k.tot?(k.recv+k.sent+k.sign+k.final)/k.tot:0;return`<button type="button" role="listitem" class="drc${n==v?" on":""}" data-drvo="${n}" style="--f:${f*100}%;--r:${r*100}%" title="Villa ${n}: ${k.final} finalised, ${k.sign} approval pending, ${k.recv+k.sent} yet to be approved, ${k.pend} to be received"><b>${n}</b><i></i></button>`}).join("")}</div></section>`}
+function renderDreg(){const box=$("drd");if(!box)return;dregPull();
+  if(DRS.villa){const v=DRS.villa,k=dcount([v]),cl=clusterOf(v);box.innerHTML=drPicker(dScopeVs())+`<section class="fxp drvh"><div class="drh1"><div><span class="vcl">${cl?esc(cl.n):""} · ${k.tot} drawings</span><h2>Villa ${v} · <span class="fig">${k.tot?Math.round(k.final/k.tot*100):0}%</span> finalised</h2></div></div>${dbar(k)}
+     <div class="drk">${[["final","Finalised"],["sign","Approval pending"],["yet","Yet to be approved"],["pend","To be received"]].map(([x,l])=>`<div class="drt k-${x}"><b class="fig">${x=="yet"?k.recv+k.sent:k[x]}</b><span>${l}</span></div>`).join("")}</div></section><section class="fxp" id="drVilla"></section>`;
+    drBind(box);dVillaDraw(v,DRS.focus);const fd=$("dwfiles");if(fd)fd.open=true;return}const vs=dScopeVs(),q=DRS.q.trim().toLowerCase();const T=DRT.filter(t=>!q||(t.n+" "+t.g).toLowerCase().includes(q));
   const c=dcount(vs,T),ed=canEdit("dwg");const pct=k=>c.tot?Math.round(c[k]/c.tot*1000)/10:0;
   const tiles=[["final","Finalised","Client signed and PM approved"],["sign","Approval pending","Client signed, waiting for the PM"],["yet","Yet to be approved","Received or sent to the client, not signed yet"],["pend","To be received","Not received from the consultant"]];
   const tv=k=>k=="yet"?c.recv+c.sent:c[k];
-  box.innerHTML=`<section class="fxp drh">
+  box.innerHTML=drPicker(vs)+`<section class="fxp drh">
     <div class="drh1"><div><span class="vcl">Drawing register · ${vs.length} ${vs.length==1?"villa":"villas"} × ${T.length} drawings</span><h2>${c.tot?`<span class="fig">${pct("final")}%</span> finalised`:"No drawings"}</h2></div>
       <div class="fxacts">${ed?`<button type="button" class="fxb" id="drImp">Import register (.xlsx)</button>`:""}<button type="button" class="fxb" id="drExp">Export register</button></div></div>
     ${dbar(c)}
@@ -5568,8 +5700,8 @@ function renderDreg(){const box=$("drd");if(!box)return;dregPull();const vs=dSco
      <div class="drv"><input class="fxi" id="drQ" type="search" placeholder="Find a drawing, e.g. FF slab" value="${esc(DRS.q)}" aria-label="Find a drawing">
      <div class="segv" role="tablist" aria-label="View">${[["matrix","Grid"],["villa","By villa"],["type","By drawing"]].map(([k,l])=>`<button type="button" role="tab" data-drv="${k}" aria-selected="${DRS.view==k}">${l}</button>`).join("")}</div></div></div>
    <section class="fxp drbody">${DRS.view=="matrix"?dMatrix(vs,T):DRS.view=="type"?dByType(vs,T):dByVilla(vs,T)}</section>`;
-  const msg=$("drMsg");
-  box.onclick=e=>{const t=e.target.closest("[data-drf],[data-drs],[data-drv],[data-drvo],[data-dro],[data-drc]");if(!t)return;
+  const msg=$("drMsg");drBind(box);
+  box.onclick=e=>{if(drClick(e))return;const t=e.target.closest("[data-drf],[data-drs],[data-drv],[data-drvo],[data-dro],[data-drc]");if(!t)return;
     if(t.dataset.drf!=null){DRS.f=DRS.f==t.dataset.drf?"":t.dataset.drf;renderDreg()}
     else if(t.dataset.drs!=null){const v=t.dataset.drs;DRS.scope=isLV(v)?v:+v;renderDreg()}
     else if(t.dataset.drv){DRS.view=t.dataset.drv;renderDreg()}
@@ -5590,24 +5722,26 @@ function dByType(vs,T){const G=[...new Set(T.map(t=>t.g))];
       ${open?`<div class="drvs">${hv.map(v=>{const st=dcell(v,t.id).st;return`<button type="button" class="drv1 s-${st}" data-drvo="${v}" data-drt0="${t.id}" title="${DSTN[st]}">${v}</button>`}).join("")}</div>`:""}</li>`}).join("")}</ul>`).join("")}
 // one villa's drawings: status, linked file, and the sign-off steps
 let DVSEL=new Set();
-function dVilla(v,focus){DVSEL=new Set(focus?[focus]:[]);dVillaDraw(v,focus)}
+function dVilla(v,focus){DVSEL=new Set(focus?[focus]:[]);DRS.villa=+v;DRS.focus=focus||"";try{if(String(villa())!==String(v)){$("vn").value=String(v);openVilla(String(v))}}catch(e){}renderDreg();const b=$("drd");if(b)b.scrollIntoView({block:"start"})}
 function dGuessFile(v,t){const L=drawingsFor(v).filter(d=>!d.sup);const w=t.n.toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(x=>x.length>1);let best=null,bs=0;
   L.forEach(d=>{const s=(d.title+" "+(d.no||"")).toLowerCase();const k=w.filter(x=>s.includes(x)).length/w.length;if(k>bs){bs=k;best=d}});return bs>=.66?best:null}
 function dVillaDraw(v,focus){const ed=canEdit("dwg"),adm=roleNow()=="admin";const files=drawingsFor(v).filter(d=>!d.sup);const c=dcount([v]);
   const sel=[...DVSEL].map(t=>({t,c:dcell(v,t)}));const has=st=>sel.some(x=>x.c.st==st);
-  const d=fxDialog(`Villa ${v} · drawings`,`<div class="dzh">${dbar(c)}<p class="fxsm">${DST.map(([k,l])=>`<span class="dzk"><i class="s-${k}"></i>${l} <b>${c[k]}</b></span>`).join("")}</p></div>
+  const host=$("drVilla");const body=`<div class="dzh">${dbar(c)}<p class="fxsm">${DST.map(([k,l])=>`<span class="dzk"><i class="s-${k}"></i>${l} <b>${c[k]}</b></span>`).join("")}</p></div>
     <div class="dzt">${[...new Set(DRT.map(t=>t.g))].map(g=>`<h4 class="drg">${esc(g)}</h4>${DRT.filter(t=>t.g==g).map(t=>{const x=dcell(v,t.id);const f=x.f?files.find(z=>z.id==x.f):null;const last=(x.h||[]).slice(-1)[0];
-      return`<label class="dzr${DVSEL.has(t.id)?" on":""}${focus==t.id?" fo":""}"><input type="checkbox" data-dzc="${t.id}"${DVSEL.has(t.id)?" checked":""}><span class="dzn"><b>${esc(t.n)}</b><small>${f?"File: "+esc(f.title)+(f.rev?" · Rev "+esc(f.rev):""):files.length?"No file linked":"No files uploaded for this villa"}${last?` · ${DSTN[last.st]} ${new Date(last.at).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}${last.by?" by "+esc(last.by):""}`:""}${x.sig?` · signed by ${esc(x.sig.name)}`:""}</small></span>${dchip(x.st)}</label>`}).join("")}`).join("")}</div>
+      return`<label class="dzr${DVSEL.has(t.id)?" on":""}${focus==t.id?" fo":""}"><input type="checkbox" data-dzc="${t.id}"${DVSEL.has(t.id)?" checked":""}><span class="dzn"><b>${esc(t.n)}</b><small>${f?"File: "+esc(f.title)+(f.rev?" · Rev "+esc(f.rev):""):files.length?"No file linked":"No files uploaded for this villa"}${last?` · ${DSTN[last.st]} ${new Date(last.at).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}${last.by?" by "+esc(last.by):""}`:""}${x.sig?` · client ${esc(x.sig.name)} signed${x.sig.paper?" on paper":""}${x.sig.on?" "+fmtD(x.sig.on):""}`:""}${x.ap?` · PM approved`:""}</small></span>${dchip(x.st)}</label>`}).join("")}`).join("")}</div>
     <div class="dzbar"><span class="fxsm" style="margin:0">${sel.length?`${plur(sel.length,"drawing")} selected`:"Tick drawings to act on them"}</span><span class="ezsp"></span>
       <button type="button" class="fxb sm fxgh" id="dzAll">${sel.length?"Clear":"Select all"}</button>
       ${ed?`<button type="button" class="fxb sm" id="dzRecv"${has("pend")?"":" disabled"}>Mark received</button>
-      <button type="button" class="fxb sm" id="dzLink"${sel.length==1&&files.length?"":" disabled"}>Link file</button>
-      <button type="button" class="fxb sm pri" id="dzSend"${has("recv")||has("sent")?"":" disabled"}>Fix as final &amp; print for client</button>
-      <button type="button" class="fxb sm" id="dzSign"${has("sent")?"":" disabled"}>Client signs</button>
-      <button type="button" class="fxb sm pri" id="dzAppr"${has("sign")?"":" disabled"}>PM approve</button>
+      <button type="button" class="fxb sm" id="dzLink"${sel.length==1&&files.length?"":" disabled"}>Link file</button>`:""}
+      <button type="button" class="fxb sm pri" id="dzSend"${has("recv")||has("sent")?"":" disabled"}>1 · Print for client signature</button>
+      <button type="button" class="fxb sm pri" id="dzSign"${has("sent")?"":" disabled"}>2 · Client signed, send to PM</button>
+      ${ed?`<button type="button" class="fxb sm pri" id="dzAppr"${has("sign")?"":" disabled"}>3 · PM approve</button>
+      <button type="button" class="fxb sm fxgh" id="dzBack"${has("sign")?"":" disabled"}>Send back</button>
       ${adm?`<button type="button" class="fxb sm fxgh" id="dzReo"${sel.some(x=>x.c.st!="pend"&&x.c.st!="recv")?"":" disabled"}>Reopen</button>`:""}`:""}
-      <button type="button" class="fxb sm" id="dzPdf"${sel.length?"":" disabled"}>PDF</button></div><p class="fxmsg" id="dzMsg" role="status"></p><div id="dzX"></div>`);
-  d.querySelector(".fxbox").classList.add("wide");
+      <button type="button" class="fxb sm fxgh" id="dzTrk"${sel.length?"":" disabled"}>Track</button>
+      <button type="button" class="fxb sm" id="dzPdf"${sel.length?"":" disabled"}>PDF</button></div><p class="fxmsg" id="dzMsg" role="status"></p><div id="dzX"></div>`;
+  let d;if(host){host.innerHTML=body;d=host}else{d=fxDialog(`Villa ${v} · drawings`,body);d.querySelector(".fxbox").classList.add("wide")}
   const msg=$("dzMsg"),redraw=()=>{dVillaDraw(v);if(view=="W")renderDreg()};
   d.querySelectorAll("[data-dzc]").forEach(i=>i.onchange=()=>{i.checked?DVSEL.add(i.dataset.dzc):DVSEL.delete(i.dataset.dzc);dVillaDraw(v)});
   $("dzAll").onclick=()=>{DVSEL=sel.length?new Set():new Set(DRT.map(t=>t.id));dVillaDraw(v)};
@@ -5616,61 +5750,94 @@ function dVillaDraw(v,focus){const ed=canEdit("dwg"),adm=roleNow()=="admin";cons
   if($("dzLink"))$("dzLink").onclick=()=>{const t=sel[0].t,x=dcell(v,t),g=dGuessFile(v,DRT.find(z=>z.id==t));
     $("dzX").innerHTML=`<div class="dzlink"><label class="fxf"><span>File for ${esc(DRT.find(z=>z.id==t).n)}</span><select class="fxi" id="dzF"><option value="">No file</option>${files.map(f=>`<option value="${f.id}"${(x.f||(g&&g.id))==f.id?" selected":""}>${esc(f.title)}${f.no?" · "+esc(f.no):""}${f.rev?" · Rev "+esc(f.rev):""}</option>`).join("")}</select></label><button type="button" class="fxb pri" id="dzFok">Link</button></div>`;
     $("dzFok").onclick=()=>{x.f=$("dzF").value;x.mt=new Date().toISOString();dregSave(v);redraw()}};
-  if($("dzSend"))$("dzSend").onclick=async e=>{const ts=sel.filter(x=>x.c.st=="recv"||x.c.st=="sent").map(x=>x.t);ts.forEach(t=>{const x=dcell(v,t);if(!x.f){const g=dGuessFile(v,DRT.find(z=>z.id==t));if(g)x.f=g.id}if(x.st=="recv")dset(v,t,"sent")});dregSave(v);
-    msg.className="fxmsg";msg.textContent="Making the sign-off PDF…";try{msg.textContent=await dPdf(v,ts,"sign")}catch(er){msg.className="fxmsg bad";msg.textContent="PDF failed: "+(er.message||er)}redraw();$("dzMsg").textContent=msg.textContent};
+  if($("dzSend"))$("dzSend").onclick=()=>dPrintAsk(v,sel.filter(x=>x.c.st=="recv"||x.c.st=="sent").map(x=>x.t));
   if($("dzSign"))$("dzSign").onclick=()=>dSignPad(v,pick("sent"));
-  if($("dzAppr"))$("dzAppr").onclick=()=>{const ts=pick("sign");const now=new Date().toISOString();ts.forEach(t=>dset(v,t,"final",{ap:{by:(ROLE&&ROLE.name)||ROLE.me||engName()||"",at:now}}));dregSave(v);redraw();$("dzMsg").textContent=`${plur(ts.length,"drawing")} approved and fixed as final.`};
+  if($("dzBack"))$("dzBack").onclick=()=>{$("dzX").innerHTML=`<div class="dzlink"><label class="fxf"><span>Why send back to the engineer? (kept in the track)</span><input class="fxi" id="dzBw" placeholder="e.g. Client signature missing on sheet 2"></label><button type="button" class="fxb bad" id="dzBok">Send back</button></div>`;
+    $("dzBok").onclick=()=>{const why=$("dzBw").value.trim();if(!why){$("dzBw").focus();return}pick("sign").forEach(t=>dset(v,t,"sent",{sig:null},"Sent back by PM: "+why));dregSave(v);redraw();$("dzMsg").textContent="Sent back. The engineer needs to get it signed again."}};
+  $("dzTrk").onclick=()=>dTrack(v,sel.map(x=>x.t));
+  if($("dzAppr"))$("dzAppr").onclick=()=>{const ts=pick("sign");const now=new Date().toISOString();ts.forEach(t=>dset(v,t,"final",{ap:{by:(ROLE&&ROLE.name)||ROLE.me||engName()||"",at:now}},"Approved by PM in the app"));dregSave(v);redraw();$("dzMsg").textContent=`${plur(ts.length,"drawing")} approved and fixed as final.`};
   if($("dzReo"))$("dzReo").onclick=()=>{$("dzX").innerHTML=`<div class="dzlink"><label class="fxf"><span>Why reopen? (kept in the history)</span><input class="fxi" id="dzWhy" placeholder="e.g. Revised by consultant, R3"></label><button type="button" class="fxb bad" id="dzReok">Reopen ${plur(sel.filter(x=>x.c.st!="pend"&&x.c.st!="recv").length,"drawing")}</button></div>`;
     $("dzReok").onclick=()=>{const why=$("dzWhy").value.trim();if(!why){$("dzWhy").focus();return}sel.filter(x=>x.c.st!="pend"&&x.c.st!="recv").forEach(x=>{dset(v,x.t,"recv",{sig:null,ap:null},"Reopened: "+why)});dregSave(v);redraw()}};
   $("dzPdf").onclick=async()=>{msg.className="fxmsg";msg.textContent="Making the PDF…";try{msg.textContent=await dPdf(v,sel.map(x=>x.t),"auto")}catch(er){msg.className="fxmsg bad";msg.textContent="PDF failed: "+(er.message||er)}}}
 // client signature, captured on this screen
-function dSignPad(v,ts){if(!ts.length)return;const x=$("dzX");x.innerHTML=`<div class="sigp"><h3 class="fxh3">Client signature · ${plur(ts.length,"drawing")}</h3>
-  <p class="fxsm" style="margin-top:0">${ts.map(t=>esc(DRT.find(z=>z.id==t).n)).join(", ")}</p>
-  <div class="sigf"><label class="fxf"><span>Client name</span><input class="fxi" id="sgN" autocomplete="name"></label><label class="fxf"><span>Phone (optional)</span><input class="fxi" id="sgP" inputmode="tel"></label></div>
-  <canvas id="sgC" width="900" height="260" aria-label="Sign here"></canvas><div class="fxacts"><button type="button" class="fxb sm fxgh" id="sgClr">Clear</button></div>
-  <label class="fxck"><input type="checkbox" id="sgOk"> I accept the drawings listed above as final for construction of villa ${v}.</label>
-  <div class="fxacts"><button type="button" class="fxb pri" id="sgSave">Save signature</button></div><p class="fxmsg" id="sgMsg"></p></div>`;
-  const cv=$("sgC"),g=cv.getContext("2d");g.lineWidth=3.2;g.lineCap="round";g.lineJoin="round";g.strokeStyle="#15233a";let dn=false,drew=false,lp=null;
-  const pt=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]};
-  cv.onpointerdown=e=>{dn=true;lp=pt(e);cv.setPointerCapture(e.pointerId);e.preventDefault()};cv.onpointermove=e=>{if(!dn)return;const p=pt(e);g.beginPath();g.moveTo(lp[0],lp[1]);g.lineTo(p[0],p[1]);g.stroke();lp=p;drew=true};cv.onpointerup=cv.onpointercancel=()=>dn=false;
-  $("sgClr").onclick=()=>{g.clearRect(0,0,cv.width,cv.height);drew=false};
-  $("sgSave").onclick=()=>{const m=$("sgMsg"),n=$("sgN").value.trim();if(!n){m.className="fxmsg bad";m.textContent="Enter the client's name.";return}if(!drew){m.className="fxmsg bad";m.textContent="Ask the client to sign in the box.";return}if(!$("sgOk").checked){m.className="fxmsg bad";m.textContent="Tick the acceptance line.";return}
-    const c2=document.createElement("canvas");c2.width=450;c2.height=130;c2.getContext("2d").drawImage(cv,0,0,450,130);const png=c2.toDataURL("image/png");const at=new Date().toISOString();
-    ts.forEach(t=>dset(v,t,"sign",{sig:{name:n,ph:$("sgP").value.trim(),png,at}}));dregSave(v);dVillaDraw(v);if(view=="W")renderDreg();$("dzMsg").textContent=`Signed by ${n}. ${plur(ts.length,"drawing")} now waiting for PM approval.`};
-  cv.scrollIntoView({behavior:"smooth",block:"center"})}
+function dSignPad(v,ts){if(!ts.length)return;const x=$("dzX");x.innerHTML=`<div class="sigp"><h3 class="fxh3">Client signed the printed copy · ${plur(ts.length,"drawing")}</h3>
+  <p class="fxsm" style="margin-top:0">${ts.map(t=>esc(DRT.find(z=>z.id==t).n)).join(", ")}. The signed paper copy stays in the site file; this records it and sends it to the PM for approval.</p>
+  <div class="sigf"><label class="fxf"><span>Client name</span><input class="fxi" id="sgN" autocomplete="name"></label><label class="fxf"><span>Date signed</span><input class="fxi" type="date" id="sgD" value="${iso(today)}" max="${iso(today)}"></label></div>
+  <div class="sigf"><label class="fxf"><span>Signed copy kept at</span><input class="fxi" id="sgK" value="Site office file"></label><label class="fxf"><span>Note for the PM (optional)</span><input class="fxi" id="sgM" placeholder="e.g. Client asked for a note on the staircase"></label></div>
+  <label class="fxck"><input type="checkbox" id="sgOk"> The client has signed every printed sheet.</label>
+  <div class="fxacts"><button type="button" class="fxb pri" id="sgSave">Send to PM for approval</button></div><p class="fxmsg" id="sgMsg"></p></div>`;
+  $("sgSave").onclick=()=>{const m=$("sgMsg"),n=$("sgN").value.trim(),on=$("sgD").value;if(!n){m.className="fxmsg bad";m.textContent="Enter the client's name.";$("sgN").focus();return}if(!on){m.className="fxmsg bad";m.textContent="Enter the date the client signed.";return}if(!$("sgOk").checked){m.className="fxmsg bad";m.textContent="Tick to confirm every sheet is signed.";return}
+    const kept=$("sgK").value.trim()||"Site office file",note=$("sgM").value.trim(),by=engName()||(ROLE&&ROLE.name)||"",at=new Date().toISOString();
+    ts.forEach(t=>dset(v,t,"sign",{sig:{name:n,on,by,at,paper:true,kept,note}},`Client ${n} signed on paper ${fmtD(on)}; kept at ${kept}. Sent to PM${note?": "+note:""}`));dregSave(v);dVillaDraw(v);if(view=="W")renderDreg();$("dzMsg").textContent=`Recorded. ${plur(ts.length,"drawing")} sent to the PM for approval.`};
+  $("sgN").scrollIntoView({behavior:"smooth",block:"center"})}
+// before printing: every drawing should have its file linked, so the drawing prints under the sign-off sheet
+function dPrintAsk(v,ts){if(!ts.length)return;const files=drawingsFor(v).filter(d=>!d.sup);
+  ts.forEach(t=>{const x=dcell(v,t);if(!x.f){const g=dGuessFile(v,DRT.find(z=>z.id==t));if(g){x.f=g.id;x.mt=new Date().toISOString()}}});
+  const miss=ts.filter(t=>!dcell(v,t).f);const go=async()=>{const ed=canEdit("dwg");ts.forEach(t=>{const x=dcell(v,t);dset(v,t,"sent",null,(x.st=="sent"?"Reprinted":"Printed")+" for client signature")});dregSave(v);
+    const msg=$("dzMsg");msg.className="fxmsg";msg.textContent="Making the sign-off PDF…";let r;try{r=await dPdf(v,ts,"sign")}catch(er){r="PDF failed: "+(er.message||er)}dVillaDraw(v);if(view=="W")renderDreg();$("dzMsg").textContent=r};
+  if(!miss.length){go();return}
+  $("dzX").innerHTML=`<div class="sigp"><h3 class="fxh3">Link the drawing before printing</h3><p class="fxsm" style="margin-top:0">${files.length?"Pick the file for each drawing so it prints below the sign-off sheet.":"No drawing files are uploaded for this villa yet. Upload them in Drawings → Add drawings, or print the sheet without the drawing."}</p>
+    ${files.length?miss.map(t=>`<label class="fxf"><span>${esc(DRT.find(z=>z.id==t).n)}</span><select class="fxi" data-dpf="${t}"><option value="">No file</option>${files.map(f=>`<option value="${f.id}">${esc(f.title)}${f.no?" · "+esc(f.no):""}${f.rev?" · Rev "+esc(f.rev):""}</option>`).join("")}</select></label>`).join(""):""}
+    <div class="fxacts">${files.length?`<button type="button" class="fxb pri" id="dpGo">Link and print</button>`:""}<button type="button" class="fxb" id="dpAny">Print without the drawing</button></div></div>`;
+  if($("dpGo"))$("dpGo").onclick=()=>{document.querySelectorAll("[data-dpf]").forEach(s2=>{if(s2.value){const x=dcell(v,s2.dataset.dpf);x.f=s2.value;x.mt=new Date().toISOString()}});$("dzX").innerHTML="";go()};
+  $("dpAny").onclick=()=>{$("dzX").innerHTML="";go()}}
+// the track: every step with who and when
+const DACT={pend:"To be received",recv:"Received from consultant",sent:"Printed for client signature",sign:"Client signed on paper, sent to PM",final:"Approved by PM, fixed as final"};
+function dTrack(v,ts){const rows=ts.map(t=>({t:DRT.find(z=>z.id==t),c:dcell(v,t)})).filter(x=>x.t);
+  $("dzX").innerHTML=`<div class="sigp"><h3 class="fxh3">Track · Villa ${v}</h3>${rows.map(({t,c})=>`<div class="dztk"><b>${esc(t.n)}</b> ${dchip(c.st)}<ol>${(c.h||[]).slice().reverse().map(h=>`<li><span>${new Date(h.at).toLocaleString("en-GB",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})}</span><b>${/^Sent back/.test(h.note||"")?"Sent back by PM":/^Reopened/.test(h.note||"")?"Reopened":DACT[h.st]||h.st}</b>${h.by?" · "+esc(h.by):""}${h.note?`<small>${esc(h.note)}</small>`:""}</li>`).join("")||"<li>No steps yet.</li>"}</ol></div>`).join("")}</div>`;
+  $("dzX").scrollIntoView({behavior:"smooth",block:"nearest"})}
 // the sign-off / final PDF: Bhaaje cover sheet with signatures, then each drawing with a header band
+async function dSheets(v,f){const b=await dwBlob(f);const imgs=[];
+  if(f.type=="pdf"||/pdf/.test(b.type)){await loadPdfJs();const pd=await pdfjsLib.getDocument({data:await b.arrayBuffer(),isEvalSupported:false}).promise;
+    for(let i=1;i<=Math.min(pd.numPages,12);i++){const pg=await pd.getPage(i);const vp0=pg.getViewport({scale:1});const sc=Math.min(2.2,2400/Math.max(vp0.width,vp0.height));const vp=pg.getViewport({scale:sc});const cv=document.createElement("canvas");cv.width=vp.width;cv.height=vp.height;const g=cv.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,cv.width,cv.height);await pg.render({canvasContext:g,viewport:vp}).promise;imgs.push({d:cv.toDataURL("image/jpeg",.85),w:cv.width,h:cv.height,t:"JPEG"})}pd.destroy()}
+  else if(/^image\//.test(b.type)){const u=await toB64(b);const im=await new Promise((r,j)=>{const i=new Image();i.onload=()=>r(i);i.onerror=j;i.src=u});imgs.push({d:u,w:im.naturalWidth,h:im.naturalHeight,t:/png/.test(b.type)?"PNG":"JPEG"})}
+  else throw new Error("cad");return imgs}
 async function dPdf(v,ts,mode){await loadJsPDF();const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4"});const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
-  const ink=[21,35,58],mute=[94,107,124],acc=[232,103,42],line=[214,220,228],ok=[24,128,80];const files=drawingsFor(v);const cl=clusterOf(v);
+  const pt=z=>String(z==null?"":z).replace(/[’‘]/g,"'").replace(/[“”]/g,'"').replace(/[–—]/g,"-").replace(/[^\x20-\x7E\n·]/g,"");const ink=[21,35,58],mute=[94,107,124],acc=[232,103,42],line=[214,220,228],ok=[24,128,80];const files=drawingsFor(v);const cl=clusterOf(v);
   const cells=ts.map(t=>({t:DRT.find(z=>z.id==t),c:dcell(v,t)})).filter(x=>x.t);const allFinal=cells.every(x=>x.c.st=="final");
+  // load every linked drawing first, so the cover can show it
+  const miss=[];for(const x of cells){x.f=x.c.f?files.find(z=>z.id==x.c.f):null;x.imgs=[];if(!x.f){miss.push(x.t.n);continue}
+    try{x.imgs=await dSheets(v,x.f)}catch(e){miss.push(x.t.n+(e.message=="cad"?" (CAD file: upload a PDF to print it)":""))}}
   pdfLogo(doc,14,12,14);doc.setFont("helvetica","bold");doc.setFontSize(16);doc.setTextColor(...ink);doc.text(allFinal?"Approved final drawings":"Drawings for final approval",W-14,18,{align:"right"});
   doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(...mute);doc.text(`AMR Living Spaces · Villa ${v}${cl?" · "+cl.n:""} · Issued ${fmt(new Date())}`,W-14,24,{align:"right"});
   doc.setDrawColor(...acc);doc.setLineWidth(.8);doc.line(14,32,W-14,32);
-  doc.autoTable({startY:37,head:[["#","Drawing","Discipline","File / Drawing no.","Rev","Status"]],body:cells.map((x,i)=>{const f=x.c.f?files.find(z=>z.id==x.c.f):null;return[i+1,x.t.n,x.t.g,f?(f.no||f.title):"—",f&&f.rev||"—",DSTN[x.c.st]]}),theme:"grid",margin:{left:14,right:14},
-    styles:{fontSize:9,cellPadding:2,textColor:ink,lineColor:line,lineWidth:.2},headStyles:{fillColor:ink,textColor:255},columnStyles:{0:{cellWidth:8,halign:"right"},5:{cellWidth:38}},
-    didParseCell:h=>{if(h.section=="body"&&h.column.index==5&&String(h.cell.raw)=="Finalised")h.cell.styles.textColor=ok}});
-  let y=doc.lastAutoTable.finalY+10;if(y>H-95){doc.addPage();y=24}
-  doc.setFontSize(10);doc.setTextColor(...ink);const decl=doc.splitTextToSize(`We confirm that the ${cells.length==1?"drawing":"drawings"} listed above ${cells.length==1?"is":"are"} accepted as final for construction of Villa ${v}, AMR Living Spaces. Any change after this approval will be treated as a variation and needs a fresh approval.`,W-28);doc.text(decl,14,y);y+=decl.length*5+8;
-  const sig=cells.map(x=>x.c.sig).find(Boolean),ap=cells.map(x=>x.c.ap).find(Boolean);const bw=(W-28-10)/2;
-  [[14,"Client",sig?sig.name:"",sig?fmt(new Date(sig.at)):"",sig&&sig.png],[14+bw+10,"For Bhaaje Private Limited (Project Manager)",ap?(ap.by||"Project manager"):"",ap?fmt(new Date(ap.at)):"",null]].forEach(([x,l,n,dt,png],i)=>{
-    doc.setDrawColor(...line);doc.setLineWidth(.3);doc.roundedRect(x,y,bw,48,2,2);doc.setFontSize(8.5);doc.setTextColor(...mute);doc.text(l,x+4,y+6);
-    if(png){try{doc.addImage(png,"PNG",x+4,y+9,bw-8,(bw-8)*130/450)}catch(e){}}
-    if(i==1&&ap){doc.setDrawColor(...ok);doc.setTextColor(...ok);doc.setLineWidth(.8);doc.roundedRect(x+bw/2-24,y+14,48,14,2,2);doc.setFont("helvetica","bold");doc.setFontSize(12);doc.text("APPROVED",x+bw/2,y+23.5,{align:"center"});doc.setFont("helvetica","normal")}
-    doc.setDrawColor(...mute);doc.line(x+4,y+38,x+bw-4,y+38);doc.setTextColor(...ink);doc.setFontSize(9.5);doc.text(n||"Name",x+4,y+43);doc.setTextColor(...mute);doc.setFontSize(8.5);doc.text(dt||"Date",x+bw-4,y+43,{align:"right"})});
-  // the drawings themselves
-  let pages=0,miss=[];
-  for(const x of cells){const f=x.c.f?files.find(z=>z.id==x.c.f):null;if(!f){miss.push(x.t.n);continue}
-    let b=null;try{b=await dwBlob(f)}catch(e){miss.push(x.t.n);continue}
-    const imgs=[];if(f.type=="pdf"||/pdf/.test(b.type)){await loadPdfJs();const pd=await pdfjsLib.getDocument({data:await b.arrayBuffer(),isEvalSupported:false}).promise;
-        for(let i=1;i<=Math.min(pd.numPages,12);i++){const pg=await pd.getPage(i);const vp0=pg.getViewport({scale:1});const sc=Math.min(2.2,2400/Math.max(vp0.width,vp0.height));const vp=pg.getViewport({scale:sc});const cv=document.createElement("canvas");cv.width=vp.width;cv.height=vp.height;const g=cv.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,cv.width,cv.height);await pg.render({canvasContext:g,viewport:vp}).promise;imgs.push({d:cv.toDataURL("image/jpeg",.85),w:cv.width,h:cv.height})}pd.destroy()}
-    else if(/^image\//.test(b.type)){const u=await toB64(b);const im=await new Promise((r,j)=>{const i=new Image();i.onload=()=>r(i);i.onerror=j;i.src=u});imgs.push({d:u,w:im.naturalWidth,h:im.naturalHeight,t:/png/.test(b.type)?"PNG":"JPEG"})}
-    else{miss.push(x.t.n+" (CAD file: upload a PDF to print it)");continue}
-    imgs.forEach((im,i)=>{const land=im.w>im.h;doc.addPage("a4",land?"landscape":"portrait");pages++;const pw=doc.internal.pageSize.getWidth(),ph=doc.internal.pageSize.getHeight();
-      pdfLogo(doc,8,5,7);doc.setFontSize(9);doc.setTextColor(...ink);doc.setFont("helvetica","bold");doc.text(`Villa ${v} · ${x.t.n}${imgs.length>1?` · sheet ${i+1}/${imgs.length}`:""}`,pw-8,9,{align:"right"});doc.setFont("helvetica","normal");
-      doc.setTextColor(...(x.c.st=="final"?ok:acc));doc.text(x.c.st=="final"?`APPROVED FINAL · ${x.c.ap?fmt(new Date(x.c.ap.at)):""}`:"FOR CLIENT SIGN-OFF",pw-8,13.5,{align:"right"});
-      const top=17,mw=pw-16,mh=ph-top-8;const r=Math.min(mw/im.w,mh/im.h);doc.addImage(im.d,im.t||"JPEG",8+(mw-im.w*r)/2,top,im.w*r,im.h*r)})}
-  const n=doc.getNumberOfPages();for(let i=1;i<=n;i++){doc.setPage(i);const pw=doc.internal.pageSize.getWidth(),ph=doc.internal.pageSize.getHeight();doc.setFontSize(7.5);doc.setTextColor(...mute);doc.text(`Bhaaje Private Limited · AMR Living Spaces · Villa ${v}`,8,ph-4);doc.text(`Page ${i} of ${n}`,pw-8,ph-4,{align:"right"})}
+  doc.autoTable({startY:37,head:[["#","Drawing","Discipline","Drawing no. / file","Rev","Sheets","Status"]],body:cells.map((x,i)=>[i+1,x.t.n,x.t.g,x.f?(x.f.no?x.f.no+" · ":"")+x.f.title:"Not linked",x.f&&x.f.rev||"—",x.imgs.length||"—",DSTN[x.c.st]]),theme:"grid",margin:{left:14,right:14},
+    styles:{fontSize:9,cellPadding:2,textColor:ink,lineColor:line,lineWidth:.2},headStyles:{fillColor:ink,textColor:255},columnStyles:{0:{cellWidth:8,halign:"right"},4:{cellWidth:12},5:{cellWidth:14,halign:"center"},6:{cellWidth:36}},
+    didParseCell:h=>{if(h.section=="body"&&h.column.index==6&&String(h.cell.raw)=="Finalised")h.cell.styles.textColor=ok;if(h.section=="body"&&h.column.index==3&&h.cell.raw=="Not linked")h.cell.styles.textColor=acc}});
+  let y=doc.lastAutoTable.finalY+8;if(y>H-80){doc.addPage();y=20}
+  doc.setFontSize(10);doc.setTextColor(...ink);const one=cells.length==1;const decl=doc.splitTextToSize(`We confirm that the ${one?"drawing":"drawings"} listed above${miss.length<cells.length?(one?", shown below,":", shown below and on the attached sheets,"):""} ${one?"is":"are"} accepted as final for construction of Villa ${v}, AMR Living Spaces. Any change after this approval will be treated as a variation and needs a fresh approval.`,W-28);doc.text(decl,14,y);y+=decl.length*5+5;
+  const sig=cells.map(x=>x.c.sig).find(Boolean),ap=cells.map(x=>x.c.ap).find(Boolean);const bw=(W-28-10)/2,bh=40;
+  [[14,"Client signature",sig?sig.name:"",sig?(sig.on?fmtD(sig.on):fmt(new Date(sig.at))):"",sig],[14+bw+10,"For Bhaaje Private Limited (Project Manager)",ap?(ap.by||"Project manager"):"",ap?fmt(new Date(ap.at)):"",null]].forEach(([x,l,n,dt,sg],i)=>{
+    doc.setDrawColor(...line);doc.setLineWidth(.3);doc.roundedRect(x,y,bw,bh,2,2);doc.setFontSize(8.5);doc.setTextColor(...mute);doc.text(l,x+4,y+6);
+    if(sg&&sg.png){try{doc.addImage(sg.png,"PNG",x+4,y+8,bw-8,(bw-8)*100/450)}catch(e){}}
+    else if(sg&&sg.paper){doc.setTextColor(...ok);doc.setFontSize(9);doc.text("Signed on the printed copy",x+bw/2,y+18,{align:"center"});doc.setTextColor(...mute);doc.setFontSize(8);doc.text(`Original kept at: ${pt(sg.kept||"site file")}`,x+bw/2,y+23,{align:"center"})}
+    if(i==1&&ap){doc.setDrawColor(...ok);doc.setTextColor(...ok);doc.setLineWidth(.8);doc.roundedRect(x+bw/2-24,y+11,48,13,2,2);doc.setFont("helvetica","bold");doc.setFontSize(12);doc.text("APPROVED",x+bw/2,y+19.6,{align:"center"});doc.setFont("helvetica","normal")}
+    doc.setDrawColor(...mute);doc.setLineWidth(.3);doc.line(x+4,y+31,x+bw-4,y+31);doc.setTextColor(...ink);doc.setFontSize(9.5);doc.text(pt(n)||"Name",x+4,y+36);doc.setTextColor(...mute);doc.setFontSize(8.5);doc.text(dt||"Date",x+bw-4,y+36,{align:"right"})});
+  y+=bh+7;
+  // approval track on the approved copy
+  if(allFinal){const tr=[];cells.forEach(x=>(x.c.h||[]).forEach(h=>{if(h.st=="pend")return;tr.push([fmt(new Date(h.at)),x.t.n,/^Sent back/.test(h.note||"")?"Sent back by PM":/^Reopened/.test(h.note||"")?"Reopened":DACT[h.st]||h.st,h.by||"",(h.note||"").replace(/^(Printed for client signature|Approved by PM in the app)$/,"")])}));
+    if(tr.length){doc.setFont("helvetica","bold");doc.setFontSize(10);doc.setTextColor(...ink);doc.text("Approval track",14,y);doc.setFont("helvetica","normal");
+      doc.autoTable({startY:y+2,head:[["Date","Drawing","Step","By","Note"]],body:tr,theme:"grid",margin:{left:14,right:14},styles:{fontSize:7.5,cellPadding:1.4,textColor:ink,lineColor:line,lineWidth:.2},headStyles:{fillColor:[238,241,245],textColor:ink},columnStyles:{0:{cellWidth:22},2:{cellWidth:44}}});y=doc.lastAutoTable.finalY+7}}
+  // the drawing itself, right under the sign-off
+  const show=cells.filter(x=>x.imgs.length);
+  const head=(txt,yy)=>{doc.setDrawColor(...acc);doc.setLineWidth(.5);doc.line(14,yy,W-14,yy);doc.setFont("helvetica","bold");doc.setFontSize(10.5);doc.setTextColor(...ink);doc.text(txt,14,yy+6);doc.setFont("helvetica","normal")};
+  const cap=x=>pt(`${x.t.n} · ${x.t.g}${x.f.no?" · "+x.f.no:""}${x.f.rev?" · Rev "+x.f.rev:""}${x.imgs.length>1?` · ${x.imgs.length} sheets, full size on the next pages`:" · full size on the next page"}`);
+  const fit=(im,x0,y0,mw,mh)=>{const r=Math.min(mw/im.w,mh/im.h);const w=im.w*r,h=im.h*r,xx=x0+(mw-w)/2;doc.setDrawColor(...line);doc.setLineWidth(.2);doc.rect(xx,y0,w,h);doc.addImage(im.d,im.t||"JPEG",xx,y0,w,h)};
+  if(show.length){if(y>H-70){doc.addPage();y=18}
+    if(show.length==1){const x=show[0];head(one?"Drawing":"Drawing: "+x.t.n,y);doc.setFontSize(8.5);doc.setTextColor(...mute);doc.text(cap(x),14,y+11);fit(x.imgs[0],14,y+14,W-28,H-y-14-12)}
+    else{head("Drawings",y);y+=10;const cw=(W-28-8)/2,chh=cw*0.72+10;let col=0;
+      show.forEach(x=>{if(y+chh>H-12){doc.addPage();y=18;col=0}const x0=14+col*(cw+8);doc.setFont("helvetica","bold");doc.setFontSize(8.5);doc.setTextColor(...ink);doc.text(doc.splitTextToSize(pt(x.t.n+(x.f.no?" · "+x.f.no:"")+(x.f.rev?" · Rev "+x.f.rev:"")),cw)[0],x0,y+3);doc.setFont("helvetica","normal");
+        fit(x.imgs[0],x0,y+5,cw,cw*0.72);col++;if(col==2){col=0;y+=chh}})}}
+  // full-size sheets, each with a place for the client to sign
+  let pages=0;for(const x of show)x.imgs.forEach((im,i)=>{const land=im.w>im.h;doc.addPage("a4",land?"landscape":"portrait");pages++;const pw=doc.internal.pageSize.getWidth(),ph=doc.internal.pageSize.getHeight();
+    pdfLogo(doc,8,5,7);doc.setFontSize(9);doc.setTextColor(...ink);doc.setFont("helvetica","bold");doc.text(pt(`Villa ${v} · ${x.t.n}${x.f.no?" · "+x.f.no:""}${x.f.rev?" · Rev "+x.f.rev:""}${x.imgs.length>1?` · sheet ${i+1}/${x.imgs.length}`:""}`),pw-8,9,{align:"right"});doc.setFont("helvetica","normal");
+    doc.setTextColor(...(x.c.st=="final"?ok:acc));doc.text(x.c.st=="final"?`APPROVED FINAL · ${x.c.ap?fmt(new Date(x.c.ap.at)):""}`:"FOR CLIENT SIGN-OFF",pw-8,13.5,{align:"right"});
+    const strip=x.c.st=="final"?0:13;const top=17,mw=pw-16,mh=ph-top-9-strip;const r=Math.min(mw/im.w,mh/im.h);doc.addImage(im.d,im.t||"JPEG",8+(mw-im.w*r)/2,top,im.w*r,im.h*r);
+    if(strip){const sy=ph-8-strip+2;doc.setDrawColor(...line);doc.setLineWidth(.3);doc.rect(8,sy,pw-16,strip-2);doc.setFontSize(8);doc.setTextColor(...mute);const cw2=(pw-16)/3;
+      ["Client signature","Name","Date"].forEach((l,k)=>{const xx=8+k*cw2;doc.text(l,xx+3,sy+4);doc.setDrawColor(...mute);doc.line(xx+3,sy+9,xx+cw2-4,sy+9)})}});
+  const n=doc.getNumberOfPages();for(let i=1;i<=n;i++){doc.setPage(i);const pw=doc.internal.pageSize.getWidth(),ph=doc.internal.pageSize.getHeight();doc.setFontSize(7.5);doc.setTextColor(...mute);doc.text(`Bhaaje Private Limited · AMR Living Spaces · Villa ${v}`,8,ph-3.5);doc.text(`Page ${i} of ${n}`,pw-8,ph-3.5,{align:"right"})}
   const name=`Villa${vkey(v)}-Drawings-${allFinal?"Final":"For-Signoff"}-${iso(new Date())}.pdf`;const r=await fxShare(doc.output("blob"),name,`Villa ${v} drawings`);
-  return r.replace(/\.+$/,"")+(miss.length?`. No printable file linked for: ${miss.join(", ")} (only the cover sheet lists them).`:pages?`. ${plur(pages,"drawing page")} included.`:"")}
+  return r.replace(/\.+$/,"")+(miss.length?`. No printable drawing linked for: ${miss.join(", ")}. Link the file and print again to include it.`:pages?`. Drawing shown under the sign-off, plus ${plur(pages,"full-size sheet")}.`:"")}
 // Excel in and out, same layout as the consultant register
 async function dImport(f){await loadXLSX();const wb=XLSX.read(await f.arrayBuffer(),{type:"array"});const A=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:null});
   let hr=-1,vc=-1;for(let r=0;r<Math.min(15,A.length);r++){const i=(A[r]||[]).findIndex(h=>/villa/i.test(String(h||"")));if(i>=0){hr=r;vc=i;break}}if(hr<0)throw new Error("Couldn't find the “Villa No” column in the first rows.");
@@ -5796,6 +5963,257 @@ async function qrPdf(){const v=villa();if(!v)throw new Error("Choose a villa fir
 {const rd0=renderDefects;renderDefects=function(){rd0.apply(this,arguments);const h=$("dfhead");if(!h||h.querySelector("#qrB"))return;const p=document.createElement("p");p.innerHTML=`<button type="button" class="btn pri sm" id="qrB" style="width:auto">Download villa quality report (PDF)</button> <span class="note" id="qrMsg"></span>`;h.appendChild(p);
   $("qrB").onclick=async()=>{const b=$("qrB");b.disabled=true;$("qrMsg").textContent="Preparing the report…";try{$("qrMsg").textContent=await qrPdf()}catch(e){$("qrMsg").textContent="Couldn't make the report: "+(e.message||e)}finally{b.disabled=false}}}}
 {const h2=window.hdrAct;window.hdrAct=function(){h2&&h2();const b=$("hpB");if(!b||view!="D")return;b.hidden=false;b.textContent="Quality report (PDF)";b.onclick=()=>{const q=$("qrB");if(q)q.click()}}}
+
+function drClick(e){const a=e.target.closest("[data-drall],[data-drstep],[data-drvo]");if(!a)return false;
+    if(a.dataset.drall){DRS.villa=0;DRS.focus="";renderDreg();return true}
+    if(a.dataset.drstep){const i=PLOTS.indexOf(DRS.villa)+(+a.dataset.drstep);if(PLOTS[i])dVilla(PLOTS[i]);return true}
+    dVilla(+a.dataset.drvo,a.dataset.drt0||"");return true}
+function drBind(box){box.onclick=e=>{drClick(e)};
+  const sel=$("drVs");if(sel)sel.onchange=()=>{if(sel.value)dVilla(+sel.value);else{DRS.villa=0;renderDreg()}};
+  const st=$("drStrip"),on=st&&st.querySelector(".on");if(on)st.scrollLeft=on.offsetLeft-st.clientWidth/2+on.clientWidth/2}
+// site map: villas with work in progress glow
+{const pm2=paintMap;paintMap=function(){pm2.apply(this,arguments);try{PLOTS.forEach(n=>{const g=$("gv"+n);if(g)g.classList.toggle("wipv",stats(n).P.length>0)})}catch(e){}}}
+{const rr=renderRamp;renderRamp=function(){rr.apply(this,arguments);const r=$("ramp");if(r&&!r.querySelector(".wipleg"))r.insertAdjacentHTML("beforeend",`<span class="wipleg"><i></i>Work going on</span>`)}}
+try{renderRamp();paintMap()}catch(e){}
+
+// ---------- v17: debit notes — every note raised, who for, how serious, what keeps repeating ----------
+const DNSV=["Critical","Major","Minor","Not linked"];
+const dnSevCol=s=>s=="Critical"?"var(--bad)":s=="Major"?"var(--acc)":s=="Minor"?"var(--s1)":"var(--na)";
+function dnAll(){const out=[],cur=villa();const keys=new Set(Object.keys(SITE));try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith("amr-planner:")&&!/:(last|_draft)$/.test(k))keys.add(k.slice(12))}}catch(e){}
+  [...keys].forEach(k=>{const s=cur&&vkey(cur)==k?snapshot():villaSnap(k);if(!s||!s.leaves)return;const v=+k||k;
+    LEAVES.forEach(u=>{const L=s.leaves[u.id];if(!L||!(L.dn||[]).length)return;const it=items({...u,custom:L.custom||[]});
+      L.dn.forEach(d=>{const lk=(d.links||[]).map(x=>{if(String(x).startsWith("p:")){const kk=x.slice(2),f=(L.df||{})[kk];return{t:(it.find(i=>i.k==kk)||{}).t||"",sev:(f&&f.sev)||"Major",cat:(f&&f.cat)||""}}const z=(L.xd||[]).find(z=>"x:"+z.id==x);return z?{t:z.t,sev:z.sev||"Major",cat:z.cat||""}:null}).filter(Boolean);
+        const sev=lk.length?DNSV.find(s=>lk.some(l=>l.sev==s))||"Major":"Not linked";const dt=d.date||String(d.at||"").slice(0,10);
+        out.push({v,u,d,lk,sev,amt:+d.amt||0,con:(d.con||"Not named").trim(),st:d.st||"draft",dt,age:dt?Math.floor((today-new Date(dt+"T00:00:00"))/864e5):0})})})});
+  return out.sort((a,b)=>String(b.dt).localeCompare(String(a.dt)))}
+const DNF={scope:0,con:"",st:"",sev:"",q:"",sort:"amt"};
+function renderDnv(){const box=$("viewN");if(!box)return;const A=dnAll();const vs=new Set(DNF.scope?(DNF.scope==="P"?PRI.map(x=>x.n):isLV(DNF.scope)?PRI.filter(x=>x.lv==LVID[DNF.scope]).map(x=>x.n):villasOf(CLUSTERS.find(c=>c.id===DNF.scope))):PLOTS);
+  const q=DNF.q.trim().toLowerCase();
+  const S=A.filter(r=>vs.has(+r.v)),F=S.filter(r=>(!DNF.con||r.con==DNF.con)&&(!DNF.st||r.st==DNF.st)&&(!DNF.sev||r.sev==DNF.sev)&&(!q||[r.d.no,r.con,r.d.why,r.u.n,"villa "+r.v].join(" ").toLowerCase().includes(q)));
+  const sum=L=>L.reduce((s,r)=>s+r.amt,0),T=sum(F),rec=sum(F.filter(r=>r.st=="recovered")),dis=F.filter(r=>r.st=="disputed"),out=F.filter(r=>r.st=="issued"||r.st=="accepted");
+  // by contractor
+  const byC={};F.forEach(r=>{const c=byC[r.con]=byC[r.con]||{con:r.con,n:0,amt:0,rec:0,out:0,sev:{},acts:{}};c.n++;c.amt+=r.amt;if(r.st=="recovered")c.rec+=r.amt;if(r.st=="issued"||r.st=="accepted")c.out+=r.amt;c.sev[r.sev]=(c.sev[r.sev]||0)+1;c.acts[r.u.n]=(c.acts[r.u.n]||0)+1});
+  const CR=Object.values(byC).sort((a,b)=>DNF.sort=="n"?b.n-a.n:b.amt-a.amt);
+  // repeats: same activity, same checklist point, same category
+  const rep=(keyf)=>{const m={};F.forEach(r=>{(keyf(r)||[]).forEach(k=>{if(!k)return;const o=m[k]=m[k]||{k,n:0,amt:0,vs:new Set(),cons:new Set()};o.n++;o.amt+=r.amt;o.vs.add(r.v);o.cons.add(r.con)})});return Object.values(m).sort((a,b)=>b.n-a.n||b.amt-a.amt).slice(0,8)};
+  const RA=rep(r=>[r.u.n]),RP=rep(r=>r.lk.map(l=>l.t)),RC=rep(r=>r.lk.length?[...new Set(r.lk.map(l=>l.cat||"Workmanship"))]:["Not linked to a defect"]);
+  const bySev=DNSV.map(s=>({s,n:F.filter(r=>r.sev==s).length,amt:sum(F.filter(r=>r.sev==s))})).filter(x=>x.n);
+  const months={};F.forEach(r=>{const m=String(r.dt).slice(0,7);if(!m)return;(months[m]=months[m]||{n:0,amt:0});months[m].n++;months[m].amt+=r.amt});const mk0=Object.keys(months).sort();const MK=[];if(mk0.length){let d=new Date(mk0[0]+"-01T00:00:00");const end=mk0[mk0.length-1];while(true){const k=d.toISOString().slice(0,7);MK.push(k);months[k]=months[k]||{n:0,amt:0};if(k>=end||MK.length>24)break;d.setMonth(d.getMonth()+1)}}MK.splice(0,Math.max(0,MK.length-12)),mmax=Math.max(1,...MK.map(m=>months[m].amt));
+  const ageB=[["0–15 days",0,15],["16–30 days",16,30],["31–60 days",31,60],["Over 60 days",61,1e9]].map(([l,a,b])=>({l,L:out.filter(r=>r.age>=a&&r.age<=b)}));
+  const cons=[...new Set(S.map(r=>r.con))].sort();const ed=canPlanSafe();
+  const stc=st=>`<span class="dnst st-${st}">${(DNST.find(x=>x[0]==st)||[0,st])[1]}</span>`;
+  box.innerHTML=`<div class="fxin dnv">
+   <section class="fxp drh"><div class="drh1"><div><span class="vcl">Debit notes · ${plur(new Set(F.map(r=>r.v)).size,"villa")} · ${plur(new Set(F.map(r=>r.con)).size,"contractor")}</span><h2><span class="fig">${inr(T)}</span> raised</h2></div>
+      <div class="fxacts"><button type="button" class="fxb" id="dnXl">Excel register</button><button type="button" class="fxb pri" id="dnPdfB"${F.length?"":" disabled"}>Summary PDF</button></div></div>
+    <div class="drk dnk">${[["n",F.length,"Debit notes raised",`${plur(F.filter(r=>r.st=="draft").length,"draft")} not yet issued`],["rec",inr(rec),"Recovered from bills",T?Math.round(rec/T*100)+"% of the value raised":""],["out",inr(sum(out)),"Waiting to recover",`${plur(out.length,"note")} issued or accepted`],["dis",inr(sum(dis)),"Disputed",plur(dis.length,"note")+" the contractor contests"]].map(([k,b,l,s])=>`<div class="drt dk-${k}"><b class="fig">${b}</b><span>${l}</span><small>${s}</small></div>`).join("")}</div>
+    <div class="dnpipe">${DNST.map(([k,l])=>{const L=F.filter(r=>r.st==k);return`<button type="button" class="dnp st-${k}${DNF.st==k?" on":""}" data-dnst="${k}" aria-pressed="${DNF.st==k}"><b>${L.length}</b><span>${l}</span><small>${inr(sum(L))}</small></button>`}).join("")}</div></section>
+   <div class="drbar"><div class="dtabs drsc" role="tablist" aria-label="Villas">${[{id:0,n:"All villas"},...CLUSTERS.map(x=>({id:x.id,n:"Cluster "+x.id})),...(PRI.length?[{id:"H",n:"High"},{id:"M",n:"Medium"},{id:"L",n:"Low"}]:[])].map(x=>`<button type="button" role="tab" data-dns="${x.id}" aria-selected="${DNF.scope===x.id}"${isLV(x.id)?` class="lvt" style="--lc:${lvCol(LVID[x.id])}"`:""}>${x.n}</button>`).join("")}</div>
+     <div class="drv"><select class="fxi" id="dnCon" aria-label="Contractor"><option value="">All contractors</option>${cons.map(c=>`<option${c==DNF.con?" selected":""}>${esc(c)}</option>`).join("")}</select><input class="fxi" id="dnQ" type="search" placeholder="Find DN no., reason, villa" value="${esc(DNF.q)}" aria-label="Search debit notes"></div></div>
+   ${S.length?`
+   <div class="dngrid">
+    <section class="fxp"><div class="wkhd"><h3 class="fxh3">By contractor</h3><div class="segv" role="tablist" aria-label="Sort"><button type="button" role="tab" data-dnsort="amt" aria-selected="${DNF.sort=="amt"}">Value</button><button type="button" role="tab" data-dnsort="n" aria-selected="${DNF.sort=="n"}">Count</button></div></div>
+      <ul class="dncl">${CR.map(c=>`<li><button type="button" class="dncr${DNF.con==c.con?" on":""}" data-dncon="${esc(c.con)}"><span class="dncn"><b>${esc(c.con)}</b><small>${plur(c.n,"note")} · most often ${esc(Object.entries(c.acts).sort((a,b)=>b[1]-a[1])[0][0])}</small></span>
+        <span class="dnsv">${DNSV.filter(s=>c.sev[s]).map(s=>`<i style="--c:${dnSevCol(s)}" title="${s}">${c.sev[s]} ${s=="Not linked"?"unlinked":s.toLowerCase()}</i>`).join("")}</span>
+        <span class="dnam"><b class="fig">${inr(c.amt)}</b><small>${c.out?inr(c.out)+" to recover":c.rec?"all recovered":""}</small></span><span class="dnbar" aria-hidden="true"><i style="width:${CR[0].amt?c.amt/Math.max(...CR.map(x=>x.amt))*100:0}%"></i></span></button></li>`).join("")}</ul></section>
+    <section class="fxp"><h3 class="fxh3">Major and minor</h3><p class="fxsm" style="margin-top:-6px">Severity of the defects each note is raised against.</p>
+      <div class="dnsevs">${bySev.map(x=>`<button type="button" class="dnsevb${DNF.sev==x.s?" on":""}" data-dnsev="${x.s}" style="--c:${dnSevCol(x.s)}"><b class="fig">${x.n}</b><span>${x.s}</span><small>${inr(x.amt)}</small></button>`).join("")}</div>
+      <h3 class="fxh3" style="margin-top:18px">Waiting to recover, by age</h3><div class="dnage">${ageB.map(b=>`<div><span>${b.l}</span><i style="--w:${out.length?b.L.length/out.length*100:0}%"></i><b>${b.L.length} · ${inr(sum(b.L))}</b></div>`).join("")}</div>
+      ${MK.length>1?`<h3 class="fxh3" style="margin-top:18px">By month</h3><div class="dnmo">${MK.map(m=>`<div title="${m}: ${months[m].n} notes, ${inr(months[m].amt)}"><i style="height:${months[m].amt/mmax*100}%"></i><span>${new Date(m+"-01T00:00:00").toLocaleDateString("en-GB",{month:"short"})}</span></div>`).join("")}</div>`:""}</section>
+   </div>
+   <section class="fxp"><h3 class="fxh3">What keeps repeating</h3><p class="fxsm" style="margin-top:-6px">The same failure raised again and again points to a contractor's method or crew, not a one-off. Fix the method once instead of recovering money every time.</p>
+     <div class="dnrep">${[["Activity",RA],["Checklist point",RP],["Defect category",RC]].map(([h,L])=>`<div><h4 class="drg">${h}</h4>${L.length?`<ol class="dnrl">${L.map(o=>`<li><span class="dnrt">${esc(o.k)}</span><span class="dnrm"><b>${o.n}×</b> · ${plur(o.vs.size,"villa")} · ${inr(o.amt)}${o.cons.size==1?` · ${esc([...o.cons][0])}`:` · ${o.cons.size} contractors`}</span></li>`).join("")}</ol>`:`<p class="fxsm">Nothing linked yet.</p>`}</div>`).join("")}</div></section>
+   <section class="fxp"><div class="wkhd"><h3 class="fxh3">${F.length==S.length?"All debit notes":plur(F.length,"debit note")+" match the filters"}</h3>${DNF.con||DNF.st||DNF.sev||q?`<button type="button" class="fxb sm" id="dnClr">Clear filters</button>`:""}</div>
+     ${F.length?`<div class="dntw"><table class="dntb"><thead><tr><th>DN no.</th><th>Date</th><th>Villa</th><th>Activity</th><th>Contractor</th><th>Severity</th><th class="r">Amount</th><th>Status</th></tr></thead><tbody>${F.map((r,i)=>`<tr data-dni="${i}" tabindex="0"><td><b>${esc(r.d.no||"")}</b></td><td>${r.dt?fmtD(r.dt):""}</td><td>${r.v}</td><td>${esc(r.u.n)}<small>${esc(r.d.why||"")}</small></td><td>${esc(r.con)}</td><td><span class="dnsvp" style="--c:${dnSevCol(r.sev)}">${r.sev}</span></td><td class="r fig">${inr(r.amt)}</td><td>${stc(r.st)}${(r.st=="issued"||r.st=="accepted")&&r.age>30?`<small class="late">${r.age} days</small>`:""}</td></tr>`).join("")}</tbody><tfoot><tr><td colspan="6">Total</td><td class="r fig">${inr(T)}</td><td></td></tr></tfoot></table></div>`:`<div class="fxempty">No debit notes match these filters.</div>`}</section>`
+   :`<section class="fxp"><div class="fxempty">No debit notes raised yet. They're raised at the end of an activity checklist, under <b>Debit notes</b>, against the defects found.</div></section>`}
+  </div>`;
+  box.onclick=e=>{const t=e.target.closest("[data-dnst],[data-dns],[data-dncon],[data-dnsev],[data-dnsort],[data-dni],#dnClr,#dnXl,#dnPdfB");if(!t)return;
+    if(t.dataset.dnst){DNF.st=DNF.st==t.dataset.dnst?"":t.dataset.dnst}else if(t.dataset.dns!=null){const v=t.dataset.dns;DNF.scope=isLV(v)?v:+v}
+    else if(t.dataset.dncon!=null){DNF.con=DNF.con==t.dataset.dncon?"":t.dataset.dncon}else if(t.dataset.dnsev){DNF.sev=DNF.sev==t.dataset.dnsev?"":t.dataset.dnsev}
+    else if(t.dataset.dnsort){DNF.sort=t.dataset.dnsort}else if(t.id=="dnClr"){DNF.con=DNF.st=DNF.sev=DNF.q=""}
+    else if(t.id=="dnXl"){dnRegister().then(m=>status(m));return}else if(t.id=="dnPdfB"){dnSummaryPdf(F).then(m=>status(m),er=>status("PDF failed: "+er.message));return}
+    else if(t.dataset.dni!=null){const r=F[+t.dataset.dni];$("vn").value=String(r.v);openVilla(String(r.v)).then(()=>{sel=LEAF[r.u.id];setView("C");setTimeout(()=>{const a=$("accDn");if(a){a.open=true;a.scrollIntoView({block:"center"})}},200)});return}
+    renderDnv()};
+  $("dnCon").onchange=e=>{DNF.con=e.target.value;renderDnv()};
+  $("dnQ").oninput=e=>{DNF.q=e.target.value;const p=e.target.selectionStart;renderDnv();const i=$("dnQ");i.focus();try{i.setSelectionRange(p,p)}catch(x){}};
+  box.querySelectorAll("tr[data-dni]").forEach(tr=>tr.onkeydown=e=>{if(e.key=="Enter")tr.click()})}
+async function dnSummaryPdf(F){await loadJsPDF();const {jsPDF}=window.jspdf,doc=new jsPDF({unit:"mm",format:"a4"});const W=210,M=14,ink=[21,35,58],mute=[94,107,124],acc=[232,103,42],line=[214,220,228];
+  const sum=L=>L.reduce((s,r)=>s+r.amt,0),rs=n=>"Rs. "+Number(n||0).toLocaleString("en-IN",{maximumFractionDigits:0});
+  pdfLogo(doc,M,12,14);doc.setFont("helvetica","bold");doc.setFontSize(16);doc.setTextColor(...ink);doc.text("Debit note summary",W-M,18,{align:"right"});doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(...mute);doc.text(`AMR Living Spaces · ${F.length} notes · issued ${fmt(new Date())}`,W-M,24,{align:"right"});
+  doc.setDrawColor(...acc);doc.setLineWidth(.8);doc.line(M,32,W-M,32);let y=38;
+  const bx=[["Raised",rs(sum(F))],["Recovered",rs(sum(F.filter(r=>r.st=="recovered")))],["To recover",rs(sum(F.filter(r=>r.st=="issued"||r.st=="accepted")))],["Disputed",rs(sum(F.filter(r=>r.st=="disputed")))]];const bw=(W-2*M-12)/4;
+  bx.forEach(([l,v],i)=>{const x=M+i*(bw+4);doc.setDrawColor(...line);doc.setFillColor(246,248,251);doc.roundedRect(x,y,bw,16,2,2,"FD");doc.setFontSize(8);doc.setTextColor(...mute);doc.text(l,x+4,y+5.5);doc.setFont("helvetica","bold");doc.setFontSize(12);doc.setTextColor(...ink);doc.text(v,x+4,y+12.5);doc.setFont("helvetica","normal")});y+=24;
+  const byC={};F.forEach(r=>{const c=byC[r.con]=byC[r.con]||{n:0,amt:0,maj:0,min:0,out:0};c.n++;c.amt+=r.amt;if(r.sev=="Critical"||r.sev=="Major")c.maj++;else if(r.sev=="Minor")c.min++;if(r.st=="issued"||r.st=="accepted")c.out+=r.amt});
+  doc.autoTable({startY:y,margin:{left:M,right:M},head:[["Contractor","Notes","Critical / major","Minor","Value","To recover"]],body:Object.entries(byC).sort((a,b)=>b[1].amt-a[1].amt).map(([c,o])=>[c,o.n,o.maj,o.min,rs(o.amt),rs(o.out)]),theme:"grid",styles:{fontSize:9,textColor:ink,lineColor:line,lineWidth:.2},headStyles:{fillColor:ink,textColor:255},columnStyles:{1:{halign:"right"},2:{halign:"right"},3:{halign:"right"},4:{halign:"right"},5:{halign:"right"}}});
+  y=doc.lastAutoTable.finalY+8;const m={};F.forEach(r=>{const k=r.u.n;(m[k]=m[k]||{n:0,amt:0,vs:new Set()});m[k].n++;m[k].amt+=r.amt;m[k].vs.add(r.v)});
+  doc.autoTable({startY:y,margin:{left:M,right:M},head:[["Most repeated activity","Times","Villas","Value"]],body:Object.entries(m).sort((a,b)=>b[1].n-a[1].n).slice(0,10).map(([k,o])=>[k,o.n,o.vs.size,rs(o.amt)]),theme:"grid",styles:{fontSize:9,textColor:ink,lineColor:line,lineWidth:.2},headStyles:{fillColor:ink,textColor:255},columnStyles:{1:{halign:"right"},2:{halign:"right"},3:{halign:"right"}}});
+  y=doc.lastAutoTable.finalY+8;doc.autoTable({startY:y,margin:{left:M,right:M},head:[["DN no.","Date","Villa","Activity","Contractor","Severity","Amount","Status"]],body:F.map(r=>[r.d.no||"",r.dt?fmtD(r.dt):"",r.v,r.u.n,r.con,r.sev,rs(r.amt),(DNST.find(x=>x[0]==r.st)||[0,r.st])[1]]),theme:"grid",styles:{fontSize:7.8,textColor:ink,lineColor:line,lineWidth:.2},headStyles:{fillColor:ink,textColor:255},columnStyles:{6:{halign:"right"}}});
+  const n=doc.getNumberOfPages();for(let i=1;i<=n;i++){doc.setPage(i);doc.setFontSize(7.5);doc.setTextColor(...mute);doc.text("Bhaaje Private Limited · AMR Living Spaces",M,290);doc.text(`Page ${i} of ${n}`,W-M,290,{align:"right"})}
+  return fxShare(doc.output("blob"),`Debit-Note-Summary-${iso(new Date())}.pdf`,"Debit note summary")}
+// page and rail entry
+{const host=$("viewO");const s=document.createElement("div");s.className="ov fxv";s.id="viewN";host.after(s);
+  const views=document.querySelector(".rail .views"),ref=$("vW");const b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.id="vN";b.className="fxrail2";b.setAttribute("aria-selected","false");b.title="Debit notes";
+  b.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 11h6M9 11c2.5 0 3 1.5 3 2.5S11 16 9 16l4 3"/><path d="M9 13.5h6"/></svg>Debit notes`;b.onclick=()=>setView("N");views.insertBefore(b,ref)}
+PGN.N="Debit notes";
+{const av=allowedViews;allowedViews=function(){const a=av();a.splice(a.indexOf("W"),0,"N");return a}}
+RAILP.eng=["S","C","D","T","L"];
+{const sv4=setView;setView=function(v){if(v=="N"){if(!allowedViews().includes("N"))return sv4("S");view="N";const app=document.querySelector(".app");app.dataset.view="N";document.querySelectorAll(".rail [role=tab]").forEach(b=>b.setAttribute("aria-selected",b.id=="vN"));try{localStorage.setItem("ak-nav","N")}catch(e){}pgHead();if(window.hdrAct)hdrAct();renderDnv();railFit();return}
+  const b=$("vN");if(b)b.setAttribute("aria-selected","false");sv4(v)}}
+{const ph3=pgHead;pgHead=function(){ph3();if(view=="N"){const s=$("pgS");if(s)s.textContent="Every debit note raised, who it's for, and what keeps repeating"}}}
+{const h3=window.hdrAct;window.hdrAct=function(){h3&&h3();const b=$("hpB");if(!b||view!="N")return;b.hidden=false;b.textContent="Summary PDF";b.onclick=()=>{const x=$("dnPdfB");if(x)x.click()}}}
+railFit();
+
+// ---------- v18: schedule from the planner, labour against the schedule, site diary ----------
+const WHY=["Labour shortage","Material not available","Rain / weather","Drawing or approval pending","Previous work not ready","Machine / equipment","Other"];
+const LST=[["done","Done"],["part","Partly done"],["none","Not started"]];
+function labMerged(w){const P=wkRows(w,"plan"),L=wkRows(w,"lab");const used=new Set();
+  const out=P.map(p=>{const l=L.find(x=>x.pid==p.id)||L.find(x=>!x.pid&&x.v==p.v&&x.leaf==p.leaf&&!used.has(x.id));if(l)used.add(l.id);
+    return{id:l?l.id:"p:"+p.id,pid:p.id,v:p.v,leaf:p.leaf,pm:+p.mas||0,ph:+p.hel||0,mas:l?+l.mas||0:null,hel:l?+l.hel||0:null,st:l?l.st||"":"",why:l?l.why||"":"",note:l?l.note||"":"",con:l?l.con||"":"",planned:true,lab:l||null}});
+  L.filter(x=>!used.has(x.id)&&!x.pid).forEach(l=>out.push({...l,mas:+l.mas||0,hel:+l.hel||0,pm:null,ph:null,planned:false,lab:l}));return out}
+const labDef=r=>r.planned&&r.mas!=null?Math.max(0,r.pm-r.mas)+Math.max(0,r.ph-r.hel):0;
+// how many masons and helpers this activity usually gets (last time it was planned anywhere)
+function wkNorms(){const m={};try{const ks=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith("ak-work:"))ks.push(k)}ks.sort().forEach(k=>{const w=wkLoad(k.slice(8));(w.rows||[]).forEach(r=>{if(!r.del&&(+r.mas||+r.hel))m[r.leaf]={mas:+r.mas||0,hel:+r.hel||0}})})}catch(e){}return m}
+const WKP={scope:0,q:"",only:false,open:new Set()};
+function wkPlanHtml(d){const D=new Date(d+"T00:00:00");const w=wkLoad(d),rows=wkRows(w,"plan");const sel=new Map(rows.map(r=>[r.v+"|"+r.leaf,r]));
+  const inScope=n=>!WKP.scope||(WKP.scope==="P"?isPri(n):isLV(WKP.scope)?(PRI[priOf(n)]||{}).lv===LVID[WKP.scope]:clusterOf(n).id===WKP.scope);
+  const q=WKP.q.trim();const G=[];PLOTS.forEach(n=>{if(!inScope(n)||(q&&!String(n).startsWith(q)))return;const F=(stats(n).F||[]).filter(f=>f.s<=D&&f.e>=D);
+    const extra=rows.filter(r=>r.v==n&&!F.some(f=>f.u.id==r.leaf)).map(r=>({u:LEAF[r.leaf],extra:true})).filter(x=>x.u);const L=[...F,...extra];if(!L.length)return;if(WKP.only&&!L.some(f=>sel.has(n+"|"+f.u.id)))return;G.push({n,L})});
+  const nsel=rows.length,total=G.reduce((s,g)=>s+g.L.length,0);
+  return`<section class="fxp" id="wkPlan"><div class="wkhd"><div><h3 class="fxh3" style="margin:0">From the planner · ${fmtD(d)}</h3><p class="fxsm" style="margin:4px 0 0">Activities the plan has running on this day. Tick the ones that will go ahead; untick to drop them. Masons and helpers start from the last numbers used for that activity.</p></div>
+    <span class="wkpc"><b class="fig">${nsel}</b> selected of ${total}</span></div>
+    <div class="wkpf"><div class="dtabs drsc">${[{id:0,n:"All villas"},...CLUSTERS.map(x=>({id:x.id,n:"Cluster "+x.id})),...(PRI.length?[{id:"H",n:"High"},{id:"M",n:"Medium"},{id:"L",n:"Low"}]:[])].map(x=>`<button type="button" data-wps="${x.id}" aria-selected="${WKP.scope===x.id}"${isLV(x.id)?` class="lvt" style="--lc:${lvCol(LVID[x.id])}"`:""}>${x.n}</button>`).join("")}</div>
+      <input class="fxi" id="wkPq" inputmode="numeric" placeholder="Villa no." value="${esc(WKP.q)}" aria-label="Find a villa"><label class="fxck"><input type="checkbox" id="wkPo"${WKP.only?" checked":""}> Only selected</label></div>
+    ${G.length?`<div class="wkpg">${G.map(g=>{const ns=g.L.filter(f=>sel.has(g.n+"|"+f.u.id)).length;const open=WKP.open.has(g.n)||ns>0&&WKP.open.size==0||G.length<=6;
+      return`<details class="wkpv${ns?" has":""}" data-wpv="${g.n}"${open?" open":""}><summary><b>Villa ${g.n}</b><span>${ns?`${ns} of ${g.L.length} selected`:`${plur(g.L.length,"activity","activities")} planned`}</span><button type="button" class="fxlnk" data-wpall="${g.n}">${ns==g.L.length?"Clear":"Select all"}</button></summary>
+        <ul>${g.L.map(f=>{const u=f.u,r=sel.get(g.n+"|"+u.id);return`<li class="wkpr${r?" on":""}"><label><input type="checkbox" data-wkpick="${g.n}|${u.id}"${r?" checked":""}><span class="wkpn"><b>${esc(u.n)}</b><small>${esc(u.seq.n)} › ${esc(u.stn)} · ${f.extra?"added by hand":f.wip?`in progress, ends ${fmtD(iso(f.e))}`:`planned ${fmtD(iso(f.s))}${+f.e!=+f.s?" – "+fmtD(iso(f.e)):""}`}</small></span></label>
+          ${r?`<span class="wkpq"><label>M<input type="number" min="0" inputmode="numeric" class="fxi" data-wkm="${r.id}" value="${+r.mas||0}" aria-label="Masons for ${esc(u.n)}"></label><label>H<input type="number" min="0" inputmode="numeric" class="fxi" data-wkh="${r.id}" value="${+r.hel||0}" aria-label="Helpers for ${esc(u.n)}"></label></span>`:""}</li>`}).join("")}</ul></details>`}).join("")}</div>`
+      :`<div class="fxempty">No activities in the plan for ${fmtD(d)}${WKP.scope||q?" in this selection":""}. Add work by hand below.</div>`}</section>`}
+function wkPlanBind(box,d){const P=$("wkPlan");if(!P)return;const re=()=>renderWk("T");
+  P.querySelectorAll("[data-wps]").forEach(b=>b.onclick=()=>{const v=b.dataset.wps;WKP.scope=isLV(v)||v=="P"?v:+v;re()});
+  $("wkPq").oninput=e=>{WKP.q=e.target.value.replace(/\D/g,"");const p=e.target.selectionStart;re();const i=$("wkPq");i.focus();try{i.setSelectionRange(p,p)}catch(x){}};
+  $("wkPo").onchange=e=>{WKP.only=e.target.checked;re()};
+  P.querySelectorAll("details[data-wpv]").forEach(dt=>dt.addEventListener("toggle",()=>{dt.open?WKP.open.add(+dt.dataset.wpv):WKP.open.delete(+dt.dataset.wpv)}));
+  const norms=wkNorms();const add=(w,v,leaf)=>{const nm=norms[leaf]||{mas:0,hel:0};w.rows.push({id:fxId(),kind:"plan",v:+v,leaf:+leaf,mas:nm.mas,hel:nm.hel,note:"",con:"",by:engName(),mt:new Date().toISOString(),src:"planner"})};
+  P.querySelectorAll("[data-wkpick]").forEach(c=>c.onchange=()=>{const [v,leaf]=c.dataset.wkpick.split("|");const w=wkLoad(d);const ex=w.rows.find(r=>r.kind=="plan"&&!r.del&&r.v==+v&&r.leaf==+leaf);
+    if(c.checked&&!ex)add(w,v,leaf);else if(!c.checked&&ex){ex.del=true;ex.mt=new Date().toISOString()}WKP.open.add(+v);wkStore(w,true);re()});
+  P.querySelectorAll("[data-wpall]").forEach(b=>b.onclick=e=>{e.preventDefault();const v=+b.dataset.wpall;const dt=b.closest("details");const picks=[...dt.querySelectorAll("[data-wkpick]")].map(c=>c.dataset.wkpick.split("|")[1]);const w=wkLoad(d);
+    const all=picks.every(l=>w.rows.some(r=>r.kind=="plan"&&!r.del&&r.v==v&&r.leaf==+l));picks.forEach(l=>{const ex=w.rows.find(r=>r.kind=="plan"&&!r.del&&r.v==v&&r.leaf==+l);if(all&&ex){ex.del=true;ex.mt=new Date().toISOString()}else if(!all&&!ex)add(w,v,l)});WKP.open.add(v);wkStore(w,true);re()});
+  P.querySelectorAll("[data-wkm],[data-wkh]").forEach(inp=>inp.onchange=()=>{const w=wkLoad(d),r=w.rows.find(x=>x.id==(inp.dataset.wkm||inp.dataset.wkh));if(!r)return;r[inp.dataset.wkm?"mas":"hel"]=Math.max(0,Math.round(+inp.value||0));r.mt=new Date().toISOString();wkStore(w,true);re()})}
+// labour: what was planned for the day, what turned up, and why any shortfall
+function labHtml(d){const w=wkLoad(d),M=labMerged(w),P=M.filter(r=>r.planned),U=M.filter(r=>!r.planned);
+  const pw=P.reduce((s,r)=>s+r.pm+r.ph,0),rep=P.filter(r=>r.lab),aw=M.reduce((s,r)=>s+(r.mas||0)+(r.hel||0),0),def=P.reduce((s,r)=>s+labDef(r),0);
+  const row=r=>{const u=LEAF[r.leaf]||{n:"(removed)",seq:{n:""},stn:""};const df=labDef(r),need=r.lab&&(df>0||(r.st&&r.st!="done"));
+    return`<li class="lbr${r.lab?" rep":""} ls-${r.st||"x"}" data-lb="${r.id}" data-lbp="${r.pid||""}">
+      <div class="lbh"><span class="wkvn">Villa <b>${r.v}</b></span><span class="wkac"><b>${esc(u.n)}</b><small>${esc(u.seq.n)} › ${esc(u.stn)}${r.planned?` · planned ${r.pm} masons, ${r.ph} helpers`:" · not in the schedule"}</small></span>
+        ${r.lab?(df>0?`<span class="lbdef">Short by ${df}</span>`:r.planned?`<span class="lbok">Full strength</span>`:""):`<span class="lbnr">Not reported yet</span>`}</div>
+      <div class="lbg"><label class="wkq"><span>Masons came</span><input type="number" min="0" inputmode="numeric" class="fxi" data-lbm="1" value="${r.mas??""}" placeholder="${r.planned?r.pm:0}"></label>
+        <label class="wkq"><span>Helpers came</span><input type="number" min="0" inputmode="numeric" class="fxi" data-lbh="1" value="${r.hel??""}" placeholder="${r.planned?r.ph:0}"></label>
+        <div class="lbst" role="group" aria-label="Work status">${LST.map(([k,l])=>`<button type="button" data-lbs="${k}" aria-pressed="${r.st==k}">${l}</button>`).join("")}</div>
+        ${r.planned&&!r.lab?`<button type="button" class="fxb sm" data-lbfull="1">As planned</button>`:""}</div>
+      ${need||r.why?`<div class="lbw"><label class="fxf"><span>Reason for the shortfall</span><select class="fxi" data-lbwhy="1"><option value="">Choose…</option>${WHY.map(x=>`<option${x==r.why?" selected":""}>${x}</option>`).join("")}</select></label><label class="fxf"><span>Note</span><input class="fxi" data-lbnote="1" value="${esc(r.note||"")}" placeholder="e.g. 2 masons shifted to villa 14"></label></div>`:""}
+    </li>`};
+  return`<section class="fxp" id="wkLab"><div class="wkhd"><div><h3 class="fxh3" style="margin:0">Planned for ${fmtD(d)}</h3><p class="fxsm" style="margin:4px 0 0">From the schedule made the day before. Enter who actually came and how far the work got. Any shortfall needs a reason.</p></div>
+    <div class="wktot"><span><b class="fig">${rep.length}/${P.length}</b> reported</span><span><b class="fig">${pw}</b> planned</span><span><b class="fig">${aw}</b> came</span><span class="${def?"lbdt":""}"><b class="fig">${def}</b> short</span></div></div>
+    ${P.length?`<ul class="lbl">${P.map(row).join("")}</ul>`:`<div class="fxempty">Nothing was scheduled for ${fmtD(d)}. Record work below, or open Tomorrow to plan.</div>`}
+    ${U.length?`<h4 class="drg" style="margin-top:16px">Work not in the schedule</h4><ul class="lbl">${U.map(row).join("")}</ul>`:""}</section>`}
+function labBind(d){const S=$("wkLab");if(!S)return;
+  const upd=(li,f)=>{const w=wkLoad(d);let r=w.rows.find(x=>x.id==li.dataset.lb&&x.kind=="lab");const now=new Date().toISOString();
+    if(!r){const p=w.rows.find(x=>x.id==li.dataset.lbp);if(!p)return;r={id:fxId(),kind:"lab",pid:p.id,v:p.v,leaf:p.leaf,mas:+p.mas||0,hel:+p.hel||0,st:"",why:"",note:"",con:"",by:engName(),mt:now};w.rows.push(r)}
+    f(r);r.mt=now;wkStore(w,true);renderWk("L")};
+  S.querySelectorAll("li[data-lb]").forEach(li=>{
+    li.querySelectorAll("[data-lbm],[data-lbh]").forEach(i=>i.onchange=()=>upd(li,r=>{r[i.dataset.lbm?"mas":"hel"]=Math.max(0,Math.round(+i.value||0))}));
+    li.querySelectorAll("[data-lbs]").forEach(b=>b.onclick=()=>upd(li,r=>{r.st=r.st==b.dataset.lbs?"":b.dataset.lbs}));
+    const fu=li.querySelector("[data-lbfull]");if(fu)fu.onclick=()=>upd(li,r=>{r.st="done"});
+    const wy=li.querySelector("[data-lbwhy]");if(wy)wy.onchange=()=>upd(li,r=>{r.why=wy.value});
+    const nt=li.querySelector("[data-lbnote]");if(nt)nt.onchange=()=>upd(li,r=>{r.note=nt.value.trim()})})}
+// hook the two pages
+{const rw=renderWk;renderWk=function(V){rw(V);const box=$("view"+V);if(!box)return;const d=WKD[V];
+  if(V=="T"){const head=box.querySelector(".fxhead");if(head){head.insertAdjacentHTML("afterend",wkPlanHtml(d));wkPlanBind(box,d)}const h3=[...box.querySelectorAll(".fxh3")].find(h=>/^Add work/.test(h.textContent));if(h3)h3.textContent="Add work that isn't in the plan"}
+  else{const cp=$("wkCopy");if(cp)cp.closest("p").remove();const lst=$("wkListL");if(lst)lst.outerHTML=labHtml(d);else{const head=box.querySelector(".fxhead");if(head)head.insertAdjacentHTML("afterend",labHtml(d))}labBind(d);
+    const h3=[...box.querySelectorAll(".fxh3")].find(h=>/^Add labour/.test(h.textContent));if(h3)h3.textContent="Add work that wasn't scheduled"}}}
+// labour PDF: planned against actual
+{const wp=wkPdf;wkPdf=function(V,d,rows,single){if(V!="L")return wp.apply(this,arguments);const M=rows&&rows.length&&rows[0].planned!==undefined?rows:labMerged(wkLoad(d));
+  const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4",orientation:single?"portrait":"landscape"});const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
+  const ink=[21,35,58],mute=[94,107,124],acc=[232,103,42],line=[214,220,228],bad=[184,55,45],ok=[31,128,80];const by=engName();
+  const lh=pdfLogo(doc,14,10,12);doc.setFont("helvetica","bold");doc.setFontSize(17);doc.setTextColor(...ink);doc.text("Daily labour report",W-14,16,{align:"right"});doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(...mute);
+  doc.text(new Date(d+"T00:00:00").toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"})+`   ·   AMR Living Spaces${by?"   ·   "+by:""}`,W-14,22,{align:"right"});
+  let y=Math.max(30,10+lh+6);doc.setDrawColor(...acc);doc.setLineWidth(.8);doc.line(14,y,W-14,y);y+=5;
+  const P=M.filter(r=>r.planned),pm=P.reduce((s,r)=>s+r.pm,0),ph=P.reduce((s,r)=>s+r.ph,0),am=M.reduce((s,r)=>s+(r.mas||0),0),ah=M.reduce((s,r)=>s+(r.hel||0),0),def=P.reduce((s,r)=>s+labDef(r),0);
+  if(!single){const bx=[["Activities",`${M.filter(r=>r.lab).length} reported of ${M.length}`],["Masons",`${am} of ${pm} planned`],["Helpers",`${ah} of ${ph} planned`],["Shortfall",`${def} workers`],["Done as planned",`${P.filter(r=>r.st=="done").length} of ${P.length}`]];const bw=(W-28-16)/5;
+    bx.forEach(([l,n],i)=>{const x=14+i*(bw+4);doc.setFillColor(...(i==3&&def?[253,236,233]:[246,248,251]));doc.setDrawColor(...line);doc.setLineWidth(.3);doc.roundedRect(x,y,bw,15,2.5,2.5,"FD");doc.setTextColor(...mute);doc.setFontSize(8);doc.text(l,x+4,y+5.2);doc.setTextColor(...(i==3&&def?bad:ink));doc.setFont("helvetica","bold");doc.setFontSize(11.5);doc.text(n,x+4,y+11.8);doc.setFont("helvetica","normal")});y+=20}
+  const stl=k=>(LST.find(x=>x[0]==k)||[0,""])[1];
+  doc.autoTable({startY:y,margin:{left:14,right:14},head:[["#","Villa","Activity","Planned M / H","Came M / H","Short","Status","Reason / note"]],
+    body:M.map((r,i)=>{const u=LEAF[r.leaf]||{n:"",seq:{n:""},stn:""};return[i+1,"Villa "+r.v,u.n+"\n"+u.seq.n+" > "+u.stn,r.planned?`${r.pm} / ${r.ph}`:"Not planned",r.mas==null?"Not reported":`${r.mas} / ${r.hel}`,labDef(r)||"",r.lab?stl(r.st)||"-":"",[r.why,r.note,r.con].filter(Boolean).join(" · ")]}),
+    theme:"grid",styles:{fontSize:8.4,cellPadding:1.8,textColor:ink,lineColor:line,lineWidth:.2,valign:"middle"},headStyles:{fillColor:ink,textColor:255},columnStyles:{0:{cellWidth:7,halign:"right"},1:{cellWidth:16},3:{halign:"center"},4:{halign:"center"},5:{halign:"right",textColor:bad,fontStyle:"bold"}},
+    didParseCell:h=>{if(h.section=="body"&&h.column.index==6){const t=String(h.cell.raw);h.cell.styles.textColor=t=="Done"?ok:t=="Not started"?bad:t=="Partly done"?acc:ink}}});
+  y=doc.lastAutoTable.finalY+14;if(y>H-24){doc.addPage();y=26}doc.setDrawColor(...mute);doc.setLineWidth(.3);doc.line(14,y,84,y);doc.line(W-84,y,W-14,y);doc.setFontSize(8.5);doc.setTextColor(...mute);doc.text("Site engineer"+(by?" ("+by+")":""),14,y+4.5);doc.text("Project manager",W-84,y+4.5);
+  const n=doc.getNumberOfPages();for(let i=1;i<=n;i++){doc.setPage(i);doc.setFontSize(8);doc.setTextColor(...mute);doc.text("Bhaaje Private Limited · AMR Living Spaces",14,H-7);doc.text(`Page ${i} of ${n}`,W-14,H-7,{align:"right"})}return doc}}
+
+// ---------- v18: site diary — plan against what happened, day by day, by month or any range ----------
+const RD={mode:"day",d:iso(new Date(Date.now()-864e5)),m:iso(new Date()).slice(0,7),from:"",to:""};
+function rdDays(){let a,b;if(RD.mode=="day")a=b=RD.d;else if(RD.mode=="month"){a=RD.m+"-01";const x=new Date(a+"T00:00:00");x.setMonth(x.getMonth()+1);x.setDate(0);b=iso(x)}else{a=RD.from||iso(new Date(Date.now()-13*864e5));b=RD.to||iso(new Date())}
+  const out=[];let x=new Date(a+"T00:00:00");const e=new Date(b+"T00:00:00");while(x<=e&&out.length<370){out.push(iso(x));x.setDate(x.getDate()+1)}return out}
+// everything recorded on a day
+function rdDay(d){const w=wkLoad(d),M=labMerged(w),P=M.filter(r=>r.planned),rep=M.filter(r=>r.lab);
+  const o={d,M,P,rep,pm:P.reduce((s,r)=>s+r.pm,0),ph:P.reduce((s,r)=>s+r.ph,0),am:M.reduce((s,r)=>s+(r.mas||0),0),ah:M.reduce((s,r)=>s+(r.hel||0),0),def:P.reduce((s,r)=>s+labDef(r),0),
+    done:P.filter(r=>r.st=="done").length,part:P.filter(r=>r.st=="part").length,none:P.filter(r=>r.st=="none").length,unrep:P.filter(r=>!r.lab).length,extra:M.filter(r=>!r.planned).length,why:{}};
+  M.forEach(r=>{if(r.why&&(labDef(r)||r.st!="done"))o.why[r.why]=(o.why[r.why]||0)+1});return o}
+function rdEvents(days){const set=new Set(days),ev={comp:[],dr:[],dc:[],dn:[]};const keys=new Set(Object.keys(SITE));try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith("amr-planner:")&&!/:(last|_draft)$/.test(k))keys.add(k.slice(12))}}catch(e){}
+  keys.forEach(k=>{const s=villaSnap(k);if(!s||!s.leaves)return;LEAVES.forEach(u=>{const L=s.leaves[u.id];if(!L)return;const on=String(L.on||"").slice(0,10);if(L.done&&set.has(on))ev.comp.push({d:on,v:+k,u});
+    Object.values(L.df||{}).forEach(d=>{if(!d||d.del)return;if(set.has(d.raised))ev.dr.push({d:d.raised,v:+k,u,sev:d.sev});if(d.closed&&set.has(String(d.on||"").slice(0,10)))ev.dc.push({d:String(d.on).slice(0,10),v:+k,u})});
+    (L.xd||[]).forEach(d=>{if(!d||d.del)return;if(set.has(d.raised))ev.dr.push({d:d.raised,v:+k,u,sev:d.sev})});(L.dn||[]).forEach(n=>{if(set.has(n.date))ev.dn.push({d:n.date,v:+k,u,amt:+n.amt||0,con:n.con})})})});return ev}
+function renderRd(){const box=$("viewR");if(!box)return;wkPullAll();const days=rdDays(),D=days.map(rdDay),ev=rdEvents(days);const by=k=>D.reduce((s,x)=>s+x[k],0);
+  const P=by("pm")+by("ph"),A=by("am")+by("ah"),planned=D.reduce((s,x)=>s+x.P.length,0),done=by("done"),why={};D.forEach(x=>Object.entries(x.why).forEach(([k,v])=>why[k]=(why[k]||0)+v));
+  const att=P?Math.round(A/P*100):null,adh=planned?Math.round(done/planned*100):null;const one=RD.mode=="day",dd=D[0];
+  const evOn=d=>({comp:ev.comp.filter(e=>e.d==d),dr:ev.dr.filter(e=>e.d==d),dc:ev.dc.filter(e=>e.d==d),dn:ev.dn.filter(e=>e.d==d)});
+  const byCon={},byVilla={};D.forEach(x=>x.M.forEach(r=>{const w=(r.mas||0)+(r.hel||0);if(!w)return;const c=r.con||"Not named";byCon[c]=(byCon[c]||0)+w;byVilla[r.v]=(byVilla[r.v]||0)+w}));
+  const mx=Math.max(1,...D.map(x=>Math.max(x.pm+x.ph,x.am+x.ah)));
+  const nav=RD.mode=="day"?`<button type="button" class="hbtn hico" data-rdstep="-1" aria-label="Previous day"><svg class="ico" viewBox="0 0 24 24"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></button><input type="date" class="fxi" id="rdD" value="${RD.d}"><button type="button" class="hbtn hico" data-rdstep="1" aria-label="Next day"><svg class="ico" viewBox="0 0 24 24"><path d="M9.5 5.5L16 12l-6.5 6.5"/></svg></button><button type="button" class="fxb sm" data-rdday="${iso(new Date())}">Today</button><button type="button" class="fxb sm" data-rdday="${iso(new Date(Date.now()-864e5))}">Yesterday</button>`
+    :RD.mode=="month"?`<button type="button" class="hbtn hico" data-rdstep="-1" aria-label="Previous month"><svg class="ico" viewBox="0 0 24 24"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></button><input type="month" class="fxi" id="rdM" value="${RD.m}"><button type="button" class="hbtn hico" data-rdstep="1" aria-label="Next month"><svg class="ico" viewBox="0 0 24 24"><path d="M9.5 5.5L16 12l-6.5 6.5"/></svg></button>`
+    :`<label class="fxf"><span>From</span><input type="date" class="fxi" id="rdF" value="${days[0]}"></label><label class="fxf"><span>To</span><input type="date" class="fxi" id="rdT" value="${days[days.length-1]}"></label>`;
+  const kp=[["Activities planned",planned,`${plur(D.reduce((s,x)=>s+x.extra,0),"extra")} not in the plan`],["Done as planned",adh==null?"–":adh+"%",`${done} done · ${by("part")} partly · ${by("none")} not started`],["Workers",`${A}`,`of ${P} planned${att!=null?` · ${att}% turned up`:""}`],["Shortfall",by("def"),`${by("unrep")} planned activities not reported`]];
+  const tbl=rows=>`<div class="dntw"><table class="dntb rdt"><thead><tr><th>Villa</th><th>Activity</th><th class="r">Planned M / H</th><th class="r">Came M / H</th><th class="r">Short</th><th>Status</th><th>Reason / note</th></tr></thead><tbody>${rows.map(r=>{const u=LEAF[r.leaf]||{n:"",seq:{n:""},stn:""};return`<tr data-rdv="${r.v}" data-rdl="${r.leaf}"><td><b>${r.v}</b></td><td>${esc(u.n)}<small>${esc(u.seq.n)} › ${esc(u.stn)}</small></td><td class="r">${r.planned?r.pm+" / "+r.ph:"Not planned"}</td><td class="r">${r.mas==null?"–":r.mas+" / "+r.hel}</td><td class="r">${labDef(r)?`<b class="late">${labDef(r)}</b>`:""}</td><td>${r.lab?`<span class="rds rs-${r.st||"x"}">${(LST.find(x=>x[0]==r.st)||[0,"Reported"])[1]}</span>`:`<span class="rds rs-nr">Not reported</span>`}</td><td>${esc([r.why,r.note,r.con].filter(Boolean).join(" · "))}</td></tr>`}).join("")}</tbody></table></div>`;
+  box.innerHTML=`<div class="fxin rdv">
+   <section class="fxp"><div class="rdtop"><div class="segv" role="tablist" aria-label="Period">${[["day","Day"],["month","Month"],["range","Date range"]].map(([k,l])=>`<button type="button" role="tab" data-rdm="${k}" aria-selected="${RD.mode==k}">${l}</button>`).join("")}</div><div class="rdnav">${nav}</div><button type="button" class="fxb" id="rdXl">Excel</button></div>
+     <h2 class="rdh">${one?new Date(RD.d+"T00:00:00").toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"}):RD.mode=="month"?new Date(RD.m+"-01T00:00:00").toLocaleDateString("en-GB",{month:"long",year:"numeric"}):`${fmtD(days[0])} – ${fmtD(days[days.length-1])}`}</h2>
+     <div class="drk">${kp.map(([l,b,s],i)=>`<div class="drt rk${i}"><b class="fig">${b}</b><span>${l}</span><small>${s}</small></div>`).join("")}</div></section>
+   ${one?`
+   <div class="dngrid"><section class="fxp"><h3 class="fxh3">Plan against what happened</h3>${dd.M.length?tbl(dd.M):`<div class="fxempty">No schedule or labour recorded for this day.</div>`}</section>
+     <section class="fxp"><h3 class="fxh3">Also on this day</h3>${(()=>{const e=evOn(RD.d);return`<ul class="rdev"><li><b class="fig">${e.comp.length}</b><span>activities marked complete</span>${e.comp.length?`<small>${e.comp.slice(0,8).map(x=>`V${x.v} ${esc(x.u.n)}`).join(" · ")}${e.comp.length>8?" …":""}</small>`:""}</li><li><b class="fig">${e.dr.length}</b><span>defects raised</span></li><li><b class="fig">${e.dc.length}</b><span>defects closed</span></li><li><b class="fig">${e.dn.length}</b><span>debit notes${e.dn.length?" · "+inr(e.dn.reduce((s,x)=>s+x.amt,0)):""}</span></li></ul>`})()}
+       <h3 class="fxh3" style="margin-top:16px">Masons and helpers</h3><div class="rdmh"><div><b class="fig">${dd.am}</b><span>masons of ${dd.pm}</span></div><div><b class="fig">${dd.ah}</b><span>helpers of ${dd.ph}</span></div></div>
+       ${(()=>{const n=new Date(RD.d+"T00:00:00");n.setDate(n.getDate()+1);const nx=wkRows(wkLoad(iso(n)),"plan");return`<h3 class="fxh3" style="margin-top:16px">Planned for the next day</h3><p class="fxsm" style="margin-top:0">${nx.length?`${plur(nx.length,"activity","activities")} on ${plur(new Set(nx.map(r=>r.v)).size,"villa")}, ${nx.reduce((s,r)=>s+(+r.mas||0),0)} masons and ${nx.reduce((s,r)=>s+(+r.hel||0),0)} helpers.`:"Nothing scheduled yet."}</p>`})()}</section></div>`
+   :`
+   <section class="fxp"><div class="wkhd"><h3 class="fxh3">Workers each day</h3><span class="fxsm drleg" style="margin:0"><span><i style="background:var(--line)"></i>Planned</span><span><i style="background:var(--s1)"></i>Came</span></span></div>
+     <div class="rdch">${D.map(x=>`<button type="button" class="rdc" data-rdday="${x.d}" title="${fmtD(x.d)}: ${x.am+x.ah} came of ${x.pm+x.ph} planned${x.def?", short "+x.def:""}"><span class="rdb"><i class="p" style="height:${(x.pm+x.ph)/mx*100}%"></i><i class="a" style="height:${(x.am+x.ah)/mx*100}%"></i>${x.def?`<i class="s" style="height:${x.def/mx*100}%"></i>`:""}</span><small>${new Date(x.d+"T00:00:00").getDate()}</small></button>`).join("")}</div></section>
+   <div class="dngrid"><section class="fxp"><h3 class="fxh3">Day by day</h3><div class="dntw"><table class="dntb rdt"><thead><tr><th>Date</th><th class="r">Planned</th><th class="r">Done</th><th class="r">Partly</th><th class="r">Not started</th><th class="r">Workers</th><th class="r">Short</th><th>Main reason</th></tr></thead><tbody>${D.filter(x=>x.M.length).map(x=>`<tr data-rdday="${x.d}"><td><b>${new Date(x.d+"T00:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})}</b></td><td class="r">${x.P.length}</td><td class="r">${x.done}</td><td class="r">${x.part}</td><td class="r">${x.none}${x.unrep?`<small>${x.unrep} not reported</small>`:""}</td><td class="r">${x.am+x.ah} / ${x.pm+x.ph}</td><td class="r">${x.def?`<b class="late">${x.def}</b>`:""}</td><td>${esc((Object.entries(x.why).sort((a,b)=>b[1]-a[1])[0]||[""])[0])}</td></tr>`).join("")||`<tr><td colspan="8">Nothing recorded in this period.</td></tr>`}</tbody></table></div></section>
+     <section class="fxp"><h3 class="fxh3">Why work fell short</h3>${Object.keys(why).length?`<div class="dnage">${Object.entries(why).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div><span>${esc(k)}</span><i style="--w:${v/Math.max(...Object.values(why))*100}%"></i><b>${v}×</b></div>`).join("")}</div>`:`<p class="fxsm">No shortfalls recorded.</p>`}
+       <h3 class="fxh3" style="margin-top:16px">Man-days</h3><div class="rdmh"><div><b class="fig">${by("am")}</b><span>mason-days of ${by("pm")}</span></div><div><b class="fig">${by("ah")}</b><span>helper-days of ${by("ph")}</span></div></div>
+       ${Object.keys(byCon).length>1||!byCon["Not named"]?`<h3 class="fxh3" style="margin-top:16px">By contractor</h3><div class="dnage">${Object.entries(byCon).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([k,v])=>`<div><span>${esc(k)}</span><i style="--w:${v/Math.max(...Object.values(byCon))*100}%"></i><b>${v}</b></div>`).join("")}</div>`:""}
+       <h3 class="fxh3" style="margin-top:16px">Busiest villas</h3><div class="dnage">${Object.entries(byVilla).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([k,v])=>`<div><span>Villa ${k}</span><i style="--w:${v/Math.max(...Object.values(byVilla))*100}%"></i><b>${v}</b></div>`).join("")||`<p class="fxsm">No labour recorded.</p>`}</div>
+       <h3 class="fxh3" style="margin-top:16px">Progress in this period</h3><ul class="rdev"><li><b class="fig">${ev.comp.length}</b><span>activities completed</span></li><li><b class="fig">${ev.dr.length}</b><span>defects raised · ${ev.dc.length} closed</span></li><li><b class="fig">${ev.dn.length}</b><span>debit notes · ${inr(ev.dn.reduce((s,x)=>s+x.amt,0))}</span></li></ul></section></div>`}
+  </div>`;
+  box.onclick=e=>{const t=e.target.closest("[data-rdm],[data-rdstep],[data-rdday],[data-rdv],#rdXl");if(!t)return;
+    if(t.dataset.rdm){RD.mode=t.dataset.rdm}else if(t.dataset.rdstep){const k=+t.dataset.rdstep;if(RD.mode=="day"){const x=new Date(RD.d+"T00:00:00");x.setDate(x.getDate()+k);RD.d=iso(x)}else{const x=new Date(RD.m+"-01T00:00:00");x.setMonth(x.getMonth()+k);RD.m=iso(x).slice(0,7)}}
+    else if(t.dataset.rdday){RD.mode="day";RD.d=t.dataset.rdday}else if(t.id=="rdXl"){rdExcel(days,D).then(m=>status(m));return}
+    else if(t.dataset.rdv){$("vn").value=t.dataset.rdv;openVilla(t.dataset.rdv).then(()=>{sel=LEAF[t.dataset.rdl]||sel;setView("C")});return}renderRd()};
+  const ch=(id,f)=>{const el=$(id);if(el)el.onchange=()=>{if(el.value){f(el.value);renderRd()}}};ch("rdD",v=>RD.d=v);ch("rdM",v=>RD.m=v);ch("rdF",v=>RD.from=v);ch("rdT",v=>RD.to=v)}
+async function rdExcel(days,D){await loadXLSX();const wb=XLSX.utils.book_new();
+  const s1=[["Date","Activities planned","Done","Partly done","Not started","Not reported","Extra (not planned)","Masons planned","Masons came","Helpers planned","Helpers came","Short","Main reason"]];
+  D.forEach(x=>s1.push([x.d,x.P.length,x.done,x.part,x.none,x.unrep,x.extra,x.pm,x.am,x.ph,x.ah,x.def,(Object.entries(x.why).sort((a,b)=>b[1]-a[1])[0]||[""])[0]]));
+  const s2=[["Date","Villa","Stage","Sub-stage","Activity","In plan","Masons planned","Helpers planned","Masons came","Helpers came","Short","Status","Reason","Note","Contractor"]];
+  D.forEach(x=>x.M.forEach(r=>{const u=LEAF[r.leaf]||{n:"",seq:{n:""},stn:""};s2.push([x.d,r.v,u.seq.n,u.stn,u.n,r.planned?"Yes":"No",r.pm??"",r.ph??"",r.mas??"",r.hel??"",labDef(r)||"",r.lab?(LST.find(z=>z[0]==r.st)||[0,"Reported"])[1]:"Not reported",r.why||"",r.note||"",r.con||""])}));
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(s1),"Days");XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(s2),"Detail");
+  return saveFile(`Site-Diary-${days[0]}${days.length>1?"_to_"+days[days.length-1]:""}.xlsx`,new Blob([XLSX.write(wb,{bookType:"xlsx",type:"array"})],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}))}
+// page and rail entry
+{const host=$("viewO");const s=document.createElement("div");s.className="ov fxv";s.id="viewR";host.after(s);
+  const views=document.querySelector(".rail .views"),ref=$("vE");const b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.id="vR";b.className="fxrail2";b.setAttribute("aria-selected","false");b.title="Site diary";
+  b.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/><path d="M9 8h6"/></svg>Site diary`;b.onclick=()=>setView("R");views.insertBefore(b,ref)}
+PGN.R="Site diary";
+{const av2=allowedViews;allowedViews=function(){const a=av2();a.splice(a.indexOf("E"),0,"R");return a}}
+{const sv5=setView;setView=function(v){if(v=="R"){view="R";document.querySelector(".app").dataset.view="R";document.querySelectorAll(".rail [role=tab]").forEach(b=>b.setAttribute("aria-selected",b.id=="vR"));try{localStorage.setItem("ak-nav","R")}catch(e){}pgHead();if(window.hdrAct)hdrAct();renderRd();railFit();return}
+  const b=$("vR");if(b)b.setAttribute("aria-selected","false");sv5(v)}}
+{const ph4=pgHead;pgHead=function(){ph4();if(view=="R"){const s=$("pgS");if(s)s.textContent="What was planned, what happened, and the labour each day"}}}
+{const h4=window.hdrAct;window.hdrAct=function(){h4&&h4();const b=$("hpB");if(!b||view!="R")return;b.hidden=false;b.textContent="Download Excel";b.onclick=()=>{const x=$("rdXl");if(x)x.click()}}}
+railFit();
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
