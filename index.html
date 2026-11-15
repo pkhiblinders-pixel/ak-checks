@@ -1479,7 +1479,7 @@ input[type="date"].fxi::-webkit-date-and-time-value{text-align:left}
 }
 
 /* ---------- v8: roles, More sheet ---------- */
-.app.rl-eng #vO,.app.rl-eng #vP,.app.rl-eng #vQ{display:none}
+.app.rl-eng #vO,.app.rl-eng #vP,.app.rl-eng #vN,.app.rl-eng #vR{display:none!important}
 .app.rl-eng #dwadd,.app.rl-eng [data-dwrm],.app.rl-eng [data-dwrm2],.app.rl-eng [data-dwrmc],.app.rl-eng .padd,.app.rl-eng #impTop{display:none!important}
 .vmore[hidden]{display:none}
 @media (min-width:901px){.vmore{display:none!important}}
@@ -1724,11 +1724,14 @@ html.aklock body{overflow:hidden}
 .drvh{display:flex;flex-direction:column;gap:12px}
 #drVilla .dzt{max-height:none;overflow:visible}
 #drVilla .dzbar{bottom:0;background:linear-gradient(transparent,var(--tint) 25%);border-radius:0 0 16px 16px}
-@keyframes wipg{0%,100%{stroke:var(--acc);stroke-width:.15;stroke-opacity:.5}50%{stroke:#ff8a2a;stroke-width:.65;stroke-opacity:1}}
-@keyframes wipd{0%,100%{opacity:.25}50%{opacity:.85}}
-#msvg g.wipv .plot{stroke:var(--acc);animation:wipg 1.8s ease-in-out infinite}
-.wipleg{display:inline-flex;align-items:center;gap:6px}.wipleg i{width:12px;height:12px;border-radius:3px;border:2px solid var(--acc);animation:wipd 1.8s ease-in-out infinite}
-@media (prefers-reduced-motion:reduce){#msvg g.wipv .plot{animation:none;stroke-width:.8}}
+@keyframes wipg{0%,100%{fill-opacity:0;stroke-width:.35;stroke-opacity:.7}50%{fill-opacity:.92;stroke-width:.9;stroke-opacity:1}}
+@keyframes wipt{50%{fill:#2a1300}}
+@keyframes wipd{0%,100%{background:transparent}50%{background:#ffb020}}
+#msvg .wipo{fill:#ffb020;stroke:#fff1c4;pointer-events:none;animation:wipg 1.1s ease-in-out infinite}
+#msvg g.wipv .pnum,#msvg g.wipv .ppct{animation:wipt 1.1s ease-in-out infinite}
+#msvg g.wipv{filter:drop-shadow(0 0 1.4px rgba(255,170,40,.95))}
+.wipleg{display:inline-flex;align-items:center;gap:6px}.wipleg i{width:12px;height:12px;border-radius:3px;border:2px solid #ff9a3c;animation:wipd 1.1s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){#msvg .wipo{animation:none;fill-opacity:.85;stroke-width:.8}#msvg g.wipv .pnum,#msvg g.wipv .ppct{animation:none;fill:#2a1300}.wipleg i{animation:none;background:#ffb020}}
 /* ---------- v17: debit notes page ---------- */
 .app:not([data-view="N"]) #viewN{display:none}
 .app[data-view="N"] .vctl{display:none}
@@ -5972,7 +5975,8 @@ function drBind(box){box.onclick=e=>{drClick(e)};
   const sel=$("drVs");if(sel)sel.onchange=()=>{if(sel.value)dVilla(+sel.value);else{DRS.villa=0;renderDreg()}};
   const st=$("drStrip"),on=st&&st.querySelector(".on");if(on)st.scrollLeft=on.offsetLeft-st.clientWidth/2+on.clientWidth/2}
 // site map: villas with work in progress glow
-{const pm2=paintMap;paintMap=function(){pm2.apply(this,arguments);try{PLOTS.forEach(n=>{const g=$("gv"+n);if(g)g.classList.toggle("wipv",stats(n).P.length>0)})}catch(e){}}}
+{const pm2=paintMap;paintMap=function(){pm2.apply(this,arguments);try{PLOTS.forEach(n=>{const g=$("gv"+n);if(!g)return;const on=stats(n).P.length>0;g.classList.toggle("wipv",on);let o=g.querySelector(".wipo");
+  if(on&&!o){const pl=$("pl"+n);o=document.createElementNS("http://www.w3.org/2000/svg","path");o.setAttribute("class","wipo");o.setAttribute("d",pl.getAttribute("d"));o.setAttribute("aria-hidden","true");pl.after(o)}else if(!on&&o)o.remove()})}catch(e){}}}
 {const rr=renderRamp;renderRamp=function(){rr.apply(this,arguments);const r=$("ramp");if(r&&!r.querySelector(".wipleg"))r.insertAdjacentHTML("beforeend",`<span class="wipleg"><i></i>Work going on</span>`)}}
 try{renderRamp();paintMap()}catch(e){}
 
@@ -6209,11 +6213,14 @@ async function rdExcel(days,D){await loadXLSX();const wb=XLSX.utils.book_new();
   b.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/><path d="M9 8h6"/></svg>Site diary`;b.onclick=()=>setView("R");views.insertBefore(b,ref)}
 PGN.R="Site diary";
 {const av2=allowedViews;allowedViews=function(){const a=av2();a.splice(a.indexOf("E"),0,"R");return a}}
-{const sv5=setView;setView=function(v){if(v=="R"){view="R";document.querySelector(".app").dataset.view="R";document.querySelectorAll(".rail [role=tab]").forEach(b=>b.setAttribute("aria-selected",b.id=="vR"));try{localStorage.setItem("ak-nav","R")}catch(e){}pgHead();if(window.hdrAct)hdrAct();renderRd();railFit();return}
+{const sv5=setView;setView=function(v){if(v=="R"&&!allowedViews().includes("R"))v="S";if(v=="R"){view="R";document.querySelector(".app").dataset.view="R";document.querySelectorAll(".rail [role=tab]").forEach(b=>b.setAttribute("aria-selected",b.id=="vR"));try{localStorage.setItem("ak-nav","R")}catch(e){}pgHead();if(window.hdrAct)hdrAct();renderRd();railFit();return}
   const b=$("vR");if(b)b.setAttribute("aria-selected","false");sv5(v)}}
 {const ph4=pgHead;pgHead=function(){ph4();if(view=="R"){const s=$("pgS");if(s)s.textContent="What was planned, what happened, and the labour each day"}}}
 {const h4=window.hdrAct;window.hdrAct=function(){h4&&h4();const b=$("hpB");if(!b||view!="R")return;b.hidden=false;b.textContent="Download Excel";b.onclick=()=>{const x=$("rdXl");if(x)x.click()}}}
 railFit();
+// v19: engineers see checklists, site map, defects, drawings, quantities, tomorrow, labour, day end
+{const av3=allowedViews;allowedViews=function(){const a=av3();if(roleNow()!="eng")return a;return["C","S","D","W","Q","T","L","E","V"]}}
+RAILP.eng=["C","S","D","T","L"];
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
