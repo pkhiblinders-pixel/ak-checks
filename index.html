@@ -11,6 +11,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="AK Checklists">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script>window.__cfgErr="";addEventListener("error",function(e){if(/config\.js/.test(e.filename||""))window.__cfgErr=e.message+" (line "+e.lineno+")"},true)</script>
 <script src="msal-browser.min.js"></script>
 <script src="config.js"></script>
 <script src="auth.js"></script>
@@ -1584,6 +1585,45 @@ html.aklock body{overflow:hidden}
 .ccm{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;background:var(--line);color:var(--ink)}
 .cc .ok .ccm{background:var(--ok);color:#fff}.cc .bad .ccm{background:var(--bad);color:#fff}.cc .warn .ccm{background:var(--acc);color:#fff}
 .cc .bad{border-color:var(--bad)}
+
+/* ---------- v11: villas by priority inside cluster tabs ---------- */
+.pgs{margin:4px 0 14px}
+.pgd{border:1px solid var(--line);border-left:4px solid var(--lc);border-radius:16px;background:var(--well);margin-top:8px;overflow:hidden}
+.pgd>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer}
+.pgd>summary::-webkit-details-marker{display:none}
+.pgd>summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--mute);border-bottom:2px solid var(--mute);transform:rotate(45deg);transition:transform .15s}
+.pgd[open]>summary::after{transform:rotate(-135deg)}
+.pgd .lvp{background:var(--lc);color:#fff;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:800}
+.pgd summary b{font-size:14px}.pgav{font-size:12.5px;color:var(--mute)}
+.pgl{display:flex;flex-direction:column;padding:0 6px 8px}
+.pgr{position:relative;display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 8px 11px;border:0;border-top:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;text-align:left;cursor:pointer;border-radius:10px}
+.pgr:hover,.pgr:focus-visible{background:color-mix(in srgb,var(--line) 40%,transparent);outline:0}
+.pgn{font-weight:800;font-size:14px}.pgs1{font-size:12.5px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pgs1 .late{color:var(--bad)}
+.pgp{font-weight:800;font-variant-numeric:tabular-nums;color:var(--ok);font-size:14px}
+.pgb{position:absolute;left:8px;right:8px;bottom:4px;height:3px;border-radius:2px;background:color-mix(in srgb,var(--line) 70%,transparent)}
+.pgb::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);border-radius:inherit;background:var(--ok)}
+
+/* ---------- v12: High / Medium / Low scopes ---------- */
+.dtabs{flex-wrap:wrap}
+.dtabs button.lvt{color:var(--lc)}
+.dtabs button.lvt[aria-selected=true]{background:var(--lc);border-color:var(--lc);color:#fff}
+
+.ppaint{display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding:4px;border-radius:999px;background:var(--well);border:1px solid var(--line)}
+.ppaint span{font-size:12px;color:var(--mute);padding:0 6px 0 8px;font-stretch:85%;font-weight:650}
+.ppaint button{height:30px;border-radius:999px;border:1px solid transparent;background:transparent;color:var(--lc,var(--ink));font:inherit;font-size:12.5px;font-weight:800;padding:0 11px;cursor:pointer}
+.ppaint button[aria-pressed=true]{background:var(--lc,var(--ink));color:#fff}
+.ppaint button[data-pp=""][aria-pressed=true]{background:var(--base);color:var(--ink);border-color:var(--line)}
+.app.rl-eng .ppaint{display:none}
+#map.painting [data-v]{cursor:copy}
+.vpri2{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:flex-end;padding-top:12px;border-top:1px solid var(--line)}
+.vpri2 .cap{flex-basis:100%;margin:0}
+.vpri2 .vdp{display:flex;gap:6px;flex-wrap:wrap}
+.vpri2 .vdp button{height:38px;border-radius:999px;border:1px solid var(--line);background:var(--well);color:var(--ink);font:inherit;font-weight:700;font-size:13px;padding:0 14px;cursor:pointer}
+.vpri2 .vdp button[aria-pressed=true]{background:var(--lc);border-color:var(--lc);color:#fff}
+.vpri2 .vtg{max-width:200px}
+.dtabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+#viewO .dtabs{grid-template-columns:repeat(8,minmax(0,1fr))!important}
+@media (max-width:900px){#viewO .dtabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}.ppaint span{flex-basis:100%;padding:2px 8px}}
 </style>
 <div class="app">
 <nav class="rail" aria-label="Sections"><div class="mark" aria-hidden="true">AK</div><div class="views" role="tablist" aria-label="View"><button type="button" role="tab" id="vO" aria-selected="false" title="Overview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M12 14l3.5-4.5"/><path d="M5 19h14"/></svg>Overview</button><button type="button" role="tab" id="vS" aria-selected="false" title="Site map"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z"/><path d="M9 4.5v13M15 6.5v13"/></svg>Site map</button><button type="button" role="tab" id="vP" aria-selected="false" title="Planner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16"/><path d="M8 7h8"/><path d="M11 12h9"/><path d="M8 17h6"/></svg>Planner</button><button type="button" role="tab" id="vC" aria-selected="false" title="Checklists"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5v-1h6v1"/><path d="M9 13l2.2 2.2L15.2 11"/></svg>Checklists<span class="badge" id="qb" hidden></span></button><button type="button" role="tab" id="vD" aria-selected="false" title="Defects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10.5v4"/><path d="M12 17.2v.3"/></svg>Defects<span class="badge" id="db"></span></button><button type="button" role="tab" id="vW" aria-selected="false" title="Drawings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 13h6M9 16.5h6"/></svg>Drawings<span class="badge" id="wb" hidden></span></button><button type="button" role="tab" id="vQ" aria-selected="false" title="Quantities"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 16.5l13-13 4 4-13 13z"/><path d="M7.5 12.5l2 2M10.5 9.5l2 2M13.5 6.5l2 2"/></svg>Quantities</button></div></nav>
@@ -1613,6 +1653,7 @@ html.aklock body{overflow:hidden}
       <h2>Site layout<small id="asof"></small></h2>
       <label class="cby">Colour by <select id="cby"><option value="p">Progress</option><option value="s">Current stage</option><option value="q">Open defects</option></select></label>
       <div class="ramp" id="ramp"></div>
+      <div class="ppaint" id="ppaint" role="group" aria-label="Set priority by tapping villas"><span>Tap villas to set priority</span><button type="button" data-pp="" aria-pressed="true">Off</button><button type="button" data-pp="High" style="--lc:var(--bad)" aria-pressed="false">High</button><button type="button" data-pp="Medium" style="--lc:var(--acc)" aria-pressed="false">Medium</button><button type="button" data-pp="Low" style="--lc:var(--s0)" aria-pressed="false">Low</button><button type="button" data-pp="none" aria-pressed="false">Clear</button></div>
       <button class="btn sm pri" type="button" id="impTop">Import latest status</button><div class="zoom"><button class="btn sm" id="mzo" type="button" aria-label="Zoom out">−</button><button class="btn sm" id="mzf" type="button">Fit</button><button class="btn sm" id="mzi" type="button" aria-label="Zoom in">+</button></div>
     </div>
     <div class="map" id="map"></div>
@@ -2875,6 +2916,8 @@ const LV=[["High","var(--bad)"],["Medium","var(--acc)"],["Low","var(--s0)"]],lvC
 let PRI=[];try{PRI=JSON.parse(localStorage.getItem("ak-priority")||"[]")}catch(e){PRI=[]}
 const priOf=n=>PRI.findIndex(x=>x.n==n),isPri=n=>priOf(+n)>=0;
 const PRIC=()=>({id:"P",n:"Priority villas",ns:PRI.map(x=>x.n)});
+const LVID={H:"High",M:"Medium",L:"Low"},isLV=x=>x==="H"||x==="M"||x==="L";
+const LVC=id=>({id,lv:LVID[id],n:LVID[id]+" priority",ns:PRI.filter(x=>x.lv==LVID[id]).map(x=>x.n)});
 let priSaving=Promise.resolve(),priDraft={n:"",lv:"High",tg:"",why:""};
 function savePri(){try{localStorage.setItem("ak-priority",JSON.stringify(PRI))}catch(e){}
   if(DB){const doc={list:PRI,saved:new Date().toISOString()};priSaving=priSaving.then(()=>DB.doc("meta/priority").set(doc)).catch(()=>{const m=$("primsg");if(m)m.textContent="Could not save the priority list to shared storage. You may only have view access."})}
@@ -2998,7 +3041,7 @@ function paintMap(){
   hiClusters();renderDash();
 }
 function asOf(){let m=BASE.date||"";PLOTS.forEach(n=>{const s=SITE[vkey(String(n))];if(s&&s.v>=3&&s.saved&&!String(s.saved).startsWith("base")&&s.saved.slice(0,10)>m)m=s.saved.slice(0,10)});return fmtD(m)}
-function hiClusters(){const sc=hov??pin;const sv=$("msvg");if(sv)sv.classList.toggle("prio",sc==="P");CLUSTERS.forEach(c=>{$("cl"+c.id).classList.toggle("hot",sc==c.id);$("cb"+c.id).classList.toggle("hot",sc==c.id)})}
+function hiClusters(){const sc=hov??pin;const sv=$("msvg");if(sv){sv.classList.toggle("prio",sc==="P"||isLV(sc));PLOTS.forEach(n=>{const g=$("gv"+n);if(!g)return;const i=priOf(n);g.classList.toggle("isp",i>=0&&(!isLV(sc)||PRI[i].lv===LVID[sc]))})}CLUSTERS.forEach(c=>{$("cl"+c.id).classList.toggle("hot",sc==c.id);$("cb"+c.id).classList.toggle("hot",sc==c.id)})}
 
 // ---------- villa hover card ----------
 const STG=["","Sub structure","Super structure","Finishing & MEP","Closing & handover","Handed over"];
@@ -3037,7 +3080,7 @@ $("map").addEventListener("click",e=>{const g=e.target.closest("[data-v]");if(g)
 $("map").addEventListener("keydown",e=>{const g=e.target.closest("[data-v]");if(g&&(e.key=="Enter"||e.key==" ")){e.preventDefault();selectVilla(g.dataset.v,true)}});
 $("map").addEventListener("focusin",e=>{const g=e.target.closest("[data-v]");if(g){const r=g.getBoundingClientRect();showTip(g.dataset.v,{clientX:r.right,clientY:r.top})}});
 $("map").addEventListener("focusout",hideTip);
-function selectVilla(n,fromMap){msel=String(n);if(!(pin==="P"&&isPri(n)))pin=clusterOf(+n).id;hov=null;paintMap();$("dash").scrollTop=0;if(fromMap&&narrow())$("sside").scrollIntoView({behavior:"smooth",block:"start"})}
+function selectVilla(n,fromMap){msel=String(n);if(!((pin==="P"&&isPri(n))||(isLV(pin)&&(PRI[priOf(+n)]||{}).lv===LVID[pin])))pin=clusterOf(+n).id;hov=null;paintMap();$("dash").scrollTop=0;if(fromMap&&narrow())$("sside").scrollIntoView({behavior:"smooth",block:"start"})}
 
 // ---------- dashboard ----------
 function chips(ns){return ns.map(n=>`<button type="button" class="vn" data-sel="${n}">${n}</button>`).join("")}
@@ -3078,9 +3121,16 @@ function dashSections(sum){const D=$("dash");let body=null;const secs=[];
   if(secs.length>2){const bar=document.createElement("div");bar.className="dsall";bar.innerHTML=`<button type="button" data-dsall="1">Expand all</button><button type="button" data-dsall="0">Collapse all</button>`;secs[0].before(bar)}
   secs.forEach(d=>d.addEventListener("toggle",()=>{d.open?DSOPEN.add(d.dataset.sec):DSOPEN.delete(d.dataset.sec);try{localStorage.setItem("ak-dsec",JSON.stringify([...DSOPEN]))}catch(e){}}))}
 $("dash").addEventListener("click",e=>{if(e.target.closest("[data-goov]")){setView("O");return}const b=e.target.closest("[data-dsall]");if(!b)return;const op=b.dataset.dsall=="1";$("dash").querySelectorAll("details.dsec").forEach(d=>{d.open=op;op?DSOPEN.add(d.dataset.sec):DSOPEN.delete(d.dataset.sec)});try{localStorage.setItem("ak-dsec",JSON.stringify([...DSOPEN]))}catch(e){}});
+
+// villas of a cluster (or the project) grouped by the priority set in the Priority tab
+function priGroups(ns,openAll){const G=[...LV.map(([l])=>({l,c:lvCol(l),v:[]})),{l:"Not set",c:"var(--na)",v:[]}];
+  ns.forEach(n=>{const i=priOf(+n);const g=i>=0?G.find(x=>x.l==PRI[i].lv)||G[G.length-1]:G[G.length-1];g.v.push({n:+n,i})});
+  G.forEach(g=>g.v.sort((x,y)=>(x.i<0?1e4:x.i)-(y.i<0?1e4:y.i)||x.n-y.n));
+  return`<div class="pgs"><p class="cap">Villas by priority</p>${G.filter(g=>g.v.length).map((g,gi)=>`<details class="pgd" style="--lc:${g.c}"${openAll||g.l!="Not set"&&g.l!="Low"?" open":""}><summary><span class="lvp">${g.l}</span><b>${g.v.length} ${g.v.length==1?"villa":"villas"}</b><span class="pgav">${pctTxt(g.v.reduce((s,x)=>s+stats(x.n).pct,0)/g.v.length)} avg</span></summary>
+    <div class="pgl">${g.v.map(x=>{const st=stats(x.n),pr=x.i>=0?PRI[x.i]:null,L=pr?lateDays(st,pr.tg):null;return`<button type="button" class="pgr" data-sel="${x.n}"><span class="pgn">Villa ${x.n}</span><span class="pgs1">${st.cat==0?"Not started":STG[st.cat]}${st.P.length?" · "+esc(st.P[0].u.n):st.N[0]?" · next "+esc(st.N[0].u.n):""}${L!=null&&L>0?` · <b class="late">late ${L}d</b>`:""}</span><span class="pgp">${pctTxt(st.pct)}</span><i class="pgb" style="--w:${st.pct}%"></i></button>`}).join("")}</div></details>`).join("")}</div>`}
 function renderDash(){
-  const sc=hov??pin,isP=sc==="P",c=isP?PRIC():CLUSTERS.find(x=>x.id===sc)||null,a=agg(c),N=a.ns.length;
-  let h=`<div class="dtabs" role="tablist" aria-label="Dashboard scope">${[{id:0},...CLUSTERS,{id:"P"}].map(x=>`<button type="button" role="tab" data-pin="${x.id}" aria-selected="${sc===x.id}"${hov!=null&&x.id===pin&&hov!==pin?' class="pinned"':""}>${x.id==="P"?`Priority${PRI.length?" "+PRI.length:""}`:x.id?"Cluster "+x.id:"Project"}</button>`).join("")}</div>`;
+  const sc=hov??pin,isP=sc==="P",c=isP?PRIC():isLV(sc)?LVC(sc):CLUSTERS.find(x=>x.id===sc)||null,a=agg(c),N=a.ns.length;
+  let h=`<div class="dtabs" role="tablist" aria-label="Dashboard scope">${[{id:0},...CLUSTERS,{id:"H"},{id:"M"},{id:"L"},{id:"P"}].map(x=>`<button type="button" role="tab" data-pin="${x.id}" aria-selected="${sc===x.id}"${isLV(x.id)?` style="--lc:${lvCol(LVID[x.id])}"`:""} class="${hov!=null&&x.id===pin&&hov!==pin?"pinned":""}${isLV(x.id)?" lvt":""}">${x.id==="P"?`All priority${PRI.length?" "+PRI.length:""}`:isLV(x.id)?`${LVID[x.id]} ${PRI.filter(p=>p.lv==LVID[x.id]).length}`:x.id?"Cluster "+x.id:"Project"}</button>`).join("")}</div>`;
   if(hov!=null&&hov!=pin)h+=`<p class="pv">Previewing ${c.n}. Click the cluster to keep it here.</p>`;
   if(msel){const st=stats(msel),pi=priOf(+msel),pr=pi>=0?PRI[pi]:null;h+=`<div class="vd"><button class="x" type="button" id="vdx" aria-label="Close villa">×</button>${card(msel,st,0)}
     <p class="cap" style="margin:12px 0 0">Priority${pr?` · #${pi+1}`:""}</p><div class="vdp" role="group" aria-label="Villa priority">${[["","None"],...LV.map(x=>[x[0],x[0]])].map(([v,l])=>`<button type="button" data-vlv="${v}" aria-pressed="${(pr?pr.lv:"")==v}" style="--lc:${v?lvCol(v):"var(--na)"}">${l}</button>`).join("")}</div>
@@ -3101,8 +3151,9 @@ function renderDash(){
     if(!N){h+=`<div class="tools"><p class="cap">Reports</p><button class="btn pri" type="button" id="repB">Download progress report (PDF)</button><p class="note" id="toolmsg">${esc(lastToolMsg)}</p></div>`;const keep=$("dash").scrollTop,fid=document.activeElement&&document.activeElement.id;$("dash").innerHTML=h;dashSections(dashSums(a,N));$("dash").insertAdjacentHTML("beforeend",`<p class="maphint">Detailed breakdowns (clusters, monthly completion, look-ahead, milestones, quality, defects and reports) are on the <button type="button" class="lnk" data-goov="1">Overview</button>.</p>`);$("dash").scrollTop=keep;if(fid&&$(fid))$(fid).focus();bindDash();return}
     h+=`<p class="cap">Priority villas together</p>`;
   }
-  h+=`${isP?"":`<div class="dhead"><div><p class="eyebrow">${c?`Villas ${c.a}–${c.b}`:"AMR Living Spaces · all clusters"}</p><h2>${c?c.n:"Project"}</h2></div><div class="big">${pctTxt(a.pct)}<small>complete</small></div></div>`}
+  h+=`${isP?"":`<div class="dhead"><div><p class="eyebrow">${c&&c.lv?`${plur(N,"villa")} ranked ${c.lv.toLowerCase()} · set in the Priority tab or on any villa`:c?`Villas ${c.a}–${c.b}`:"AMR Living Spaces · all clusters"}</p><h2>${c?c.n:"Project"}</h2></div><div class="big">${pctTxt(a.pct)}<small>complete</small></div></div>`}
     ${isP?"":`<div class="pbar lg"><i style="width:${a.pct}%"></i></div>`}
+    ${isP?"":c&&c.lv?(N?priGroups(a.ns,true):`<div class="empty">No villas ranked ${c.lv.toLowerCase()} yet. Tap a villa on the map and choose ${c.lv}.</div>`):priGroups(a.ns)}
     <div class="tiles">
       <div><span>Villas</span><b>${N}</b><small>${a.started} started (${pcN(a.started,N)}) · ${a.cat[5]} handed over (${pcN(a.cat[5],N)})</small></div>
       <div><span>In progress</span><b>${a.wip}</b><small>activities on ${a.wipV} villa${a.wipV==1?"":"s"} (${pcN(a.wipV,N)} of villas)</small></div>
@@ -3151,7 +3202,7 @@ function bindDash(){
     $("paadd").onclick=()=>{const n=+$("pan").value;if(!SITEGEO.plots[n]){$("primsg").textContent="Enter a villa number from 1 to 112.";$("pan").focus();return}
       const was=isPri(n);setPri(n,$("palv").value,$("patg").value,$("pawhy").value.trim());priDraft={n:"",lv:priDraft.lv,tg:"",why:""};$("primsg").textContent=was?`Villa ${n} updated.`:`Villa ${n} added at #${priOf(n)+1}.`}}
 }
-$("dash").addEventListener("click",e=>{const ow=e.target.closest("[data-odw]");if(ow){openFromMap(ow.dataset.odw);setTab("W");return}const od=e.target.closest("[data-odf]");if(od){openFromMap(od.dataset.odf);setTab("D");dfFilter="open";return}const p=e.target.closest("[data-pin]");if(p){const v=p.dataset.pin;pin=v==="P"?"P":+v;hov=null;if(msel&&(pin==="P"?!isPri(msel):clusterOf(+msel).id!==pin&&pin!==0))msel=null;paintMap();return}
+$("dash").addEventListener("click",e=>{const ow=e.target.closest("[data-odw]");if(ow){openFromMap(ow.dataset.odw);setTab("W");return}const od=e.target.closest("[data-odf]");if(od){openFromMap(od.dataset.odf);setTab("D");dfFilter="open";return}const p=e.target.closest("[data-pin]");if(p){const v=p.dataset.pin;pin=v==="P"||isLV(v)?v:+v;hov=null;if(msel&&(pin==="P"?!isPri(msel):isLV(pin)?(PRI[priOf(+msel)]||{}).lv!==LVID[pin]:clusterOf(+msel).id!==pin&&pin!==0))msel=null;paintMap();return}
   const lv=e.target.closest("[data-vlv]");if(lv){setPri(msel,lv.dataset.vlv||null);return}
   const mv=e.target.closest("[data-pmv]");if(mv){const [i,d]=mv.dataset.pmv.split(":").map(Number),j=i+d;if(j>=0&&j<PRI.length){[PRI[i],PRI[j]]=[PRI[j],PRI[i]];savePri()}return}
   const rm=e.target.closest("[data-prm]");if(rm){setPri(rm.dataset.prm,null);return}
@@ -3311,7 +3362,7 @@ function parseStatusBook(wb){let best=null;
   const map=matchActs(names);const vs=Object.keys(best.col).map(Number).filter(n=>SITEGEO.plots[n]).sort((a,b)=>a-b);
   const words={},unk={};let blanks=0;cells.forEach((o,i)=>{if(!map[i])return;vs.forEach(n=>{const v=o[n];const c=codeOf(v);if(v==null||String(v).trim()===""){blanks++;return}const key=v instanceof Date?"(date)":typeof v=="number"?"(number "+v+")":String(v).trim();if(c)(words[c]=words[c]||{})[key]=((words[c]||{})[key]||0)+1;else unk[key]=(unk[key]||0)+1})});
   return{sheet:best.sheet,tr:best.tr,names,days,cells,map,vs,words,unk,blanks}}
-function importInto(s0,n,P){const s=JSON.parse(JSON.stringify(s0));s.leaves=s.leaves||{};let ch={d:0,w:0,t:0,keep:0,dur:0};
+function importInto(s0,n,P){const s=JSON.parse(JSON.stringify(s0));s.leaves=s.leaves||{};let ch={d:0,w:0,t:0,keep:0,dur:0};const NOW=new Date().toISOString();
   P.cells.forEach((o,i)=>{const u=P.map[i];if(!u)return;const x=s.leaves[u.id]=s.leaves[u.id]||{d:u.def,done:false,chk:{},custom:[],by:"",rem:"",on:""};
     const dd=P.days[i];if(typeof dd=="number"&&dd>=0&&dd<=365&&Number.isFinite(dd)&&Math.round(dd)!=(x.d??u.def)){x.d=Math.round(dd);ch.dur++}
     const c=codeOf(o[n]);if(c==null)return;
@@ -3319,6 +3370,7 @@ function importInto(s0,n,P){const s=JSON.parse(JSON.stringify(s0));s.leaves=s.le
     else if(x.done&&x.src!="sheet"){ch.keep++}
     else if(c=="w"){if(x.done||!x.wip){x.done=false;x.src="";x.on="";x.wip=true;ch.w++}}
     else{if(x.done||x.wip){x.done=false;x.src="";x.on="";x.wip=false;ch.t++}}});
+  P.cells.forEach((o,i)=>{const u=P.map[i];if(u&&s.leaves[u.id])s.leaves[u.id].mt=NOW});if(ch.dur)s.pmt=NOW;s.dv=s.dv||2;
   s.v=3;s.villa=String(n);s.saved=new Date().toISOString();s.imported=P.file;delete s.base;return{s,ch}}
 $("impF").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;const m=$("toolmsg");m.textContent="Reading "+f.name+"…";
   try{await loadXLSX();const wb=XLSX.read(await f.arrayBuffer(),{type:"array",cellDates:true});const P=parseStatusBook(wb);P.file=f.name;
@@ -3346,8 +3398,9 @@ function renderImportPreview(){const p=pendingImport;if(!p||!$("impP"))return;co
 async function applyImport(){const p=pendingImport;pendingImport=null;const m=$("toolmsg");let i=0,fail=0;$("impP").innerHTML="";
   const todo=p.P.vs.map(n=>({n,r:importInto(getState(n)||baseState(n)||{leaves:{}},n,p.P)})).filter(x=>x.r.ch.d+x.r.ch.w+x.r.ch.t+x.r.ch.dur);
   for(const {n,r} of todo){const k=vkey(String(n));SITE[k]=r.s;ls.set("amr-planner:"+k,JSON.stringify(r.s));
-    if(DB){try{await DB.doc("villas/"+k).set(r.s)}catch(e){fail++}}i++;if(i%8==0){m.textContent=`Saving ${i} of ${todo.length} villas…`}}
+    if(DB){syMark(k)}i++;if(i%8==0){m.textContent=`Saving ${i} of ${todo.length} villas…`}}
   if(loadedVilla&&SITE[vkey(loadedVilla)])apply(SITE[vkey(loadedVilla)],false);
+  if(DB){m.textContent=`Sending ${todo.length} villas to SharePoint…`;syKick(100)}
   paintMap();lastToolMsg=`Imported ${p.P.file}: ${todo.length} villa${todo.length==1?"":"s"} updated${fail?`, ${fail} could not be saved to shared storage (kept on this device and retried automatically)`:""}. Project now ${pctTxt(agg(null).pct)} complete.`;if($("toolmsg"))$("toolmsg").textContent=lastToolMsg}
 async function saveFile(name,blob){if(DL){await DL.save({filename:name,data:blob});return"Saved "+name}
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);return"Downloaded "+name}
@@ -5085,7 +5138,7 @@ function renderVilla(){const box=$("viewV");if(!box)return;const n=+VSEL;if(!n){
   box.innerHTML=`<div class="fxin">
    <a href="#" class="vback" id="vBack"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg>Site map</a>
    <section class="fxp vhero">
-     <div class="vht"><span class="vcl">${c?esc(c.n):"AMR Living Spaces"}${isPri(n)?' · <b class="vpri">Priority</b>':""}</span><h2 class="vnum">Villa ${n}</h2>
+     <div class="vht"><span class="vcl">${c?esc(c.n):"AMR Living Spaces"}${isPri(n)?` · <b class="vpri" style="color:${lvCol(PRI[priOf(n)].lv)}">${PRI[priOf(n)].lv} priority</b>`:""}</span><h2 class="vnum">Villa ${n}</h2>
        <p class="vnow">${cur?`${cur.st=="wip"?"Now":"Next"}: <b>${esc(cur.u.n)}</b> <span>${esc(cur.u.seq.n)} › ${esc(cur.u.stn)}</span>`:"All activities complete"}</p></div>
      <div class="vpct"><b class="fig">${pctTxt(pct)}</b><span>complete</span></div>
      <div class="vbar" role="img" aria-label="${pctTxt(pct)} complete"><i style="width:${Math.min(100,pct)}%"></i></div>
@@ -5154,7 +5207,7 @@ var PSIG="",PMT="";const planSig=()=>JSON.stringify([$("sd").value,$("sun").chec
 PSIG=planSig();{const v=villa();try{const s=v?JSON.parse(ls.get("amr-planner:"+vkey(v))||"null"):null;PMT=(s&&s.pmt)||""}catch(e){}}
 syMerge=function(l,r){const o=JSON.parse(JSON.stringify(r));o.leaves=o.leaves||{};
   for(const id in (l.leaves||{})){const a=l.leaves[id],b=o.leaves[id];if(!b){o.leaves[id]=a;continue}
-    const lw=String(a.mt||"")>=String(b.mt||"");const pick=lw?{...a}:{...b};
+    const lw=String(a.mt||"")>String(b.mt||"");const pick=lw?{...a}:{...b};
     // durations belong to the programme: they follow whichever side changed the plan last
     pick.d=String(l.pmt||"")>String(r.pmt||"")?a.d:b.d;o.leaves[id]=pick}
   if(String(l.pmt||"")>String(r.pmt||"")){o.start=l.start;o.skipSun=l.skipSun;o.groups=l.groups;o.tg=l.tg;o.pmt=l.pmt}
@@ -5302,17 +5355,29 @@ function gateShow(kind,o){o=o||{};document.documentElement.classList.add("aklock
   const em=window.AKAPP&&AKAPP.email?AKAPP.email():"";const err=o.err?esc(o.err.message||String(o.err)):"";
   const M={loading:["Checking your sign-in…","",""],
     signin:["Sign in to continue","AK Checklists is for the AMR Living Spaces team. Sign in with your company Microsoft 365 account.",`<button type="button" class="fxb pri gbig" data-g="in">${fsv('<rect x="3" y="3" width="8" height="8" fill="currentColor" stroke="none"/><rect x="13" y="3" width="8" height="8" fill="currentColor" stroke="none" opacity=".75"/><rect x="3" y="13" width="8" height="8" fill="currentColor" stroke="none" opacity=".75"/><rect x="13" y="13" width="8" height="8" fill="currentColor" stroke="none" opacity=".55"/>')}Sign in with Microsoft</button>`],
-    setup:["The app isn't connected to Microsoft 365 yet",`Until it is, nobody can open it. Fill in these values in <code>config.js</code> next to index.html (SETUP-APP.md, Part B): <b>${esc((window.AKAPP&&AKAPP.missing||[]).join(", "))}</b>.`,""],
+    setup:["The app isn't connected to Microsoft 365 yet",`Until it is, nobody can open it. This phone sees these settings as missing in <code>config.js</code>: <b>${esc((window.AKAPP&&AKAPP.missing||[]).join(", "))}</b>.`,`<button type="button" class="fxb pri" data-g="reload">Reload the app</button><button type="button" class="fxb" data-g="probe">Check config.js</button>`],
     file:["Open AK Planner from its link","This copy only opens inside the AK Planner page on SharePoint, or in the AK Checklists app after signing in with Microsoft 365.",""],
     offline:["Connect to the internet to sign in","The first sign-in on this phone needs a connection. After that the app works offline.",`<button type="button" class="fxb pri" data-g="retry">Try again</button>`],
     noaccess:["Your account doesn't have access",`Signed in as <b>${esc(em)}</b>, but the AMR Living Spaces SharePoint site refused access. Ask the site owner to add you to the site, then try again.`,`<button type="button" class="fxb pri" data-g="retry">Try again</button><button type="button" class="fxb" data-g="out">Use another account</button>`],
     error:["Couldn't reach SharePoint",`Signed in as <b>${esc(em)}</b>. The app couldn't confirm your access: ${err}`,`<button type="button" class="fxb pri" data-g="retry">Try again</button><button type="button" class="fxb" data-g="diag">Check connection</button>${o.cont?`<button type="button" class="fxb" data-g="cont">Continue offline</button>`:""}<button type="button" class="fxb fxgh" data-g="out">Sign out</button>`]}[kind];
   g.className="g-"+kind;g.innerHTML=`<div class="gcard"><div class="glogo" aria-hidden="true">AK</div><p class="gsub">AMR Living Spaces</p><h1 id="akgT">${M[0]}</h1>${M[1]?`<p class="gtxt">${M[1]}</p>`:`<div class="gspin" aria-hidden="true"></div>`}${M[2]?`<div class="gacts">${M[2]}</div>`:""}<div id="gDiag"></div></div>`;
   g.onclick=e=>{const b=e.target.closest("[data-g]");if(!b)return;const k=b.dataset.g;
-    if(k=="in")AKAPP.signIn();else if(k=="out")AKAPP.signOut();else if(k=="retry")gateRun();else if(k=="cont"){applyRole();gateOpen()}else if(k=="diag")connCheck($("gDiag"))};
+    if(k=="in")AKAPP.signIn();else if(k=="out")AKAPP.signOut();else if(k=="retry")gateRun();else if(k=="cont"){applyRole();gateOpen()}else if(k=="diag")connCheck($("gDiag"));else if(k=="reload")appReload();else if(k=="probe")cfgProbe(true)};
   const f=g.querySelector("button");if(f)f.focus()}
+// clear the offline copy of the app and load everything fresh from the web address
+async function appReload(){try{sessionStorage.setItem("ak-healed","1");if(navigator.serviceWorker){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()))}if(window.caches){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}}catch(e){}location.reload()}
+// read config.js straight from the web address and say what's in it
+async function cfgProbe(show){const box=$("gDiag");const out=(cls,html)=>{if(show&&box)box.innerHTML=`<ol class="cc"><li class="${cls}"><span class="ccm" aria-hidden="true">${cls=="ok"?"✓":"✕"}</span><div><b>config.js on the web</b><small>${html}</small></div></li></ol>`};
+  let txt="",st=0,url=new URL("config.js",location.href).href;try{const r=await fetch(url+"?t="+Date.now(),{cache:"no-store"});st=r.status;txt=await r.text()}catch(e){out("bad",`Couldn't download ${esc(url)} (${esc(e.message||e)}).`);return null}
+  if(st!=200){out("bad",`${esc(url)} answered ${st}. Upload config.js to the same folder as index.html.`);return null}
+  const val=k=>{const m=txt.match(new RegExp(k+"\\s*:\\s*[\"']([^\"']*)[\"']","i"));return m?m[1].trim():""};
+  const got={clientId:val("clientId"),tenantId:val("tenantId"),siteUrl:val("siteUrl")};const empty=Object.keys(got).filter(k=>!got[k]);
+  let syntax="";try{new Function(txt)}catch(e){syntax=e.message}
+  if(syntax){out("bad",`The file on the web has a typo: <b>${esc(syntax)}</b>. Check every line inside the { } ends with a comma except the last, and every value is in "quotes".`);return got}
+  if(empty.length){out("bad",`The file on the web still has these empty: <b>${empty.join(", ")}</b>. Make sure you committed the edit on GitHub, then wait 1–2 minutes for GitHub Pages to publish it and tap Reload the app.`);return got}
+  out("ok",`The file on the web is filled in (site ${esc(got.siteUrl)}). This phone was still using an old copy. Tap <b>Reload the app</b>.`);return got}
 async function gateRun(){if(GATE.mode=="open")return gateOpen();if(GATE.mode=="file")return gateShow("file");
-  gateShow("loading");await AKAPP.ready;const st=AKAPP.state();if(st=="setup")return gateShow("setup");if(st!="ok")return gateShow(navigator.onLine?"signin":"offline");
+  gateShow("loading");await AKAPP.ready;const st=AKAPP.state();if(st=="setup"){gateShow("setup");if(navigator.onLine&&!sessionStorage.getItem("ak-healed")){const g=await cfgProbe(false);if(g&&g.clientId&&g.tenantId&&g.siteUrl&&!(AKAPP.missing||[]).some(m=>/typo|msal|valid/.test(m))){appReload();return}}cfgProbe(true);return}if(st!="ok")return gateShow(navigator.onLine?"signin":"offline");
   const em=AKAPP.email();if(em&&em!==ROLE.me){ROLE.me=em;ROLE.siteAdmin=false;ROLE.owner=false;ls.set("ak-me",em);ls.set("ak-siteadmin","0");ls.set("ak-owner","0")}
   const cached=ls.get("ak-role:"+em);
   if(!navigator.onLine){if(cached){applyRole();gateOpen()}else gateShow("offline");return}
@@ -5357,6 +5422,19 @@ async function connCheck(box){if(!box){const d=fxDialog("Connection check",`<div
   if(GATE.mode=="app")add("Sign out",'<path d="M14 4h5v16h-5"/><path d="M10 8l-4 4 4 4M6 12h10"/>',()=>{const n=syWaiting();const d=fxDialog("Sign out?",`<p class="gtxt" style="margin-top:0">${n?`<b>${plur(n,"item")} haven't synced yet.</b> They stay on this phone and sync the next time you sign in.`:"Everything is synced."}</p><div class="fxacts"><button type="button" class="fxb pri" id="soY">Sign out</button><button type="button" class="fxb" data-x="1">Cancel</button></div>`);$("soY").onclick=()=>AKAPP.signOut()})},0))}
 addEventListener("online",()=>{if(document.documentElement.classList.contains("aklock")&&$("akgate")&&/g-(offline|error)/.test($("akgate").className))gateRun()});
 gateRun();
+{const pm=paintMap;paintMap=function(){pm.apply(this,arguments);try{if(view=="S"||view=="O")pgHead()}catch(e){}}}
+
+// ---------- v12: set priority by tapping villas; priority on the villa page; saves offline ----------
+var PPM="";
+$("ppaint").addEventListener("click",e=>{const b=e.target.closest("[data-pp]");if(!b)return;PPM=b.dataset.pp;$("ppaint").querySelectorAll("[data-pp]").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));$("map").classList.toggle("painting",!!PPM);
+  status(PPM?(PPM=="none"?"Tap villas to remove their priority. Tap Off when done.":`Tap villas to mark them ${PPM}. Tap Off when done.`):"")});
+$("viewS").addEventListener("click",e=>{if(!PPM)return;const g=e.target.closest("#map [data-v]");if(!g)return;e.stopImmediatePropagation();e.preventDefault();if(!canEdit("plan"))return;const n=+g.dataset.v;
+  setPri(n,PPM=="none"?null:PPM);status(PPM=="none"?`Villa ${n}: priority removed.`:`Villa ${n}: ${PPM} priority.`)},true);
+{const sp0=savePri;savePri=function(){if(DB&&!navigator.onLine){try{localStorage.setItem("ak-priority",JSON.stringify(PRI))}catch(e){}syMark("w:__pri");paintMap();return}sp0()}}
+{const p1=wkPush;wkPush=async function(d){if(d=="__pri"){await DB.doc("meta/priority").set({list:PRI,saved:new Date().toISOString()});return}return p1(d)}}
+{const rv=renderVilla;renderVilla=function(){rv();const n=+VSEL;if(!n||!canEdit("plan"))return;const box=$("viewV").querySelector(".vact");if(!box)return;const i=priOf(n),pr=i>=0?PRI[i]:null;
+  const d=document.createElement("div");d.className="vpri2";d.innerHTML=`<span class="cap">Priority${pr?` · #${i+1} in the list`:""}</span><div class="vdp" role="group" aria-label="Villa priority">${[["","None"],...LV.map(x=>[x[0],x[0]])].map(([v,l])=>`<button type="button" data-vpl="${v}" aria-pressed="${(pr?pr.lv:"")==v}" style="--lc:${v?lvCol(v):"var(--na)"}">${l}</button>`).join("")}</div>${pr?`<label class="fxf vtg"><span>Target handover</span><input type="date" class="fxi" id="vpTg" value="${esc(pr.tg||"")}"></label>`:""}`;
+  box.after(d);d.onclick=e=>{const b=e.target.closest("[data-vpl]");if(b){setPri(n,b.dataset.vpl||null);renderVilla()}};const t=$("vpTg");if(t)t.onchange=()=>{setPri(n,PRI[priOf(n)].lv,t.value);renderVilla()}}}
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
