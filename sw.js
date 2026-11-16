@@ -1,7 +1,7 @@
 // AK Checklists offline cache.
 // The app page and its settings are fetched fresh whenever there's signal (so changes to config.js
 // take effect on the next open), and come from this cache when there's no signal.
-const V = "ak-checklists-6.19.0";
+const V = "ak-checklists-6.20.0";
 const SHELL = ["./", "index.html", "config.js", "auth.js", "msal-browser.min.js", "manifest.webmanifest", "icon-192.png", "icon-512.png", "icon-maskable-512.png", "apple-touch-icon.png"];
 const FRESH = /\/(index\.html|config\.js|auth\.js)?$/;
 self.addEventListener("install", e => { e.waitUntil(caches.open(V).then(c => c.addAll(SHELL.map(u => new Request(u, { cache: "reload" })))).then(() => self.skipWaiting())); });

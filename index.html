@@ -5381,9 +5381,10 @@ function renderWk(V){const K=WKK[V],box=$("view"+V);if(!box)return;const kind=K.
     if(t.dataset.wkdelok){const w=wkLoad(d),r=w.rows.find(x=>x.id==t.dataset.wkdelok);if(r){r.del=true;r.mt=new Date().toISOString();wkStore(w,true)}wkDel=null;renderWk(V);return}
     if(t.id=="wkCopy"){const w=wkLoad(d),now=new Date().toISOString(),have=new Set(wkRows(w,"lab").map(r=>r.v+"|"+r.leaf));let n=0;wkRows(w,"plan").forEach(p=>{if(have.has(p.v+"|"+p.leaf))return;w.rows.push({id:fxId(),kind:"lab",v:p.v,leaf:p.leaf,mas:p.mas,hel:p.hel,note:"",con:"",by:engName(),mt:now});n++});wkStore(w,true);renderWk(V);const m2=$("wkMsg"+V);m2.className="fxmsg";m2.textContent=n?`Copied ${plur(n,"activity","activities")} from the schedule.`:"Everything scheduled is already in this report."}};
   const go=async(fn,b)=>{b.disabled=true;out.className="fxmsg";out.textContent="Preparing the PDF…";try{await loadJsPDF();out.textContent=await fn()}catch(e){out.className="fxmsg bad";out.textContent="Couldn't make the PDF: "+(e.message||e)}finally{b.disabled=false}};
-  $("wkPv"+V).onclick=e=>go(async()=>{await fxPdfPreview(wkPdf(V,d,rows),K.doc+" · "+fmtD(d));return""},e.currentTarget);
-  $("wkSh"+V).onclick=e=>go(()=>{wkStoreNow(d).catch(()=>{});return fxShare(wkPdf(V,d,rows).output("blob"),`${K.file}-${fileDate(V,d)}.pdf`,K.doc+" "+fmtD(d))},e.currentTarget);
-  $("wkZip"+V).onclick=e=>go(async()=>{await loadZip();const z=new JSZip();rows.forEach(r=>{const u=LEAF[r.leaf];if(!u)return;let n=`${leafFile(r.v,u)}-${K.tag}-${fileDate(V,d)}.pdf`,i=2;while(z.file(n))n=n.replace(/(-\d+)?\.pdf$/,"")+"-"+(i++)+".pdf";z.file(n,wkPdf(V,d,[r],true).output("arraybuffer"))});
+  const srows=()=>rows.filter(r=>scIn(r.v)),sfx=()=>scOn()?"-"+scName().replace(/[^A-Za-z0-9]+/g,""):"";
+  $("wkPv"+V).onclick=e=>go(async()=>{await fxPdfPreview(wkPdf(V,d,srows(),false,true),K.doc+" · "+fmtD(d)+(scOn()?" · "+scName():""));return""},e.currentTarget);
+  $("wkSh"+V).onclick=e=>go(()=>{wkStoreNow(d).catch(()=>{});return fxShare(wkPdf(V,d,srows(),false,true).output("blob"),`${K.file}-${fileDate(V,d)}${sfx()}.pdf`,K.doc+" "+fmtD(d)+(scOn()?" · "+scName():""))},e.currentTarget);
+  $("wkZip"+V).onclick=e=>go(async()=>{await loadZip();const z=new JSZip();srows().forEach(r=>{const u=LEAF[r.leaf];if(!u)return;let n=`${leafFile(r.v,u)}-${K.tag}-${fileDate(V,d)}.pdf`,i=2;while(z.file(n))n=n.replace(/(-\d+)?\.pdf$/,"")+"-"+(i++)+".pdf";z.file(n,wkPdf(V,d,[r],true).output("arraybuffer"))});
     wkStoreNow(d).catch(()=>{});const blob=await z.generateAsync({type:"blob",mimeType:"application/zip"});return fxShare(blob,`${K.tag}-PDFs-by-activity-${fileDate(V,d)}.zip`,K.doc)},e.currentTarget)}
 const fileDate=(V,d)=>{if(V!="T")return d;const x=new Date(d+"T00:00:00");x.setDate(x.getDate()-1);return iso(x)};
 function wkPdf(V,d,rows,single){const K=WKK[V];const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4"});const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
@@ -6412,9 +6413,10 @@ function wkPlanBind(box,d){const P=$("wkPlan");if(!P)return;const re=()=>{const 
   const ev=P.querySelector("[data-wpev]");if(ev)ev.onclick=()=>bulk(P.querySelectorAll("[data-wkpick]"))}
 // project manager / admin: why planned work was left out of the schedule
 function skipHtml(d){if(!canEdit("plan"))return"";const w=wkLoad(d),sel=new Set(wkRows(w,"plan").map(r=>r.v+"|"+r.leaf)),S=new Map(wkRows(w,"skip").map(r=>[r.v+"|"+r.leaf,r]));
-  const all=planFor(d).filter(x=>scIn(x.n)),schd=all.filter(x=>sel.has(x.k)).length,miss=all.filter(x=>!sel.has(x.k)),said=miss.filter(x=>(S.get(x.k)||{}).why).length;
+  const all=(planKeys(d)||[]).map(k=>{const [n,l]=k.split("|").map(Number);return{n,u:LEAF[l],k}}).filter(x=>x.u&&scIn(x.n)).sort((a,b)=>a.n-b.n),schd=all.filter(x=>sel.has(x.k)).length,miss=all.filter(x=>!sel.has(x.k)),said=miss.filter(x=>(S.get(x.k)||{}).why).length;
   const opt=v=>`<option value="">Choose a reason…</option>${SKW.map(x=>`<option${x==v?" selected":""}>${x}</option>`).join("")}`;
-  return`<details class="fxp skd" id="wkSkip"${SKOPEN||miss.length&&said<miss.length&&miss.length<=40?" open":""}><summary><span class="skt"><b>Planned but not scheduled</b><small>Project manager review</small></span><span class="wktot"><span class="${miss.length&&said<miss.length?"lbdt":""}"><b class="fig">${miss.length}</b> left out</span><span><b class="fig">${said}/${miss.length}</b> explained</span></span><svg class="ico vch" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><div class="wkhd"><div><p class="fxsm" style="margin:4px 0 0">The planner has <b>${all.length}</b> ${all.length==1?"activity":"activities"} on ${fmtD(d)}${scOn()?" in "+esc(scName()):""}; the engineers scheduled <b>${schd}</b>. Say why each one was left out. Only project managers and admins see this; it goes into the site diary.</p></div>
+  if(!all.length)return`<section class="fxp" id="wkSkip"><h3 class="fxh3">Planned but not scheduled</h3><p class="fxsm">The planner for ${fmtD(d)} wasn't recorded. It is kept from the day the schedule is made in Tomorrow.</p></section>`;
+  return`<details class="fxp skd" id="wkSkip" open><summary><span class="skt"><b>Planned but not scheduled</b><small>Project manager review</small></span><span class="wktot"><span class="${miss.length&&said<miss.length?"lbdt":""}"><b class="fig">${miss.length}</b> left out</span><span><b class="fig">${said}/${miss.length}</b> explained</span></span><svg class="ico vch" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><div class="wkhd"><div><p class="fxsm" style="margin:4px 0 0">The planner has <b>${all.length}</b> ${all.length==1?"activity":"activities"} on ${fmtD(d)}${scOn()?" in "+esc(scName()):""}; the engineers scheduled <b>${schd}</b>. Say why each one was left out. Only project managers and admins see this.</p></div>
     </div></div>
     ${miss.length?`<div class="skbulk"><select class="fxi" id="skAll">${opt("")}</select><input class="fxi" id="skAllN" placeholder="Comment (optional)"><button type="button" class="fxb sm pri" id="skAllGo">Apply to all without a reason</button></div>
     <div class="dntw"><table class="dntb sktb"><thead><tr><th>Villa</th><th>Activity</th><th>Reason</th><th>Comment</th></tr></thead><tbody>${miss.map(x=>{const r=S.get(x.k)||{};return`<tr data-sk="${x.k}" class="${r.why?"ok":""}"><td><b>${x.n}</b></td><td>${esc(x.u.n)}<small>${esc(x.u.seq.n)} › ${esc(x.u.stn)}</small></td><td><select class="fxi" data-skw="1">${opt(r.why)}</select></td><td><input class="fxi" data-skn="1" value="${esc(r.note||"")}" placeholder="e.g. Steel arrives Monday">${r.by?`<small>${esc(r.by)}, ${new Date(r.mt).toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}</small>`:""}</td></tr>`}).join("")}</tbody></table></div>`
@@ -6422,7 +6424,7 @@ function skipHtml(d){if(!canEdit("plan"))return"";const w=wkLoad(d),sel=new Set(
 let SKOPEN=false;
 function skipSet(d,k,f){const [v,leaf]=k.split("|").map(Number);const w=wkLoad(d);let r=w.rows.find(x=>x.kind=="skip"&&!x.del&&x.v==v&&x.leaf==leaf);
   if(!r){r={id:fxId(),kind:"skip",v,leaf,why:"",note:""};w.rows.push(r)}f(r);r.by=(ROLE&&ROLE.name)||engName()||"";r.mt=new Date().toISOString();wkStore(w,true)}
-function skipBind(d){const S=$("wkSkip");if(!S)return;S.addEventListener("toggle",()=>{SKOPEN=S.open});const re=()=>{const box=$("viewT"),y=box?box.scrollTop:0,wy=window.scrollY;renderWk("T");if(box)box.scrollTop=y;window.scrollTo(0,wy)};
+function skipBind(d){const S=$("wkSkip");if(!S)return;const re=()=>{const box=$("viewR"),y=box?box.scrollTop:0,wy=window.scrollY;renderRd();if(box)box.scrollTop=y;window.scrollTo(0,wy)};
   S.querySelectorAll("tr[data-sk]").forEach(tr=>{tr.querySelector("[data-skw]").onchange=e=>{skipSet(d,tr.dataset.sk,r=>r.why=e.target.value);re()};tr.querySelector("[data-skn]").onchange=e=>{skipSet(d,tr.dataset.sk,r=>r.note=e.target.value.trim());re()}});
   if($("skAllGo"))$("skAllGo").onclick=()=>{const why=$("skAll").value,nt=$("skAllN").value.trim();if(!why){$("skAll").focus();return}S.querySelectorAll("tr[data-sk]").forEach(tr=>{if(!tr.querySelector("[data-skw]").value)skipSet(d,tr.dataset.sk,r=>{r.why=why;if(nt&&!r.note)r.note=nt})});re()}}
 // labour: masons and helpers against each scheduled activity
@@ -6452,9 +6454,9 @@ function labBind(d){const S=$("wkLab");if(!S)return;
     li.querySelectorAll("[data-lbs]").forEach(b=>b.onclick=()=>upd(li,r=>{r.st=r.st==b.dataset.lbs?"":b.dataset.lbs}));
     const wy=li.querySelector("[data-lbwhy]");if(wy)wy.onchange=()=>upd(li,r=>{r.why=wy.value});
     const nt=li.querySelector("[data-lbnote]");if(nt)nt.onchange=()=>upd(li,r=>{r.note=nt.value.trim()})})}
-{const rw=renderWk;renderWk=function(V){rw(V);if(V!="T")return;const P=$("wkPlan"),d=WKD.T;if(P&&canEdit("plan")){P.insertAdjacentHTML("beforebegin",skipHtml(d));skipBind(d)}}}
+
 // PDFs: the schedule lists activities only; the labour report has masons, helpers, status and reasons
-{const wp=wkPdf;wkPdf=function(V,d,rows,single){if(V=="T")return wkPdfT(d,rows,single);if(V=="L")return wkPdfL(d,rows,single);return wp.apply(this,arguments)}}
+{const wp=wkPdf;wkPdf=function(V,d,rows,single,sc){if(V=="T")return wkPdfT(d,rows,single,sc&&scOn());if(V=="L")return wkPdfL(d,rows,single,sc&&scOn());return wp.apply(this,arguments)}}
 function wkPdfHead(doc,title,sub){const W=doc.internal.pageSize.getWidth();const ink=[21,35,58],mute=[94,107,124],acc=[232,103,42];const lh=pdfLogo(doc,14,10,12);
   doc.setFont("helvetica","bold");doc.setFontSize(17);doc.setTextColor(...ink);doc.text(title,W-14,16,{align:"right"});doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(...mute);doc.text(sub,W-14,22,{align:"right"});
   const y=Math.max(30,10+lh+6);doc.setDrawColor(...acc);doc.setLineWidth(.8);doc.line(14,y,W-14,y);return y+5}
@@ -6464,15 +6466,15 @@ function wkPdfFoot(doc,by){const W=doc.internal.pageSize.getWidth(),H=doc.intern
   doc.setDrawColor(94,107,124);doc.setLineWidth(.3);doc.line(14,y,84,y);doc.line(W-84,y,W-14,y);doc.setFontSize(8.5);doc.setTextColor(94,107,124);doc.text("Site engineer"+(by?" ("+by+")":""),14,y+4.5);doc.text("Project manager",W-84,y+4.5);
   const n=doc.getNumberOfPages();for(let i=1;i<=n;i++){doc.setPage(i);const ph=doc.internal.pageSize.getHeight(),pw=doc.internal.pageSize.getWidth();doc.setFontSize(8);doc.setTextColor(94,107,124);doc.text("Bhaaje Private Limited · AMR Living Spaces",14,ph-7);doc.text(`Page ${i} of ${n}`,pw-14,ph-7,{align:"right"})}return doc}
 const dayLong=d=>new Date(d+"T00:00:00").toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
-function wkPdfT(d,rows,single){const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4"});const by=engName();const ink=[21,35,58],line=[214,220,228];
-  let y=wkPdfHead(doc,"Work schedule",`Work on ${dayLong(d)}  ·  AMR Living Spaces${by?"  ·  "+by:""}`);
-  if(!single){const pk=planKeys(d),pl=pk?pk.length:null;y=wkPdfBoxes(doc,y,[["Activities",rows.length],["Villas",new Set(rows.map(r=>r.v)).size],...(pl!=null?[["In the planner",pl],["Not scheduled",Math.max(0,pl-rows.filter(r=>pk.includes(r.v+"|"+r.leaf)).length)]]:[])],pl!=null&&pl>rows.length?3:-1)}
+function wkPdfT(d,rows,single,sc){const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4"});const by=engName();const ink=[21,35,58],line=[214,220,228];
+  let y=wkPdfHead(doc,"Work schedule"+(sc?" · "+scName():""),`Work on ${dayLong(d)}  ·  AMR Living Spaces${by?"  ·  "+by:""}`);
+  if(!single){const pk0=planKeys(d),pk=pk0?(sc?pk0.filter(k=>scIn(+k.split("|")[0])):pk0):null,pl=pk?pk.length:null;y=wkPdfBoxes(doc,y,[["Activities",rows.length],["Villas",new Set(rows.map(r=>r.v)).size],...(pl!=null?[["In the planner",pl],["Not scheduled",Math.max(0,pl-rows.filter(r=>pk.includes(r.v+"|"+r.leaf)).length)]]:[])],pl!=null&&pl>rows.length?3:-1)}
   doc.autoTable({startY:y,margin:{left:14,right:14},head:[["#","Villa","Stage","Sub-stage","Activity","Notes"]],body:rows.map((r,i)=>{const u=LEAF[r.leaf]||{n:"(removed)",seq:{n:""},stn:""};return[i+1,"Villa "+r.v,u.seq.n,u.stn,u.n,[r.con,r.note].filter(Boolean).join(" · ")]}),theme:"grid",
     styles:{fontSize:8.8,cellPadding:2,textColor:ink,lineColor:line,lineWidth:.2,valign:"middle"},headStyles:{fillColor:ink,textColor:255},columnStyles:{0:{cellWidth:8,halign:"right"},1:{cellWidth:18},2:{cellWidth:30},3:{cellWidth:34},5:{cellWidth:38}}});
   return wkPdfFoot(doc,by)}
-function wkPdfL(d,rows,single){const M=rows&&rows.length&&rows[0].planned!==undefined?rows:labMerged(wkLoad(d));const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4",orientation:single?"portrait":"landscape"});const by=engName();
+function wkPdfL(d,rows,single,sc){const M=rows&&rows.length&&rows[0].planned!==undefined?rows:labMerged(wkLoad(d));const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:"mm",format:"a4",orientation:single?"portrait":"landscape"});const by=engName();
   const ink=[21,35,58],line=[214,220,228],bad=[184,55,45],ok=[31,128,80],acc=[232,103,42];
-  let y=wkPdfHead(doc,"Daily labour report",`${dayLong(d)}  ·  AMR Living Spaces${by?"  ·  "+by:""}`);const P=M.filter(r=>r.planned),am=M.reduce((s,r)=>s+(r.mas||0),0),ah=M.reduce((s,r)=>s+(r.hel||0),0),nd=P.filter(labNotDone).length;
+  let y=wkPdfHead(doc,"Daily labour report"+(sc?" · "+scName():""),`${dayLong(d)}  ·  AMR Living Spaces${by?"  ·  "+by:""}`);const P=M.filter(r=>r.planned),am=M.reduce((s,r)=>s+(r.mas||0),0),ah=M.reduce((s,r)=>s+(r.hel||0),0),nd=P.filter(labNotDone).length;
   if(!single)y=wkPdfBoxes(doc,y,[["Scheduled",P.length],["Reported",`${P.filter(r=>r.lab).length} of ${P.length}`],["Masons",am],["Helpers",ah],["Total workers",am+ah],["Not done",nd]],nd?5:-1);
   const stl=k=>(LST.find(x=>x[0]==k)||[0,""])[1];
   doc.autoTable({startY:y,margin:{left:14,right:14},head:[["#","Villa","Activity","Masons","Helpers","Status","Reason / note"]],
@@ -6498,7 +6500,7 @@ function renderRd(){const box=$("viewR");if(!box)return;wkPullAll();const days=r
   const byCon={},byVilla={};D.forEach(x=>x.M.forEach(r=>{const w=(r.mas||0)+(r.hel||0);if(!w)return;const c=r.con||"Not named";byCon[c]=(byCon[c]||0)+w;byVilla[r.v]=(byVilla[r.v]||0)+w}));
   const mx=Math.max(1,...D.map(x=>x.am+x.ah));
   const arrow=(k,l)=>`<button type="button" class="hbtn hico" data-rdstep="${k}" aria-label="${l}"><svg class="ico" viewBox="0 0 24 24"><path d="${k<0?"M14.5 5.5L8 12l6.5 6.5":"M9.5 5.5L16 12l-6.5 6.5"}"/></svg></button>`;
-  const nav=RD.mode=="day"?`${arrow(-1,"Previous day")}<input type="date" class="fxi" id="rdD" value="${RD.d}">${arrow(1,"Next day")}<button type="button" class="fxb sm" data-rdday="${iso(new Date())}">Today</button><button type="button" class="fxb sm" data-rdday="${iso(new Date(Date.now()-864e5))}">Yesterday</button>`
+  const nav=RD.mode=="day"?`${arrow(-1,"Previous day")}<input type="date" class="fxi" id="rdD" value="${RD.d}">${arrow(1,"Next day")}<button type="button" class="fxb sm" data-rdday="${iso(new Date(Date.now()-864e5))}">Yesterday</button><button type="button" class="fxb sm" data-rdday="${iso(new Date())}">Today</button><button type="button" class="fxb sm" data-rdday="${iso(new Date(Date.now()+864e5))}">Tomorrow</button>`
     :RD.mode=="month"?`${arrow(-1,"Previous month")}<input type="month" class="fxi" id="rdM" value="${RD.m}">${arrow(1,"Next month")}`
     :`<label class="fxf"><span>From</span><input type="date" class="fxi" id="rdF" value="${days[0]}"></label><label class="fxf"><span>To</span><input type="date" class="fxi" id="rdT" value="${days[days.length-1]}"></label>`;
   const kp=[["Scheduled",sched,plKnown.length?`of ${plTot} in the planner · ${missTot} left out`:`${by("extra")} more done without a schedule`],["Done as scheduled",adh==null?"–":adh+"%",`${done} done · ${by("part")} partly · ${by("none")} not started`],["Workers",A,`${by("am")} masons · ${by("ah")} helpers`],["Not done",nd,`${by("unrep")} not reported`]];
@@ -6510,9 +6512,10 @@ function renderRd(){const box=$("viewR");if(!box)return;wkPullAll();const days=r
      <div class="wkpf" style="margin-top:10px">${scBar()}</div>
      <h2 class="rdh">${one?dayLong(RD.d):RD.mode=="month"?new Date(RD.m+"-01T00:00:00").toLocaleDateString("en-GB",{month:"long",year:"numeric"}):`${fmtD(days[0])} – ${fmtD(days[days.length-1])}`}${scOn()?` <small>${esc(scName())}</small>`:""}</h2>
      <div class="drk">${kp.map(([l,b,s],i)=>`<div class="drt rk${i}"><b class="fig">${b}</b><span>${l}</span><small>${s}</small></div>`).join("")}</div></section>
+   ${one&&canEdit("plan")?`<div id="rdSkip"></div>`:""}
    ${one?`
    <div class="dngrid"><section class="fxp"><h3 class="fxh3">Scheduled work and what happened</h3>${dd.M.length?tbl(dd.M):`<div class="fxempty">No schedule or labour recorded for this day.</div>`}
-       <h3 class="fxh3" style="margin-top:18px">In the planner but not scheduled${dd.pl!=null?` · ${dd.miss.length} of ${dd.pl}`:""}</h3>${dd.pl==null?`<p class="fxsm">The planner for this day wasn't recorded. It is kept from the day the schedule is made.</p>`:missTbl(dd.miss)}</section>
+       ${canEdit("plan")?"":`<h3 class="fxh3" style="margin-top:18px">In the planner but not scheduled${dd.pl!=null?` · ${dd.miss.length} of ${dd.pl}`:""}</h3>${dd.pl==null?`<p class="fxsm">The planner for this day wasn't recorded. It is kept from the day the schedule is made.</p>`:missTbl(dd.miss)}`}</section>
      <section class="fxp"><h3 class="fxh3">Masons and helpers</h3><div class="rdmh"><div><b class="fig">${dd.am}</b><span>masons</span></div><div><b class="fig">${dd.ah}</b><span>helpers</span></div></div>
        ${Object.keys(dd.why).length?`<h3 class="fxh3" style="margin-top:16px">Why work wasn't done</h3>${rdBars(dd.why)}`:""}
        <h3 class="fxh3" style="margin-top:16px">Also on this day</h3>${(()=>{const e=evOn(RD.d);return`<ul class="rdev"><li><b class="fig">${e.comp.length}</b><span>activities marked complete</span>${e.comp.length?`<small>${e.comp.slice(0,8).map(x=>`V${x.v} ${esc(x.u.n)}`).join(" · ")}${e.comp.length>8?" …":""}</small>`:""}</li><li><b class="fig">${e.dr.length}</b><span>defects raised</span></li><li><b class="fig">${e.dc.length}</b><span>defects closed</span></li><li><b class="fig">${e.dn.length}</b><span>debit notes${e.dn.length?" · "+inr(e.dn.reduce((s,x)=>s+x.amt,0)):""}</span></li></ul>`})()}
@@ -6528,10 +6531,11 @@ function renderRd(){const box=$("viewR");if(!box)return;wkPullAll();const days=r
        <h3 class="fxh3" style="margin-top:16px">Busiest villas</h3>${rdBars(Object.fromEntries(Object.entries(byVilla).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([k,v])=>["Villa "+k,v])))||`<p class="fxsm">No labour recorded.</p>`}
        <h3 class="fxh3" style="margin-top:16px">Progress in this period</h3><ul class="rdev"><li><b class="fig">${ev.comp.filter(e=>scIn(e.v)).length}</b><span>activities completed</span></li><li><b class="fig">${ev.dr.filter(e=>scIn(e.v)).length}</b><span>defects raised · ${ev.dc.filter(e=>scIn(e.v)).length} closed</span></li><li><b class="fig">${ev.dn.filter(e=>scIn(e.v)).length}</b><span>debit notes · ${inr(ev.dn.filter(e=>scIn(e.v)).reduce((s,x)=>s+x.amt,0))}</span></li></ul></section></div>`}
   </div>`;
-  box.onclick=e=>{const t=e.target.closest("[data-rdm],[data-rdstep],[data-rdday],[data-rdv],#rdXl");if(!t)return;
+  box.onclick=e=>{if(e.target.closest("#wkSkip"))return;const t=e.target.closest("[data-rdm],[data-rdstep],[data-rdday],[data-rdv],#rdXl");if(!t)return;
     if(t.dataset.rdm){RD.mode=t.dataset.rdm}else if(t.dataset.rdstep){const k=+t.dataset.rdstep;if(RD.mode=="day"){const x=new Date(RD.d+"T00:00:00");x.setDate(x.getDate()+k);RD.d=iso(x)}else{const x=new Date(RD.m+"-01T00:00:00");x.setMonth(x.getMonth()+k);RD.m=iso(x).slice(0,7)}}
     else if(t.dataset.rdday){RD.mode="day";RD.d=t.dataset.rdday}else if(t.id=="rdXl"){rdExcel(days,D).then(m=>status(m));return}
     else if(t.dataset.rdv){$("vn").value=t.dataset.rdv;openVilla(t.dataset.rdv).then(()=>{sel=LEAF[t.dataset.rdl]||sel;setView("C")});return}renderRd()};
+  if(RD.mode=="day"&&canEdit("plan")&&$("rdSkip")){$("rdSkip").innerHTML=skipHtml(RD.d);skipBind(RD.d)}
   const ch=(id,f)=>{const el=$(id);if(el)el.onchange=()=>{if(el.value){f(el.value);renderRd()}}};ch("rdD",v=>RD.d=v);ch("rdM",v=>RD.m=v);ch("rdF",v=>RD.from=v);ch("rdT",v=>RD.to=v)}
 async function rdExcel(days,D){await loadXLSX();const wb=XLSX.utils.book_new();
   const s1=[["Date","In the planner","Scheduled","Not scheduled","Done","Partly done","Not started","Not reported","Done without a schedule","Masons","Helpers","Main reason not done"]];
@@ -6751,6 +6755,14 @@ WKP.by=WKP.by||"v";
     const on=ks.every(([v,l])=>w.rows.some(r=>r.kind=="plan"&&!r.del&&r.v==+v&&r.leaf==+l));const now=new Date().toISOString();
     ks.forEach(([v,l])=>{const ex=w.rows.find(r=>r.kind=="plan"&&!r.del&&r.v==+v&&r.leaf==+l);if(on){if(ex){ex.del=true;ex.mt=now}}else if(!ex)w.rows.push({id:fxId(),kind:"plan",v:+v,leaf:+l,mas:0,hel:0,note:"",con:"",by:engName(),mt:now,src:"planner"})});
     wkStore(w,true);const y=window.scrollY;renderWk("T");window.scrollTo(0,y)})}}
+// ---------- v24: keep the tapped item in place when a list redraws ----------
+let ANC=null;
+document.addEventListener("click",e=>{const S="[data-wkpick],[data-wpall],[data-wkby],[data-wpper],[data-ogdone],[data-ogby],[data-scc],[data-scp],[data-lbs]";let t=e.target.closest(S);if(!t){const l=e.target.closest("label");t=l&&l.querySelector("[data-wkpick],[data-ogdone]")}if(!t)return;
+  const at=[...t.attributes].find(a=>/^data-(wkpick|wpall|wkby|wpper|ogdone|ogby|scc|scp|lbs)$/.test(a.name));if(!at)return;const li=t.closest("[data-lb]");
+  ANC={sel:(li?`[data-lb="${li.dataset.lb}"] `:"")+`[${at.name}="${CSS.escape(at.value)}"]`,top:t.getBoundingClientRect().top,at:Date.now()};setTimeout(ancFix,0);setTimeout(ancFix,60)},true);
+function ancFix(){if(!ANC||Date.now()-ANC.at>1500)return;const el=document.querySelector(ANC.sel);if(!el)return;const d=el.getBoundingClientRect().top-ANC.top;if(Math.abs(d)<2)return;
+  let p=el.parentElement;while(p&&p!==document.body){const o=getComputedStyle(p).overflowY;if((o=="auto"||o=="scroll")&&p.scrollHeight>p.clientHeight)break;p=p.parentElement}
+  (p&&p!==document.body?p:document.scrollingElement).scrollTop+=d}
 // ---------- v23: ongoing work over a day, month or date range; by villa, activity or stage; backdated completion ----------
 function ogStages(G,card){return SEQ.map(q=>{const X=G.filter(([id])=>LEAF[id]&&LEAF[id].si==q.i);if(!X.length)return"";const n=X.reduce((s,[,L])=>s+L.length,0);
   return`<section class="ogsg" style="--sc:${scol(q.i)}"><h3>${cpSvg(CPSTG[q.i]||"tools")}<span>${esc(q.n)}</span><small>${plur(X.length,"activity","activities")} · ${n} villa-activities</small></h3><div class="wkpg2 oga2">${X.map(card).join("")}</div></section>`}).join("")}
