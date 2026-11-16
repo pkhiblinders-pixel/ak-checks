@@ -1977,6 +1977,14 @@ body.cpdrag,body.cpdrag *{cursor:grabbing!important;user-select:none}
 .skc .sktb{table-layout:fixed;width:100%}.skc .sktb th:first-child{width:52px}.skc .sktb select.fxi,.skc .sktb input.fxi{min-width:0;width:100%}
 .needf{border-color:var(--bad)!important}
 @media (max-width:560px){.skgrid{grid-template-columns:1fr}}
+
+/* ---------- v26: plan freeze ---------- */
+.plk{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 12px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:var(--well)}
+.plk>.ico{width:22px;height:22px;flex:none;color:var(--mute)}.plk .plkt{display:flex;flex-direction:column;flex:1 1 300px;min-width:0}.plk .plkt b{font-size:14.5px}.plk .plkt span{font-size:12.5px;color:var(--mute)}
+.plk.on{border-color:var(--ok);background:var(--okbg)}.plk.on>.ico{color:var(--ok)}
+#viewP>.plk{grid-column:1/-1;align-self:start}#viewP:not(.ez):has(>.plk:not([hidden])){grid-template-rows:auto minmax(0,1fr)}#viewP.ez>.plk{margin:0 auto 12px;max-width:1180px}
+.plk.pulse{animation:plkp .6s ease 2}@keyframes plkp{50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 35%,transparent)}}
+@media (prefers-reduced-motion:reduce){.plk.pulse{animation:none}}
 </style>
 <div class="app">
 <nav class="rail" aria-label="Sections"><div class="mark" aria-hidden="true">AK</div><div class="views" role="tablist" aria-label="View"><button type="button" role="tab" id="vO" aria-selected="false" title="Overview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M12 14l3.5-4.5"/><path d="M5 19h14"/></svg>Overview</button><button type="button" role="tab" id="vS" aria-selected="false" title="Site map"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z"/><path d="M9 4.5v13M15 6.5v13"/></svg>Site map</button><button type="button" role="tab" id="vP" aria-selected="false" title="Planner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16"/><path d="M8 7h8"/><path d="M11 12h9"/><path d="M8 17h6"/></svg>Planner</button><button type="button" role="tab" id="vC" aria-selected="false" title="Checklists"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5v-1h6v1"/><path d="M9 13l2.2 2.2L15.2 11"/></svg>Checklists<span class="badge" id="qb" hidden></span></button><button type="button" role="tab" id="vD" aria-selected="false" title="Defects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10.5v4"/><path d="M12 17.2v.3"/></svg>Defects<span class="badge" id="db"></span></button><button type="button" role="tab" id="vW" aria-selected="false" title="Drawings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 13h6M9 16.5h6"/></svg>Drawings<span class="badge" id="wb" hidden></span></button><button type="button" role="tab" id="vQ" aria-selected="false" title="Quantities"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 16.5l13-13 4 4-13 13z"/><path d="M7.5 12.5l2 2M10.5 9.5l2 2M13.5 6.5l2 2"/></svg>Quantities</button></div></nav>
@@ -3034,7 +3042,7 @@ function setStageDays(q,N){const L=stageLeaves(q);const span=()=>schedule().stag
   for(let k=0;k<600;k++){cur=span();if(cur==N)break;const crit=L.filter(u=>u.d>0&&u.d==gdur(groupOf(u))).sort((a,b)=>b.d-a.d||a.id-b.id);if(!crit.length)break;
     if(cur<N)crit[k%crit.length].d++;else{const c=crit.filter(u=>u.d>1);if(!c.length)break;c[k%c.length].d--}}
   return span()}
-async function applyPlanAll(){const m=$("stmsg2");const D={};LEAVES.forEach(u=>D[u.id]=u.d);const groups=GROUPS.map(g=>g.map(u=>u.id)),tg={...STGT},cur=villa()?vkey(villa()):null;
+var applyPlanAll=async function(){const m=$("stmsg2");const D={};LEAVES.forEach(u=>D[u.id]=u.d);const groups=GROUPS.map(g=>g.map(u=>u.id)),tg={...STGT},cur=villa()?vkey(villa()):null;
   let i=0,fail=0;const now=new Date().toISOString();if(m)m.textContent="Applying…";
   for(const n of PLOTS){const k=vkey(String(n));if(k===cur)continue;const s0=getState(n);if(!s0)continue;const s=JSON.parse(JSON.stringify(s0));s.leaves=s.leaves||{};
     LEAVES.forEach(u=>{const x=s.leaves[u.id]=s.leaves[u.id]||{d:u.def,done:false,wip:false,src:"",chk:{},custom:[],by:"",rem:"",on:""};x.d=D[u.id]});
@@ -5573,7 +5581,7 @@ addEventListener("online",()=>setTimeout(roleLoad,1500));
 $("dwup").addEventListener("click",e=>{if(!canEdit("dwg")){e.stopImmediatePropagation();$("dwmsg").textContent="Only admins and project managers can upload drawings."}},true);
 $("dwlist").addEventListener("click",e=>{if(!canEdit("dwg")&&e.target.closest("[data-dwrm],[data-dwrm2],[data-dwrmc]")){e.stopImmediatePropagation();e.preventDefault()}},true);
 // planner changes carry their own time stamp, so an engineer's device never rolls back the programme
-var PSIG="",PMT="";const planSig=()=>JSON.stringify([$("sd").value,$("sun").checked,GROUPS.map(g=>g.map(u=>u.id)),STGT,LEAVES.map(u=>u.d),typeof PINS=="undefined"?{}:PINS]);
+var PSIG="",PMT="";const planSig=()=>JSON.stringify([$("sd").value,$("sun").checked,GROUPS.map(g=>g.map(u=>u.id)),STGT,LEAVES.map(u=>u.d),typeof PINS=="undefined"?{}:PINS,typeof LOCK=="undefined"?null:LOCK]);
 {const st0=syStamp;syStamp=function(){const g=planSig();if(PSIG&&g!==PSIG&&villa())PMT=new Date().toISOString();PSIG=g;st0()}}
 {const a1=apply;apply=function(s,keep){a1.apply(this,arguments);PMT=(!keep&&s&&s.pmt)||"";PSIG=planSig()}}
 {const s1=snapshot;snapshot=function(){const s=s1.apply(this,arguments);s.pmt=PMT||"";return s}}
@@ -5583,7 +5591,7 @@ syMerge=function(l,r){const o=JSON.parse(JSON.stringify(r));o.leaves=o.leaves||{
     const lw=String(a.mt||"")>String(b.mt||"");const pick=lw?{...a}:{...b};
     // durations belong to the programme: they follow whichever side changed the plan last
     pick.d=String(l.pmt||"")>String(r.pmt||"")?a.d:b.d;o.leaves[id]=pick}
-  if(String(l.pmt||"")>String(r.pmt||"")){o.start=l.start;o.skipSun=l.skipSun;o.groups=l.groups;o.tg=l.tg;o.pins=l.pins;o.pmt=l.pmt}
+  if(String(l.pmt||"")>String(r.pmt||"")){o.start=l.start;o.skipSun=l.skipSun;o.groups=l.groups;o.tg=l.tg;o.pins=l.pins;if(l.lock)o.lock=l.lock;else delete o.lock;o.pmt=l.pmt}
   o.v=l.v;o.dv=l.dv;o.villa=l.villa||r.villa;o.saved=new Date().toISOString();return o};
 // drawings: upload works offline too; files wait on the device and go up with the next sync
 var DWDEL=new Set();try{DWDEL=new Set(JSON.parse(ls.get("ak-dwdel")||"[]"))}catch(e){}
@@ -6643,7 +6651,7 @@ const CP={m:null,st:null,sel:null};let CPU=[];
 const cpSnap=()=>JSON.stringify({g:GROUPS.map(g=>g.map(u=>u.id)),p:PINS,sd:$("sd").value,d:LEAVES.map(u=>[u.id,u.d])});
 function cpPush(){CPU.push(cpSnap());if(CPU.length>40)CPU.shift()}
 function cpUndo(){const s=CPU.pop();if(!s)return;const o=JSON.parse(s);GROUPS=o.g.map(g=>g.map(id=>LEAF[id]).filter(Boolean)).filter(g=>g.length);PINS=o.p||{};$("sd").value=o.sd;o.d.forEach(([id,d])=>{if(LEAF[id])LEAF[id].d=d});changed()}
-const cpRO=()=>!(typeof canEdit=="function"?canEdit("plan"):true);
+const cpRO=()=>!!(typeof LOCK!="undefined"&&LOCK)||!(typeof canEdit=="function"?canEdit("plan"):true);
 // place an activity on a date: it is fixed there, and moves to that point in the order
 function cpPlace(id,date){const u=LEAF[id];if(!u||u.done||cpRO())return;cpPush();
   const d=new Date(date+"T00:00:00");if(d<startDate()&&!LEAVES.some(x=>x.done))$("sd").value=date;
@@ -6679,8 +6687,8 @@ function renderEz(){const box=$("ezp");if(!box||!window.CPREADY)return;const v=v
       <button type="button" class="cpx" data-cpx="1" aria-label="Close">×</button></div>`:"";
   box.innerHTML=`<div class="fxin cpw">
    <section class="fxp ezh cph">
-     <div class="ezh1"><span class="vcl">${v?"Villa "+esc(v):"No villa selected"}</span><h2>${fin?`Finishes <span class="fig">${fmt(fin)}</span>`:"All work complete"}</h2>
-       <p>${pend.length?`${plur(pend.length,"activity","activities")} to go${npin?` · ${npin} on fixed dates`:""}. ${skip?"Sundays off.":"Working every day."}`:"Every activity is marked done."}</p></div>
+     <div class="ezh1"><span class="vcl">${v?"Villa "+esc(v):"No villa selected"}</span>${(()=>{let fc=null;try{fc=villaStats(snapshot()).fin}catch(e){}return`<h2>${fc||fin?`Finishes <span class="fig">${fmt(fc||fin)}</span>`:"All work complete"}</h2>
+       <p>${pend.length?`${plur(pend.length,"activity","activities")} to go${npin?` · ${npin} on fixed dates`:""}${fin?` · planned end ${fmt(fin)}`:""}. ${skip?"Sundays off.":"Working every day."}`:"Every activity is marked done."}</p>`})()}</div>
      <div class="ezset"><label class="fxf"><span>Work starts on</span><input type="date" class="fxi" id="ezSd" value="${esc($("sd").value)}"${ro?" disabled":""}></label>
        <label class="fxck"><input type="checkbox" id="ezSun"${skip?" checked":""}${ro?" disabled":""}> Sundays off</label></div>
      <div class="ezpdf"><label class="fxf"><span>PDF includes</span><select class="fxi" id="ezPx"><option value="0">Schedule with dates</option><option value="1">+ completed activities</option><option value="2">+ completed activities and photos</option><option value="3">+ all checklists and photos</option></select></label>
@@ -6876,6 +6884,47 @@ WKP.per="d";
   P.querySelectorAll("[data-wkby]").forEach(b=>b.onclick=()=>{WKP.by=b.dataset.wkby;re()});
   $("wkPq").oninput=e=>{WKP.q=e.target.value.replace(/\D/g,"");const p=e.target.selectionStart;re();const i=$("wkPq");i.focus();try{i.setSelectionRange(p,p)}catch(x){}};
   P.onclick=e=>{const t=e.target.closest("[data-ogv],[data-ogday]");if(!t)return;if(t.dataset.ogday){WKP.per="d";WKD.T=t.dataset.ogday;re();return}ogOpen(+t.dataset.ogv,+t.dataset.ogl)}}}
+// ---------- v26: plan freeze (lock), apply-to-all that sticks, one forecast everywhere ----------
+var LOCK=null;
+{const s1=snapshot;snapshot=function(){const s=s1.apply(this,arguments);if(LOCK)s.lock=LOCK;else delete s.lock;return s}}
+{const a1=apply;apply=function(s,keep){a1.apply(this,arguments);if(!keep)LOCK=(s&&s.lock)||null;PSIG=planSig()}}
+{const v=villa();try{const st=v?(SITE[vkey(v)]||JSON.parse(ls.get("amr-planner:"+vkey(v))||"null")):null;LOCK=(st&&st.lock)||null;PSIG=planSig()}catch(e){}}
+// write a plan change into another villa so it syncs and wins over the older copy
+function planPut(n,s){const k=vkey(String(n)),now=new Date().toISOString();s.pmt=now;s.saved=now;s.v=3;s.villa=String(n);SITE[k]=s;ls.set("amr-planner:"+k,JSON.stringify(s));statsCache[n]=null;if(DB){syMark(k)}}
+applyPlanAll=async function(){const m=$("stmsg2");const D={};LEAVES.forEach(u=>D[u.id]=u.d);const groups=GROUPS.map(g=>g.map(u=>u.id)),tg={...STGT},cur=villa()?vkey(villa()):null;
+  let i=0,lk=0;const now=new Date().toISOString();if(m)m.textContent="Applying…";
+  for(const n of PLOTS){const k=vkey(String(n));if(k===cur)continue;const s0=getState(n);if(!s0)continue;if(s0.lock){lk++;continue}const s=JSON.parse(JSON.stringify(s0));s.leaves=s.leaves||{};
+    LEAVES.forEach(u=>{const x=s.leaves[u.id]=s.leaves[u.id]||{d:u.def,done:false,wip:false,src:"",chk:{},custom:[],by:"",rem:"",on:""};if(x.d!==D[u.id]){x.d=D[u.id];x.mt=now}});
+    s.groups=groups;s.tg=tg;s.dv=2;planPut(n,s);i++;if(m&&i%10==0)m.textContent=`Applying… ${i} villas`}
+  if(DB)syKick(300);saveNow();stgMsg=`Days, order and targets applied to ${i} other villa${i==1?"":"s"}${lk?`. ${lk} frozen villa${lk==1?"":"s"} left as they are`:""}. Overview, site map and Tomorrow now use the new days.`;render();if(view=="S")paintMap()};
+// freeze: the PM fixes the plan; nobody can change days, order or dates until it is unfrozen
+function plkInfo(){const st=villaStats(snapshot());return{by:(ROLE&&ROLE.name)||engName()||"Project manager",at:new Date().toISOString(),fin:st.fin?iso(st.fin):"",days:LEAVES.reduce((a,u)=>a+(u.done?0:u.d),0)}}
+function plkSet(on){if(!villa())return;LOCK=on?plkInfo():null;changed();saveNow();plkBar();status(on?`Villa ${villa()} plan frozen.`:`Villa ${villa()} plan unfrozen. It can be changed again.`)}
+function plkAll(on){const cur=villa()?vkey(villa()):null;let i=0;const by=(ROLE&&ROLE.name)||engName()||"Project manager",at=new Date().toISOString();
+  for(const n of PLOTS){const k=vkey(String(n));if(k===cur)continue;const s0=getState(n);if(!s0||!!s0.lock==on)continue;const s=JSON.parse(JSON.stringify(s0));
+    if(on){const st=stats(n);s.lock={by,at,fin:st.fin?iso(st.fin):""}}else delete s.lock;planPut(n,s);i++}
+  if(cur)LOCK=on?plkInfo():null;changed();saveNow();if(DB)syKick(300);plkBar();status(on?`Plans frozen for ${i+(cur?1:0)} villas.`:`Plans unfrozen for ${i+(cur?1:0)} villas.`)}
+let plkArm=0;
+function plkBar(){const host=$("viewP");if(!host)return;let b=$("plkB");if(!b){b=document.createElement("div");b.id="plkB";host.prepend(b)}
+  const v=villa(),pm=canEdit("plan");if(!v){b.hidden=true;return}b.hidden=false;const nl=PLOTS.filter(n=>(getState(n)||{}).lock).length;
+  const st=LOCK?villaStats(snapshot()):null,slip=LOCK&&LOCK.fin&&st&&st.fin?Math.round((st.fin-new Date(LOCK.fin+"T00:00:00"))/864e5):null;
+  b.className="plk"+(LOCK?" on":"");
+  b.innerHTML=LOCK?`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><div class="plkt"><b>Plan frozen</b><span>By ${esc(LOCK.by||"project manager")} on ${fmtD(iso(new Date(LOCK.at)))}${LOCK.fin?` · frozen finish ${fmtD(LOCK.fin)}`:""}${slip?` · now forecast ${fmtD(iso(st.fin))} (${slip>0?slip+" days late":-slip+" days early"})`:""}. Days, order and dates can't be changed; progress and checklists still update.</span></div>${pm?`<button type="button" class="fxb sm" data-plk="off">Unfreeze</button>`:""}`
+    :`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.5-2"/></svg><div class="plkt"><b>Plan not frozen</b><span>${pm?"Set the days and order, then freeze the plan so it can't be changed by mistake.":"The project manager hasn't frozen this plan yet."}${nl?` ${nl} of ${PLOTS.length} villas are frozen.`:""}</span></div>${pm?`<button type="button" class="fxb sm pri" data-plk="on">Freeze villa ${esc(v)}</button><button type="button" class="fxb sm" data-plk="all">Freeze all villas</button>`:""}`;
+  b.onclick=e=>{const t=e.target.closest("[data-plk]");if(!t)return;const k=t.dataset.plk;
+    if(k=="all"||k=="alloff"){if(Date.now()-plkArm>5000){plkArm=Date.now();t.textContent="Tap again to confirm";return}plkArm=0;plkAll(k=="all");return}plkSet(k=="on")};
+  if(LOCK&&pm&&nl>1){if(!b.querySelector('[data-plk="alloff"]'))b.insertAdjacentHTML("beforeend",`<button type="button" class="fxb sm fxgh" data-plk="alloff">Unfreeze all</button>`)}}
+{const r0=render;render=function(){r0.apply(this,arguments);try{plkBar()}catch(e){}}}
+// while frozen, block every editing control on the planner page (navigation, zoom, PDF and progress stay)
+{const OK='#zo,#zf,#zi,#st,#ac,#sa,#chips *,#hero *,#ezTl,#ezBack,#ezPv,#ezDl,#ezSh,#ezPx,#pdf,#pdfo,[data-cpmo],[data-cptoday],[data-cpst],[data-cpu],[data-cpx],[data-cpmore],#plkB *,summary,#vn,.vnav *,[data-plk]';
+  const blk=e=>{if(!LOCK||!$("viewP").contains(e.target))return;const t=e.target.closest("button,input,select,textarea,label,#gantt");if(!t)return;
+    if(t.id=="gantt"){if(e.type=="pointerdown"&&e.target.closest(".bar,.gbar,[data-gb],rect")){e.preventDefault();e.stopPropagation();plkNote()}return}
+    if(t.matches(OK)||t.closest("#hero,#plkB,#chips"))return;e.preventDefault();e.stopImmediatePropagation();plkNote()};
+  ["pointerdown","mousedown","click","change","input","keydown"].forEach(ev=>document.addEventListener(ev,blk,true))}
+let plkT=0;function plkNote(){if(Date.now()-plkT<1500)return;plkT=Date.now();status("This plan is frozen. "+(canEdit("plan")?"Unfreeze it at the top of the planner to make changes.":"Ask the project manager to unfreeze it."));const b=$("plkB");if(b){b.classList.remove("pulse");void b.offsetWidth;b.classList.add("pulse")}}
+// the timeline's pending days and projected closure come from the same forecast as Overview and Tomorrow
+{const rk=renderKPI;renderKPI=function(S){rk(S);try{const st=villaStats(snapshot());$("k8").textContent=st.fin?fmt(st.fin):"Complete";$("k3").textContent=st.rem+" days"}catch(e){}}}
+plkBar();
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
