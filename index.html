@@ -2071,6 +2071,24 @@ label.fxb{display:inline-flex;align-items:center;cursor:pointer}
 @media (max-width:560px){.tkk{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 .tkd{margin:14px 0 6px;font-size:13.5px;color:var(--mute)}.tkl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 .tkl li{display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:10px;padding:8px 10px;border-radius:12px;background:var(--well)}.tkl li b{font-size:13.5px}.tkl li small{grid-column:2;color:var(--mute);font-size:12.5px}.tkt{grid-row:span 2;color:var(--mute);font-size:12px;font-variant-numeric:tabular-nums}
+/* ---------- v34: approvals, villa status ---------- */
+.app:not([data-view="U"]) #viewU{display:none}
+.aprc{display:inline-block;align-self:flex-start;margin-left:6px;font-size:11.5px;font-weight:800;border-radius:999px;padding:3px 9px;white-space:nowrap}
+.aprc.ok{background:var(--okbg);color:var(--ok)}.aprc.w{background:var(--warnbg);color:var(--warn)}.aprc.bad{background:var(--badbg);color:var(--bad)}
+.aprbtn{display:inline-flex!important;align-items:center;gap:6px;width:auto!important;padding:0 12px!important;font-weight:700;font-size:13px;background:var(--warnbg)!important;color:var(--warn)!important}
+.aprbtn span{background:var(--warn);color:var(--base);border-radius:999px;padding:1px 7px;font-size:12px}
+.aprbox{width:min(640px,100%)!important}.aprl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.apr{display:flex;flex-direction:column;gap:8px;padding:10px 12px;border-radius:14px;background:var(--well);border:1px solid var(--line)}.aprh{display:flex;flex-direction:column}.aprh small{color:var(--mute);font-size:12px}
+.aprk{font-size:12.5px;font-weight:700;border-radius:10px;padding:6px 10px}.aprk.ok{background:var(--okbg);color:var(--ok)}.aprk.no{background:var(--badbg);color:var(--bad)}
+.aprbk{display:flex;gap:6px;flex-wrap:wrap}.aprbk .fxi{flex:1 1 200px;width:auto;height:38px}
+.vsl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.vsr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 10px;border-radius:14px;background:var(--well);border:1px solid var(--line)}
+.vsr.cur{border-color:var(--acc)}.vsr.s-done .vsn b{color:var(--mute)}
+.vsn{display:flex;flex-direction:column;min-width:0}.vsn b{font-size:14px}.vsn small{color:var(--mute);font-size:12px}.vsnext{color:var(--acc)!important;font-weight:700}
+.vsseg button{min-height:34px;font-size:12.5px;white-space:nowrap}.vsr.s-done .vsseg [aria-pressed="true"]{background:var(--ok);color:#fff}.vsr.s-wip .vsseg [aria-pressed="true"]{background:var(--warn);color:#fff}
+@media (max-width:700px){.vsr{grid-template-columns:auto minmax(0,1fr)}.vsseg{grid-column:1/-1}.vsseg{display:flex}.vsseg button{flex:1}}
+.stsel{margin:0 0 8px}.sgr[hidden]{display:none!important}
+.plnext{margin:0 0 10px;padding:8px 10px;border-radius:10px;background:var(--warnbg);font-size:13px}
 </style>
 <div class="app">
 <nav class="rail" aria-label="Sections"><div class="mark" role="img" aria-label="AK Planner"></div><div class="views" role="tablist" aria-label="View"><button type="button" role="tab" id="vO" aria-selected="false" title="Overview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M12 14l3.5-4.5"/><path d="M5 19h14"/></svg>Overview</button><button type="button" role="tab" id="vS" aria-selected="false" title="Site map"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z"/><path d="M9 4.5v13M15 6.5v13"/></svg>Site map</button><button type="button" role="tab" id="vP" aria-selected="false" title="Planner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16"/><path d="M8 7h8"/><path d="M11 12h9"/><path d="M8 17h6"/></svg>Planner</button><button type="button" role="tab" id="vC" aria-selected="false" title="Checklists"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5v-1h6v1"/><path d="M9 13l2.2 2.2L15.2 11"/></svg>Checklists<span class="badge" id="qb" hidden></span></button><button type="button" role="tab" id="vD" aria-selected="false" title="Defects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5l8.5 15h-17z"/><path d="M12 10.5v4"/><path d="M12 17.2v.3"/></svg>Defects<span class="badge" id="db"></span></button><button type="button" role="tab" id="vW" aria-selected="false" title="Drawings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 13h6M9 16.5h6"/></svg>Drawings<span class="badge" id="wb" hidden></span></button><button type="button" role="tab" id="vQ" aria-selected="false" title="Quantities"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 16.5l13-13 4 4-13 13z"/><path d="M7.5 12.5l2 2M10.5 9.5l2 2M13.5 6.5l2 2"/></svg>Quantities</button></div></nav>
@@ -6482,7 +6500,7 @@ PGN.R="Site diary";
 {const h4=window.hdrAct;window.hdrAct=function(){h4&&h4();const b=$("hpB");if(!b||view!="R")return;b.hidden=false;b.textContent="Download Excel";b.onclick=()=>{const x=$("rdXl");if(x)x.click()}}}
 railFit();
 // v19: engineers see checklists, site map, defects, drawings, quantities, tomorrow, labour, day end
-{const av3=allowedViews;allowedViews=function(){const a=av3();if(roleNow()!="eng")return a;return["C","S","G","D","W","Q","T","L","E","V"]}}
+{const av3=allowedViews;allowedViews=function(){const a=av3();if(roleNow()!="eng")return a;return["C","U","S","G","D","W","Q","T","L","E","V"]}}
 RAILP.eng=["C","S","D","T","L"];
 // ---------- v20: one villa filter everywhere, schedule by villa, PM reasons for unscheduled plan work ----------
 {try{const o=JSON.parse(localStorage.getItem("ak-sc")||"null");if(o){pin=[0,1,2,3].includes(+o.c)?+o.c:0;PSC=["","H","M","L","P"].includes(o.p)?o.p:""}}catch(e){}}
@@ -7360,6 +7378,91 @@ function openTrack(){const L=people();if(!L.length){mePick();return}if(!TRK.p||!
       if(!src||src=="about:blank"){if(fb){I.src=fb}else{$("lbxP").textContent="Loading photo…"}}L.hidden=false;try{$("lbxC").focus()}catch(x){}
       // photos kept in SharePoint: fetch the full image if it isn't on the phone yet
       const id=(t.dataset.phid)||"";if(!src&&SP&&SP.blob&&id)SP.blob(id).then(b=>{I.src=URL.createObjectURL(b)}).catch(()=>{})},0)});}
+// ---------- v34: completion needs PM approval (only when the checklist is complete); villa status page; planner opens on current work ----------
+// checklist completeness for any villa's activity
+function chkOf(n,id){const u0=LEAF[id];if(!u0)return{tot:0,open:0,ok:0};if(loadedVilla&&String(loadedVilla)==String(n))return clStat(u0);
+  const x=((getState(n)||{}).leaves||{})[id]||{};const u=Object.assign(Object.create(u0),{chk:x.chk||{},custom:x.custom||[]});try{return clStat(u)}catch(e){return{tot:0,open:0,ok:0}}}
+const chkDone=(n,id)=>{const s=chkOf(n,id);return s.tot>0&&s.open==0};
+// approval requests live in the work record of the day the work was done
+function aprAll(days){const out=[];const lim=iso(new Date(Date.now()-(days||60)*864e5));for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(!k||!/^ak-work:\d{4}-\d\d-\d\d$/.test(k))continue;const d=k.slice(8);if(d<lim)continue;
+  wkLoad(d).rows.forEach(r=>{if(r.kind=="apr"&&!r.del)out.push({...r,d})})}return out.sort((a,b)=>String(b.at).localeCompare(String(a.at)))}
+const leafDone=(n,id)=>{if(loadedVilla&&String(loadedVilla)==String(n))return!!(LEAF[id]&&LEAF[id].done);const x=((getState(n)||{}).leaves||{})[id];return!!(x&&x.done)};
+function aprPending(){return aprAll().filter(r=>r.st=="pend"&&!leafDone(r.v,r.leaf))}
+function aprGet(d,v,leaf){return wkLoad(d).rows.find(r=>r.kind=="apr"&&!r.del&&r.v==+v&&r.leaf==+leaf)}
+function aprAdd(d,v,leaf,src){const w=wkLoad(d);let r=w.rows.find(x=>x.kind=="apr"&&!x.del&&x.v==+v&&x.leaf==+leaf);const now=new Date().toISOString();
+  if(r&&(r.st=="pend"||r.st=="ok"))return r;if(!r){r={id:`apr:${v}:${leaf}`,kind:"apr",v:+v,leaf:+leaf};w.rows.push(r)}Object.assign(r,{st:"pend",src,by:(ME&&ME.name)||engName()||"",eid:ME&&ME.id||"",at:now,mt:now,note:""});wkStore(w,true);aprBadge();return r}
+function aprDrop(d,v,leaf){const w=wkLoad(d),r=w.rows.find(x=>x.kind=="apr"&&!x.del&&x.v==+v&&x.leaf==+leaf&&x.st=="pend");if(r){r.del=true;r.mt=new Date().toISOString();wkStore(w,true);aprBadge()}}
+function aprSet(d,v,leaf,st,note){const w=wkLoad(d),r=w.rows.find(x=>x.kind=="apr"&&!x.del&&x.v==+v&&x.leaf==+leaf);if(!r)return;r.st=st;r.note=note||"";r.pm={by:(ME&&ME.name)||(ROLE&&ROLE.name)||"Project manager",at:new Date().toISOString()};r.mt=r.pm.at;wkStore(w,true);aprBadge()}
+const aprChip=r=>!r?"":r.st=="ok"?`<span class="aprc ok">Approved by ${esc((r.pm&&r.pm.by)||"PM")}</span>`:r.st=="back"?`<span class="aprc bad">Sent back${r.note?": "+esc(r.note):""}</span>`:`<span class="aprc w">Waiting for PM approval</span>`;
+// labour: "Done" asks the PM; changing it back withdraws the request
+{const rw=renderWk;renderWk=function(V){rw(V);if(V!="L")return;const d=WKD.L,w=wkLoad(d);labMerged(w).forEach(r=>{if(!r.lab)return;const a=aprGet(d,r.v,r.leaf);
+    if(r.st=="done"&&!leafDone(r.v,r.leaf)&&!a)aprAdd(d,r.v,r.leaf,"labour");else if(r.st!="done"&&a&&a.st=="pend"&&a.src=="labour")aprDrop(d,r.v,r.leaf)});
+  document.querySelectorAll("#wkLab li[data-lb]").forEach(li=>{const w2=wkLoad(d),row=labMerged(w2).find(x=>String(x.id)==li.dataset.lb);if(!row||row.st!="done")return;const a=aprGet(d,row.v,row.leaf);const h=li.querySelector(".lbh");
+    if(h&&a)h.insertAdjacentHTML("beforeend",aprChip(a)+(a.st=="pend"&&!chkDone(row.v,row.leaf)?`<span class="aprc w">Checklist not complete yet</span>`:""))})}}
+// the PM's approval list
+function openApprovals(){const L=aprPending();const pm=canEdit("plan");
+  const row=r=>{const u=LEAF[r.leaf]||{n:"",stn:"",seq:{n:""}},s=chkOf(r.v,r.leaf),ok=s.tot>0&&s.open==0;
+    return`<li class="apr" data-apr="${r.d}|${r.v}|${r.leaf}"><div class="aprh"><b>Villa ${r.v} · ${esc(u.n)}</b><small>${esc(u.seq.n)} › ${esc(u.stn)} · done ${fmtD(r.d)} · by ${esc(r.by||"engineer")} · from ${r.src=="status"?"Villa status":"Labour report"}</small></div>
+      <div class="aprk ${ok?"ok":"no"}">${ok?`Checklist complete · ${s.tot} points`:`Checklist not complete: ${s.tot-s.open} of ${s.tot} points answered`}</div>
+      ${pm?`<div class="fxacts" style="margin:0"><button type="button" class="fxb sm pri" data-apok="1"${ok?"":" disabled"}>Approve as completed</button><button type="button" class="fxb sm" data-apck="1">Open checklist</button><button type="button" class="fxb sm fxgh" data-apbk="1">Send back</button></div>`:""}</li>`};
+  const d=fxDialog(`Completed work to approve${L.length?" · "+L.length:""}`,L.length?`<p class="fxsm" style="margin-top:0">Engineers marked these activities completed. Approve once the checklist is complete; the activity is then fixed as done on that date.</p><ul class="aprl">${L.map(row).join("")}</ul>`:`<div class="fxempty">Nothing waiting for approval.</div>`);
+  d.querySelector(".fxbox").classList.add("aprbox");
+  d.querySelectorAll("[data-apr]").forEach(li=>{const [dd,v,leaf]=li.dataset.apr.split("|");const go=li.querySelector("[data-apok]"),ck=li.querySelector("[data-apck]"),bk=li.querySelector("[data-apbk]");
+    if(go)go.onclick=()=>{if(!chkDone(v,leaf))return;markDoneOn(+v,+leaf,dd,true);aprSet(dd,v,leaf,"ok");status(`Villa ${v}: ${LEAF[leaf].n} approved as completed on ${fmtD(dd)}.`);openApprovals()};
+    if(ck)ck.onclick=()=>{d.hidden=true;ogOpen(+v,+leaf)};
+    if(bk)bk.onclick=()=>{if(li.querySelector(".aprbk"))return;bk.insertAdjacentHTML("afterend",`<div class="aprbk"><input class="fxi" placeholder="Why? e.g. 3 checklist points still open"><button type="button" class="fxb sm bad">Send back</button></div>`);const box=li.querySelector(".aprbk");
+      box.querySelector("button").onclick=()=>{const why=box.querySelector("input").value.trim();if(!why){box.querySelector("input").focus();return}aprSet(dd,v,leaf,"back",why);openApprovals()}}})}
+function aprBadge(){const n=canEdit("plan")?aprPending().length:0;let b=$("aprB");const mb=$("mnB");if(!mb)return;if(!n){if(b)b.remove();return}
+  if(!b){b=document.createElement("button");b.type="button";b.id="aprB";b.className="hbtn aprbtn";mb.parentElement.before(b);b.onclick=()=>openApprovals()}b.innerHTML=`<span>${n}</span> to approve`;b.title=`${plur(n,"activity","activities")} marked completed, waiting for your approval`}
+setTimeout(()=>{aprBadge();if(canEdit("plan")){const n=aprPending().length,k="ak-aprseen";if(n&&sessionStorage.getItem(k)!=String(n)){sessionStorage.setItem(k,String(n));openApprovals()}}},3500);
+setInterval(aprBadge,60e3);
+// ---------- Villa status: engineers update what's pending, in progress and completed ----------
+var VST={g:null,f:"",msg:"",bad:false};
+function renderVst(){const box=$("viewU");if(!box)return;const v=villa(),pm=canEdit("plan");if(!v){box.innerHTML=`<div class="fxin"><section class="fxp"><div class="fxempty">Pick a villa at the top to update its status.</div></section></div>`;return}
+  const order=GROUPS.flat(),cur=order.find(u=>u.wip&&!u.done)||order.find(u=>!u.done);if(VST.g==null)VST.g=cur?cur.si:0;
+  const today0=iso(new Date()),A=new Map(aprAll().filter(r=>r.v==+v).map(r=>[r.leaf,r]));
+  const L=LEAVES.filter(u=>(VST.g===""||u.si==VST.g)&&(!VST.f||(VST.f=="wip"?u.wip&&!u.done:VST.f=="todo"?!u.done&&!u.wip:u.done)));
+  const cnt=k=>LEAVES.filter(u=>k=="done"?u.done:k=="wip"?u.wip&&!u.done:!u.done&&!u.wip).length;
+  box.innerHTML=`<div class="fxin"><section class="fxp"><div class="wkhd"><div><h2 class="rdh" style="margin:0">Villa ${esc(v)} status</h2><p class="fxsm" style="margin:4px 0 0">Mark each activity pending, in progress or completed. Completed work goes to the project manager, who approves it once the checklist is complete.</p></div></div>
+    <div class="drk ogk"><div class="drt"><b class="fig">${cnt("done")}</b><span>completed</span></div><div class="drt"><b class="fig">${cnt("wip")}</b><span>in progress</span></div><div class="drt"><b class="fig">${cnt("todo")}</b><span>pending</span></div><div class="drt"><b class="fig">${[...A.values()].filter(r=>r.st=="pend"&&!leafDone(v,r.leaf)).length}</b><span>waiting for approval</span></div></div>
+    <div class="dzfl" style="margin-top:12px"><label class="fxf"><span>Stage</span><select class="fxi" id="vsG"><option value="">All stages</option>${SEQ.map(q=>`<option value="${q.i}"${String(VST.g)===String(q.i)?" selected":""}>${esc(q.n)} (${stageLeaves(q).filter(u=>u.done).length}/${stageLeaves(q).length} done)</option>`).join("")}</select></label>
+      <label class="fxf"><span>Show</span><select class="fxi" id="vsF"><option value="">Everything</option><option value="wip"${VST.f=="wip"?" selected":""}>In progress</option><option value="todo"${VST.f=="todo"?" selected":""}>Pending</option><option value="done"${VST.f=="done"?" selected":""}>Completed</option></select></label></div></section>
+   <section class="fxp"><ul class="vsl">${L.map(u=>{const s=clStat(u),a=A.get(u.id),st=u.done?"done":u.wip?"wip":"todo",wait=a&&a.st=="pend"&&!u.done;
+      return`<li class="vsr s-${st}${u===cur?" cur":""}" data-vs="${u.id}" style="--sc:${scol(u.si)}"><span class="cpti sm">${cpIcon(u)}</span><div class="vsn"><b>${esc(u.n)}</b><small>${esc(u.stn)} · checklist ${s.tot-s.open}/${s.tot}${u.done&&u.on?" · done "+fmtD(String(u.on).slice(0,10)):""}</small>${u===cur&&!u.wip&&!u.done&&!wait?`<small class="vsnext">Next in sequence: needs to be planned</small>`:""}${aprChip(u.done?null:a)}</div>
+        <div class="segv vsseg" role="group" aria-label="Status of ${esc(u.n)}"><button type="button" data-vss="todo" aria-pressed="${st=="todo"&&!wait}">Pending</button><button type="button" data-vss="wip" aria-pressed="${st=="wip"&&!wait}">In progress</button><button type="button" data-vss="done" aria-pressed="${st=="done"||wait}">${wait?"Waiting for PM":"Completed"}</button></div></li>`}).join("")||`<li class="fxempty">Nothing matches.</li>`}</ul><p class="fxmsg${VST.bad?" bad":""}" id="vsMsg" role="status">${esc(VST.msg)}</p></section></div>`;
+  $("vsG").onchange=e=>{VST.g=e.target.value===""?"":+e.target.value;renderVst()};$("vsF").onchange=e=>{VST.f=e.target.value;renderVst()};
+  box.querySelectorAll("[data-vs]").forEach(li=>li.querySelectorAll("[data-vss]").forEach(b=>b.onclick=()=>{const u=LEAF[li.dataset.vs],k=b.dataset.vss,msg={set className(c){VST.bad=/bad/.test(c);$("vsMsg").className=c},set textContent(t){VST.msg=t;$("vsMsg").textContent=t}};msg.className="fxmsg";VST.msg="";
+    if(u.done&&k!="done"){if(!pm){msg.className="fxmsg bad";msg.textContent="Only the project manager can reopen a completed activity.";return}u.done=false;u.src="";u.on="";u.wip=k=="wip"}
+    else if(k=="todo"){u.wip=false;aprDrop(today0,v,u.id)}
+    else if(k=="wip"){u.wip=true;aprDrop(today0,v,u.id)}
+    else if(k=="done"&&!u.done){if(pm){if(!canDone(u)){msg.className="fxmsg bad";msg.textContent=`Complete the checklist first: ${clStat(u).open} points still open.`;return}markDoneOn(+v,u.id,today0,true);aprSet(today0,v,u.id,"ok")}
+      else{u.wip=true;aprAdd(today0,v,u.id,"status");msg.textContent=canDone(u)?`${u.n}: sent to the PM for approval.`:`${u.n}: sent to the PM. The checklist still has ${clStat(u).open} open points; the PM can approve once it's complete.`}}
+    const y=window.scrollY,bx=$("viewU"),by=bx.scrollTop;changed();saveNow();renderVst();bx.scrollTop=by;window.scrollTo(0,y)}))}
+{const host=$("viewO");const s=document.createElement("div");s.className="ov fxv";s.id="viewU";host.after(s);
+  const ref=$("vD"),b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.id="vU";b.className="fxrail2";b.setAttribute("aria-selected","false");b.title="Villa status";
+  b.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h16"/><circle cx="8" cy="5" r="1.6" fill="currentColor"/><circle cx="14" cy="12" r="1.6" fill="currentColor"/><circle cx="18" cy="19" r="1.6" fill="currentColor"/></svg>Status`;b.onclick=()=>setView("U");ref.parentElement.insertBefore(b,ref)}
+PGN.U="Villa status";
+{const av=allowedViews;allowedViews=function(){const a=av();if(a.includes("U"))return a;const i=a.indexOf("C");a.splice(i<0?a.length:i+1,0,"U");return a}}
+{const sv=setView;setView=function(v){if(v=="U"&&!allowedViews().includes("U"))v="S";if(v=="U"){view="U";document.querySelector(".app").dataset.view="U";document.querySelectorAll(".rail [role=tab]").forEach(b=>b.setAttribute("aria-selected",b.id=="vU"));try{localStorage.setItem("ak-nav","U")}catch(e){}pgHead();if(window.hdrAct)hdrAct();VST.g=null;renderVst();railFit();setTimeout(railShowActive,0);return}
+  const b=$("vU");if(b)b.setAttribute("aria-selected","false");return sv.apply(this,arguments)}}
+{const r0=render;render=function(){r0.apply(this,arguments);if(view=="U")try{renderVst()}catch(e){}}}
+MGRP[0][1].splice(1,0,"U");
+// ---------- planner: stage days & targets from a drop-down ----------
+var STSEL=null;
+{const rs=renderStgt;renderStgt=function(S){rs.apply(this,arguments);const el=$("stgt");if(!el)return;const ae=document.activeElement;const B=[...el.querySelectorAll(".sgr")];if(!B.length)return;
+  if(STSEL==null){const u=GROUPS.flat().find(u=>u.wip&&!u.done)||GROUPS.flat().find(u=>!u.done);STSEL=u?u.si:0}
+  if(!el.querySelector("#stSel")){el.insertAdjacentHTML("afterbegin",`<label class="fxf stsel"><span>Stage</span><select class="fxi" id="stSel">${S.stages.map((st,i)=>`<option value="${i}"${i==STSEL?" selected":""}>${esc(st.q.n)} · ${st.days} days · ${st.nd}/${st.n} done</option>`).join("")}</select></label>`);
+    $("stSel").onchange=e=>{STSEL=+e.target.value;renderStgt(schedule())}}
+  B.forEach((b,i)=>b.hidden=i!=STSEL)}}
+// ---------- planner: switching villa lands on the work in progress, or the next activity to plan ----------
+let PLV="";
+{const ov=openVilla;openVilla=async function(v){const r=await ov.apply(this,arguments);const k=String(villa()||"");if(k&&k!==PLV){PLV=k;STSEL=null;
+    const order=GROUPS.flat(),w=order.find(u=>u.wip&&!u.done),nx=w||order.find(u=>!u.done);if(nx){sel=nx;CP.sel=nx.id;CP.st=nx.si;CP.m=null;if(view=="P"||view=="U")render()}}return r}}
+function plNote(){if(view!="P")return;const order=GROUPS.flat();if(order.some(u=>u.wip&&!u.done))return;const nx=order.find(u=>!u.done);if(!nx)return;const last=[...order].reverse().find(u=>u.done);
+  const txt=`<p class="plnext"><b>No work in progress on this villa.</b> Next in the sequence: <b>${esc(nx.n)}</b> (${esc(nx.stn)}). It needs to be planned.${last?` Last completed: ${esc(last.n)}${last.on?" on "+fmtD(String(last.on).slice(0,10)):""}.`:""}</p>`;
+  const h=(typeof EZ!="undefined"&&EZ)?document.querySelector("#ezp .cpdet"):$("hero");if(h&&!h.parentElement.querySelector(".plnext"))h.insertAdjacentHTML(EZ?"beforebegin":"afterbegin",txt)}
+{const r1=render;render=function(){r1.apply(this,arguments);try{plNote()}catch(e){}}}
+{const re=renderEz;renderEz=function(){const r=re.apply(this,arguments);try{if(!document.querySelector("#ezp .plnext"))plNote()}catch(e){}return r}}
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
