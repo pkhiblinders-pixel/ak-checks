@@ -1,11 +1,18 @@
 // Microsoft 365 sign-in for AK Checklists. Nothing in the app opens until the person has signed in.
 (function(){
-  var C = window.AKCONFIG || {};
+  // settings: accept small spelling differences (clientID, siteURL…) and stray spaces
+  var RAW = window.AKCONFIG || null, C = {};
+  if (RAW) for (var k in RAW) { var v = RAW[k]; C[String(k).toLowerCase()] = typeof v === "string" ? v.trim() : v; }
+  C = { appUrl: C.appurl || "", clientId: C.clientid || C.applicationid || C.appid || "", tenantId: C.tenantid || C.directoryid || C.tenant || "",
+        siteUrl: String(C.siteurl || C.site || "").replace(/\/(SitePages|Shared%20Documents|Shared Documents|_layouts)\/.*$/i, "").replace(/\/$/, ""),
+        library: C.library || "Shared Documents", root: C.root || "AK Planner", list: C.list || "AK Planner Data", admins: C.admins || [] };
+  window.AKCONFIG = C;
   var A = window.AKAPP = { url: C.appUrl || "", config: C };
   var missing = [];
-  if (!C.clientId) missing.push("clientId");
-  if (!C.tenantId) missing.push("tenantId");
-  if (!C.siteUrl) missing.push("siteUrl");
+  if (!RAW) missing.push(window.__cfgErr ? "config.js has a typo: " + window.__cfgErr : "config.js didn't load");
+  if (RAW && !C.clientId) missing.push("clientId");
+  if (RAW && !C.tenantId) missing.push("tenantId");
+  if (RAW && !C.siteUrl) missing.push("siteUrl");
   if (!window.msal) missing.push("msal-browser.min.js (file missing next to index.html)");
   A.missing = missing;
   A.state = function(){ return missing.length ? "setup" : (!ok ? "loading" : (pca.getActiveAccount() ? "ok" : "signin")); };
