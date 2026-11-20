@@ -7505,8 +7505,8 @@ dlrHtml=function(d){const w=wkLoad(d),mine=dlrMine(w,d)||{},mc=mine.c||{},T=dlrC
     return`<div class="dlrc${over?" over":""}"><div class="dlrcn"><b>${esc(g.n)}</b><small>${plur(g.R.filter(r=>r.planned).length,"activity","activities")} today</small></div>
       ${g.k=="?"?`<span class="fxsm" style="margin:0">${t.mas} masons, ${t.hel} helpers entered before clusters</span><span></span>`:`<label class="wkq"><span>Masons</span><input class="fxi" type="number" min="0" inputmode="numeric" data-dlc="${g.k}|mas" value="${m.mas??""}" placeholder="0"></label>
       <label class="wkq"><span>Helpers</span><input class="fxi" type="number" min="0" inputmode="numeric" data-dlc="${g.k}|hel" value="${m.hel??""}" placeholder="0"></label>`}
-      <div class="dlrca"><span>Given to activities</span><b>${am}/${t.mas} masons · ${ah}/${t.hel} helpers</b>${over?`<em>More than taken</em>`:t.mas+t.hel&&am+ah<t.mas+t.hel?`<em class="lf">${Math.max(0,t.mas-am)} masons, ${Math.max(0,t.hel-ah)} helpers left to give</em>`:""}</div></div>`};
-  const tot=Object.values(T).reduce((s,x)=>({mas:s.mas+x.mas,hel:s.hel+x.hel}),{mas:0,hel:0});
+      <div class="dlrca"><span>Given to activities</span><b>${t.mas+t.hel?`${am} of ${t.mas} masons · ${ah} of ${t.hel} helpers`:`${am} masons · ${ah} helpers`}</b>${t.mas+t.hel||!(am+ah)?"":`<em class="lf">Enter how many were taken in this cluster</em>`}${over?`<em>More than taken</em>`:t.mas+t.hel&&am+ah<t.mas+t.hel?`<em class="lf">${Math.max(0,t.mas-am)} masons, ${Math.max(0,t.hel-ah)} helpers left to give</em>`:""}</div></div>`};
+  const tot=cl.reduce((s,g)=>{const x=T[g.k]||{mas:0,hel:0};return{mas:s.mas+x.mas,hel:s.hel+x.hel}},{mas:0,hel:0});
   const sh=(k,l,sub)=>{const x=shrOf(w,k);return`<div class="dlrs"><div><b>${l}</b><small>${sub}</small>${x?`<small class="ok">Shared ${new Date(x.at).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})}${x.by?" by "+esc(x.by):""}</small>`:""}</div><div class="fxacts" style="margin:0"><button type="button" class="fxb sm pri" data-lsh="${k}|msg">Share message</button><button type="button" class="fxb sm" data-lsh="${k}|pdf">Share PDF</button></div></div>`};
   return`<section class="fxp" id="dlr"><div class="wkhd"><div><h3 class="fxh3" style="margin:0">Labour by cluster · ${fmtD(d)}${ME?" · "+esc(ME.name):""}</h3><p class="fxsm" style="margin:4px 0 0">Morning: enter the masons and helpers taken in each cluster and share it. Evening: give each activity below the masons and helpers it used, then share the evening report.</p></div></div>
     ${all&&all.rows.length>1?`<p class="dlrall">Site total from ${all.rows.length} engineers: <b>${tot.mas} masons</b>, <b>${tot.hel} helpers</b> · ${all.rows.map(r=>esc(r.by||"engineer")+" "+(+r.mas||0)+"/"+(+r.hel||0)).join(" · ")}</p>`:""}
@@ -7735,6 +7735,94 @@ var TMRP=null;
       doc.autoTable({startY:y+6,head:[["Villa","Activity","Stage"]],body:a.map(r=>{const u=LEAF[r.leaf]||{n:"(removed)",stn:""};return[r.v,pt(u.n),pt(u.stn)]}),theme:"grid",margin:{left:14,right:14},styles:{fontSize:9,cellPadding:2,textColor:[21,35,58],lineColor:[214,220,228],lineWidth:.2},headStyles:{fillColor:[21,35,58],textColor:255},columnStyles:{0:{cellWidth:14,halign:"right"}}});y=doc.lastAutoTable.finalY+8})}catch(e){console.warn(e)}}
   return wf.apply(this,arguments)}}
 {const lp=labPdf;labPdf=async function(d,k){if(k=="pm")TMRP=d;try{return await lp.apply(this,arguments)}finally{TMRP=null}}}
+// ---------- v39: phone layout — nothing wider than the screen (iPhone date/number inputs, long names, grids) ----------
+{const st=document.createElement("style");st.textContent=`
+html,body{overflow-x:clip;max-width:100%}
+.app,.ov,.fxin,.fxp{min-width:0;max-width:100%}
+input,select,textarea{min-width:0;max-width:100%}
+input[type=date].fxi{-webkit-appearance:none;appearance:none;display:block;text-align:left}
+input[type=date]::-webkit-date-and-time-value{text-align:left}
+select.fxi{text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.fxp code,.fxsm code,.fxp p,.fxp small{overflow-wrap:anywhere}
+.dlrc{grid-template-columns:minmax(0,1fr) minmax(0,110px) minmax(0,110px) minmax(0,1.6fr)}
+.dlrsh,.lbsv{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.lbsv{grid-template-columns:minmax(0,1fr) auto}
+.lbg{flex-wrap:wrap;min-width:0}.lbg>*{min-width:0}.lbst,.lbty .segv{max-width:100%}
+.lbty .segv button,.lbst button{white-space:nowrap}
+@media (max-width:700px){
+ .dlrc{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.dlrsh,.lbsv{grid-template-columns:minmax(0,1fr)}
+ .dlrs .fxacts{flex-wrap:wrap}.dlrs .fxacts .fxb{flex:1 1 auto}
+ .lbg{display:flex;flex-wrap:wrap;gap:8px}.lbty,.lbcon{flex:1 1 100%}.lbg .wkq{flex:1 1 calc(50% - 4px)}.lbst{flex:1 1 100%;display:flex}.lbst button{flex:1}
+ .lbty .segv{display:flex}.lbty .segv button{flex:1}
+ .trrng .fxf{flex:1 1 140px}.tbtop input[type=date]{flex:1 1 140px}
+ .wklock{font-size:12.5px}
+}`;document.head.appendChild(st)}
+// ---------- v40: drawings register without the long scroll; every checklist answer and change is tracked; checklist audit download ----------
+{const st=document.createElement("style");st.textContent=`
+.drvp .drstrip{display:none}
+.drcl{border:1px solid var(--line);border-radius:16px;background:var(--well);margin:0 0 10px}.drcl>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:12px 14px}
+.drcl>summary::-webkit-details-marker{display:none}.drcl>summary b{font-size:15px}.drcl>summary small{color:var(--mute);font-size:12px}.drcl>summary .drcn{display:flex;gap:8px;flex-wrap:wrap;font-size:12.5px}
+.drcl>summary .chev{transition:transform .2s}.drcl[open]>summary .chev{transform:rotate(180deg)}
+.drtg{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:6px;padding:0 12px 12px}
+.drti{display:flex;flex-direction:column;gap:5px;padding:8px 10px;border-radius:12px;border:1px solid var(--line);background:var(--base);color:var(--ink);font:inherit;text-align:left;cursor:pointer;min-width:0}
+.drti:hover{border-color:var(--acc)}.drti b{font-size:14px}.drti small{font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.drti .dzsb{height:6px}
+.drti.has-sign{border-color:var(--s-sign,#8b5cf6)}
+@media (max-width:700px){.drcl>summary{grid-template-columns:minmax(0,1fr) auto;row-gap:6px}.drcl>summary .dzsb{grid-column:1/-1}.drcl>summary .drcn{grid-column:1/-1}.drtg{grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}}
+.ckh{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;margin-top:6px;font-size:11.5px;color:var(--mute)}
+.ckh button{font:inherit;font-size:11.5px;font-weight:700;color:var(--warn);background:var(--warnbg);border:0;border-radius:999px;padding:2px 9px;cursor:pointer}
+.ckhl{list-style:none;margin:6px 0 0;padding:8px 10px;border-radius:10px;background:var(--well);display:flex;flex-direction:column;gap:4px;font-size:12px;flex-basis:100%}
+.ckhl b.y{color:var(--ok)}.ckhl b.n{color:var(--bad)}.ckhl b.na{color:var(--mute)}`;document.head.appendChild(st)}
+// ---- drawings: villas grouped by cluster, folded, as compact tiles ----
+DRS.copen=DRS.copen||new Set();DRS.view="villa";
+dByVilla=function(vs,T){const rows=vs.map(v=>({v,c:dcount([v],T)})).filter(x=>!DRS.f||(DRS.f=="yet"?x.c.recv+x.c.sent:x.c[DRS.f]));if(!rows.length)return`<div class="fxempty">No villas match this filter.</div>`;
+  const G=[...CLUSTERS.map(c=>({k:String(c.id),n:c.n,R:rows.filter(r=>(clusterOf(r.v)||{}).id==c.id)})),{k:"x",n:"Other",R:rows.filter(r=>!clusterOf(r.v))}].filter(g=>g.R.length);
+  const one=G.length==1;const sum=R=>R.reduce((a,{c})=>{DST.forEach(([k])=>a[k]=(a[k]||0)+(c[k]||0));return a},{});
+  const cn=c=>`${c.final?`<b class="s-final-t">${c.final} final</b>`:""}${c.sign?`<b class="s-sign-t">${c.sign} pending</b>`:""}${(c.recv||0)+(c.sent||0)?`<span>${(c.recv||0)+(c.sent||0)} yet</span>`:""}${c.pend?`<span class="mu">${c.pend} to receive</span>`:""}`;
+  return`<p class="fxsm" style="margin:0 0 10px">Villas are grouped by cluster. Open a cluster, then tap a villa to see its drawings.</p>`+G.map(g=>{const s=sum(g.R),op=one||DRS.copen.has(g.k);
+    return`<details class="drcl" data-drcl="${g.k}"${op?" open":""}><summary><span><b>${esc(g.n)}</b><br><small>${plur(g.R.length,"villa")}</small></span>${dbar(s)}<span class="drcn">${cn(s)}</span><svg class="ico chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="drtg">${g.R.map(({v,c})=>`<button type="button" class="drti${c.sign?" has-sign":""}" data-drvo="${v}" title="Villa ${v}: ${c.final} finalised, ${c.sign} approval pending, ${c.recv+c.sent} yet to be approved, ${c.pend} to be received"><b>Villa ${v}</b>${dbar(c)}<small>${c.final} final · ${c.recv+c.sent} yet${c.sign?` · ${c.sign} pending`:""}${c.pend?` · ${c.pend} to rec.`:""}</small></button>`).join("")}</div></details>`}).join("")};
+document.addEventListener("toggle",e=>{const d=e.target;if(!d||!d.matches||!d.matches("details.drcl"))return;d.open?DRS.copen.add(d.dataset.drcl):DRS.copen.delete(d.dataset.drcl)},true);
+// ---- checklist answers: every Yes / No / N/A, and every change, kept with who and when ----
+const CKL={y:"Yes",n:"No",na:"N/A","":"Blank"};
+let CKX={t:0,m:null};
+function ckIndex(force){if(!force&&CKX.m&&Date.now()-CKX.t<4000)return CKX.m;const m=new Map();for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(!k||!/^ak-work:\d{4}-\d\d-\d\d$/.test(k))continue;
+    try{(JSON.parse(localStorage.getItem(k)).rows||[]).forEach(r=>{if(r.kind!="ckh"||r.del)return;const key=r.v+"|"+r.leaf+"|"+r.k;(m.get(key)||m.set(key,[]).get(key)).push(r)})}catch(e){}}
+  m.forEach(a=>a.sort((x,y)=>String(x.at).localeCompare(String(y.at))));CKX={t:Date.now(),m};return m}
+function ckLog(v,u,changes){if(!changes.length)return;const d=iso(new Date()),w=wkLoad(d),now=new Date().toISOString(),who=ME||{id:"anon",name:engName()||"Not named"};const it=new Map(items(u).map(x=>[x.k,x]));
+  changes.forEach(([k,f,t],i)=>{const x=it.get(k);w.rows.push({id:`ckh:${who.id}:${v}:${u.id}:${k}:${Date.now().toString(36)}${i}`,kind:"ckh",v:+v,leaf:u.id,k,t:x?x.t:"",f:f||"",to:t||"",by:who.name,eid:who.id,at:now,mt:now})});
+  wkStore(w,true);CKX.t=0}
+let CKB=null;
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("#cl [data-v],#naAll,#clrAll");if(!t||!sel||!villa())return;CKB={v:villa(),u:sel,chk:{...(sel.chk||{})}};
+  setTimeout(()=>{const b=CKB;CKB=null;if(!b||b.u!==sel)return;const a=b.u.chk||{},ch=[];new Set([...Object.keys(b.chk),...Object.keys(a)]).forEach(k=>{if((b.chk[k]||"")!==(a[k]||""))ch.push([k,b.chk[k],a[k]])});ckLog(b.v,b.u,ch);ckPaint()},0)},true);
+function ckPaint(){const L=$("cl");if(!L||!sel||!villa())return;const M=ckIndex(),v=+villa();
+  L.querySelectorAll("li[data-k]").forEach(li=>{const H=M.get(v+"|"+sel.id+"|"+li.dataset.k);const old=li.querySelector(".ckh");if(old)old.remove();if(!H||!H.length)return;const last=H[H.length-1],nch=H.filter(r=>r.f).length;
+    const tm=r=>new Date(r.at).toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+    li.insertAdjacentHTML("beforeend",`<div class="ckh"><span>${last.to?`${CKL[last.to]} by <b>${esc(last.by||"")}</b>, ${tm(last)}`:`Answer cleared by <b>${esc(last.by||"")}</b>, ${tm(last)}`}</span>${nch?`<button type="button" data-ckh="1">Changed ${nch==1?"once":nch+" times"}</button>`:""}</div>`);
+    const b=li.querySelector("[data-ckh]");if(b)b.onclick=e=>{e.stopPropagation();const box=li.querySelector(".ckh"),ex=box.querySelector(".ckhl");if(ex){ex.remove();return}
+      box.insertAdjacentHTML("beforeend",`<ul class="ckhl">${H.slice().reverse().map(r=>`<li>${tm(r)} · <b>${esc(r.by||"")}</b>: ${r.f?`<b class="${r.f}">${CKL[r.f]}</b> → `:"answered "}<b class="${r.to}">${CKL[r.to||""]}</b></li>`).join("")}</ul>`)}})}
+{let pend=0;const mo=new MutationObserver(()=>{if(pend)return;pend=requestAnimationFrame(()=>{pend=0;mo.disconnect();try{ckPaint()}finally{const L=$("cl");if(L)mo.observe(L,{childList:true})}})});const L0=$("cl");if(L0)mo.observe(L0,{childList:true});setTimeout(ckPaint,800)}
+// ---- checklist audit download: every answered point, every change, every defect and its rectification ----
+function ckLeafOf(n,u0){if(loadedVilla&&String(loadedVilla)==String(n))return LEAF[u0.id];const x=((getState(n)||{}).leaves||{})[u0.id]||{};return Object.assign(Object.create(u0),{chk:x.chk||{},custom:x.custom||[],df:x.df||{},xd:x.xd||[],ph:x.ph||{},done:!!x.done,on:x.on||"",by:x.by||""})}
+async function ckAudit(vs,onlyLeaf){await loadXLSX();const M=ckIndex(true),A=[["Villa","Cluster","Stage","Sub-stage","Activity","When","Checkpoint","Answer","Last set by","Last set on","Times changed","Photos","Defect"]],
+  C=[["Date & time","Villa","Activity","Checkpoint","From","To","Changed by"]],D=[["Villa","Activity","Checkpoint / defect","Severity","Category","Location","Raised on","Raised by","Responsible","Due","Status","Rectified on","Rectified by","Rectification note","Photos before","Photos after fix"]],S=[["Villa","Activity","Points","Yes","No","N/A","Unanswered","Changes","Defects open","Defects closed","Activity done"]];
+  const dt=s=>s?new Date(s).toLocaleString("en-GB",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}):"";
+  vs.forEach(n=>{const cl=(clusterOf(+n)||{}).n||"";(onlyLeaf?[LEAF[onlyLeaf]]:LEAVES).forEach(u0=>{const u=ckLeafOf(n,u0);let it;try{it=items(u)}catch(e){return}const s=clStat(u);let chg=0,dfo=0,dfc=0;
+    it.forEach(x=>{const H=M.get(+n+"|"+u0.id+"|"+x.k)||[];chg+=H.filter(r=>r.f).length;const v=u.chk[x.k]||"";const last=H[H.length-1];const df=u.df[x.k];
+      if(v||H.length)A.push([+n,cl,u0.seq.n,u0.stn,u0.n,PHN[x.ph]||"",x.t,CKL[v],last?last.by:"",last?dt(last.at):"",H.filter(r=>r.f).length,((u.ph||{})[x.k]||[]).length,v=="n"?(df&&df.closed?"Closed":"Open"):""]);
+      H.forEach(r=>C.push([dt(r.at),+n,u0.n,x.t,r.f?CKL[r.f]:"(first answer)",CKL[r.to||""],r.by||""]));
+      if(v=="n"&&df&&!df.del){df.closed?dfc++:dfo++;D.push([+n,u0.n,x.t,df.sev||"",df.cat||"",df.loc||"",df.raised||"",df.rby||df.by0||"",df.who||"",df.due||"",df.closed?"Closed":"Open",df.closed?df.on||"":"",df.closed?df.by||"":"",df.note||"",((u.ph||{})[x.k]||[]).length,(df.after||[]).length])}});
+    (u.xd||[]).filter(d=>!d.del).forEach(d=>{d.closed?dfc++:dfo++;D.push([+n,u0.n,d.t||"",d.sev||"",d.cat||"",d.loc||"",d.raised||"",d.rby||"",d.who||"",d.due||"",d.closed?"Closed":"Open",d.closed?d.on||"":"",d.closed?d.by||"":"",d.note||"",(d.before||[]).length,(d.after||[]).length])});
+    if(s.y+s.n+s.na||chg||dfo||dfc)S.push([+n,u0.n,s.tot,s.y,s.n,s.na,s.open,chg,dfo,dfc,u.done?"Yes"+(u.on?" ("+u.on+")":""):"No"])})});
+  C.splice(1,C.length,...C.slice(1).sort((a,b)=>0));
+  const wb=XLSX.utils.book_new();const add=(rows,name,w)=>{const ws=XLSX.utils.aoa_to_sheet(rows);ws["!cols"]=w.map(x=>({wch:x}));ws["!autofilter"]={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:Math.max(0,rows.length-1),c:rows[0].length-1}})};XLSX.utils.book_append_sheet(wb,ws,name)};
+  add(S,"Summary",[7,34,8,6,6,6,11,9,12,13,16]);add(A,"Checkpoints",[7,10,18,22,30,16,60,9,16,18,10,8,9]);add(C,"Changes",[19,7,30,60,14,10,18]);add(D,"Defects & rectification",[7,30,50,10,14,14,12,14,14,12,9,12,14,40,9,10]);
+  const tag=onlyLeaf?`Villa${vs[0]}-${LEAF[onlyLeaf].n.replace(/[^A-Za-z0-9]+/g,"_")}`:vs.length==1?"Villa"+vs[0]:scOn()?scName().replace(/[^A-Za-z0-9]+/g,""):"All-villas";
+  const name=`Checklist-audit-${tag}-${iso(new Date())}.xlsx`;return{name,blob:new Blob([XLSX.write(wb,{type:"array",bookType:"xlsx"})],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}),n:{pts:A.length-1,ch:C.length-1,df:D.length-1}}}
+function openAudit(){const v=villa();const d=fxDialog("Download checklist audit",`<p class="fxsm" style="margin-top:0">An Excel file with every checkpoint answered (Yes, No or N/A), who set it and when, every change made afterwards, and every defect with its rectification.</p>
+  <div class="fxf"><span>Include</span><select class="fxi" id="auS">${sel&&v?`<option value="a">This activity: Villa ${esc(v)} · ${esc(sel.n)}</option>`:""}${v?`<option value="v" selected>Villa ${esc(v)}: all activities</option>`:""}<option value="s"${v?"":" selected"}>${scOn()?esc(scName()):"All villas"} (${dScopeVs().length} villas)</option></select></div>
+  <div class="fxacts"><button type="button" class="fxb pri" id="auGo">Download Excel</button></div><p class="fxmsg" id="auM" role="status"></p>`);
+  $("auGo").onclick=async e=>{const b=e.currentTarget,m=$("auM"),k=$("auS").value;b.disabled=true;m.className="fxmsg";m.textContent="Collecting the checklists…";
+    try{const r=await ckAudit(k=="s"?dScopeVs():[+v],k=="a"?sel.id:null);m.textContent=(await saveFile(r.name,r.blob))+` · ${r.n.pts} checkpoints, ${r.n.ch} changes, ${r.n.df} defects.`}catch(x){m.className="fxmsg bad";m.textContent="Couldn't make the file: "+(x.message||x)}finally{b.disabled=false}}}
+{const dl=$("clDl"),a=document.querySelector(".clacts");if(!$("ckAud")&&(dl||a)){const h=`<button class="${dl?dl.className:"btn sm"}" type="button" id="ckAud">Download audit (Excel)</button>`;dl?dl.insertAdjacentHTML("afterend",h):a.insertAdjacentHTML("beforeend",h);$("ckAud").onclick=openAudit}}
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
