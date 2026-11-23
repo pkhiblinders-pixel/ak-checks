@@ -3731,7 +3731,7 @@ function monthChart(a){const D=monthData(a);MCH=D;const ms=D.months,n=ms.length;
     if(i%lblEvery==0||m.k==D.cur)lab+=`<text class="ax${m.k==D.cur?" cur":""}" x="${cx}" y="${H-5}" text-anchor="middle">${mName(m.k)}${m.k%12==0||i==0?" "+String(Math.floor(m.k/12)).slice(2):""}</text>`;
     hit+=`<rect class="hit${mPin==m.k?" on":""}" data-mo="${i}" x="${L+band*i}" y="${T-10}" width="${band}" height="${ph+10}"/>`});
   // cumulative chart
-  const H2=96,ph2=H2-T-B,y2=v=>T+ph2-ph2*v/D.N;let g2="";[0,Math.round(D.N/2),D.N].forEach(v=>{g2+=`<line class="gl" x1="${L}" x2="${W-Rr}" y1="${y2(v)}" y2="${y2(v)}"/><text class="ax" x="${L-5}" y="${y2(v)+3}" text-anchor="end">${v}</text>`});
+  const H2=96,ph2=H2-T-B,y2=v=>T+ph2-ph2*v/Math.max(1,D.N);let g2="";[0,Math.round(D.N/2),D.N].forEach(v=>{g2+=`<line class="gl" x1="${L}" x2="${W-Rr}" y1="${y2(v)}" y2="${y2(v)}"/><text class="ax" x="${L-5}" y="${y2(v)+3}" text-anchor="end">${v}</text>`});
   const pts=ms.map((m,i)=>[L+band*i+band/2,y2(m.cum)]);const ci=ms.findIndex(m=>m.k>=D.cur);const split=ci<0?n-1:ci;
   const pathOf=a=>a.length?"M"+a.map(p=>p.map(v=>v.toFixed(1)).join(" ")).join("L"):"";
   const solid=pts.slice(0,split+1).map((p,i)=>[p[0],y2(ms[i].k<D.cur?ms[i].cum:ms[i].cumAct)]);
@@ -5055,7 +5055,7 @@ function ovChart(a,P){const box=$("ovchart");if(!box)return;const W=Math.max(280
   const fc=[[T,now]];PJ.months.forEach((m,i)=>{let d=+mEnd(m.k);if(i==PJ.months.length-1&&a.fin)d=+a.fin;if(d>T)fc.push([d,Math.min(100,m.proj)])});
   const lastPlan=P.ev.length?P.ev[P.ev.length-1][0]:T;
   const k0=mkey(new Date(Math.min(P.t0==null?T:P.t0,T))),k1=mkey(new Date(Math.max(lastPlan,fc[fc.length-1][0],T)));
-  const x0=+mdate(k0),x1=+mEnd(k1)+864e5,X=t=>mL+(W-mL-mR)*(t-x0)/(x1-x0),Y=p=>mT+(H-mT-mB)*(1-p/100),f1=v=>v.toFixed(1);
+  const x0=+mdate(k0),x1=+mEnd(k1)+864e5,X=t=>mL+(W-mL-mR)*(t-x0)/(x1-x0),Y=p=>mT+(H-mT-mB)*(1-p/100),f1=v=>(Number.isFinite(v)?v:0).toFixed(1);
   const pts=[];{let s=0,i=0;const N=Math.min(160,Math.max(40,Math.round(W/6)));for(let j=0;j<=N;j++){const t=x0+(x1-x0)*j/N;while(i<P.ev.length&&P.ev[i][0]<=t){s+=P.ev[i][1];i++}pts.push([t,P.tot?100*s/P.tot:0])}}
   const path=L=>L.map((p,i)=>(i?"L":"M")+f1(X(p[0]))+" "+f1(Y(p[1]))).join("");
   const planNow=planAt(P,T+864e5-1),nM=k1-k0+1,step=Math.max(1,Math.ceil(nM/(W<520?4:W<900?6:9)));
@@ -7396,7 +7396,7 @@ function openTrack(){const L=people();if(!L.length){mePick();return}if(!TRK.p||!
 // checklist completeness for any villa's activity
 function chkOf(n,id){const u0=LEAF[id];if(!u0)return{tot:0,open:0,ok:0};if(loadedVilla&&String(loadedVilla)==String(n))return clStat(u0);
   const x=((getState(n)||{}).leaves||{})[id]||{};const u=Object.assign(Object.create(u0),{chk:x.chk||{},custom:x.custom||[]});try{return clStat(u)}catch(e){return{tot:0,open:0,ok:0}}}
-const chkDone=(n,id)=>{const s=chkOf(n,id);return s.tot>0&&s.open==0};
+const chkDone=(n,id)=>{const s=chkOf(n,id);return s.tot>0&&s.open==0&&!coMissingV(n,id).length};
 // approval requests live in the work record of the day the work was done
 function aprAll(days){const out=[];const lim=iso(new Date(Date.now()-(days||60)*864e5));for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(!k||!/^ak-work:\d{4}-\d\d-\d\d$/.test(k))continue;const d=k.slice(8);if(d<lim)continue;
   wkLoad(d).rows.forEach(r=>{if(r.kind=="apr"&&!r.del)out.push({...r,d})})}return out.sort((a,b)=>String(b.at).localeCompare(String(a.at)))}
@@ -7415,9 +7415,9 @@ const aprChip=r=>!r?"":r.st=="ok"?`<span class="aprc ok">Approved by ${esc((r.pm
     if(h&&a)h.insertAdjacentHTML("beforeend",aprChip(a)+(a.st=="pend"&&!chkDone(row.v,row.leaf)?`<span class="aprc w">Checklist not complete yet</span>`:""))})}}
 // the PM's approval list
 function openApprovals(){const L=aprPending();const pm=canEdit("plan");
-  const row=r=>{const u=LEAF[r.leaf]||{n:"",stn:"",seq:{n:""}},s=chkOf(r.v,r.leaf),ok=s.tot>0&&s.open==0;
+  const row=r=>{const u=LEAF[r.leaf]||{n:"",stn:"",seq:{n:""}},s=chkOf(r.v,r.leaf),cm=coMissingV(r.v,r.leaf),ok=s.tot>0&&s.open==0&&!cm.length;
     return`<li class="apr" data-apr="${r.d}|${r.v}|${r.leaf}"><div class="aprh"><b>Villa ${r.v} · ${esc(u.n)}</b><small>${esc(u.seq.n)} › ${esc(u.stn)} · done ${fmtD(r.d)} · by ${esc(r.by||"engineer")} · from ${r.src=="status"?"Villa status":"Labour report"}</small></div>
-      <div class="aprk ${ok?"ok":"no"}">${ok?`Checklist complete · ${s.tot} points`:`Checklist not complete: ${s.tot-s.open} of ${s.tot} points answered`}</div>
+      <div class="aprk ${ok?"ok":"no"}">${ok?`Checklist complete · ${s.tot} points · close-out photos added`:s.tot>0&&s.open==0?`Close-out photos missing: ${cm.map(p=>PHN[p]).join(", ")}`:`Checklist not complete: ${s.tot-s.open} of ${s.tot} points answered`}</div>
       ${pm?`<div class="fxacts" style="margin:0"><button type="button" class="fxb sm pri" data-apok="1"${ok?"":" disabled"}>Approve as completed</button><button type="button" class="fxb sm" data-apck="1">Open checklist</button><button type="button" class="fxb sm fxgh" data-apbk="1">Send back</button></div>`:""}</li>`};
   const d=fxDialog(`Completed work to approve${L.length?" · "+L.length:""}`,L.length?`<p class="fxsm" style="margin-top:0">Engineers marked these activities completed. Approve once the checklist is complete; the activity is then fixed as done on that date.</p><ul class="aprl">${L.map(row).join("")}</ul>`:`<div class="fxempty">Nothing waiting for approval.</div>`);
   d.querySelector(".fxbox").classList.add("aprbox");
@@ -7449,7 +7449,7 @@ function renderVst(){const box=$("viewU");if(!box)return;const v=villa(),pm=canE
     if(u.done&&k!="done"){if(!pm){msg.className="fxmsg bad";msg.textContent="Only the project manager can reopen a completed activity.";return}u.done=false;u.src="";u.on="";u.wip=k=="wip"}
     else if(k=="todo"){u.wip=false;aprDrop(today0,v,u.id)}
     else if(k=="wip"){u.wip=true;aprDrop(today0,v,u.id)}
-    else if(k=="done"&&!u.done){if(pm){if(!canDone(u)){msg.className="fxmsg bad";msg.textContent=`Complete the checklist first: ${clStat(u).open} points still open.`;return}markDoneOn(+v,u.id,today0,true);aprSet(today0,v,u.id,"ok")}
+    else if(k=="done"&&!u.done){if(pm){if(canDone(u)&&coMissing(u).length){msg.className="fxmsg bad";msg.textContent=`Add the close-out photos first (Checklists page): ${coMissing(u).map(p=>PHN[p]).join(", ")}.`;return}if(!canDone(u)){msg.className="fxmsg bad";msg.textContent=`Complete the checklist first: ${clStat(u).open} points still open.`;return}markDoneOn(+v,u.id,today0,true);aprSet(today0,v,u.id,"ok")}
       else{u.wip=true;aprAdd(today0,v,u.id,"status");msg.textContent=canDone(u)?`${u.n}: sent to the PM for approval.`:`${u.n}: sent to the PM. The checklist still has ${clStat(u).open} open points; the PM can approve once it's complete.`}}
     const y=window.scrollY,bx=$("viewU"),by=bx.scrollTop;changed();saveNow();renderVst();bx.scrollTop=by;window.scrollTo(0,y)}))}
 {const host=$("viewO");const s=document.createElement("div");s.className="ov fxv";s.id="viewU";host.after(s);
@@ -8047,7 +8047,7 @@ async function villaDossier2(opt,prog){await loadJsPDF();const {jsPDF}=window.js
       headStyles:{font:TX,fontStyle:"bold",textColor:K.mute,fontSize:7.2,lineWidth:{bottom:.4},lineColor:K.ink},columnStyles:cs||{},...(ex||{}),didAddPage:()=>{PAGES.push({p:doc.getNumberOfPages(),sec:SEC})}});y=doc.lastAutoTable.finalY+6};
   const stLbl=c=>(DST.find(s=>s[0]==c.st)||[0,""])[1];
   const best=(arr,n)=>arr.slice().sort((a,b)=>String(b.q.at||"").localeCompare(String(a.q.at||""))).slice(0,n);
-  const allPh=[];L.forEach(u=>{its(u).forEach(x=>{if(u.chk[x.k]=="n")return;((u.ph||{})[x.k]||[]).forEach(q=>allPh.push({q,u,x}))})});
+  const allPh=[];L.forEach(u=>{its(u).forEach(x=>{if(u.chk[x.k]=="n")return;((u.ph||{})[x.k]||[]).forEach(q=>allPh.push({q,u,x}))});["P","D","A"].forEach(p=>((u.ph||{})["act:"+p]||[]).forEach(q=>allPh.push({q,u,x:{ph:p,k:"act:"+p,t:"Close-out photo"},co:1})))});
   // ================= COVER =================
   prog&&prog("Setting the cover…");const heroC=best(allPh.filter(p=>p.x.ph=="A"),3).concat(best(allPh,6));let hero=null;for(const h of heroC){hero=await dsImgQ(h.q,1800);if(hero)break}
   const HH=168;doc.setFillColor(...K.ink);doc.rect(0,0,PW,PH,"F");
@@ -8139,7 +8139,7 @@ async function villaDossier2(opt,prog){await loadJsPDF();const {jsPDF}=window.js
     f(9,1,[255,255,255]);txt(`Stage ${s.i+1} of ${SEQ.length}`,ML,bh+TOP-22);f(26,1,[255,255,255],HD);txt(s.q.n,ML,bh+TOP-11);const sd=s.L.filter(u=>u.done).length;f(9,0,[255,255,255]);txt(s.L.every(u=>u.done)?`Completed ${D(stEnd(s))} · ${s.L.length} activities`:`${sd} of ${s.L.length} activities complete${(st.SE||[])[s.i]&&st.SE[s.i].e?` · forecast ${D(st.SE[s.i].e)}`:""}`,ML,bh+TOP-4.5);y=bh+TOP+10;
     const idle=[];
     for(const u of s.L){const it=its(u),cs=clStat(u),lab=W.lab[u.id]||[],apr=W.apr[u.id],phs=Object.values(u.ph||{}).reduce((a,b)=>a+b.length,0);if(!(u.done||u.wip||cs.y+cs.n+cs.na||lab.length||phs)){idle.push(u.n);continue}
-      const myDF=DF.filter(x=>x.u===u),myPh=best(allPh.filter(p=>p.u===u),opt.photos=="all"?99:3);need(34+(myPh.length&&opt.photos!="none"?44:0));
+      const myDF=DF.filter(x=>x.u===u),myPh=(()=>{const mine=allPh.filter(p=>p.u===u),coP=mine.filter(p=>p.co);if(!coP.length)return best(mine,opt.photos=="all"?99:3);if(opt.photos=="all")return["P","D","A"].flatMap(ph=>best(coP.filter(p=>p.x.ph==ph),99).reverse()).concat(best(mine.filter(p=>!p.co),99));return["P","D","A"].map(ph=>best(coP.filter(p=>p.x.ph==ph),1)[0]).filter(Boolean)})();need(34+(myPh.length&&opt.photos!="none"?44:0));
       hair(ML,y,PW-MR,K.ink,.35);y+=6;f(13,0,K.ink,HD);const tl=wrap(u.n,CW-34);txt(tl[0],ML,y+1.5);const sc=u.done?["Completed",K.okT,K.ok]:u.wip?["In progress",K.ambT,K.amb]:["Inspected",K.tint,K.ink2];chip(sc[0],PW-MR,y+1,sc[1],sc[2],"right");y+=5;f(8,0,K.mute);txt(u.stn,ML,y+1.5);y+=6;
       const md=lab.reduce((a,r)=>a+(+r.mas||0)+(+r.hel||0),0),cons=[...new Set(lab.filter(r=>r.lt=="con"&&r.con).map(r=>r.con))];
       const facts=[["Started",lab[0]?D(lab[0].d):"–"],["Completed",u.done&&u.on?D(String(u.on).slice(0,10)):u.done?"Yes":"–"],["Approved",apr&&apr.st=="ok"?`${byN(apr.pm&&apr.pm.by)||"PM"}, ${DS(apr.pm&&apr.pm.at)}`:u.done&&u.src=="pm"?"Project manager":"–"],["Labour",md?`${md} man-days${cons.length?" · "+cons.join(", "):""}`:"–"]];
@@ -8184,6 +8184,101 @@ async function villaDossier2(opt,prog){await loadJsPDF();const {jsPDF}=window.js
   doc.setProperties({title:`Villa ${v} — Construction and handover dossier`,subject:"AMR Living Spaces",author:"Bhaaje Private Limited",creator:"AK Planner"});
   return{doc,name:`Villa${v}-Dossier-${iso(gen)}.pdf`,pages:N}}
 villaDossier=villaDossier2;
+// ---------- v43: close-out photos: before / during / after photos for each activity, required to mark it completed ----------
+{const st=document.createElement("style");st.textContent=`
+.cob{margin:0 0 12px;padding:12px;border-radius:14px;border:1px dashed var(--line);background:var(--well)}.cob.ready{border-style:solid;border-color:var(--acc)}.cob.done{border-color:var(--ok)}
+.cob h4{margin:0;font-size:14px}.cob>p{margin:4px 0 10px;font-size:12.5px;color:var(--mute)}
+.cog{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.cos{display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:12px;background:var(--base);border:1px solid var(--line);min-width:0}
+.cos.ok{border-color:var(--ok)}.cos>b{font-size:12.5px;display:flex;justify-content:space-between;gap:6px}.cos>b em{font-style:normal;font-weight:700;font-size:11px;color:var(--bad)}.cos.ok>b em{color:var(--ok)}
+.cot{display:flex;gap:4px;flex-wrap:wrap;min-height:44px}.cot button{position:relative;width:44px;height:44px;padding:0;border:0;border-radius:8px;overflow:hidden;background:var(--line);cursor:pointer}.cot img{width:100%;height:100%;object-fit:cover;display:block}
+.cot .x{position:absolute;top:1px;right:1px;width:16px;height:16px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:11px;line-height:16px;text-align:center}
+.cos .fxacts{margin:0;gap:4px}.cos .phb{flex:1;min-height:34px;font-size:12px}
+.cob[aria-disabled="true"] .cos .phb{opacity:.45;pointer-events:none}
+@media (max-width:700px){.cog{grid-template-columns:1fr}}`;document.head.appendChild(st)}
+const CO=["P","D","A"],coKey=p=>"act:"+p;
+function coPhases(u){let it=[];try{it=items(u)}catch(e){}const s=new Set(it.map(x=>x.ph));const ph=CO.filter(p=>s.has(p));return ph.length?ph:CO}
+function coMissing(u){return coPhases(u).filter(p=>!((u.ph||{})[coKey(p)]||[]).length)}
+function coMissingV(n,id){const u0=LEAF[id];if(!u0)return[];if(loadedVilla&&String(loadedVilla)==String(n))return coMissing(u0);const x=((getState(n)||{}).leaves||{})[id]||{};return coMissing(Object.assign(Object.create(u0),{ph:x.ph||{},custom:x.custom||[]}))}
+function coPaint(){const lock=$("lock");if(!lock||!sel)return;const u=sel;let box=$("cob");if(!box){box=document.createElement("div");box.id="cob";box.className="cob";lock.prepend(box)}
+  const full=canDone(u),miss=coMissing(u),ph=coPhases(u);box.className="cob"+(u.done?" done":full?" ready":"");box.setAttribute("aria-disabled",String(!full&&!u.done));
+  box.innerHTML=`<h4>Close-out photos</h4><p>${u.done?"Saved with the activity and included in the villa dossier.":full?(miss.length?`Checklist complete. Add at least one photo for ${miss.map(p=>PHS[p].toLowerCase()).join(", ")} to mark this activity completed.`:"All close-out photos added. You can mark the activity completed."):"Finish every checkpoint first; then add photos of the work before, during and after, and mark it completed."}</p>
+    <div class="cog">${ph.map(p=>{const a=(u.ph||{})[coKey(p)]||[];return`<div class="cos${a.length?" ok":""}" data-cop="${p}"><b>${PHN[p]}<em>${a.length?a.length+" photo"+(a.length>1?"s":""):"Needed"}</em></b>
+      <div class="cot">${a.map((q,i)=>{let s="";try{s=phSrc(q)}catch(e){}return`<button type="button" data-coi="${i}" title="${esc((q.by||"")+" "+(q.at?new Date(q.at).toLocaleString("en-GB"):""))}">${s?`<img src="${esc(s)}" alt="${PHS[p]} photo ${i+1}" loading="lazy">`:""}${u.done?"":`<span class="x" data-cox="${i}" aria-label="Remove photo">×</span>`}</button>`}).join("")}</div>
+      ${PHOK?`<div class="fxacts"><button type="button" class="phb" data-coc="cam">Take photo</button><button type="button" class="phb soft" data-coc="file">Attach</button></div>`:`<small style="color:var(--mute)">${esc(PHWHY)}</small>`}</div>`}).join("")}</div>`;
+  box.querySelectorAll("[data-cop]").forEach(c=>{const p=c.dataset.cop;c.querySelectorAll("[data-coc]").forEach(b=>b.onclick=()=>{phTarget={u,k:coKey(p)};$(b.dataset.coc=="cam"?"phCam":"phFile").click()});
+    c.querySelectorAll("[data-coi]").forEach(b=>b.onclick=e=>{const x=e.target.closest("[data-cox]");const a=(u.ph||{})[coKey(p)]||[];const i=+b.dataset.coi;
+      if(x){if(u.done)return;a.splice(i,1);if(!a.length)delete u.ph[coKey(p)];changed();saveNow();coPaint();return}let s="";try{s=phSrc(a[i])}catch(er){}if(s)window.open(s,"_blank")})})}
+{const r0=render;render=function(){r0.apply(this,arguments);if(view=="C")try{coPaint()}catch(e){}}}
+{const ap=addPhotos;addPhotos=async function(){const r=await ap.apply(this,arguments);try{coPaint()}catch(e){}return r}}
+{const dn=$("dn"),o=dn.onchange;dn.onchange=e=>{const u=sel;if(e.target.checked&&u&&canDone(u)){const m=coMissing(u);if(m.length){e.target.checked=false;const lm=$("lockmsg");lm.className="note warn";lm.textContent=`Add the close-out photos first: ${m.map(p=>PHN[p]).join(", ")}.`;const b=$("cob");if(b)b.scrollIntoView({block:"nearest",behavior:"smooth"});return}}return o.call(dn,e)}}
+setTimeout(()=>{try{coPaint()}catch(e){}},600);
+function dsDrawFor(u){const tx=" "+(u.n+" "+u.stn).toLowerCase().replace(/[^a-z0-9]+/g," ")+" ";const stop=new Set(["details","detail","layout","plan","drawing","drawings","section","sections","elevation","and","with","the","of","floor"]);
+  return DRT.filter(t=>{const w=t.n.toLowerCase().replace(/[^a-z0-9]+/g," ").split(" ").filter(x=>x.length>1&&!stop.has(x));return w.length&&w.every(x=>tx.includes(" "+x+" ")||(x.length>5&&tx.includes(" "+x.slice(0,-1))))})}
+// ---------- v44: Labour split in two: Morning labour (per cluster) and Activity progress (evening), which submits with tomorrow's schedule ----------
+var LM="am";
+{const st=document.createElement("style");st.textContent=`
+.app[data-lm="am"] #viewL #wkLab,.app[data-lm="am"] #viewL .wkfold,.app[data-lm="am"] #viewL .fxout,.app[data-lm="am"] #viewL #lmSub,.app[data-lm="am"] #viewL #lmSum,.app[data-lm="am"] #viewL .dlrs:has([data-lsh^="pm"]){display:none!important}
+.app[data-lm="pm"] #viewL #dlr,.app[data-lm="pm"] #viewL .fxout,.app:not([data-lm="pm"]) #lmSub{display:none!important}
+.app[data-lm="am"] #viewL .dlrsh{grid-template-columns:1fr}
+.lmsum{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}.lmsum b{font-size:14px}.lmsum span{font-size:13px;color:var(--ink2,inherit)}.lmsum .mu{color:var(--mute)}
+.lmwarn{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:12px;background:var(--warnbg);font-size:13px}
+.lmchk{list-style:none;margin:10px 0;padding:0;display:flex;flex-direction:column;gap:6px}.lmchk li{display:flex;gap:8px;align-items:center;font-size:13px}.lmchk i{width:18px;height:18px;border-radius:50%;flex:none;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:800;color:#fff;background:var(--ok)}.lmchk li.no i{background:var(--warn)}
+.lmdone{color:var(--ok);font-weight:700;font-size:13px}`;document.head.appendChild(st)}
+const lmSet=m=>{LM=m;const a=document.querySelector(".app");if(a)a.dataset.lm=m};lmSet("am");
+// navigation: a second tab for progress
+{const ref=$("vL");if(ref&&!$("vK")){ref.title="Morning labour";const b=ref.cloneNode(true);b.id="vK";b.title="Activity progress";b.setAttribute("aria-selected","false");
+  b.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16"/><path d="M6 15l4-4 3 3 5-6"/><circle cx="18" cy="8" r="1.4" fill="currentColor"/></svg>Progress`;b.onclick=()=>setView("K");ref.after(b);
+  const sp=ref.querySelector("svg");if(sp&&sp.nextSibling)sp.nextSibling.textContent="Labour"}}
+PGN.L="Morning labour";PGN.K="Activity progress";
+{const i=MGRP[0][1].indexOf("L");if(i>=0&&!MGRP[0][1].includes("K"))MGRP[0][1].splice(i+1,0,"K")}
+{const av=allowedViews;allowedViews=function(){const a=av();if(a.includes("L")&&!a.includes("K"))a.splice(a.indexOf("L")+1,0,"K");return a}}
+{const sv=setView;setView=function(v){if(v=="K"){lmSet("pm");const r=sv.call(this,"L");document.querySelectorAll(".rail [role=tab]").forEach(b=>b.setAttribute("aria-selected",String(b.id=="vK")));try{localStorage.setItem("ak-nav","K")}catch(e){}pgHead();return r}
+  if(v=="L")lmSet("am");const k=$("vK");if(k)k.setAttribute("aria-selected","false");return sv.apply(this,arguments)}}
+{const ph=pgHead;pgHead=function(){ph();if(view!="L")return;const t=$("pgT"),s=$("pgS");if(t)t.textContent=LM=="pm"?"Activity progress":"Morning labour";if(s)s.textContent=LM=="pm"?"How far each scheduled activity got today, and the labour it used":"Masons and helpers taken this morning, cluster by cluster"}}
+// page content per mode
+function lmTaken(d){const w=wkLoad(d);return{T:dlrCl(w),G:labGroups(w)}}
+{const rw=renderWk;renderWk=function(V){rw.apply(this,arguments);if(V!="L")return;const box=$("viewL"),d=WKD.L;if(!box)return;const h=box.querySelector(".fxht");
+  if(h){const h2=h.querySelector("h2,h1"),p=h.querySelector("p");if(h2)h2.textContent=LM=="pm"?"Today's activity progress":"Morning labour";if(p)p.textContent=LM=="pm"?"Enter how far each scheduled activity got and the masons and helpers it used. Submitting creates the evening report, with tomorrow's schedule attached.":"Enter the masons and helpers taken in each cluster this morning, then share it. Activity progress is entered in the evening on the Progress page."}
+  if(LM!="pm")return;const w=wkLoad(d),{T,G}=lmTaken(d),M=labMerged(w).filter(r=>scIn(r.v));
+  // what was taken this morning, to give out to activities
+  const anyT=Object.values(T).some(x=>x.mas+x.hel);const sum=document.createElement("section");sum.className="fxp";sum.id="lmSum";
+  sum.innerHTML=anyT?`<div class="lmsum"><b>Taken this morning</b>${G.filter(g=>T[g.k]&&(T[g.k].mas+T[g.k].hel)).map(g=>{const t=T[g.k],am=g.R.reduce((s,r)=>s+(r.mas||0),0),ah=g.R.reduce((s,r)=>s+(r.hel||0),0);return`<span>${esc(g.n)}: ${am}/${t.mas} masons · ${ah}/${t.hel} helpers given</span>`}).join("")}<span class="mu">Change the morning numbers on the Labour page.</span></div>`
+    :`<div class="lmwarn"><span><b>Morning labour not entered.</b> Enter the masons and helpers taken this morning first, so they can be given out to activities.</span><button type="button" class="fxb sm pri" id="lmGoAm">Enter morning labour</button></div>`;
+  const lab=$("wkLab");if(lab&&!$("lmSum"))lab.before(sum);const g1=$("lmGoAm");if(g1)g1.onclick=()=>setView("L");
+  // submit
+  const rep=M.filter(r=>r.lab&&r.st).length,tot=M.length,noWhy=M.filter(r=>r.st=="none"&&!r.why).length,d1=tmrOf(d),tm=wkRows(wkLoad(d1),"plan").filter(r=>scIn(r.v)).length,sub=(w.rows||[]).filter(r=>r.kind=="sub"&&!r.del).sort((a,b)=>String(b.at).localeCompare(String(a.at)))[0];
+  const ok=(c,t)=>`<li class="${c?"":"no"}"><i>${c?"✓":"!"}</i>${t}</li>`;const s2=document.createElement("section");s2.className="fxp";s2.id="lmSub";
+  s2.innerHTML=`<div class="wkhd"><div><h3 class="fxh3" style="margin:0">Submit today's progress</h3><p class="fxsm" style="margin:4px 0 0">Creates the evening report: each activity's status and labour, cluster by cluster, followed by tomorrow's schedule (${fmtD(d1)}).</p></div>${sub?`<span class="lmdone">Submitted ${new Date(sub.at).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})}${sub.by?" by "+esc(sub.by):""}</span>`:""}</div>
+    <ul class="lmchk">${ok(tot&&rep==tot,`${rep} of ${tot} activities reported`)}${ok(!noWhy,noWhy?`${noWhy} not started without a reason`:"Every activity not started has a reason")}${ok(anyT,anyT?"Morning labour entered":"Morning labour not entered")}${ok(tm,tm?`Tomorrow's schedule ready: ${plur(tm,"activity","activities")}`:`Tomorrow's schedule (${fmtD(d1)}) not made yet`)}</ul>
+    ${tm?"":`<div class="lmwarn" style="margin-bottom:10px"><span>Plan tomorrow's work first so it goes out with this report.</span><button type="button" class="fxb sm" id="lmGoT">Plan tomorrow</button></div>`}
+    <div class="fxacts"><button type="button" class="fxb pri" id="lmSubGo">${sub?"Submit again and share PDF":"Submit and share PDF"}</button><button type="button" class="fxb" data-lsv="pm">See PDF</button><button type="button" class="fxb" data-ldl="pm">Download PDF</button><button type="button" class="fxb" id="lmMsg">Share message</button></div><p class="fxmsg" id="lmM" role="status"></p>`;
+  const anchor=box.querySelector(".fxout")||lab;if(anchor&&!$("lmSub"))anchor.before(s2);const sv2=$("lbSv");if(sv2)s2.appendChild(sv2);const gT=$("lmGoT");if(gT)gT.onclick=()=>setView("T");
+  const m=$("lmM"),run=async(b,fn)=>{b.disabled=true;m.className="fxmsg";try{await fn()}catch(e){m.className="fxmsg bad";m.textContent="Couldn't make the report: "+(e.message||e)}finally{b.disabled=false}};
+  const nm=`Progress-${d}${labScTag()}.pdf`,ttl=`Activity progress · ${fmtD(d)}`;
+  $("lmSubGo").onclick=e=>run(e.currentTarget,async()=>{m.textContent="Making the report…";const doc=await labPdf(d,"pm"),bl=doc.output("blob");await labKeep(d,nm,bl);const w2=wkLoad(d),now=new Date().toISOString();
+    w2.rows.push({id:`sub:${(ME&&ME.id)||"x"}:${Date.now().toString(36)}`,kind:"sub",at:now,mt:now,by:(ME&&ME.name)||engName()||""},{id:`shr:pm:${(ME&&ME.id)||"x"}:${Date.now().toString(36)}`,kind:"shr",k:"pm",how:"pdf",at:now,mt:now,by:(ME&&ME.name)||engName()||""});wkStore(w2,true);
+    const r=await fxShare(bl,nm,ttl);renderWk("L");const m2=$("lmM");if(m2){m2.className="fxmsg";m2.textContent=`Submitted. ${r}`}});
+  $("lmMsg").onclick=e=>run(e.currentTarget,async()=>{m.textContent=await fxShareText(labText(d,"pm"),ttl)});
+  s2.querySelector("[data-lsv]").onclick=e=>run(e.currentTarget,async()=>{const doc=await labPdf(d,"pm");await labKeep(d,nm,doc.output("blob"));await fxPdfPreview(doc,ttl)});
+  s2.querySelector("[data-ldl]").onclick=e=>run(e.currentTarget,async()=>{const bl=(await labPdf(d,"pm")).output("blob");await labKeep(d,nm,bl);m.textContent=(await saveFile(nm,bl))+". A copy is kept under Saved PDFs."})}}
+// open on the right tab after a reload
+setTimeout(()=>{try{if(localStorage.getItem("ak-nav")=="K"&&view=="L"&&LM!="pm")setView("K")}catch(e){}},400);
+// ---------- v45: Tomorrow / ongoing follow the planner calendar exactly; site map dated today; Tomorrow always opens on tomorrow ----------
+const VPC={};
+function villaPlan(n){n=+n;if(loadedVilla&&+loadedVilla==n){const S=schedule(),o={};LEAVES.forEach(u=>{const m=S.map[u.id];if(m&&m.s)o[u.id]={s:m.s,e:m.e,done:!!u.done,wip:!u.done&&!!(u.wip||Object.keys(u.chk||{}).length)}});return o}
+  const s=getState(n);const sig=(s?(s.saved||"")+"|"+(s.start||"")+"|"+(s.skipSun?1:0)+"|"+JSON.stringify(s.pins||{}):"none")+"|"+iso(new Date());if(VPC[n]&&VPC[n].sig==sig)return VPC[n].v;
+  const D={},DN={},WP={},old=!!s&&(s.dv||1)<2;LEAVES.forEach(u=>{const x=s&&s.leaves&&s.leaves[u.id];const dv=x?+(old&&x.d==DEF1[u.id]?u.def:(x.d??u.def)):u.def;D[u.id]=Number.isFinite(dv)?Math.max(0,Math.min(999,Math.round(dv))):u.def;DN[u.id]=!!(x&&x.done);WP[u.id]=!DN[u.id]&&!!(x&&(x.wip||(x.chk&&Object.keys(x.chk).length)))});
+  const seen=new Set(),G=((s&&Array.isArray(s.groups))?s.groups:[]).map(g=>(Array.isArray(g)?g:[]).filter(id=>LEAF[id]&&!seen.has(id)&&seen.add(id))).filter(g=>g.length);LEAVES.forEach(u=>{if(!seen.has(u.id))G.push([u.id])});
+  const skip=s?!!s.skipSun:true,sd=s&&s.start?new Date(String(s.start).slice(0,10)+"T00:00:00"):null,st=sd&&!isNaN(sd)?sd:today;const PN=(s&&s.pins)||{};
+  let mx=0;const T0=G.map(g=>{const p=g.map(id=>!DN[id]&&/^\d{4}-\d\d-\d\d$/.test(PN[id]||"")?PN[id]:null).filter(Boolean).sort()[0];const t0=p?wdIdx(st,new Date(p+"T00:00:00"),skip):mx;mx=Math.max(mx,t0+Math.max(0,...g.map(id=>D[id])));return t0});
+  const W=workDays(st,Math.max(mx,1)+1,skip),o={};G.forEach((g,gi)=>g.forEach(id=>{const d=D[id];if(d)o[id]={s:W[T0[gi]],e:W[T0[gi]+d-1],done:DN[id],wip:WP[id]}}));VPC[n]={sig,v:o};return o}
+planFor=function(d){const D=new Date(d+"T00:00:00"),out=[];PLOTS.forEach(n=>{const P=villaPlan(n);for(const id in P){const m=P[id];if(m.done||!m.s)continue;
+    const on=m.s<=D&&m.e>=D,late=m.wip&&m.e<D;if(on||late){const u=LEAF[id];out.push({n,u,f:{u,s:m.s,e:m.e,wip:m.wip,late},k:n+"|"+id})}}});return out};
+// the site map and reports show today's status
+asOf=function(){return fmtD(iso(new Date()))};
+// Tomorrow always opens on tomorrow (a page left open overnight no longer shows yesterday's "tomorrow")
+{const sv=setView;setView=function(v){if(v=="T")WKD.T=tomorrow();return sv.apply(this,arguments)}}
+{let day=iso(new Date());setInterval(()=>{const d=iso(new Date());if(d!=day){day=d;WKD.T=tomorrow();WKD.L=d;if(["T","L"].includes(view))renderWk(view)}},60e3)}
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
