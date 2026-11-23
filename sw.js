@@ -1,10 +1,11 @@
 // AK Checklists offline cache.
 // The app page and its settings are fetched fresh whenever there's signal (so changes to config.js
 // take effect on the next open), and come from this cache when there's no signal.
-const V = "ak-checklists-6.42.0";
+const V = "ak-checklists-6.43.0";
 const SHELL = ["./", "index.html", "config.js", "auth.js", "msal-browser.min.js", "manifest.webmanifest", "icon-192.png", "icon-512.png", "icon-maskable-512.png", "apple-touch-icon.png"];
 const FRESH = /\/(index\.html|config\.js|auth\.js)?$/;
-self.addEventListener("install", e => { e.waitUntil(caches.open(V).then(c => c.addAll(SHELL.map(u => new Request(u, { cache: "reload" })))).then(() => self.skipWaiting())); });
+// each file is cached on its own, so one missing file (for example config.js) never stops the app from installing
+self.addEventListener("install", e => { e.waitUntil(caches.open(V).then(c => Promise.all(SHELL.map(u => c.add(new Request(u, { cache: "reload" })).catch(() => null)))).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== V).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 function timeout(ms){ return new Promise((_, no) => setTimeout(() => no(new Error("slow")), ms)); }
 self.addEventListener("fetch", e => {

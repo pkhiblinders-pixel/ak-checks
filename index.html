@@ -8306,6 +8306,34 @@ planFor=function(d){const D=new Date(d+"T00:00:00"),out=[];PLOTS.forEach(n=>{con
     if(m.s<=D&&m.e>=D){const u=LEAF[id];out.push({n,u,f:{u,s:m.s,e:m.e,wip:m.wip},k:n+"|"+id})}}});return out};
 // Tomorrow: never shows a day that has already passed, however the page was opened
 {const rw=renderWk;renderWk=function(V){if(V=="T"&&(!WKD.T||WKD.T<tomorrow()))WKD.T=tomorrow();return rw.apply(this,arguments)}}
+// ---------- v47: downloads that work on Android phones; a clear "save to phone" step when the file takes a while to make ----------
+const MIME={pdf:"application/pdf",xlsx:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",zip:"application/zip",json:"application/json",csv:"text/csv",png:"image/png",jpg:"image/jpeg"};
+const isAndroid=/Android/i.test(navigator.userAgent);
+saveFile=async function(name,blob){if(DL){await DL.save({filename:name,data:blob});return"Saved "+name}
+  const ext=(name.split(".").pop()||"").toLowerCase();if(!blob.type&&MIME[ext])blob=new Blob([blob],{type:MIME[ext]});
+  const url=URL.createObjectURL(blob);setTimeout(()=>URL.revokeObjectURL(url),180000);
+  const fire=()=>{const a=document.createElement("a");a.href=url;a.download=name;a.rel="noopener";document.body.appendChild(a);a.click();setTimeout(()=>a.remove(),1000)};
+  const fresh=!navigator.userActivation||navigator.userActivation.isActive;
+  if(!isAndroid&&fresh){fire();return"Downloaded "+name}
+  // phones: the file is ready; one tap saves it (a fresh tap is what Android needs to allow the download)
+  return await new Promise(res=>{const f=new File([blob],name,{type:blob.type||"application/octet-stream"});const canShare=!!(navigator.canShare&&navigator.canShare({files:[f]}));
+    const d=fxDialog("File ready",`<p class="fxsm" style="margin-top:0"><b>${esc(name)}</b> · ${(blob.size/1024>1024?(blob.size/1048576).toFixed(1)+" MB":Math.max(1,Math.round(blob.size/1024))+" KB")}</p>
+      <div class="fxacts" style="flex-direction:column;align-items:stretch"><button type="button" class="fxb pri" id="sfSave">Save to phone</button>${canShare?`<button type="button" class="fxb" id="sfShare">Share or save to Files / Drive</button>`:""}<button type="button" class="fxb" id="sfOpen">Open</button></div>
+      <p class="fxsm" style="margin-bottom:0">Saved files go to the phone's Downloads folder. If nothing happens, use Share and pick Files or Drive.</p>`);
+    let done=false;const fin=m=>{if(done)return;done=true;d.hidden=true;res(m)};
+    $("sfSave").onclick=()=>{fire();fin("Saved "+name+" to Downloads")};
+    const sh=$("sfShare");if(sh)sh.onclick=async()=>{try{await navigator.share({files:[f],title:name});fin("Shared "+name)}catch(e){if(e&&e.name=="AbortError")return;fin("Couldn't share: "+(e.message||e))}};
+    $("sfOpen").onclick=()=>{window.open(url,"_blank");fin("Opened "+name)};
+    const x=d.querySelector(".fxx,[data-close],button[aria-label='Close']");if(x)x.addEventListener("click",()=>fin("Download cancelled."));
+    new MutationObserver((_,o)=>{if(d.hidden){o.disconnect();fin("Download cancelled.")}}).observe(d,{attributes:true,attributeFilter:["hidden"]})})};
+// opened in a Chrome tab on a phone instead of the app: offer the proper install
+setTimeout(()=>{try{const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone;if(!isAndroid||standalone||sessionStorage.getItem("ak-inst")||!document.querySelector('link[rel="manifest"]'))return;
+  const bar=document.createElement("div");bar.className="fxinst";bar.setAttribute("role","status");
+  bar.innerHTML=`<span><b>Open as an app.</b> You're in a Chrome tab. Install AK Checklists so it opens full screen and downloads go straight to the phone.</span><button type="button" class="fxb sm pri" id="instGo">Install</button><button type="button" class="fxb sm" id="instNo" aria-label="Not now">Not now</button>`;
+  document.body.appendChild(bar);const st=document.createElement("style");st.textContent=`.fxinst{position:fixed;left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:250;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px;border-radius:16px;background:var(--panel,#1c2433);color:var(--ink,#fff);box-shadow:0 10px 30px rgba(0,0,0,.35);font-size:13px}.fxinst span{flex:1 1 220px}`;document.head.appendChild(st);
+  $("instNo").onclick=()=>{sessionStorage.setItem("ak-inst","1");bar.remove()};
+  $("instGo").onclick=async()=>{if(typeof fxPrompt!="undefined"&&fxPrompt){fxPrompt.prompt();try{await fxPrompt.userChoice}catch(e){}bar.remove();return}
+    bar.querySelector("span").innerHTML=`<b>To install:</b> tap Chrome's ⋮ menu → <b>Install app</b> (or <b>Add to Home screen</b> → <b>Install</b>). If an old AK Checklists icon is on the home screen, long-press it and remove it first, then install again from this page.`;$("instGo").remove()}}catch(e){}},2500);
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
