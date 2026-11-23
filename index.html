@@ -8279,6 +8279,33 @@ asOf=function(){return fmtD(iso(new Date()))};
 // Tomorrow always opens on tomorrow (a page left open overnight no longer shows yesterday's "tomorrow")
 {const sv=setView;setView=function(v){if(v=="T")WKD.T=tomorrow();return sv.apply(this,arguments)}}
 {let day=iso(new Date());setInterval(()=>{const d=iso(new Date());if(d!=day){day=d;WKD.T=tomorrow();WKD.L=d;if(["T","L"].includes(view))renderWk(view)}},60e3)}
+// ---------- v46: a live plan: unfinished work never sits in the past; calendar, Tomorrow, Ongoing and the Today board share it ----------
+// rule for each group of activities, in sequence:
+//  - in progress: runs from its start (pulled to today if planned later) and keeps running at least until tomorrow
+//  - not started: starts no earlier than today (a past fixed date counts as today)
+//  - completed: stays where it was, and never pushes later work beyond today
+function livePlace(G,D,DN,WP,PN,st,skip){const tT=Math.max(0,wdIdx(st,today,skip));let mx=0;const T0=[],DE={};
+  G.forEach(g=>{const ids=g.map(x=>x.id??x);const open=ids.filter(id=>!DN[id]),wip=open.some(id=>WP[id]);const p=open.map(id=>/^\d{4}-\d\d-\d\d$/.test(PN[id]||"")?PN[id]:null).filter(Boolean).sort()[0];
+    let t0=p?wdIdx(st,new Date(p+"T00:00:00"),skip):mx;if(wip){if(t0>tT)t0=tT}else if(open.length)t0=Math.max(t0,tT);
+    let gd=0;ids.forEach(id=>{let d=D[id]||0;if(d&&!DN[id]&&WP[id])d=Math.max(d,tT-t0+2);DE[id]=d;gd=Math.max(gd,d)});T0.push(t0);mx=Math.max(mx,open.length?t0+gd:Math.min(t0+gd,tT))});return{T0,DE,mx:Math.max(mx,...T0.map((t,i)=>t+Math.max(0,...(G[i].map(x=>DE[x.id??x]||0))))),tT}}
+schedule=function(){const st=startDate(),skip=$("sun").checked;const D={},DN={},WP={};LEAVES.forEach(u=>{D[u.id]=u.d;DN[u.id]=!!u.done;WP[u.id]=!u.done&&!!(u.wip||Object.keys(u.chk||{}).length)});
+  const {T0,DE,mx}=livePlace(GROUPS,D,DN,WP,PINS,st,skip);const W=workDays(st,Math.max(mx,1)+1,skip);const map={};
+  GROUPS.forEach((g,gi)=>{const t=T0[gi];g.forEach(u=>{const d=DE[u.id];map[u.id]={t,gi,g,d,s:d?W[t]:null,e:d?W[t+d-1]:null,pin:!u.done&&PINS[u.id]||""}})});
+  const stages=SEQ.map(q=>{let a=1e9,b=-1;const L=stageLeaves(q);L.forEach(u=>{const m=map[u.id];if(m&&m.d){a=Math.min(a,m.t);b=Math.max(b,m.t+m.d)}});const nd=L.filter(u=>u.done).length;return b<0?{q,days:0,nd,n:L.length}:{q,days:b-a,t0:a,t1:b,s:W[a],e:W[b-1],nd,n:L.length}});
+  const serial=LEAVES.reduce((a,u)=>a+u.d,0);const pend=GROUPS.reduce((a,g)=>a+g.filter(u=>!u.done).reduce((m,u)=>Math.max(m,u.d),0),0);
+  return{map,stages,tot:mx,W,serial,pend,end:mx?W[mx-1]:startDate()}};
+for(const k in VPC)delete VPC[k];
+villaPlan=function(n){n=+n;if(loadedVilla&&+loadedVilla==n){const S=schedule(),o={};LEAVES.forEach(u=>{const m=S.map[u.id];if(m&&m.s)o[u.id]={s:m.s,e:m.e,done:!!u.done,wip:!u.done&&!!(u.wip||Object.keys(u.chk||{}).length)}});return o}
+  const s=getState(n);const sig=(s?(s.saved||"")+"|"+(s.start||"")+"|"+(s.skipSun?1:0)+"|"+JSON.stringify(s.pins||{}):"none")+"|"+iso(new Date())+"|live";if(VPC[n]&&VPC[n].sig==sig)return VPC[n].v;
+  const D={},DN={},WP={},old=!!s&&(s.dv||1)<2;LEAVES.forEach(u=>{const x=s&&s.leaves&&s.leaves[u.id];const dv=x?+(old&&x.d==DEF1[u.id]?u.def:(x.d??u.def)):u.def;D[u.id]=Number.isFinite(dv)?Math.max(0,Math.min(999,Math.round(dv))):u.def;DN[u.id]=!!(x&&x.done);WP[u.id]=!DN[u.id]&&!!(x&&(x.wip||(x.chk&&Object.keys(x.chk).length)))});
+  const seen=new Set(),G=((s&&Array.isArray(s.groups))?s.groups:[]).map(g=>(Array.isArray(g)?g:[]).filter(id=>LEAF[id]&&!seen.has(id)&&seen.add(id))).filter(g=>g.length);LEAVES.forEach(u=>{if(!seen.has(u.id))G.push([u.id])});
+  const skip=s?!!s.skipSun:true,sd=s&&s.start?new Date(String(s.start).slice(0,10)+"T00:00:00"):null,st=sd&&!isNaN(sd)?sd:today;
+  const {T0,DE,mx}=livePlace(G,D,DN,WP,(s&&s.pins)||{},st,skip);const W=workDays(st,Math.max(mx,1)+1,skip),o={};
+  G.forEach((g,gi)=>g.forEach(id=>{const d=DE[id];if(d)o[id]={s:W[T0[gi]],e:W[T0[gi]+d-1],done:DN[id],wip:WP[id]}}));VPC[n]={sig,v:o};return o};
+planFor=function(d){const D=new Date(d+"T00:00:00"),out=[];PLOTS.forEach(n=>{const P=villaPlan(n);for(const id in P){const m=P[id];if(m.done||!m.s)continue;
+    if(m.s<=D&&m.e>=D){const u=LEAF[id];out.push({n,u,f:{u,s:m.s,e:m.e,wip:m.wip},k:n+"|"+id})}}});return out};
+// Tomorrow: never shows a day that has already passed, however the page was opened
+{const rw=renderWk;renderWk=function(V){if(V=="T"&&(!WKD.T||WKD.T<tomorrow()))WKD.T=tomorrow();return rw.apply(this,arguments)}}
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
