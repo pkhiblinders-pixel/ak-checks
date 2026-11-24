@@ -8495,6 +8495,48 @@ function labPriSummary(doc,y,G,T,k,pt){const rows=G.filter(g=>g.R.length||(T[g.k
     const k=li.querySelector(".aprk");if(k)k.textContent=`Reopen: Completed → ${STL[r.to]}`;
     if(ok){ok.textContent=`Reopen as ${STL[r.to].toLowerCase()}`;ok.onclick=()=>{leafSet(r.v,r.leaf,x=>{x.done=false;x.src="";x.on="";x.ckp=null;x.wip=r.to=="wip"});stuSet(r,"ok");aprBadge();status(`Villa ${r.v}: ${(LEAF[r.leaf]||{}).n} reopened as ${STL[r.to].toLowerCase()}.`);if(view=="U")renderVst();openApprovals()}}
     if(bk){bk.textContent="Keep completed";bk.onclick=()=>{stuSet(r,"back");aprBadge();if(view=="U")renderVst();openApprovals()}}})}}
+// ---------- v52: every phone pulls approvals and people from the server; one approval per activity; admin can remove duplicate people ----------
+{const st=document.createElement("style");st.textContent=`
+.meman{margin-top:10px}.meman summary{cursor:pointer;font-weight:700}.meml{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.meml li{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:var(--well)}.meml li .mef{width:34px;height:34px;font-size:12px}
+.meml li span.nm{flex:1;min-width:0}.meml li small{display:block;color:var(--mute);font-size:11.5px}.meml li.dup{border-color:var(--warn)}
+.aprdays{font-size:12px;color:var(--mute);margin:-2px 0 0}`;document.head.appendChild(st)}
+// --- pull every work day and the people list from the server, then refresh what is on screen ---
+let SYW={t:0,p:null};
+function wkSyncAll(force){if(!DB||!navigator.onLine)return Promise.resolve(false);if(SYW.p)return SYW.p;if(!force&&Date.now()-SYW.t<45000)return Promise.resolve(false);SYW.t=Date.now();
+  const take=docs=>{let ch=false;docs.forEach(x=>{const d=x.id;if(!(/^\d{4}-\d\d-\d\d$/.test(d)||d==PPL_D)||syDirty("w:"+d))return;const l=wkLoad(d);const out=wkMerge(l,x.data()||{});
+      if(JSON.stringify(out.rows)!==JSON.stringify(l.rows)||JSON.stringify(out.files)!==JSON.stringify(l.files||[])){ls.set("ak-work:"+d,JSON.stringify(out));ch=true}});return ch};
+  SYW.p=new Promise(res=>{let done=false;const fin=ch=>{if(done)return;done=true;SYW.p=null;if(ch)wkRefresh();res(ch)};
+    try{const c=DB.collection("work");if(c.get)c.get().then(q=>fin(take(q.docs))).catch(()=>fin(false));else{let un=null;un=c.onSnapshot(q=>{const ch=take(q.docs);if(un){un();un=null}fin(ch)},()=>fin(false))}}catch(e){fin(false)}
+    setTimeout(()=>fin(false),20000)});return SYW.p}
+function wkRefresh(){try{aprBadge()}catch(e){}const D=$("fxDlg");const busy=D&&D.contains(document.activeElement)&&/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);try{if(D&&!D.hidden&&!busy&&D.querySelector(".aptabs"))openApprovals(APT);else if(D&&!D.hidden&&!busy&&D.querySelector(".mebox")&&!D.querySelector(".meman[open]"))mePick()}catch(e){}
+  try{if(view=="U")renderVst();else if(view=="T"||view=="L")renderWk(view)}catch(e){}}
+{let n=0;const w=setInterval(()=>{if(DB||++n>60){clearInterval(w);if(DB){wkSyncAll(true).then(()=>{if(ME&&!people().some(p=>p.id==ME.id)&&people().length){const s=people().find(p=>pNorm(p.name)==pNorm(ME.name));if(s)meSet(s)}})}}},1000)}
+setInterval(()=>{if(document.visibilityState=="visible")wkSyncAll()},60000);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState=="visible")wkSyncAll()});
+// --- approvals: one entry per activity even if it was reported completed on several days ---
+{const a0=aprSet;aprSet=function(d,v,leaf,st,note){a0.apply(this,arguments);if(st=="pend")return;aprAll().filter(r=>r.v==+v&&r.leaf==+leaf&&r.st=="pend"&&r.d!=d).forEach(r=>a0(r.d,v,leaf,st,note))}}
+{const ap=aprPending;aprPending=function(){const m=new Map();ap().forEach(r=>{const k=r.v+":"+r.leaf,x=m.get(k);if(!x){m.set(k,{...r,days:[r.d]})}else{x.days.push(r.d);if(r.d<x.d){const days=x.days;m.set(k,{...r,days})}}});return[...m.values()]}}
+{const oa=openApprovals;openApprovals=function(tab){if(DB&&!openApprovals.__s){openApprovals.__s=1;wkSyncAll(true).finally(()=>{openApprovals.__s=0})}oa.apply(this,arguments);const D=$("fxDlg");if(!D)return;const P=aprPending();
+  D.querySelectorAll("[data-apr]").forEach(li=>{const [dd,v,leaf]=li.dataset.apr.split("|");const r=P.find(x=>x.v==+v&&x.leaf==+leaf);if(!r||r.days.length<2)return;const h=li.querySelector(".aprh");
+    if(h&&!li.querySelector(".aprdays"))h.insertAdjacentHTML("beforeend",`<p class="aprdays">Reported completed ${r.days.length} times: ${r.days.sort().map(x=>fmtD(x)).join(", ")}. Approving or sending back covers all of them.</p>`)})}}
+// --- people: no duplicates; the admin or PM can remove a person ---
+const pNorm=s=>String(s||"").toLowerCase().replace(/[^a-z]/g,"");
+{const pp=people;people=function(){const L=pp(),m=new Map();L.forEach(p=>{const k=pNorm(p.name),x=m.get(k);if(!x||(!x.photo&&p.photo)||(!!x.photo==!!p.photo&&String(p.mt||"")<String(x.mt||"")&&!(ME&&ME.id==x.id))||(ME&&ME.id==p.id))m.set(k,p)});return[...m.values()].sort((a,b)=>a.name.localeCompare(b.name))}}
+function pAll(){return(wkLoad(PPL_D).rows||[]).filter(r=>r.kind=="person"&&!r.del).sort((a,b)=>a.name.localeCompare(b.name)||String(a.mt).localeCompare(String(b.mt)))}
+function pDel(ids){const w=wkLoad(PPL_D),now=new Date().toISOString();(w.rows||[]).forEach(r=>{if(r.kind=="person"&&ids.includes(r.id)){r.del=true;r.mt=now}});wkStore(w,true)}
+{const mp=mePick;mePick=function(force){if(DB&&!mePick.__s){mePick.__s=1;wkSyncAll(true).finally(()=>{mePick.__s=0})}mp.apply(this,arguments);const D=$("fxDlg");if(!D||!canEdit("plan"))return;const box=D.querySelector(".mebox");if(!box||box.querySelector(".meman"))return;
+  const A=pAll(),cnt={};A.forEach(p=>{const k=pNorm(p.name);cnt[k]=(cnt[k]||0)+1});const nd=Object.values(cnt).filter(n=>n>1).reduce((s,n)=>s+n-1,0);
+  box.insertAdjacentHTML("beforeend",`<details class="meman"><summary>Manage people (${A.length}${nd?` · ${nd} duplicate${nd>1?"s":""}`:""})</summary>
+    <p class="fxsm">Remove names added twice or by mistake. Work already saved under a removed name stays as it is.</p>
+    ${nd?`<button type="button" class="fxb sm" id="meDd">Remove ${nd} exact duplicate${nd>1?"s":""}</button>`:""}
+    <ul class="meml">${A.map(p=>`<li class="${cnt[pNorm(p.name)]>1?"dup":""}">${meFace(p)}<span class="nm">${esc(p.name)}<small>${p.email?esc(p.email)+" · ":""}added ${p.mt?fmtD(String(p.mt).slice(0,10)):"earlier"}${ME&&ME.id==p.id?" · this device":""}</small></span><button type="button" class="fxb sm fxgh" data-medel="${p.id}">Remove</button></li>`).join("")}</ul></details>`);
+  const keep=people().map(p=>p.id);
+  const dd=$("meDd");if(dd)dd.onclick=()=>{pDel(A.filter(p=>!keep.includes(p.id)).map(p=>p.id));const m=D.querySelector(".meman");mePick();const m2=$("fxDlg").querySelector(".meman");if(m2)m2.open=true;status("Duplicate names removed.")};
+  box.querySelectorAll("[data-medel]").forEach(b=>b.onclick=()=>{if(b.dataset.sure!="1"){b.dataset.sure="1";b.textContent="Tap again to remove";b.classList.add("bad");return}const id=b.dataset.medel;pDel([id]);if(ME&&ME.id==id){ME=null;try{localStorage.removeItem("ak-me")}catch(e){}}mePick();const m2=$("fxDlg").querySelector(".meman");if(m2)m2.open=true})}}
+// adding a person: check the server's list first so the same name is not added twice
+{const mp=mePick;mePick=function(){mp.apply(this,arguments);const g=$("meGo");if(!g)return;const f=g.onclick;g.onclick=async()=>{const n=($("meN").value||"").trim();if(n.length>=2&&DB){g.disabled=true;g.textContent="Checking…";try{await wkSyncAll(true)}catch(e){}g.disabled=false;g.textContent="Add and continue"}
+  const ex=people().find(p=>pNorm(p.name)==pNorm(n));if(ex&&n.length>=2){meSet(ex);$("fxDlg").hidden=true;return}f()}}}
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
