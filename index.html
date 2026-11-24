@@ -7529,7 +7529,7 @@ function labText(d,k){const w=wkLoad(d),G=labGroups(w),T=dlrCl(w),st=r=>(LST.fin
   const L=[`*AMR Living Spaces · ${k=="am"?"Morning labour":"Evening labour report"}*`,fmtD(d)+((ME&&ME.name)?" · "+ME.name:""),""];
   G.forEach(g=>{const t=T[g.k]||{mas:0,hel:0};if(!g.R.length&&!t.mas&&!t.hel)return;tm+=t.mas;th+=t.hel;const gm=g.R.reduce((s,r)=>s+(r.mas||0),0),gh=g.R.reduce((s,r)=>s+(r.hel||0),0);am+=gm;ah+=gh;
     L.push(`*${g.n}* · ${t.mas} masons, ${t.hel} helpers${k=="am"?" taken":` taken · ${gm} M / ${gh} H used`}`);
-    g.R.forEach(r=>{const u=LEAF[r.leaf]||{n:"(removed)"};L.push(k=="am"?`• Villa ${r.v}: ${u.n}`:`• Villa ${r.v}: ${u.n} · ${r.mas||0} M, ${r.hel||0} H · ${st(r)}${r.st=="none"&&r.why?" ("+r.why+")":""}${r.note?" · "+r.note:""}`)});
+    labPriEach(g.R,k,L,r=>{const u=LEAF[r.leaf]||{n:"(removed)"};L.push(k=="am"?`• Villa ${r.v}: ${u.n}`:`• Villa ${r.v}: ${u.n} · ${r.mas||0} M, ${r.hel||0} H · ${st(r)}${r.st=="none"&&r.why?" ("+r.why+")":""}${r.note?" · "+r.note:""}`)});
     if(!g.R.length)L.push("• No activities scheduled");L.push("")});
   L.push(`*Total:* ${tm} masons, ${th} helpers`+(k=="am"?` · ${plur(G.reduce((s,g)=>s+g.R.length,0),"activity","activities")}`:` · ${am} M / ${ah} H given to activities`));
   if(k=="pm"){const M=labMerged(w),dn=M.filter(r=>r.st=="done").length,pt=M.filter(r=>r.st=="part").length,ns=M.filter(r=>r.st=="none").length,nr=M.filter(r=>!r.lab).length;L.push(`Done ${dn} · In progress ${pt} · Not started ${ns}${nr?` · Not reported ${nr}`:""}`)}
@@ -7539,12 +7539,12 @@ async function labPdf(d,k){await loadJsPDF();const {jsPDF}=window.jspdf;const do
   let y=wkPdfHead(doc,k=="am"?"Morning labour":"Evening labour report",`AMR Living Spaces · ${fmtD(d)}${ME?" · "+pt(ME.name):""}`);
   const tot=Object.values(T).reduce((s,x)=>({mas:s.mas+x.mas,hel:s.hel+x.hel}),{mas:0,hel:0}),M=labMerged(w);
   y=wkPdfBoxes(doc,y,k=="am"?[["Masons taken",tot.mas],["Helpers taken",tot.hel],["Activities",M.length]]:[["Masons taken",tot.mas],["Helpers taken",tot.hel],["Done",M.filter(r=>r.st=="done").length],["In progress",M.filter(r=>r.st=="part").length],["Not started",M.filter(r=>r.st=="none").length]],k=="pm"&&M.some(r=>r.st=="none")?4:undefined);
-  let any=false;G.forEach(g=>{const t=T[g.k]||{mas:0,hel:0};if(!g.R.length&&!t.mas&&!t.hel)return;any=true;const gm=g.R.reduce((s,r)=>s+(r.mas||0),0),gh=g.R.reduce((s,r)=>s+(r.hel||0),0);
+  y=labPriSummary(doc,y,G,T,k,pt);let any=false;G.forEach(g=>{const t=T[g.k]||{mas:0,hel:0};if(!g.R.length&&!t.mas&&!t.hel)return;any=true;const gm=g.R.reduce((s,r)=>s+(r.mas||0),0),gh=g.R.reduce((s,r)=>s+(r.hel||0),0);
     if(y>doc.internal.pageSize.getHeight()-40){doc.addPage();y=20}
     doc.setFont("helvetica","bold");doc.setFontSize(11);doc.setTextColor(21,35,58);doc.text(pt(g.n),14,y+4);doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(94,107,124);
     doc.text(`${t.mas} masons, ${t.hel} helpers taken${k=="pm"?` · ${gm} masons, ${gh} helpers given to activities`:""}`,doc.internal.pageSize.getWidth()-14,y+4,{align:"right"});
     doc.autoTable({startY:y+6,head:[k=="am"?["Villa","Activity","Stage"]:["Villa","Activity","Masons","Helpers","Status","Reason / note"]],
-      body:g.R.length?g.R.map(r=>{const u=LEAF[r.leaf]||{n:"(removed)",stn:""};return k=="am"?[r.v,pt(u.n),pt(u.stn)]:[r.v,pt(u.n),r.mas||0,r.hel||0,st(r),pt([r.st=="none"?r.why:"",r.note].filter(Boolean).join(" · "))]}):[[{content:"No activities scheduled",colSpan:k=="am"?3:6}]],
+      body:g.R.length?labPriRows(g.R,k,r=>{const u=LEAF[r.leaf]||{n:"(removed)",stn:""};return k=="am"?[r.v,pt(u.n),pt(u.stn)]:[r.v,pt(u.n),r.mas||0,r.hel||0,st(r),pt([r.st=="none"?r.why:"",r.note].filter(Boolean).join(" · "))]}):[[{content:"No activities scheduled",colSpan:k=="am"?3:6}]],
       theme:"grid",margin:{left:14,right:14},styles:{fontSize:9,cellPadding:2,textColor:[21,35,58],lineColor:[214,220,228],lineWidth:.2},headStyles:{fillColor:[21,35,58],textColor:255},columnStyles:{0:{cellWidth:14,halign:"right"},...(k=="pm"?{2:{cellWidth:16,halign:"right"},3:{cellWidth:16,halign:"right"},4:{cellWidth:24}}:{})},
       didParseCell:h=>{if(h.section=="body"&&k=="pm"&&h.column.index==4){if(h.cell.raw=="Not started")h.cell.styles.textColor=[184,55,45];if(h.cell.raw=="Done")h.cell.styles.textColor=[24,128,80]}}});y=doc.lastAutoTable.finalY+8});
   if(!any)doc.autoTable({startY:y,body:[["Nothing scheduled and no labour entered for this day."]],theme:"plain"});
@@ -7580,7 +7580,7 @@ const labScTag=()=>scOn()?"-"+scName().replace(/[^A-Za-z0-9]+/g,""):"";
   // approval chips on their own line instead of squeezed into the header
   box.querySelectorAll("#wkLab .lbh").forEach(h=>{const C=h.querySelectorAll(".aprc");if(!C.length)return;const wr=document.createElement("div");wr.className="aprw";C.forEach(c=>wr.appendChild(c));h.after(wr)});
   // the filter, above the labour totals
-  const dl=$("dlr");if(dl&&!$("lbSc")){dl.insertAdjacentHTML("beforebegin",`<section class="fxp lbsc" id="lbSc"><div class="wkpf">${scBar()}</div>${scOn()?`<p class="lbscn">Showing ${esc(scName())}. Totals, messages and PDFs follow this filter.</p>`:""}</section>`)}
+  const dl=$("dlr");if(dl&&!$("lbSc")){dl.insertAdjacentHTML("beforebegin",`<section class="fxp lbsc" id="lbSc"><div class="wkpf">${scBar()}</div><p class="lbscn">${scOn()?`Showing ${esc(scName())}. Totals, messages and PDFs cover only these villas.`:"Messages and PDFs cover every villa, in sections by cluster and by priority. Pick a cluster or priority above to make one for just those villas."}</p></section>`)}
   if(scOn()){box.querySelectorAll("#wkLab li[data-lb]").forEach(li=>{const r=labMerged(wkLoad(d)).find(x=>String(x.id)==li.dataset.lb);if(r&&!scIn(r.v))li.hidden=true});
     box.querySelectorAll("#wkLab .lbcl").forEach(c=>{if(![...c.querySelectorAll("li[data-lb]")].some(li=>!li.hidden))c.hidden=true})}
   // morning / evening cards: see, download, share — every PDF made is kept
@@ -8351,7 +8351,7 @@ function leafSet(n,id,fn){const u=LEAF[id];if(!u)return;const now=new Date().toI
   if(loadedVilla&&String(loadedVilla)==String(n)){fn(u);u.mt=now;changed();saveNow();return}
   const s=JSON.parse(JSON.stringify(getState(n)||{v:3,leaves:{}}));s.v=s.v||3;s.leaves=s.leaves||{};const x=s.leaves[id]||(s.leaves[id]={});fn(x);x.mt=now;s.saved=now;
   const k=vkey(String(n));SITE[k]=s;ls.set("amr-planner:"+k,JSON.stringify(s));statsCache[n]=null;if(typeof VPC!="undefined")delete VPC[+n];if(DB){syMark(k);syKick(400)}}
-const leafOf=(n,id)=>{if(loadedVilla&&String(loadedVilla)==String(n))return LEAF[id];const u0=LEAF[id],x=((getState(n)||{}).leaves||{})[id]||{};return Object.assign(Object.create(u0),{chk:x.chk||{},custom:x.custom||[],ph:x.ph||{},done:!!x.done,wip:!!x.wip,ckp:x.ckp||null})};
+var leafOf=(n,id)=>{if(loadedVilla&&String(loadedVilla)==String(n))return LEAF[id];const u0=LEAF[id],x=((getState(n)||{}).leaves||{})[id]||{};return Object.assign(Object.create(u0),{chk:x.chk||{},custom:x.custom||[],ph:x.ph||{},done:!!x.done,wip:!!x.wip,ckp:x.ckp||null})};
 // progress: an activity completed with its checklist still pending counts 90% until the checklist is finished
 {const vs=villaStats;villaStats=function(s){const r=vs.apply(this,arguments);try{if(s&&s.leaves&&r&&r.tot){let cut=0;for(const id in s.leaves){const x=s.leaves[id];if(x&&x.done&&x.ckp){const u=LEAF[id];cut+=0.1*(+(x.d??(u&&u.def))||0)}}
   if(cut){r.dd=Math.max(0,r.dd-cut);r.pct=Math.round(1000*r.dd/r.tot)/10;r.ckp=Object.values(s.leaves).filter(x=>x&&x.done&&x.ckp).length}}}catch(e){}return r}}
@@ -8409,6 +8409,77 @@ function ckpPaint(){const lock=$("lock");if(!lock||!sel)return;const u=sel,v=vil
     rq.onclick=()=>{aprAdd(iso(new Date()),v,u.id,"checklist");u.wip=true;changed();saveNow();ckpPaint();status("Sent to the project manager for approval.")}}else if(rq)rq.remove()}
 {const r0=render;render=function(){r0.apply(this,arguments);if(view=="C")try{ckpPaint()}catch(e){}}}
 setTimeout(()=>{try{aprBadge();ckpPaint()}catch(e){}},900);
+// ---------- v49: completion dates; start/end dates and photos before asking the PM ----------
+{const st=document.createElement("style");st.textContent=`
+.cob[aria-disabled="true"] .cos .phb{opacity:1;pointer-events:auto}
+.wdt{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 12px;padding:12px;border-radius:14px;border:1px dashed var(--line);background:var(--well)}
+.wdt h4{grid-column:1/-1;margin:0;font-size:14px}.wdt p{grid-column:1/-1;margin:-4px 0 0;font-size:12.5px;color:var(--mute)}.wdt .fxf{margin:0}.wdt .fxi{width:100%;min-height:42px}
+.wdt.miss{border-color:var(--warn)}.lock .wdt .fxf{text-align:left;display:flex;flex-direction:column;align-items:stretch;gap:4px;font-size:12.5px}.lock .wdt .fxi{height:auto}
+#ckReq{white-space:normal;height:auto;min-height:42px;line-height:1.3;padding:8px 12px}
+.ckneed{margin:6px 0 0;font-size:12.5px;color:var(--warn)}
+.cdd p{margin:0 0 10px}.cdd .fxf{margin:0 0 12px}.cdd .fxi{width:100%;min-height:44px}
+@media (max-width:520px){.wdt{grid-template-columns:1fr}}`;document.head.appendChild(st)}
+// keep actual start (as) and end (ae) dates with the activity
+{const s0=snapshot;snapshot=function(){const s=s0.apply(this,arguments);LEAVES.forEach(u=>{const x=s.leaves[u.id];if(!x)return;if(u.as)x.as=u.as;if(u.ae)x.ae=u.ae});return s}}
+{const a0=apply;apply=function(s){a0.apply(this,arguments);LEAVES.forEach(u=>{const x=((s&&s.leaves)||{})[u.id]||{};u.as=x.as||"";u.ae=x.ae||""})}}
+{const lo=leafOf;leafOf=function(n,id){const u=lo(n,id);if(loadedVilla&&String(loadedVilla)==String(n))return u;const x=((getState(n)||{}).leaves||{})[id]||{};u.as=x.as||"";u.ae=x.ae||"";return u}}
+const aprRow=(d,v,leaf)=>{const w=wkLoad(d),r=w.rows.find(x=>x.kind=="apr"&&!x.del&&x.v==+v&&x.leaf==+leaf);return[w,r]};
+// ask for a completion date (today by default; any earlier date the engineer remembers)
+function askDoneDate(u,cb){const t=iso(new Date());const d=fxDialog(`Complete: ${esc(u.n)}`,`<div class="cdd"><p class="fxsm">When was this finished? Leave today if it was finished today, or pick the date it was actually completed.</p>
+  <label class="fxf"><span>Completed on</span><input class="fxi" type="date" id="cddOn" value="${u.ae&&u.ae<=t?u.ae:t}" max="${t}"${u.as?` min="${u.as}"`:""}></label>
+  <div class="fxacts" style="margin:0"><button type="button" class="fxb pri" id="cddGo">Mark completed</button><button type="button" class="fxb fxgh" id="cddNo">Cancel</button></div></div>`);
+  $("cddNo").onclick=()=>{d.hidden=true};$("cddGo").onclick=()=>{const v=$("cddOn").value||t;if(v>t){$("cddOn").focus();return}d.hidden=true;cb(v)}}
+{const rv=renderVst;renderVst=function(){rv.apply(this,arguments);const box=$("viewU");if(!box)return;const v=villa();if(!v)return;
+  box.querySelectorAll("[data-vs]").forEach(li=>{const u=LEAF[li.dataset.vs];const b=li.querySelector('[data-vss="done"]');if(!u||!b||u.done)return;
+    const a=aprAll().find(r=>r.v==+v&&r.leaf==u.id&&r.st=="pend");if(a)return;
+    b.addEventListener("click",e=>{if(b.__go)return;e.stopImmediatePropagation();e.preventDefault();askDoneDate(u,on=>{const t=iso(new Date());b.__go=true;try{b.onclick&&b.onclick()}finally{b.__go=false}
+      if(u.done){u.on=on;if(!u.ae)u.ae=on;changed();saveNow()}else{const [w,r]=aprRow(t,v,u.id);if(r){r.on=on;r.as=u.as||"";r.ae=on;wkStore(w,true)}if(!u.ae){u.ae=on;changed();saveNow()}}
+      if(on!=t){VST.msg=(VST.msg?VST.msg+" ":"")+`Completion date: ${fmtD(on)}.`}renderVst()})},true)})}}
+// the PM approves on the date the work was actually completed
+{const mk=markDoneOn;markDoneOn=function(n,id,d,on){if(on&&typeof APRON!="undefined"&&APRON)d=APRON;return mk.call(this,n,id,d,on)}}
+var APRON="";
+{const oa=openApprovals;openApprovals=function(tab){oa.apply(this,arguments);const D=$("fxDlg");if(!D)return;
+  D.querySelectorAll("[data-apr]").forEach(li=>{const [dd,v,leaf]=li.dataset.apr.split("|");const [,r]=aprRow(dd,v,leaf);if(!r)return;const on=r.on||dd;
+    const sm=li.querySelector(".aprh small");if(sm){sm.innerHTML=sm.innerHTML.replace(/done [^·]+·/,`completed ${fmtD(on)}${r.as?` (started ${fmtD(r.as)})`:""} ·`)}
+    li.querySelectorAll("[data-apok],[data-apck2]").forEach(b=>{const f=b.onclick;b.onclick=()=>{APRON=on;try{f()}finally{APRON=""}}})})}}
+// Checklists page: start and end dates of the work
+function wdtPaint(){const lock=$("lock");if(!lock||!sel)return;const u=sel,t=iso(new Date());let box=$("wdt");if(!box){box=document.createElement("div");box.id="wdt";box.className="wdt";const cob=$("cob");(cob||lock.firstChild)?lock.insertBefore(box,cob||lock.firstChild):lock.appendChild(box)}
+  box.classList.toggle("miss",!u.done&&(!u.as||!u.ae)&&clStat(u).tot-clStat(u).open>0);
+  box.innerHTML=`<h4>Work dates</h4><p>When the work on site started and finished. Needed before the activity goes to the project manager.</p>
+   <label class="fxf"><span>Started on</span><input class="fxi" type="date" id="wdtS" value="${u.as||""}" max="${t}"></label>
+   <label class="fxf"><span>Finished on</span><input class="fxi" type="date" id="wdtE" value="${u.ae||""}" max="${t}"${u.as?` min="${u.as}"`:""}></label>`;
+  const sv=()=>{const s=$("wdtS").value,e=$("wdtE").value;if(s&&e&&e<s){$("wdtE").value=s}u.as=$("wdtS").value;u.ae=$("wdtE").value;if(u.done&&u.ae&&u.src!="pm")u.on=u.ae;changed();saveNow();wdtPaint();try{ckpPaint();wdtGate()}catch(er){}};
+  $("wdtS").onchange=sv;$("wdtE").onchange=sv}
+// what's still needed before the engineer can send it
+function wdtNeed(u){const n=[];if(!u.as)n.push("the start date");if(!u.ae)n.push("the finish date");const m=coMissing(u);if(m.length)n.push(`photos for ${m.map(p=>PHS[p].toLowerCase()).join(", ")}`);return n}
+function wdtGate(){const u=sel;if(!u)return;const rq=$("ckReq");let nd=$("ckNeed");const need=wdtNeed(u);
+  if(rq&&!/waiting/i.test(rq.textContent)){rq.disabled=need.length>0;if(need.length){if(!nd){nd=document.createElement("p");nd.id="ckNeed";nd.className="ckneed";rq.after(nd)}nd.textContent=`Before sending, add ${need.length>1?need.slice(0,-1).join(", ")+" and "+need[need.length-1]:need[0]}.`}else if(nd)nd.remove()}else if(nd)nd.remove()}
+{const ck=ckpPaint;ckpPaint=function(){ck.apply(this,arguments);const rq=$("ckReq");const u=sel;if(rq&&u&&rq.onclick&&!rq.onclick.__w){const f=rq.onclick;rq.onclick=()=>{if(wdtNeed(u).length){wdtGate();return}const v=villa(),t=iso(new Date());f&&f();const [w,r]=aprRow(t,v,u.id);if(r){r.as=u.as;r.ae=u.ae;r.on=u.ae;wkStore(w,true)}ckpPaint()};rq.onclick.__w=1}wdtGate()}}
+// ticking "Mark as completed" also needs the dates
+{const dn=$("dn"),o=dn.onchange;dn.onchange=e=>{const u=sel;if(e.target.checked&&u&&!u.done&&(!u.as||!u.ae)){e.target.checked=false;const lm=$("lockmsg");lm.className="note warn";lm.textContent="Enter the dates the work started and finished first.";const b=$("wdt");if(b){b.classList.add("miss");b.scrollIntoView({block:"nearest",behavior:"smooth"})}return}
+  const r=o.call(dn,e);if(u&&u.done&&u.ae&&u.src!="pm"){u.on=u.ae;changed();saveNow()}return r}}
+{const r0=render;render=function(){r0.apply(this,arguments);if(view=="C")try{wdtPaint();wdtGate()}catch(e){}}}
+{const cp=coPaint;coPaint=function(){cp.apply(this,arguments);const b=$("cob");if(b&&sel&&!sel.done&&!canDone(sel)){const p=b.querySelector("p");if(p)p.textContent="Add photos of the work for each stage you have checked. They go to the project manager with the activity, and into the villa dossier."}try{wdtGate()}catch(e){}}}
+setTimeout(()=>{try{if(view=="C"){wdtPaint();wdtGate()}}catch(e){}},1000);
+// ---------- v50: labour message and PDFs split by cluster and by priority ----------
+const LPO=["High","Medium","Low","Not ranked"],LPC={High:[184,55,45],Medium:[190,105,20],Low:[40,98,170],"Not ranked":[94,107,124]};
+const lvOfV=v=>{const i=priOf(+v);return i<0?"Not ranked":PRI[i].lv};
+function labPriSplit(R){const G={};R.forEach(r=>{const l=lvOfV(r.v);(G[l]=G[l]||[]).push(r)});return LPO.filter(l=>G[l]).map(l=>({l,R:G[l]}))}
+// PDF table rows: a coloured heading row for each priority, then its activities
+function labPriRows(R,k,fn){const out=[],n=k=="am"?3:6;labPriSplit(R).forEach(({l,R:A})=>{const m=A.reduce((s,r)=>s+(r.mas||0),0),h=A.reduce((s,r)=>s+(r.hel||0),0),vs=[...new Set(A.map(r=>+r.v))].sort((a,b)=>a-b);
+  out.push([{content:`${l=="Not ranked"?"Villas not ranked":l+" priority"}  ·  ${A.length} ${A.length==1?"activity":"activities"}  ·  villa${vs.length>1?"s":""} ${vs.join(", ")}${k=="pm"?`  ·  ${m} masons, ${h} helpers`:""}`,colSpan:n,styles:{fillColor:[246,247,249],textColor:LPC[l],fontStyle:"bold",halign:"left"}}]);A.forEach(r=>out.push(fn(r)))});return out}
+// message lines: priority headings inside each cluster
+function labPriEach(R,k,L,fn){labPriSplit(R).forEach(({l,R:A})=>{L.push(`_${l=="Not ranked"?"Not ranked":l+" priority"}_ (${A.length})`);A.forEach(fn)})}
+// first-page summary: clusters down, priorities across
+function labPriSummary(doc,y,G,T,k,pt){const rows=G.filter(g=>g.R.length||(T[g.k]&&(T[g.k].mas||T[g.k].hel)));if(!rows.length)return y;
+  const cnt=(R,l)=>R.filter(r=>lvOfV(r.v)==l).length,tot={m:0,h:0,n:0,L:{}};
+  const body=rows.map(g=>{const t=T[g.k]||{mas:0,hel:0};tot.m+=t.mas;tot.h+=t.hel;tot.n+=g.R.length;LPO.forEach(l=>tot.L[l]=(tot.L[l]||0)+cnt(g.R,l));return[pt(g.n),...LPO.map(l=>cnt(g.R,l)||"-"),g.R.length,t.mas,t.hel]});
+  if(rows.length>1)body.push([{content:"Total",styles:{fontStyle:"bold"}},...LPO.map(l=>tot.L[l]||"-"),tot.n,tot.m,tot.h].map(x=>typeof x=="object"?x:{content:String(x),styles:{fontStyle:"bold"}}));
+  doc.setFont("helvetica","bold");doc.setFontSize(11);doc.setTextColor(21,35,58);doc.text("Activities by cluster and priority",14,y+4);
+  doc.autoTable({startY:y+6,head:[["Cluster","High","Medium","Low","Not ranked","Activities","Masons","Helpers"]],body,theme:"grid",margin:{left:14,right:14},
+    styles:{fontSize:9,cellPadding:2,textColor:[21,35,58],lineColor:[214,220,228],lineWidth:.2,halign:"right"},headStyles:{fillColor:[21,35,58],textColor:255,halign:"right"},columnStyles:{0:{halign:"left",cellWidth:40}},
+    didParseCell:h=>{if(h.column.index>=1&&h.column.index<=4){const l=LPO[h.column.index-1];if(h.section=="head")h.cell.styles.fillColor=LPC[l];else if(h.cell.raw!="-")h.cell.styles.textColor=LPC[l]}if(h.section=="head"&&h.column.index==0)h.cell.styles.halign="left"}});
+  return doc.lastAutoTable.finalY+10}
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
