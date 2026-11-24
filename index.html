@@ -7449,7 +7449,7 @@ function renderVst(){const box=$("viewU");if(!box)return;const v=villa(),pm=canE
     if(u.done&&k!="done"){if(!pm){msg.className="fxmsg bad";msg.textContent="Only the project manager can reopen a completed activity.";return}u.done=false;u.src="";u.on="";u.wip=k=="wip"}
     else if(k=="todo"){u.wip=false;aprDrop(today0,v,u.id)}
     else if(k=="wip"){u.wip=true;aprDrop(today0,v,u.id)}
-    else if(k=="done"&&!u.done){if(pm){if(canDone(u)&&coMissing(u).length){msg.className="fxmsg bad";msg.textContent=`Add the close-out photos first (Checklists page): ${coMissing(u).map(p=>PHN[p]).join(", ")}.`;return}if(!canDone(u)){msg.className="fxmsg bad";msg.textContent=`Complete the checklist first: ${clStat(u).open} points still open.`;return}markDoneOn(+v,u.id,today0,true);aprSet(today0,v,u.id,"ok")}
+    else if(k=="done"&&!u.done){if(pm){const full=canDone(u)&&!coMissing(u).length;markDoneOn(+v,u.id,today0,true);u.ckp=full?null:{by:(ME&&ME.name)||(ROLE&&ROLE.name)||"Project manager",at:new Date().toISOString()};aprSet(today0,v,u.id,"ok",full?"":"Approved with checklist pending");if(!full)msg.textContent=`${u.n}: completed, checklist pending (${clStat(u).open} points open${coMissing(u).length?", close-out photos missing":""}). It reaches 100% when the checklist is finished.`}
       else{u.wip=true;aprAdd(today0,v,u.id,"status");msg.textContent=canDone(u)?`${u.n}: sent to the PM for approval.`:`${u.n}: sent to the PM. The checklist still has ${clStat(u).open} open points; the PM can approve once it's complete.`}}
     const y=window.scrollY,bx=$("viewU"),by=bx.scrollTop;changed();saveNow();renderVst();bx.scrollTop=by;window.scrollTo(0,y)}))}
 {const host=$("viewO");const s=document.createElement("div");s.className="ov fxv";s.id="viewU";host.after(s);
@@ -8334,6 +8334,81 @@ setTimeout(()=>{try{const standalone=matchMedia("(display-mode: standalone)").ma
   $("instNo").onclick=()=>{sessionStorage.setItem("ak-inst","1");bar.remove()};
   $("instGo").onclick=async()=>{if(typeof fxPrompt!="undefined"&&fxPrompt){fxPrompt.prompt();try{await fxPrompt.userChoice}catch(e){}bar.remove();return}
     bar.querySelector("span").innerHTML=`<b>To install:</b> tap Chrome's ⋮ menu → <b>Install app</b> (or <b>Add to Home screen</b> → <b>Install</b>). If an old AK Checklists icon is on the home screen, long-press it and remove it first, then install again from this page.`;$("instGo").remove()}}catch(e){}},2500);
+// ---------- v48: PM approves status updates and activity completions separately; "Completed – checklist pending" ----------
+{const st=document.createElement("style");st.textContent=`
+.aptabs{display:flex;gap:6px;margin:0 0 12px}.aptabs button{flex:1;min-height:40px;border-radius:12px;border:1px solid var(--line);background:var(--well);color:var(--ink);font:700 13px/1.1 inherit;cursor:pointer}.aptabs button[aria-selected="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+.aptabs b{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;background:rgba(0,0,0,.18);font-size:11.5px}
+.apr .aprk.pend{background:var(--warnbg);color:var(--warn)}.aprpts{margin:0;padding:8px 10px;border-radius:10px;background:var(--base);border:1px solid var(--line);font-size:12px;max-height:180px;overflow:auto}
+.aprpts li{margin:2px 0 2px 16px}.aprpts .na{color:var(--mute)}.aprpts .op{color:var(--warn)}
+.ckpchip{display:inline-block;font-size:11.5px;font-weight:800;border-radius:999px;padding:3px 9px;background:var(--warnbg);color:var(--warn)}
+.ckpban{margin:0 0 12px;padding:10px 12px;border-radius:12px;background:var(--warnbg);font-size:13px}.ckpban b{color:var(--warn)}
+#ckReq{margin-top:8px;width:100%}`;document.head.appendChild(st)}
+// keep the new fields with the villa's saved state
+{const s0=snapshot;snapshot=function(){const s=s0.apply(this,arguments);LEAVES.forEach(u=>{if(s.leaves[u.id]&&u.ckp)s.leaves[u.id].ckp=u.ckp});return s}}
+{const a0=apply;apply=function(s,keep){a0.apply(this,arguments);LEAVES.forEach(u=>{const x=((s&&s.leaves)||{})[u.id];u.ckp=(x&&x.ckp)||null})}}
+// change one activity of any villa (open or not)
+function leafSet(n,id,fn){const u=LEAF[id];if(!u)return;const now=new Date().toISOString();
+  if(loadedVilla&&String(loadedVilla)==String(n)){fn(u);u.mt=now;changed();saveNow();return}
+  const s=JSON.parse(JSON.stringify(getState(n)||{v:3,leaves:{}}));s.v=s.v||3;s.leaves=s.leaves||{};const x=s.leaves[id]||(s.leaves[id]={});fn(x);x.mt=now;s.saved=now;
+  const k=vkey(String(n));SITE[k]=s;ls.set("amr-planner:"+k,JSON.stringify(s));statsCache[n]=null;if(typeof VPC!="undefined")delete VPC[+n];if(DB){syMark(k);syKick(400)}}
+const leafOf=(n,id)=>{if(loadedVilla&&String(loadedVilla)==String(n))return LEAF[id];const u0=LEAF[id],x=((getState(n)||{}).leaves||{})[id]||{};return Object.assign(Object.create(u0),{chk:x.chk||{},custom:x.custom||[],ph:x.ph||{},done:!!x.done,wip:!!x.wip,ckp:x.ckp||null})};
+// progress: an activity completed with its checklist still pending counts 90% until the checklist is finished
+{const vs=villaStats;villaStats=function(s){const r=vs.apply(this,arguments);try{if(s&&s.leaves&&r&&r.tot){let cut=0;for(const id in s.leaves){const x=s.leaves[id];if(x&&x.done&&x.ckp){const u=LEAF[id];cut+=0.1*(+(x.d??(u&&u.def))||0)}}
+  if(cut){r.dd=Math.max(0,r.dd-cut);r.pct=Math.round(1000*r.dd/r.tot)/10;r.ckp=Object.values(s.leaves).filter(x=>x&&x.done&&x.ckp).length}}}catch(e){}return r}}
+// close-out photos are needed only for stages of the work that were actually checked (Yes or No), not for all-N/A or not-yet-checked stages
+coPhases=function(u){let it=[];try{it=items(u)}catch(e){}const s=new Set(it.filter(x=>{const v=(u.chk||{})[x.k];return v=="y"||v=="n"}).map(x=>x.ph));return CO.filter(p=>s.has(p))};
+// once the checklist of a "checklist pending" activity is finished, it becomes fully complete by itself
+function ckpSweep(){if(!loadedVilla)return;let n=0;LEAVES.forEach(u=>{if(u.done&&u.ckp&&canDone(u)&&!coMissing(u).length){u.ckp=null;n++}});if(n){changed();saveNow();status(`Checklist finished: ${plur(n,"activity is","activities are")} now fully complete.`)}}
+// ---------- status updates from engineers ----------
+function stuAll(){const out=[];const lim=iso(new Date(Date.now()-60*864e5));for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(!k||!/^ak-work:\d{4}-\d\d-\d\d$/.test(k)||k.slice(8)<lim)continue;wkLoad(k.slice(8)).rows.forEach(r=>{if(r.kind=="stu"&&!r.del)out.push({...r,d:k.slice(8)})})}return out.sort((a,b)=>String(b.at).localeCompare(String(a.at)))}
+const stuPending=()=>stuAll().filter(r=>r.st=="pend");
+const STL={todo:"Pending",wip:"In progress",done:"Completed"};
+function stuLog(v,u,from,to){if(canEdit("plan"))return;const d=iso(new Date()),w=wkLoad(d),now=new Date().toISOString();let r=w.rows.find(x=>x.kind=="stu"&&!x.del&&x.st=="pend"&&x.v==+v&&x.leaf==u.id);
+  if(r){if(r.from==to){r.del=true;r.mt=now}else{r.to=to;r.at=now;r.mt=now}}else{if(from==to)return;w.rows.push({id:`stu:${v}:${u.id}:${Date.now().toString(36)}`,kind:"stu",v:+v,leaf:u.id,from,to,st:"pend",by:(ME&&ME.name)||engName()||"",eid:ME&&ME.id||"",at:now,mt:now})}wkStore(w,true);aprBadge()}
+function stuSet(r,st,note){const w=wkLoad(r.d),x=w.rows.find(z=>z.id==r.id);if(!x)return;x.st=st;x.note=note||"";x.pm={by:(ME&&ME.name)||(ROLE&&ROLE.name)||"Project manager",at:new Date().toISOString()};x.mt=x.pm.at;wkStore(w,true)}
+// record engineers' changes on the Status page (Pending ↔ In progress)
+{const rv=renderVst;renderVst=function(){rv.apply(this,arguments);const box=$("viewU");if(!box)return;const v=villa();if(!v)return;const P=new Map(stuPending().filter(r=>r.v==+v).map(r=>[r.leaf,r]));
+  box.querySelectorAll("[data-vs]").forEach(li=>{const u=LEAF[li.dataset.vs];if(!u)return;const r=P.get(u.id);const vsn=li.querySelector(".vsn");
+    if(u.done&&u.ckp&&vsn&&!vsn.querySelector(".ckpchip"))vsn.insertAdjacentHTML("beforeend",`<span class="ckpchip">Completed · checklist pending</span>`);
+    if(r&&vsn&&!vsn.querySelector(".stuchip"))vsn.insertAdjacentHTML("beforeend",`<span class="aprc w stuchip">${STL[r.to]} · waiting for PM to confirm</span>`);
+    li.querySelectorAll("[data-vss]").forEach(b=>{if(b.dataset.vss=="done")return;b.addEventListener("click",()=>{const from=r?r.from:(u.done?"done":u.wip?"wip":"todo");setTimeout(()=>{const to=u.done?"done":u.wip?"wip":"todo";stuLog(v,u,from,to);renderVst()},0)},true)})})}}
+// ---------- the PM's approvals: two separate lists ----------
+var APT="act";
+aprBadge=function(){const n=canEdit("plan")?aprPending().length+stuPending().length:0;let b=$("aprB");const mb=$("mnB");if(!mb)return;if(!n){if(b)b.remove();return}
+  if(!b){b=document.createElement("button");b.type="button";b.id="aprB";b.className="hbtn aprbtn";mb.parentElement.before(b);b.onclick=()=>openApprovals()}b.innerHTML=`<span>${n}</span> to approve`;b.title=`${aprPending().length} completions and ${stuPending().length} status updates waiting for you`};
+openApprovals=function(tab){if(tab)APT=tab;const A=aprPending(),U=stuPending(),pm=canEdit("plan");
+  const ptsList=(u)=>{let it=[];try{it=items(u)}catch(e){}const na=it.filter(x=>u.chk[x.k]=="na"),op=it.filter(x=>!u.chk[x.k]);if(!na.length&&!op.length)return"";
+    return`<details><summary class="fxsm" style="cursor:pointer;margin:0">See the ${op.length?op.length+" open":""}${op.length&&na.length?" and ":""}${na.length?na.length+" N/A":""} points</summary><ul class="aprpts">${op.map(x=>`<li class="op">Not checked: ${esc(x.t)} <small>(${PHS[x.ph]})</small></li>`).join("")}${na.map(x=>`<li class="na">N/A: ${esc(x.t)} <small>(${PHS[x.ph]})</small></li>`).join("")}</ul></details>`};
+  const actRow=r=>{const u=leafOf(r.v,r.leaf),s=clStat(u),cm=coMissing(u),full=s.tot>0&&s.open==0&&!cm.length;
+    return`<li class="apr" data-apr="${r.d}|${r.v}|${r.leaf}"><div class="aprh"><b>Villa ${r.v} · ${esc(u.n)}</b><small>${esc(u.seq.n)} › ${esc(u.stn)} · done ${fmtD(r.d)} · by ${esc(r.by||"engineer")} · from ${r.src=="status"?"Villa status":r.src=="checklist"?"Checklists":"Labour report"}</small></div>
+      <div class="aprk ${full?"ok":"pend"}">${full?`Checklist complete · ${s.tot} points${s.na?` (${s.na} N/A)`:""} · close-out photos added`:`Checklist ${s.tot-s.open} of ${s.tot} answered${s.na?` · ${s.na} N/A`:""}${s.open?` · ${s.open} still to check`:""}${cm.length?` · photos missing: ${cm.map(p=>PHS[p]).join(", ")}`:""}`}</div>${ptsList(u)}
+      ${pm?`<div class="fxacts" style="margin:0">${full?`<button type="button" class="fxb sm pri" data-apok="1">Approve as completed</button>`:`<button type="button" class="fxb sm pri" data-apck2="1">Approve – checklist pending</button>`}<button type="button" class="fxb sm" data-apck="1">Open checklist</button><button type="button" class="fxb sm fxgh" data-apbk="1">Send back</button></div>
+      ${full?"":`<p class="fxsm" style="margin:0">Use this when the work is finished but some points are checked later (for example after curing). It counts as completed in the plan; progress stays at 90% for this activity until its checklist is finished.</p>`}`:""}</li>`};
+  const stuRow=r=>{const u=LEAF[r.leaf]||{n:"",seq:{n:""},stn:""};return`<li class="apr" data-stu="${r.id}"><div class="aprh"><b>Villa ${r.v} · ${esc(u.n)}</b><small>${esc(u.seq.n)} › ${esc(u.stn)} · ${new Date(r.at).toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})} · by ${esc(r.by||"engineer")}</small></div>
+      <div class="aprk pend">${STL[r.from]} → ${STL[r.to]}</div>${pm?`<div class="fxacts" style="margin:0"><button type="button" class="fxb sm pri" data-stok="1">Confirm</button><button type="button" class="fxb sm fxgh" data-stbk="1">Undo the change</button></div>`:""}</li>`};
+  const body=`<div class="aptabs" role="tablist"><button type="button" role="tab" data-apt="act" aria-selected="${APT=="act"}">Activity completions<b>${A.length}</b></button><button type="button" role="tab" data-apt="stu" aria-selected="${APT=="stu"}">Status updates<b>${U.length}</b></button></div>
+    ${APT=="act"?(A.length?`<p class="fxsm" style="margin-top:0">Engineers marked these activities completed. Approve when the checklist is complete, or approve with the checklist pending when some points are checked later.</p><ul class="aprl">${A.map(actRow).join("")}</ul>`:`<div class="fxempty">No completions waiting.</div>`)
+      :(U.length?`<p class="fxsm" style="margin-top:0">Engineers changed these activities between pending and in progress on the Villa status page. Confirm them, or undo the change.</p><ul class="aprl">${U.map(stuRow).join("")}</ul>`:`<div class="fxempty">No status updates waiting.</div>`)}`;
+  const d=fxDialog(`Waiting for your approval${A.length+U.length?" · "+(A.length+U.length):""}`,body);d.querySelector(".fxbox").classList.add("aprbox");
+  d.querySelectorAll("[data-apt]").forEach(b=>b.onclick=()=>openApprovals(b.dataset.apt));
+  d.querySelectorAll("[data-apr]").forEach(li=>{const [dd,v,leaf]=li.dataset.apr.split("|");const q=s=>li.querySelector(s);
+    if(q("[data-apok]"))q("[data-apok]").onclick=()=>{markDoneOn(+v,+leaf,dd,true);leafSet(+v,+leaf,x=>{x.ckp=null});aprSet(dd,v,leaf,"ok");status(`Villa ${v}: ${LEAF[leaf].n} approved as completed.`);openApprovals()};
+    if(q("[data-apck2]"))q("[data-apck2]").onclick=()=>{markDoneOn(+v,+leaf,dd,true);const by=(ME&&ME.name)||(ROLE&&ROLE.name)||"Project manager";leafSet(+v,+leaf,x=>{x.ckp={by,at:new Date().toISOString()}});aprSet(dd,v,leaf,"ok","Approved with checklist pending");status(`Villa ${v}: ${LEAF[leaf].n} completed, checklist pending.`);openApprovals()};
+    if(q("[data-apck]"))q("[data-apck]").onclick=()=>{d.hidden=true;ogOpen(+v,+leaf)};
+    if(q("[data-apbk]"))q("[data-apbk]").onclick=()=>{const bk=q("[data-apbk]");if(li.querySelector(".aprbk"))return;bk.insertAdjacentHTML("afterend",`<div class="aprbk"><input class="fxi" placeholder="Why? e.g. 3 checklist points still open"><button type="button" class="fxb sm bad">Send back</button></div>`);const box=li.querySelector(".aprbk");
+      box.querySelector("button").onclick=()=>{const why=box.querySelector("input").value.trim();if(!why){box.querySelector("input").focus();return}aprSet(dd,v,leaf,"back",why);openApprovals()}}});
+  d.querySelectorAll("[data-stu]").forEach(li=>{const r=U.find(x=>x.id==li.dataset.stu);if(!r)return;
+    li.querySelector("[data-stok]").onclick=()=>{stuSet(r,"ok");aprBadge();openApprovals()};
+    li.querySelector("[data-stbk]").onclick=()=>{leafSet(r.v,r.leaf,x=>{if(r.from=="todo"){x.wip=false}else if(r.from=="wip"){x.wip=true}});stuSet(r,"back");aprBadge();status(`Villa ${r.v}: ${(LEAF[r.leaf]||{}).n} set back to ${STL[r.from].toLowerCase()}.`);if(view=="U")renderVst();openApprovals()}})};
+// ---------- Checklists page: the engineer can ask for completion with the checklist to follow; banner for checklist-pending activities ----------
+function ckpPaint(){const lock=$("lock");if(!lock||!sel)return;const u=sel,v=villa();if(!v)return;sel&&ckpSweep();
+  let ban=$("ckpBan");if(u.done&&u.ckp){if(!ban){ban=document.createElement("div");ban.id="ckpBan";ban.className="ckpban";lock.prepend(ban)}ban.innerHTML=`<b>Completed · checklist pending.</b> Approved by ${esc(u.ckp.by||"the project manager")} on ${fmtD(String(u.ckp.at).slice(0,10))}. ${clStat(u).open?`Answer the remaining ${clStat(u).open} points`:""}${clStat(u).open&&coMissing(u).length?" and a":clStat(u).open?"":"A"}${coMissing(u).length?`dd the close-out photos (${coMissing(u).map(p=>PHS[p]).join(", ")})`:""}; then it becomes fully complete.`}else if(ban)ban.remove();
+  let rq=$("ckReq");const s=clStat(u),pend=aprGet(iso(new Date()),v,u.id),anyPend=aprAll().find(r=>r.v==+v&&r.leaf==u.id&&r.st=="pend");
+  if(!u.done&&!canDone(u)&&s.tot&&s.tot-s.open>0){if(!rq){rq=document.createElement("button");rq.type="button";rq.id="ckReq";rq.className="btn sm";($("dn").closest("label")||$("dn")).after(rq)}
+    rq.disabled=!!anyPend;rq.textContent=anyPend?"Completion sent to the PM: waiting for approval":"Work finished, checklist to follow: ask the PM to approve";
+    rq.onclick=()=>{aprAdd(iso(new Date()),v,u.id,"checklist");u.wip=true;changed();saveNow();ckpPaint();status("Sent to the project manager for approval.")}}else if(rq)rq.remove()}
+{const r0=render;render=function(){r0.apply(this,arguments);if(view=="C")try{ckpPaint()}catch(e){}}}
+setTimeout(()=>{try{aprBadge();ckpPaint()}catch(e){}},900);
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 
