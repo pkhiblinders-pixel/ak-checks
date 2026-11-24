@@ -8371,7 +8371,7 @@ function stuSet(r,st,note){const w=wkLoad(r.d),x=w.rows.find(z=>z.id==r.id);if(!
   box.querySelectorAll("[data-vs]").forEach(li=>{const u=LEAF[li.dataset.vs];if(!u)return;const r=P.get(u.id);const vsn=li.querySelector(".vsn");
     if(u.done&&u.ckp&&vsn&&!vsn.querySelector(".ckpchip"))vsn.insertAdjacentHTML("beforeend",`<span class="ckpchip">Completed · checklist pending</span>`);
     if(r&&vsn&&!vsn.querySelector(".stuchip"))vsn.insertAdjacentHTML("beforeend",`<span class="aprc w stuchip">${STL[r.to]} · waiting for PM to confirm</span>`);
-    li.querySelectorAll("[data-vss]").forEach(b=>{if(b.dataset.vss=="done")return;b.addEventListener("click",()=>{const from=r?r.from:(u.done?"done":u.wip?"wip":"todo");setTimeout(()=>{const to=u.done?"done":u.wip?"wip":"todo";stuLog(v,u,from,to);renderVst()},0)},true)})})}}
+    li.querySelectorAll("[data-vss]").forEach(b=>{if(b.dataset.vss=="done")return;b.addEventListener("click",()=>{if(u.done)return;const from=r?r.from:(u.done?"done":u.wip?"wip":"todo");setTimeout(()=>{const to=u.done?"done":u.wip?"wip":"todo";stuLog(v,u,from,to);renderVst()},0)},true)})})}}
 // ---------- the PM's approvals: two separate lists ----------
 var APT="act";
 aprBadge=function(){const n=canEdit("plan")?aprPending().length+stuPending().length:0;let b=$("aprB");const mb=$("mnB");if(!mb)return;if(!n){if(b)b.remove();return}
@@ -8480,6 +8480,21 @@ function labPriSummary(doc,y,G,T,k,pt){const rows=G.filter(g=>g.R.length||(T[g.k
     styles:{fontSize:9,cellPadding:2,textColor:[21,35,58],lineColor:[214,220,228],lineWidth:.2,halign:"right"},headStyles:{fillColor:[21,35,58],textColor:255,halign:"right"},columnStyles:{0:{halign:"left",cellWidth:40}},
     didParseCell:h=>{if(h.column.index>=1&&h.column.index<=4){const l=LPO[h.column.index-1];if(h.section=="head")h.cell.styles.fillColor=LPC[l];else if(h.cell.raw!="-")h.cell.styles.textColor=LPC[l]}if(h.section=="head"&&h.column.index==0)h.cell.styles.halign="left"}});
   return doc.lastAutoTable.finalY+10}
+// ---------- v51: engineers can also reopen completed activities (Completed → In progress / Pending); the PM confirms ----------
+{const st=document.createElement("style");st.textContent=`.aptabs button{display:flex;align-items:center;justify-content:center;gap:2px;white-space:nowrap;padding:0 10px}.aptabs b{margin-left:6px}`;document.head.appendChild(st)}
+{const rv=renderVst;renderVst=function(){rv.apply(this,arguments);if(canEdit("plan"))return;const box=$("viewU");if(!box)return;const v=villa();if(!v)return;
+  box.querySelectorAll("[data-vs]").forEach(li=>{const u=LEAF[li.dataset.vs];if(!u||!u.done)return;const pend=stuPending().find(r=>r.v==+v&&r.leaf==u.id);
+    if(pend){li.querySelectorAll("[data-vss]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.vss==pend.to)))}
+    li.querySelectorAll("[data-vss]").forEach(b=>b.addEventListener("click",e=>{e.stopImmediatePropagation();e.preventDefault();const k=b.dataset.vss;
+      stuLog(v,u,"done",k);const now=stuPending().find(r=>r.v==+v&&r.leaf==u.id);
+      VST.bad=false;VST.msg=now?`${u.n}: asked the PM to reopen it as ${STL[k].toLowerCase()}. It stays completed until the PM confirms.`:`${u.n}: request cancelled; it stays completed.`;renderVst()},true))})}}
+{const oa=openApprovals;openApprovals=function(tab){oa.apply(this,arguments);const D=$("fxDlg");if(!D)return;
+  const p=D.querySelector('[data-apt="act"]');if(p&&p.firstChild&&p.firstChild.nodeType==3)p.firstChild.textContent="Completions";
+  const intro=[...D.querySelectorAll(".fxsm")].find(x=>/between pending and in progress/.test(x.textContent));if(intro)intro.textContent="Engineers changed the status of these activities on the Villa status page. Confirm them, or undo the change. A completed activity is reopened only when you confirm.";
+  D.querySelectorAll("[data-stu]").forEach(li=>{const r=stuPending().find(x=>x.id==li.dataset.stu);if(!r||r.from!="done")return;const ok=li.querySelector("[data-stok]"),bk=li.querySelector("[data-stbk]");
+    const k=li.querySelector(".aprk");if(k)k.textContent=`Reopen: Completed → ${STL[r.to]}`;
+    if(ok){ok.textContent=`Reopen as ${STL[r.to].toLowerCase()}`;ok.onclick=()=>{leafSet(r.v,r.leaf,x=>{x.done=false;x.src="";x.on="";x.ckp=null;x.wip=r.to=="wip"});stuSet(r,"ok");aprBadge();status(`Villa ${r.v}: ${(LEAF[r.leaf]||{}).n} reopened as ${STL[r.to].toLowerCase()}.`);if(view=="U")renderVst();openApprovals()}}
+    if(bk){bk.textContent="Keep completed";bk.onclick=()=>{stuSet(r,"back");aprBadge();if(view=="U")renderVst();openApprovals()}}})}}
 // installed app: register the offline cache
 if(window.AKAPP&&"serviceWorker" in navigator&&(location.protocol=="https:"||location.hostname=="localhost")){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 

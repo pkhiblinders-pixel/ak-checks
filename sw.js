@@ -1,7 +1,7 @@
 // AK Checklists offline cache.
 // The app page and its settings are fetched fresh whenever there's signal (so changes to config.js
 // take effect on the next open), and come from this cache when there's no signal.
-const V = "ak-checklists-6.46.0";
+const V = "ak-checklists-6.47.0";
 const SHELL = ["./", "index.html", "config.js", "auth.js", "msal-browser.min.js", "manifest.webmanifest", "icon-192.png", "icon-512.png", "icon-maskable-512.png", "apple-touch-icon.png"];
 const FRESH = /\/(index\.html|config\.js|auth\.js)?$/;
 // each file is cached on its own, so one missing file (for example config.js) never stops the app from installing
